@@ -5,14 +5,32 @@ type SeoInput = {
   title: string;
   description: string;
   path: string;
+  noIndex?: boolean;
+  noFollow?: boolean;
 };
 
-export function createMetadata({ title, description, path }: SeoInput): Metadata {
-  const url = `${siteConfig.siteUrl}${path}`;
+export function absoluteUrl(path = "") {
+  const base = siteConfig.siteUrl.replace(/\/$/, "");
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return normalizedPath === "/" ? base : `${base}${normalizedPath}`;
+}
+
+export function createMetadata({ title, description, path, noIndex = false, noFollow = false }: SeoInput): Metadata {
+  const url = absoluteUrl(path);
 
   return {
     title,
     description,
+    robots: noIndex
+      ? {
+          index: false,
+          follow: !noFollow,
+          googleBot: {
+            index: false,
+            follow: !noFollow
+          }
+        }
+      : undefined,
     alternates: {
       canonical: url
     },

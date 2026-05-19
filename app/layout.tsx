@@ -5,7 +5,9 @@ import { BehavioralNudge } from "@/components/BehavioralNudge";
 import { EngagementTracker } from "@/components/EngagementTracker";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { JsonLd } from "@/components/JsonLd";
 import { siteConfig } from "@/data/siteConfig";
+import { absoluteUrl } from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,9 +53,30 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.brandName,
+    url: siteConfig.siteUrl,
+    description: siteConfig.tagline,
+    logo: absoluteUrl("/brand/pawpeaceguide-logo.png")
+  };
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.brandName,
+    url: siteConfig.siteUrl,
+    description: siteConfig.tagline,
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.brandName
+    }
+  };
+
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
+        <JsonLd data={[organizationSchema, websiteSchema]} />
         <EngagementTracker />
         <Header />
         <main>{children}</main>

@@ -90,7 +90,7 @@ const linkableResources = [
     body: "A no-backend quiz that helps readers identify the policy features they should compare."
   },
   {
-    href: "/guides/how-pet-insurance-deductibles-work",
+    href: "/guides/pet-insurance-deductibles",
     icon: FileSearch,
     title: "Deductible guide",
     body: "Plain-English context for annual deductibles, reimbursement, and claim math."

@@ -15,7 +15,9 @@ type RedirectPageProps = {
 export const metadata = createMetadata({
   title: "Leaving PawPeaceGuide",
   description: "You are being redirected to a third-party provider site.",
-  path: "/go"
+  path: "/go",
+  noIndex: true,
+  noFollow: true
 });
 
 export default async function ProviderRedirectPage({ params, searchParams }: RedirectPageProps) {

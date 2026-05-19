@@ -3,6 +3,8 @@ import { UTMLink } from "@/components/UTMLink";
 import { siteConfig } from "@/data/siteConfig";
 
 const footerLinks = [
+  { href: "/guides", label: "Guides" },
+  { href: "/glossary", label: "Glossary" },
   { href: "/affiliate-disclosure", label: "Affiliate disclosure" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },

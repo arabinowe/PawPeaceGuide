@@ -27,7 +27,9 @@ export function BehavioralNudge() {
     pathname === "/quiz" ||
     pathname === "/calculator" ||
     pathname === "/compare" ||
-    pathname === "/ready-to-compare";
+    pathname === "/ready-to-compare" ||
+    pathname.startsWith("/guides") ||
+    pathname === "/glossary";
 
   useEffect(() => {
     try {

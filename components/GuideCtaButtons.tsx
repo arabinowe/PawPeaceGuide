@@ -7,6 +7,12 @@ import { trackFunnelEvent } from "@/lib/tracking";
 export function GuideCtaButtons({ guideSlug }: { guideSlug: string }) {
   function track(source: string) {
     trackFunnelEvent(siteConfig.eventNames.guideCtaClicked, { guideSlug, source });
+    if (source === "compare") {
+      trackFunnelEvent(siteConfig.eventNames.seoCompareCtaClicked, { guideSlug, source });
+    }
+    if (source === "quiz") {
+      trackFunnelEvent(siteConfig.eventNames.seoQuizCtaClicked, { guideSlug, source });
+    }
   }
 
   return (
@@ -15,10 +21,10 @@ export function GuideCtaButtons({ guideSlug }: { guideSlug: string }) {
         Compare quote options
       </Button>
       <Button href="/quiz" variant="secondary" className="w-full" onClick={() => track("quiz")}>
-        Take quiz
+        Start 60-second check
       </Button>
-      <Button href="/pet-insurance" variant="secondary" className="w-full" onClick={() => track("landing")}>
-        Main guide
+      <Button href="/calculator" variant="secondary" className="w-full" onClick={() => track("calculator")}>
+        Use calculator
       </Button>
     </div>
   );

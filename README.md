@@ -208,6 +208,116 @@ Backlink outreach ideas:
 
 Every public page family uses real, happy pet imagery. Keep future images calm, bright, and relevant to the page route. Avoid clinical, distressed, graphic, or fear-based imagery.
 
+## SEO System Overview
+
+PawPeaceGuide's SEO thesis is: pet insurance explained before the stressful vet bill moment.
+
+The organic system is static-first:
+
+- `/guides` is the main education library.
+- `/guides/[slug]` renders published guide records from `data/guides.ts`.
+- `/glossary` explains pet insurance terms with linkable anchors.
+- `/sitemap.xml` lists indexable public routes and published guide pages.
+- `/robots.txt` disallows `/admin/`, `/go/`, and `/api/`.
+- `/llms.txt` gives AI crawlers and answer engines a concise description of the site, core routes, compliance boundaries, and guide URLs.
+
+The SEO funnel should educate first, then offer natural links to `/quiz`, `/calculator`, and `/compare`. It should never auto-redirect organic visitors to affiliate partners.
+
+## How to Add a New Guide
+
+1. Add a new record to `data/guides.ts`.
+2. Include `slug`, `title`, `metaTitle`, `metaDescription`, `category`, `summary`, `shortAnswer`, `keyTakeaways`, `sections`, `exampleScenario`, `whatToCompare`, `commonMistakes`, `faqs`, `relatedGuideSlugs`, `datePublished`, `dateModified`, and `readingTimeMinutes`.
+3. Keep the article useful enough to publish. Do not add empty or thin placeholder guide pages.
+4. Add 2-4 related guide slugs that already exist.
+5. Run `npm run build` to confirm the dynamic `/guides/[slug]` route, Article schema, FAQ schema, and sitemap generation work.
+
+## How to Edit Guide Metadata
+
+Guide metadata is controlled in `data/guides.ts`:
+
+- `metaTitle` becomes the page title.
+- `metaDescription` becomes the search description and Open Graph description.
+- `dateModified` updates Article schema and sitemap `lastModified`.
+- `category` controls the `/guides` index grouping.
+
+Canonical URLs come from `NEXT_PUBLIC_SITE_URL` through `lib/seo.ts`. Keep production set to `https://pawpeaceguide.com` so canonical and Open Graph URLs do not point to Vercel preview domains.
+
+## How Internal Links Work
+
+Each guide page automatically includes:
+
+- A link back to `/guides`.
+- Table of contents anchors.
+- Links to related guides from `relatedGuideSlugs`.
+- CTA links to `/quiz`, `/calculator`, and `/compare`.
+- Affiliate disclosure near monetized CTAs.
+- Bottom legal disclaimer.
+
+SEO click tracking events stay generic: `guide_page_viewed`, `related_guide_clicked`, `seo_compare_cta_clicked`, and `seo_quiz_cta_clicked`.
+
+## Sitemap and Robots Setup
+
+`app/sitemap.ts` includes:
+
+- `/`
+- `/pet-insurance`
+- `/dog-parent-protection`
+- `/quiz`
+- `/calculator`
+- `/compare`
+- `/guides`
+- `/glossary`
+- published guide pages
+- legal pages
+
+`app/sitemap.ts` excludes `/go/[providerSlug]`, `/admin/*`, `/api/*`, and unbuilt placeholder topics.
+
+`app/robots.ts` allows public pages and disallows:
+
+- `/admin/`
+- `/go/`
+- `/api/`
+
+Noindex metadata is also applied to `/go/[providerSlug]`, `/admin/economics`, and `/admin/engagement`; robots.txt is not the only protection.
+
+## Google Search Launch Checklist
+
+1. Confirm the custom domain is connected and resolving with HTTPS.
+2. Confirm `NEXT_PUBLIC_SITE_URL=https://pawpeaceguide.com`.
+3. Verify `pawpeaceguide.com` in Google Search Console.
+4. Submit `https://pawpeaceguide.com/sitemap.xml`.
+5. Inspect the homepage.
+6. Inspect `/guides`.
+7. Inspect the top 5 guide URLs.
+8. Confirm `https://pawpeaceguide.com/robots.txt` works.
+9. Confirm `/go/` and `/admin/` are noindex and disallowed.
+10. Check mobile usability for the homepage, `/dog-parent-protection`, `/guides`, and a top guide.
+11. Run PageSpeed Insights on the homepage and `/guides/is-pet-insurance-worth-it`.
+12. Confirm canonical URLs do not point to `vercel.app`.
+13. Confirm each guide has unique metadata.
+
+## Content Quality Rules
+
+- Write for a pet owner making a real financial decision, not for keyword stuffing.
+- Avoid generic filler and affiliate-farm phrasing.
+- Use hypotheticals clearly labeled as examples.
+- Do not invent current provider pricing, coverage details, payout terms, or rankings.
+- If provider-specific details are mentioned, tell readers to verify them directly with the provider.
+- Do not use fake reviews, fake star ratings, fake testimonials, countdowns, or unsupported savings claims.
+- Use safe language: features to compare, questions to ask, policy terms vary, review details directly with the provider, compare quote options, educational guide, affiliate-supported resource.
+
+## Affiliate Disclosure Rules
+
+Affiliate disclosures must appear near monetized CTAs and provider comparison sections.
+
+Use this framing:
+
+```text
+PawPeaceGuide is an educational, affiliate-supported website. We may earn compensation if you visit a provider through our links and purchase a policy. We are not an insurer, broker, agency, producer, financial advisor, or legal advisor. Review all policy terms directly with the provider.
+```
+
+Do not imply PawPeaceGuide sells, solicits, binds, underwrites, negotiates, or directly recommends insurance.
+
 ## Primary Affiliate Strategy
 
 The Swiftest is currently the preferred primary offer because the working affiliate strategy is based on a public payout claim of `$125 per conversion`. Treat this as an unverified public claim until PawPeaceGuide is accepted and the final approved terms are visible in the affiliate dashboard.
@@ -399,7 +509,12 @@ Events are defined in `data/siteConfig.ts` and handled in `lib/tracking.ts`:
 - `backup_offer_clicked`
 - `affiliate_cta_clicked`
 - `email_capture_submitted`
+- `guide_page_viewed`
 - `guide_cta_clicked`
+- `glossary_viewed`
+- `related_guide_clicked`
+- `seo_compare_cta_clicked`
+- `seo_quiz_cta_clicked`
 - `outbound_redirect_started`
 
 Privacy rule: do not send quiz answers, pet health details, calculator inputs, personal financial details, or user email addresses to Meta Pixel or the engagement endpoint by default. Send generic events only unless a future consent-aware implementation explicitly changes that.

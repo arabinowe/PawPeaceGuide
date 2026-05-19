@@ -6,7 +6,9 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "Internal Engagement Tracking",
   description: "Internal PawPeaceGuide engagement monitoring and event QA.",
-  path: "/admin/engagement"
+  path: "/admin/engagement",
+  noIndex: true,
+  noFollow: true
 });
 
 const trackedSignals = [

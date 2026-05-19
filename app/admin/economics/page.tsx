@@ -9,7 +9,9 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "Internal Funnel Economics",
   description: "Internal PawPeaceGuide break-even planning assumptions.",
-  path: "/admin/economics"
+  path: "/admin/economics",
+  noIndex: true,
+  noFollow: true
 });
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {

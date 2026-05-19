@@ -68,7 +68,12 @@ export type FunnelEventName =
   | "provider_card_viewed"
   | "affiliate_cta_clicked"
   | "email_capture_submitted"
+  | "guide_page_viewed"
   | "guide_cta_clicked"
+  | "glossary_viewed"
+  | "related_guide_clicked"
+  | "seo_compare_cta_clicked"
+  | "seo_quiz_cta_clicked"
   | "primary_offer_viewed"
   | "primary_offer_clicked"
   | "backup_offer_clicked"
@@ -91,9 +96,33 @@ export type LandingPageVariant = {
   faq: Array<{ question: string; answer: string }>;
 };
 
+export type GuideCategory =
+  | "Pet Insurance Basics"
+  | "Dog Insurance Guides"
+  | "Cat Insurance Guides"
+  | "Vet Bill Planning"
+  | "Policy Fine Print"
+  | "Breed-Specific Guides";
+
+export type GuideFaq = {
+  question: string;
+  answer: string;
+};
+
+export type GuideExampleScenario = {
+  title: string;
+  body: string[];
+};
+
 export type Guide = {
   slug: string;
   title: string;
+  metaTitle: string;
+  metaDescription: string;
+  category: GuideCategory;
+  summary: string;
+  shortAnswer: string;
+  keyTakeaways: string[];
   description: string;
   intro: string;
   sections: Array<{
@@ -101,4 +130,14 @@ export type Guide = {
     heading: string;
     body: string[];
   }>;
+  exampleScenario: GuideExampleScenario;
+  whatToCompare: string[];
+  commonMistakes: string[];
+  faqs: GuideFaq[];
+  relatedGuideSlugs: string[];
+  datePublished: string;
+  dateModified: string;
+  readingTimeMinutes: number;
+  affiliateDisclosureRequired: boolean;
+  disclaimerRequired: boolean;
 };

@@ -1,6 +1,6 @@
 import { GuideCard } from "@/components/GuideCard";
 import { PetImagePanel, petImages } from "@/components/PetImage";
-import { guides } from "@/data/guides";
+import { getGuidesByCategory, guideCategories, plannedGuideTopics } from "@/data/guides";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
@@ -18,15 +18,53 @@ export default function GuidesIndexPage() {
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Guides</p>
           <h1 className="mt-3 text-4xl font-semibold text-ink md:text-5xl">Pet insurance education library</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">
-            Use these guides to prepare better questions before comparing third-party provider quote options.
+            Pet insurance explained before the stressful vet bill moment. Use these guides to prepare better
+            questions before comparing third-party provider quote options.
           </p>
         </div>
         <PetImagePanel image={petImages.calmTrust} label="Helpful dog and cat insurance guides" priority />
       </div>
-      <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {guides.map((guide) => (
-          <GuideCard key={guide.slug} guide={guide} />
-        ))}
+      <div className="mt-10 space-y-10">
+        {guideCategories.map((category) => {
+          const categoryGuides = getGuidesByCategory(category);
+          const plannedTopics = plannedGuideTopics[category] || [];
+
+          return (
+            <section key={category} aria-labelledby={`category-${category.replace(/\s+/g, "-").toLowerCase()}`}>
+              <div className="flex flex-col justify-between gap-3 border-b border-line pb-3 md:flex-row md:items-end">
+                <div>
+                  <h2 id={`category-${category.replace(/\s+/g, "-").toLowerCase()}`} className="text-2xl font-semibold text-ink">
+                    {category}
+                  </h2>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    {categoryGuides.length > 0
+                      ? "Published plain-English guides."
+                      : "Planned topics. These are not published until they are useful enough to stand alone."}
+                  </p>
+                </div>
+              </div>
+
+              {categoryGuides.length > 0 ? (
+                <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                  {categoryGuides.map((guide) => (
+                    <GuideCard key={guide.slug} guide={guide} />
+                  ))}
+                </div>
+              ) : null}
+
+              {plannedTopics.length > 0 ? (
+                <div className="mt-5 rounded-md border border-dashed border-line bg-white p-5">
+                  <p className="text-sm font-semibold text-ink">Publishing queue</p>
+                  <ul className="mt-3 grid gap-2 text-sm leading-6 text-muted sm:grid-cols-2">
+                    {plannedTopics.map((topic) => (
+                      <li key={topic}>{topic}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </section>
+          );
+        })}
       </div>
     </section>
   );

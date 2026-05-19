@@ -4,7 +4,7 @@ export const siteConfig = {
   brandName: "PawPeaceGuide",
   tagline: "Plain-English pet insurance guidance for calmer decisions.",
   heroLine: "Know before you need it.",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://pawpeaceguide.example",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://pawpeaceguide.com",
   metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || "TODO_META_PIXEL_ID",
   googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || "TODO_GA_MEASUREMENT_ID",
   googleTagManagerId: "TODO_GTM_ID",
@@ -44,7 +44,12 @@ export const siteConfig = {
     providerCardViewed: "provider_card_viewed",
     affiliateCtaClicked: "affiliate_cta_clicked",
     emailCaptureSubmitted: "email_capture_submitted",
+    guidePageViewed: "guide_page_viewed",
     guideCtaClicked: "guide_cta_clicked",
+    glossaryViewed: "glossary_viewed",
+    relatedGuideClicked: "related_guide_clicked",
+    seoCompareCtaClicked: "seo_compare_cta_clicked",
+    seoQuizCtaClicked: "seo_quiz_cta_clicked",
     primaryOfferViewed: "primary_offer_viewed",
     primaryOfferClicked: "primary_offer_clicked",
     backupOfferClicked: "backup_offer_clicked",
@@ -79,5 +84,6 @@ export const navLinks = [
   { href: "/calculator", label: "Calculator" },
   { href: "/compare", label: "Compare" },
   { href: "/blog", label: "Blog" },
-  { href: "/guides/is-pet-insurance-worth-it", label: "Guides" }
+  { href: "/guides", label: "Guides" },
+  { href: "/glossary", label: "Glossary" }
 ];
