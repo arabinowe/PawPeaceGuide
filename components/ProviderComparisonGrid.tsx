@@ -1,5 +1,5 @@
 import { ProviderCard } from "@/components/ProviderCard";
-import { providers } from "@/data/providers";
+import { isProviderAffiliateConfigured, providers } from "@/data/providers";
 
 type ProviderComparisonGridProps = {
   compact?: boolean;
@@ -17,8 +17,15 @@ export function ProviderComparisonGrid({
   pageSource = "provider_grid"
 }: ProviderComparisonGridProps) {
   const filteredProviders = role ? providers.filter((provider) => provider.role === role) : providers;
+  const configuredBackupProviders = filteredProviders.filter(isProviderAffiliateConfigured);
+  const publicProviders =
+    role === "backup"
+      ? configuredBackupProviders.length > 0
+        ? configuredBackupProviders
+        : filteredProviders.slice(0, 2)
+      : filteredProviders;
   const visibleProviders =
-    typeof limit === "number" ? filteredProviders.slice(0, limit) : filteredProviders;
+    typeof limit === "number" ? publicProviders.slice(0, limit) : publicProviders;
 
   return (
     <div className="grid gap-5 lg:grid-cols-2">

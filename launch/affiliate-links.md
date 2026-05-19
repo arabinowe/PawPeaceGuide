@@ -1,12 +1,22 @@
 # Affiliate Link Status
 
+## Odie
+
+- Status: Approved.
+- Role: Current primary revenue offer.
+- Slug: `odie`.
+- Config field: `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL`, `NEXT_PUBLIC_ODIE_AFFILIATE_URL`, or `providerAffiliateUrls.odie` in `data/siteConfig.ts`.
+- Current tracking link: configured as an Awin click-tracking URL.
+- Public payout claim: Unknown; verify payout, cookie window, qualifying action, and paid-social permission in Awin.
+- Required before scaling: confirm allowed traffic sources, qualifying action, cookie window, payout terms, disclosure requirements, and paid social permission.
+
 ## The Swiftest
 
 - Status: Pending approval.
-- Role: Primary comparison offer.
+- Role: Pending high-priority comparison backup.
 - Slug: `the-swiftest`.
-- Config field: `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL` or `providerAffiliateUrls.theSwiftest` in `data/siteConfig.ts`.
-- Current placeholder: `PLACEHOLDER_PRIMARY_AFFILIATE_URL`.
+- Config field: `NEXT_PUBLIC_SWIFTEST_AFFILIATE_URL` or `providerAffiliateUrls.theSwiftest` in `data/siteConfig.ts`.
+- Current placeholder: `PLACEHOLDER_SWIFTEST_AFFILIATE_URL`.
 - Public payout claim: `$125 per conversion, verify in affiliate dashboard`.
 - Required before launch: approved tracking URL, allowed traffic sources, qualifying action, cookie window, payout terms, disclosure requirements, and paid social permission.
 
@@ -31,12 +41,13 @@
 ## Link QA Steps
 
 1. Before the approved URL is added, visit `/compare` and confirm provider cards route users back into the quiz or guide instead of promising an outbound quote page.
-2. Before the approved URL is added, visit `/go/the-swiftest` and confirm it shows the graceful pending-link page.
-3. Add approved tracking URL.
-4. Redeploy.
-5. Visit `/go/the-swiftest`.
-6. Confirm redirect destination.
-7. Test with UTMs:
-   `/go/the-swiftest?utm_source=instagram&utm_medium=paid_social&utm_campaign=dog_parent_test_1&utm_content=know_before_you_need_it`
-8. Confirm disclosure appears before clickout.
-9. Confirm no blank, malformed, placeholder, or `example.com` URL redirects.
+2. Visit `/go/odie` and confirm it redirects through the Awin tracking URL.
+3. Before the approved Swiftest URL is added, visit `/go/the-swiftest` and confirm it shows the graceful pending-link page.
+4. Add each approved tracking URL as it arrives.
+5. Redeploy.
+6. Visit `/go/[providerSlug]`.
+7. Confirm redirect destination.
+8. Test with UTMs:
+   `/go/odie?utm_source=instagram&utm_medium=paid_social&utm_campaign=dog_parent_test_1&utm_content=know_before_you_need_it`
+9. Confirm disclosure appears before clickout.
+10. Confirm no blank, malformed, placeholder, or `example.com` URL redirects.

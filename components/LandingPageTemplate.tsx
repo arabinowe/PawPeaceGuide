@@ -27,6 +27,7 @@ import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
 import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { UTMLink } from "@/components/UTMLink";
+import { getPrimaryProvider } from "@/data/providers";
 import { siteConfig } from "@/data/siteConfig";
 import type { LandingPageVariant } from "@/lib/types";
 
@@ -65,11 +66,11 @@ const animalPaths = [
   }
 ];
 
-const swiftestPrepItems = [
+const providerPrepItems = [
   {
     icon: TableProperties,
-    title: "Provider table context",
-    body: "The Swiftest's public pet page compares multiple dog and cat insurance options. Scan each card as a starting point, then verify terms directly."
+    title: "Provider-page context",
+    body: "Use PawPeaceGuide first to understand the terms you are likely to see on a provider or comparison page."
   },
   {
     icon: WalletCards,
@@ -78,13 +79,15 @@ const swiftestPrepItems = [
   },
   {
     icon: SearchCheck,
-    title: "SwiftScore context",
-    body: "Treat any score or ranking as one input. Policy wording, exclusions, waiting periods, and claim rules still deserve your own review."
+    title: "Policy-detail context",
+    body: "Treat provider pages as starting points. Policy wording, exclusions, waiting periods, and claim rules still deserve your own review."
   }
 ];
 
 export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
+  const primaryProvider = getPrimaryProvider();
   const heroImage = getPetImageForPath(page.slug);
+  const heroBackgroundImage = usesHeroBackground(page.slug) ? petImages.heroPets : heroImage;
   const usesKnowBeforeHero =
     page.slug === "pet-insurance" ||
     page.slug === "pet-parent-protection" ||
@@ -101,16 +104,33 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
   return (
     <>
       <PageEventTracker page={`/${page.slug}`} paid />
-      <section
-        className="relative isolate overflow-hidden border-b border-line bg-ink"
-        style={{
-          backgroundImage:
-            `linear-gradient(180deg, rgba(248,250,247,0.98) 0%, rgba(248,250,247,0.95) 56%, rgba(248,250,247,0.72) 100%), linear-gradient(90deg, rgba(248,250,247,0.98) 0%, rgba(248,250,247,0.94) 43%, rgba(248,250,247,0.64) 66%, rgba(23,33,43,0.12) 100%), url('${heroImage.src}')`,
-          backgroundPosition: "center right",
-          backgroundSize: "cover"
-        }}
-      >
-        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-5 md:flex md:min-h-[520px] md:items-center md:py-10">
+      <section className="relative isolate overflow-hidden border-b border-line bg-[#f7f2e9]">
+        <div className="absolute inset-0 hidden md:block">
+          <Image
+            src={heroBackgroundImage.src}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+            priority
+          />
+        </div>
+        <div
+          className="absolute inset-0 hidden md:block"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(248,250,247,0.98) 0%, rgba(248,250,247,0.9) 38%, rgba(248,250,247,0.24) 60%, rgba(248,250,247,0) 100%)"
+          }}
+        />
+        <div
+          className="absolute inset-0 hidden md:block"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(248,250,247,0.54) 0%, rgba(248,250,247,0.14) 58%, rgba(248,250,247,0.04) 100%)"
+          }}
+        />
+        <div className="absolute inset-x-0 bottom-0 hidden h-28 bg-gradient-to-t from-[#f7f2e9]/38 to-transparent md:block" />
+        <div className="relative mx-auto max-w-6xl px-4 py-6 sm:px-5 md:flex md:min-h-[560px] md:items-center md:py-12">
           <div className="max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clay sm:text-sm">
               {page.eyebrow}
@@ -154,8 +174,8 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
             <div className="mt-4 overflow-hidden rounded-md border border-white/70 bg-white/70 shadow-tight md:hidden">
               <div className="relative aspect-[16/9]">
                 <Image
-                  src={heroImage.src}
-                  alt={heroImage.alt}
+                  src={heroBackgroundImage.src}
+                  alt={heroBackgroundImage.alt}
                   fill
                   sizes="100vw"
                   className="object-cover"
@@ -220,9 +240,9 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
                 Start with the happy pet in your household.
               </h2>
               <p className="mt-4 text-base leading-7 text-muted">
-                The public Swiftest pet insurance comparison content focuses on dogs and cats.
                 PawPeaceGuide keeps this pre-sell flow centered on dog, cat, puppy, and kitten
-                shoppers until a partner confirms any additional animal categories.
+                shoppers because those are the clearest pet insurance paths for the current
+                provider set. Verify any animal-specific availability directly with the provider.
               </p>
             </div>
             <div className="rounded-md border border-line bg-mist p-5">
@@ -294,34 +314,33 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
           <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
-                The Swiftest handoff
+                Provider handoff
               </p>
               <h2 className="mt-3 text-3xl font-semibold text-ink">
-                Prepared visitors make better use of comparison pages
+                Prepared visitors make better use of provider pages
               </h2>
             </div>
             <div className="rounded-md border border-line bg-mist p-5">
               <p className="text-base leading-7 text-muted">
-                The Swiftest is the intended third-party comparison destination for PawPeaceGuide.
-                Their public pet insurance page organizes provider options with comparison details
-                and SwiftScore context. PawPeaceGuide helps you understand the terms to scan before
-                you leave this site.
+                {primaryProvider.name} is the current approved provider clickout for
+                PawPeaceGuide. This page helps you understand the terms to scan before you leave
+                this site for a third-party provider.
               </p>
               <p className="mt-3 text-sm leading-6 text-muted">
                 PawPeaceGuide does not sell insurance. PawPeaceGuide is an educational,
                 affiliate-supported site that links to third-party providers and comparison tools.
-                Policy terms, quote availability, pricing, and provider rankings are controlled by
+                Policy terms, quote availability, pricing, and claim decisions are controlled by
                 the third-party destination.
               </p>
               <div className="mt-5">
                 <PrimaryOfferButton pageSource={`/${page.slug}-comparison-section`}>
-                  Continue to The Swiftest comparison
+                  Visit {primaryProvider.name} provider site
                 </PrimaryOfferButton>
               </div>
             </div>
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {swiftestPrepItems.map((item, index) => (
+            {providerPrepItems.map((item, index) => (
               <div key={item.title} className="rounded-md border border-line bg-white p-5 shadow-tight">
                 <item.icon className="h-5 w-5 text-pine" aria-hidden="true" />
                 <p className="mt-4 text-sm font-semibold text-clay">0{index + 1}</p>
@@ -370,12 +389,12 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
       <section className="mx-auto max-w-6xl px-5 py-12">
         <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">How the funnel works</p>
-          <h2 className="mt-3 text-3xl font-semibold text-ink">Three calm steps before The Swiftest handoff</h2>
+          <h2 className="mt-3 text-3xl font-semibold text-ink">Three calm steps before provider handoff</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {[
               "Answer a few pet and budget questions without sharing health details",
               "See which quote-page details deserve attention",
-              "Continue to the primary comparison option once the approved link is live"
+              `Continue to ${primaryProvider.name} or another approved provider option when you are ready`
             ].map((step, index) => (
               <div key={step} className="rounded-md bg-mist p-5">
                 <ClipboardCheck className="h-5 w-5 text-pine" aria-hidden="true" />
@@ -397,14 +416,15 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Provider preview</p>
-              <h2 className="mt-3 text-3xl font-semibold text-ink">The Swiftest first, backups below</h2>
+              <h2 className="mt-3 text-3xl font-semibold text-ink">{primaryProvider.name} first, comparison backups below</h2>
               <p className="mt-3 max-w-2xl text-base leading-7 text-muted">
-                The primary handoff is The Swiftest comparison flow once the approved affiliate URL
-                is configured. Backup direct-provider cards remain available below the main path.
+                {primaryProvider.name} is the current live affiliate-supported path. Pending
+                comparison and provider programs stay configurable below it, but the main CTA now
+                prioritizes the approved offer.
               </p>
             </div>
             <PrimaryOfferButton pageSource={`/${page.slug}-provider-preview`} variant="secondary">
-              Review The Swiftest path
+              Review {primaryProvider.name} option
             </PrimaryOfferButton>
           </div>
           <div className="mt-6">
@@ -440,7 +460,7 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
         <CTABlock
           eyebrow="Ready when you are"
           title="Start with education, then continue to the comparison path."
-          body="PawPeaceGuide helps you prepare better questions before leaving for The Swiftest or another third-party quote option."
+          body={`PawPeaceGuide helps you prepare better questions before leaving for ${primaryProvider.name} or another third-party quote option.`}
           primaryHref="/quiz"
           primaryLabel={page.primaryCta}
           secondaryHref="/compare"
@@ -450,4 +470,8 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
       <StickyMobileCTA href="/quiz" label={mobileStickyLabel} variant={isAdLandingPage ? "accent" : "primary"} />
     </>
   );
+}
+
+function usesHeroBackground(slug: string) {
+  return slug === "pet-insurance" || slug === "pet-parent-protection";
 }

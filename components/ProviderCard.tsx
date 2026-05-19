@@ -24,6 +24,17 @@ export function ProviderCard({
   pageSource = "provider_card"
 }: ProviderCardProps) {
   const affiliateConfigured = isProviderAffiliateConfigured(provider);
+  const offerLabel =
+    provider.role === "primary"
+      ? "Primary approved option"
+      : affiliateConfigured
+        ? "Approved provider option"
+        : "Backup quote option";
+  const statusText = affiliateConfigured
+    ? "Available option"
+    : provider.role === "primary"
+      ? "Preparing link"
+      : "Comparison guide";
   const ctaHref = affiliateConfigured
     ? getAffiliateRedirectHref(provider.slug)
     : provider.role === "primary"
@@ -101,12 +112,16 @@ export function ProviderCard({
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clay">
-            {provider.role === "primary" ? "Primary comparison option" : "Backup quote option"}
+            {offerLabel}
           </p>
           <h3 className="mt-2 text-xl font-semibold text-ink">{provider.name}</h3>
         </div>
-        <span className="rounded-md bg-mist px-3 py-1 text-xs font-semibold text-pine">
-          Priority {provider.priority}
+        <span
+          className={`rounded-md px-3 py-1 text-xs font-semibold ${
+            affiliateConfigured ? "bg-pine text-white" : "bg-mist text-pine"
+          }`}
+        >
+          {statusText}
         </span>
       </div>
 

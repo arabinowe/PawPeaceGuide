@@ -9,6 +9,7 @@ import { PetImagePanel, petImages } from "@/components/PetImage";
 import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
 import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
+import { getPrimaryProvider } from "@/data/providers";
 import { siteConfig } from "@/data/siteConfig";
 import { trackFunnelEvent } from "@/lib/tracking";
 
@@ -97,6 +98,7 @@ export function Quiz() {
   const [answers, setAnswers] = useState<QuizAnswers>(emptyAnswers);
   const [stepIndex, setStepIndex] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const primaryProvider = getPrimaryProvider();
 
   const step = steps[stepIndex];
   const progress = completed ? 100 : Math.round(((stepIndex + 1) / steps.length) * 100);
@@ -141,10 +143,10 @@ export function Quiz() {
       petLabel,
       breedLabel,
       summary:
-        `Use The Swiftest's dog and cat comparison flow to review quote-page details for a ${petLabel}. ` +
+        `Use ${primaryProvider.name}'s provider page to review quote-page details for a ${petLabel}. ` +
         `Keep ${breedLabel}, age range, deductible comfort, reimbursement rate, annual benefit, waiting periods, and exclusions in view.`
     };
-  }, [answers.ageRange, answers.breed, answers.petType]);
+  }, [answers.ageRange, answers.breed, answers.petType, primaryProvider.name]);
 
   function setAnswer(value: string) {
     setAnswers((current) => ({ ...current, [step.key]: value }));
@@ -214,12 +216,12 @@ export function Quiz() {
         </div>
 
         <div className="mt-8 rounded-md border border-line bg-mist p-5">
-          <h2 className="text-2xl font-semibold text-ink">Ready for The Swiftest comparison flow</h2>
+          <h2 className="text-2xl font-semibold text-ink">Ready for the provider review step</h2>
           <p className="mt-3 text-base leading-7 text-muted">
             Quote options can vary by pet age, breed, location, deductible, reimbursement rate,
             annual limit, wellness add-ons, underwriting rules, and provider availability. PawPeaceGuide
             does not recommend a specific provider from your answers, and your quiz answers stay in
-            this browser session. Use this profile as a checklist when you review The Swiftest or
+            this browser session. Use this profile as a checklist when you review {primaryProvider.name} or
             any provider quote page.
           </p>
           <div className="mt-5 rounded-md border border-line bg-white p-4">
@@ -230,7 +232,7 @@ export function Quiz() {
           </div>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
             <PrimaryOfferButton pageSource="/quiz-result" showDevelopmentWarning className="w-full sm:w-auto">
-              Continue to The Swiftest comparison
+              Visit {primaryProvider.name} provider site
             </PrimaryOfferButton>
             <Button href="/calculator" variant="secondary" className="w-full sm:w-auto">
               Use the cost calculator
@@ -246,7 +248,7 @@ export function Quiz() {
         <div className="mt-6">
           <h2 className="text-2xl font-semibold text-ink">Backup provider options</h2>
           <p className="mt-2 text-sm leading-6 text-muted">
-            These secondary options are available below the primary comparison path. Review policy
+            These secondary options are available below the current primary path. Review policy
             details directly with each provider.
           </p>
           <div className="mt-4">

@@ -2,6 +2,7 @@ import { Calculator, ClipboardCheck, FileSearch, ShieldCheck } from "lucide-reac
 import { Button } from "@/components/Button";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
+import { getPrimaryProvider } from "@/data/providers";
 
 type IntentPathRouterProps = {
   pageSource: string;
@@ -33,6 +34,8 @@ const pathCards = [
 ];
 
 export function IntentPathRouter({ pageSource, className = "" }: IntentPathRouterProps) {
+  const primaryProvider = getPrimaryProvider();
+
   return (
     <section className={className}>
       <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
@@ -46,7 +49,7 @@ export function IntentPathRouter({ pageSource, className = "" }: IntentPathRoute
           <p className="mt-3 text-base leading-7 text-muted">
             The highest-intent click is a visitor who understands the basic tradeoffs and is
             ready to review third-party quote options. If that is you, continue toward the
-            primary comparison path. If not, use the tools first.
+            current primary provider path. If not, use the tools first.
           </p>
           <div className="mt-5 rounded-md border border-pine/20 bg-sky/35 p-4">
             <div className="flex gap-3">
@@ -61,7 +64,7 @@ export function IntentPathRouter({ pageSource, className = "" }: IntentPathRoute
             </div>
             <div className="mt-4">
               <PrimaryOfferButton pageSource={pageSource} showDisclosure={false}>
-                Continue to The Swiftest comparison
+                Visit {primaryProvider.name} provider site
               </PrimaryOfferButton>
             </div>
           </div>

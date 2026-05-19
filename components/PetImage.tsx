@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 export type PetImageKey =
+  | "heroPets"
   | "dogOwner"
   | "catHome"
   | "puppy"
@@ -9,6 +10,10 @@ export type PetImageKey =
   | "calmTrust";
 
 export const petImages: Record<PetImageKey, { src: string; alt: string }> = {
+  heroPets: {
+    src: "/landing/pawpeace-hero-pets.jpg",
+    alt: "Happy golden retriever and orange cat relaxing with their owner in a warm home"
+  },
   dogOwner: {
     src: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1400&q=80",
     alt: "Happy golden retriever sitting with its owner at home"
@@ -36,6 +41,7 @@ export const petImages: Record<PetImageKey, { src: string; alt: string }> = {
 };
 
 export function getPetImageForPath(pathOrSlug: string) {
+  if (pathOrSlug.includes("pet-parent") || pathOrSlug === "pet-insurance") return petImages.heroPets;
   if (pathOrSlug.includes("start-60")) return petImages.dogSolo;
   if (pathOrSlug.includes("cat")) return petImages.catHome;
   if (pathOrSlug.includes("kitten")) return petImages.kitten;

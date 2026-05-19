@@ -20,6 +20,7 @@ import { IntentPathRouter } from "@/components/IntentPathRouter";
 import { PetImagePanel, petImages } from "@/components/PetImage";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
 import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
+import { getConfiguredBackupProviders, getPrimaryProvider } from "@/data/providers";
 import { siteConfig } from "@/data/siteConfig";
 import { createMetadata } from "@/lib/seo";
 
@@ -87,6 +88,9 @@ const animalFitCards = [
 ];
 
 export default function ComparePage() {
+  const primaryProvider = getPrimaryProvider();
+  const configuredBackupProvider = getConfiguredBackupProviders()[0];
+
   return (
     <>
       <ComparePageTracker />
@@ -96,11 +100,11 @@ export default function ComparePage() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Primary partner path</p>
             <h1 className="mt-3 text-4xl font-semibold text-ink md:text-5xl">
-              Start with The Swiftest comparison flow
+              Start with the current approved provider option
             </h1>
             <p className="mt-4 text-lg leading-8 text-muted">
-              PawPeaceGuide prepares pet owners to leave for The Swiftest, a third-party
-              pet insurance comparison destination. PawPeaceGuide does not sell, solicit,
+              PawPeaceGuide prepares pet owners to leave for {primaryProvider.name}, a third-party
+              pet insurance provider site. PawPeaceGuide does not sell, solicit,
               bind, underwrite, negotiate, or directly offer insurance.
             </p>
           </div>
@@ -109,9 +113,9 @@ export default function ComparePage() {
             <div className="rounded-md border border-line bg-white p-5 shadow-tight">
               <p className="text-sm font-semibold text-ink">What to review before clicking out</p>
               <p className="mt-2 text-sm leading-6 text-muted">
-                The Swiftest may show provider comparison details such as plan cost assumptions,
-                reimbursement amount, annual benefit, provider notes, and SwiftScore context. Treat
-                those as starting points, then verify policy terms directly.
+                {primaryProvider.name} may show plan details such as cost assumptions,
+                deductible choices, reimbursement structure, annual benefit options, exclusions, and
+                policy documents. Treat those as starting points, then verify policy terms directly.
               </p>
               <div className="mt-4 flex flex-col gap-3 sm:flex-row">
                 <Button href="/quiz" variant="secondary">
@@ -129,7 +133,7 @@ export default function ComparePage() {
           <FeatureCard
             icon={FileSearch}
             title="Arrive ready to scan"
-            body="Use PawPeaceGuide to understand the insurance terms you are likely to see on a comparison page before leaving for The Swiftest."
+            body={`Use PawPeaceGuide to understand the insurance terms you are likely to see before leaving for ${primaryProvider.name}.`}
           />
           <FeatureCard
             icon={Percent}
@@ -139,7 +143,7 @@ export default function ComparePage() {
           <FeatureCard
             icon={Gauge}
             title="Verify every detail"
-            body="The Swiftest and its provider partners control their quote flow, rankings, eligibility, and policy terms. Review details directly before applying."
+            body={`${primaryProvider.name} controls its quote flow, eligibility, pricing, and policy terms. Review details directly before applying.`}
           />
         </div>
 
@@ -151,10 +155,9 @@ export default function ComparePage() {
           </p>
           <h2 className="mt-3 text-3xl font-semibold text-ink">Designed for dog and cat shoppers</h2>
           <p className="mt-3 max-w-3xl text-base leading-7 text-muted">
-            The public Swiftest pet insurance comparison content is built around dog and cat
-            insurance. PawPeaceGuide uses puppies and kittens as age-specific dog and cat paths,
-            not as separate insurance products. If you are shopping for another animal, verify
-            availability directly with providers before relying on any comparison page.
+            PawPeaceGuide uses puppies and kittens as age-specific dog and cat paths, not as
+            separate insurance products. If you are shopping for another animal, verify
+            availability directly with providers before relying on any quote page.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {animalFitCards.map((item) => (
@@ -165,15 +168,15 @@ export default function ComparePage() {
 
         <div className="mt-8 rounded-md border border-line bg-white p-5 shadow-soft md:p-7">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
-            Start with The Swiftest
+            Start with {primaryProvider.name}
           </p>
-          <h2 className="mt-3 text-3xl font-semibold text-ink">Primary pet insurance comparison option</h2>
+          <h2 className="mt-3 text-3xl font-semibold text-ink">Current primary pet insurance provider option</h2>
           <p className="mt-3 max-w-3xl text-base leading-7 text-muted">
-            For many pet owners, starting with a third-party comparison flow can be simpler than
-            checking one insurer at a time. The Swiftest is the intended primary destination for
-            this funnel after the education, quiz, or calculator step. PawPeaceGuide is
-            affiliate-supported and may earn compensation if you visit a provider through our links
-            and purchase a policy.
+            For many pet owners, the useful first step is understanding what to compare before
+            opening a provider quote flow. {primaryProvider.name} is the current approved primary
+            destination for this funnel after the education, quiz, or calculator step. PawPeaceGuide
+            is affiliate-supported and may earn compensation if you visit a provider through our
+            links and purchase a policy.
           </p>
           <div className="mt-6">
             <ProviderComparisonGrid
@@ -193,9 +196,11 @@ export default function ComparePage() {
             </p>
             <h2 className="mt-3 text-3xl font-semibold text-ink">Secondary provider options</h2>
             <p className="mt-3 max-w-3xl text-base leading-7 text-muted">
-              These backup cards preserve flexibility if the primary partner is not approved or if
-              direct-provider quote options are worth comparing below the primary comparison path.
-              Policy terms vary, so review details directly with each provider.
+              {configuredBackupProvider
+                ? `${configuredBackupProvider.name} is also configured as a live direct-provider option. `
+                : "These backup cards preserve flexibility as additional partner approvals arrive. "}
+              Direct-provider quote options can be useful to review below the primary comparison
+              path. Policy terms vary, so review details directly with each provider.
             </p>
           </div>
           <ProviderComparisonGrid role="backup" pageSource="/compare-backup" />

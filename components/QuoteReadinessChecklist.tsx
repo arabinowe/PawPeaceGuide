@@ -71,18 +71,18 @@ export function QuoteReadinessChecklist({
               Ready to compare quote options?
             </h2>
             <p className="mt-3 text-sm leading-6 text-muted md:text-base md:leading-7">
-              Use this quick checkpoint before leaving PawPeaceGuide for The Swiftest. It helps
+              Use this quick checkpoint before leaving PawPeaceGuide for {provider.name}. It helps
               shoppers arrive prepared without turning this site into an insurance application.
             </p>
             {!affiliateConfigured ? (
               <p className="mt-4 rounded-md border border-gold/35 bg-[#fff9ea] px-3 py-2 text-xs leading-5 text-muted md:px-4 md:py-3 md:text-sm md:leading-6">
-                The Swiftest tracking URL is still pending approval. Until it is configured, the
+                The {provider.name} tracking URL is still pending approval. Until it is configured, the
                 primary handoff keeps visitors inside the PawPeaceGuide comparison guide.
               </p>
             ) : null}
             <div className="mt-5 flex flex-col gap-3 sm:flex-row">
               <PrimaryOfferButton pageSource={pageSource} showDisclosure={false} className="w-full sm:w-auto">
-                Continue to The Swiftest comparison
+                Visit {provider.name} provider site
               </PrimaryOfferButton>
               <Button href="/quiz" variant="secondary" className="w-full sm:w-auto">
                 Check my profile first
@@ -115,7 +115,7 @@ export function QuoteReadinessChecklist({
             <div>
               <p className="text-sm font-semibold text-ink">What to scan after clickout</p>
               <p className="mt-1 text-sm leading-6 text-muted">
-                The Swiftest and provider sites control their own quote flow, rankings, pricing,
+                {provider.name} and other provider sites control their own quote flow, pricing,
                 availability, and policy language.
               </p>
             </div>

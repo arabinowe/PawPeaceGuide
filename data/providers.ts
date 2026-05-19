@@ -3,10 +3,45 @@ import type { Provider } from "@/lib/types";
 
 export const providers = ([
   {
-    name: "The Swiftest",
-    slug: siteConfig.providerTrackingSlugs.theSwiftest,
+    name: "Odie",
+    slug: siteConfig.providerTrackingSlugs.odie,
     role: "primary",
     priority: 1,
+    affiliateUrl: siteConfig.providerAffiliateUrls.odie,
+    affiliateNetwork: "Awin",
+    commissionType: "Unknown",
+    publicPayoutClaim: "Unknown. Verify approved payout and qualifying action in Awin.",
+    estimatedPayout:
+      "Approved affiliate link is configured. Add confirmed payout, cookie window, and qualifying action after reviewing Awin terms.",
+    approvalStatus: "Approved",
+    bestForLabel: "Review an approved dog and cat provider option",
+    shortDescription:
+      "Current primary clickout because PawPeaceGuide has an approved Odie affiliate link while broader comparison partners are still pending.",
+    notes:
+      "Approved Awin affiliate link is live. Treat Odie as the current primary direct-provider option, while keeping comparison partners ready to add after approval.",
+    pros: [
+      "Approved PawPeaceGuide affiliate clickout is configured through Awin",
+      "Useful direct-provider option for dog and cat owners who are ready to review policy details",
+      "Can be compared against marketplace or comparison paths after users understand core insurance terms"
+    ],
+    cons: [
+      "Direct-provider flow is not a full-market comparison",
+      "Approved payout, cookie window, and paid social permissions should be verified in Awin before scaling campaigns",
+      "Users must review policy terms, exclusions, waiting periods, claim rules, and availability directly with Odie"
+    ],
+    trafficRestrictionsNotes:
+      "Approved link is configured. Confirm Facebook/Instagram paid social, pre-sell page, direct-linking, retargeting, and creative restrictions in Awin before scaling.",
+    paidSearchRestrictionsNotes:
+      "Placeholder. Confirm Awin trademark, competitor, paid search, and brand bidding restrictions before running search campaigns.",
+    brandBiddingAllowed: "unknown",
+    ctaText: "Visit provider site",
+    disclosureText: siteConfig.affiliateDisclosure
+  },
+  {
+    name: "The Swiftest",
+    slug: siteConfig.providerTrackingSlugs.theSwiftest,
+    role: "backup",
+    priority: 2,
     affiliateUrl: siteConfig.providerAffiliateUrls.theSwiftest,
     affiliateNetwork: "Everflow",
     commissionType: "CPA / conversion",
@@ -17,9 +52,9 @@ export const providers = ([
     approvalStatus: "Pending approval",
     bestForLabel: "Start with a pet insurance comparison flow",
     shortDescription:
-      "Primary third-party comparison destination for PawPeaceGuide once approved affiliate terms and tracking are confirmed.",
+      "Pending comparison partner. Promote this path after approved affiliate terms and tracking are confirmed.",
     notes:
-      "Primary comparison offer. The Swiftest's public pet insurance page is built around provider comparisons and SwiftScore context; final tracking URL and terms must be verified after approval.",
+      "High-priority comparison offer after approval. The Swiftest's public pet insurance page is built around provider comparisons and SwiftScore context; final tracking URL and terms must be verified after approval.",
     pros: [
       "Pet-focused comparison page rather than a single-carrier handoff",
       "Public site presents an explore, compare, then continue-to-provider flow",
@@ -39,10 +74,45 @@ export const providers = ([
     disclosureText: siteConfig.affiliateDisclosure
   },
   {
+    name: "Petted",
+    slug: siteConfig.providerTrackingSlugs.petted,
+    role: "backup",
+    priority: 3,
+    affiliateUrl: siteConfig.providerAffiliateUrls.petted,
+    affiliateNetwork: "Petted",
+    commissionType: "Unknown",
+    publicPayoutClaim: "Unknown. Verify approved payout and qualifying action after acceptance.",
+    estimatedPayout:
+      "Placeholder only. Add approved payout, cookie window, and qualifying action after affiliate acceptance.",
+    approvalStatus: "Pending approval",
+    bestForLabel: "Future marketplace or comparison backup option",
+    shortDescription:
+      "Pending backup partner slot for a pet insurance marketplace or comparison path after approved terms are confirmed.",
+    notes:
+      "Application pending. Keep disabled until the approved tracking URL, traffic rules, and disclosures are confirmed.",
+    pros: [
+      "Potential backup comparison-style partner",
+      "Can preserve revenue continuity if primary comparison approval is delayed",
+      "May fit education-first traffic after terms are verified"
+    ],
+    cons: [
+      "Affiliate approval and payout terms are not configured yet",
+      "Paid social rules must be confirmed before ads use this path",
+      "Users must verify quote, provider, and policy details directly"
+    ],
+    trafficRestrictionsNotes:
+      "Pending. Confirm Facebook/Instagram paid social, bridge page, and disclosure rules after approval.",
+    paidSearchRestrictionsNotes:
+      "Pending. Confirm brand bidding, trademark, and competitor-term rules after approval.",
+    brandBiddingAllowed: "unknown",
+    ctaText: "Compare quote options",
+    disclosureText: siteConfig.affiliateDisclosure
+  },
+  {
     name: "Pets Best",
     slug: siteConfig.providerTrackingSlugs.petsBest,
     role: "backup",
-    priority: 2,
+    priority: 4,
     affiliateUrl: siteConfig.providerAffiliateUrls.petsBest,
     affiliateNetwork: "Impact Radius",
     commissionType: "qualified lead or signup, verify after approval",
@@ -74,10 +144,115 @@ export const providers = ([
     disclosureText: siteConfig.affiliateDisclosure
   },
   {
+    name: "Fetch",
+    slug: siteConfig.providerTrackingSlugs.fetch,
+    role: "backup",
+    priority: 5,
+    affiliateUrl: siteConfig.providerAffiliateUrls.fetch,
+    affiliateNetwork: "Unknown",
+    commissionType: "Unknown",
+    publicPayoutClaim: "Unknown. Verify approved payout and qualifying action after acceptance.",
+    estimatedPayout:
+      "Placeholder only. Add approved payout, cookie window, and qualifying action after affiliate acceptance.",
+    approvalStatus: "Pending approval",
+    bestForLabel: "Future direct-provider option",
+    shortDescription:
+      "Pending backup provider slot. Keep disabled until an approved tracking URL and terms are available.",
+    notes:
+      "Application pending. Do not imply approval or provider endorsement until affiliate terms are confirmed.",
+    pros: [
+      "Can become another direct-provider comparison point after approval",
+      "Useful for users who want to compare individual provider terms",
+      "Provider-specific card can be expanded after approved disclosures are available"
+    ],
+    cons: [
+      "Affiliate link is not configured yet",
+      "Payout and qualifying action are unknown",
+      "Policy terms and availability must be verified directly with the provider"
+    ],
+    trafficRestrictionsNotes:
+      "Pending. Confirm paid social, pre-sell page, and creative rules after approval.",
+    paidSearchRestrictionsNotes:
+      "Pending. Confirm trademark and brand bidding restrictions after approval.",
+    brandBiddingAllowed: "unknown",
+    ctaText: "Visit provider site",
+    disclosureText: siteConfig.affiliateDisclosure
+  },
+  {
+    name: "Trupanion",
+    slug: siteConfig.providerTrackingSlugs.trupanion,
+    role: "backup",
+    priority: 6,
+    affiliateUrl: siteConfig.providerAffiliateUrls.trupanion,
+    affiliateNetwork: "Unknown",
+    commissionType: "Unknown",
+    publicPayoutClaim: "Unknown. Verify approved payout and qualifying action after acceptance.",
+    estimatedPayout:
+      "Placeholder only. Add approved payout, cookie window, and qualifying action after affiliate acceptance.",
+    approvalStatus: "Pending approval",
+    bestForLabel: "Future direct-provider option",
+    shortDescription:
+      "Pending backup provider slot for users who want to review a direct provider after education.",
+    notes:
+      "Application pending. Keep disabled until approved link, traffic rules, and required disclosures are confirmed.",
+    pros: [
+      "Can support direct-provider comparison once approved",
+      "May be useful for shoppers comparing claim and reimbursement mechanics",
+      "Provider card can be expanded after verified partner terms are available"
+    ],
+    cons: [
+      "Affiliate link is not configured yet",
+      "Paid traffic permissions are not confirmed in the app",
+      "Users must review policy terms directly with the provider"
+    ],
+    trafficRestrictionsNotes:
+      "Pending. Confirm Facebook/Instagram traffic, pre-sell page, and retargeting rules after approval.",
+    paidSearchRestrictionsNotes:
+      "Pending. Confirm brand bidding, trademark, and competitor-term rules after approval.",
+    brandBiddingAllowed: "unknown",
+    ctaText: "Visit provider site",
+    disclosureText: siteConfig.affiliateDisclosure
+  },
+  {
+    name: "ASPCA Pet Health Insurance",
+    slug: siteConfig.providerTrackingSlugs.aspcaPetHealth,
+    role: "backup",
+    priority: 7,
+    affiliateUrl: siteConfig.providerAffiliateUrls.aspcaPetHealth,
+    affiliateNetwork: "Unknown",
+    commissionType: "Unknown",
+    publicPayoutClaim: "Unknown. Verify approved payout and qualifying action after acceptance.",
+    estimatedPayout:
+      "Placeholder only. Add approved payout, cookie window, and qualifying action after affiliate acceptance.",
+    approvalStatus: "Pending approval",
+    bestForLabel: "Future direct-provider option",
+    shortDescription:
+      "Pending backup provider slot. Keep disabled until approved affiliate terms and tracking are confirmed.",
+    notes:
+      "Application pending. Confirm brand, trademark, traffic, and disclosure rules before use in paid campaigns.",
+    pros: [
+      "Can become another provider-specific option after approval",
+      "Useful for readers comparing direct provider policy terms",
+      "Maintains funnel flexibility if other partners are delayed"
+    ],
+    cons: [
+      "Affiliate link is not configured yet",
+      "Payout, cookie window, and paid social rules are not entered",
+      "Users should verify policy details directly with the provider"
+    ],
+    trafficRestrictionsNotes:
+      "Pending. Confirm Facebook/Instagram paid social and pre-sell page rules after approval.",
+    paidSearchRestrictionsNotes:
+      "Pending. Confirm brand bidding, trademark, and paid search restrictions after approval.",
+    brandBiddingAllowed: "unknown",
+    ctaText: "Visit provider site",
+    disclosureText: siteConfig.affiliateDisclosure
+  },
+  {
     name: "Embrace",
     slug: siteConfig.providerTrackingSlugs.embrace,
     role: "backup",
-    priority: 3,
+    priority: 8,
     affiliateUrl: siteConfig.providerAffiliateUrls.embrace,
     affiliateNetwork: "FlexOffers",
     commissionType: "qualified lead, verify after approval",
@@ -119,6 +294,10 @@ export function getPrimaryProvider() {
 
 export function getBackupProviders() {
   return providers.filter((provider) => provider.role === "backup");
+}
+
+export function getConfiguredBackupProviders() {
+  return getBackupProviders().filter(isProviderAffiliateConfigured);
 }
 
 export function isProviderAffiliateConfigured(provider: Provider) {

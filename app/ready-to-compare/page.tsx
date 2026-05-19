@@ -5,13 +5,14 @@ import { EmailCaptureForm } from "@/components/EmailCaptureForm";
 import { PageEventTracker } from "@/components/PageEventTracker";
 import { PetImagePanel, petImages } from "@/components/PetImage";
 import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
+import { getPrimaryProvider } from "@/data/providers";
 import { siteConfig } from "@/data/siteConfig";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Ready to Compare Pet Insurance Quote Options",
   description:
-    "A high-intent PawPeaceGuide checkpoint before visiting The Swiftest to compare pet insurance quote options.",
+    "A high-intent PawPeaceGuide checkpoint before visiting a third-party pet insurance provider or comparison option.",
   path: "/ready-to-compare"
 });
 
@@ -23,6 +24,8 @@ const intentSignals = [
 ];
 
 export default function ReadyToComparePage() {
+  const primaryProvider = getPrimaryProvider();
+
   return (
     <>
       <PageEventTracker page="/ready-to-compare" paid />
@@ -36,8 +39,8 @@ export default function ReadyToComparePage() {
               Ready to compare pet insurance quote options?
             </h1>
             <p className="mt-5 text-lg leading-8 text-muted">
-              If you already understand the basics, use this checkpoint and continue toward The
-              Swiftest comparison flow once the approved partner link is live.
+              If you already understand the basics, use this checkpoint and continue toward the
+              current {primaryProvider.name} provider option when you are ready.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Button href="#quote-ready">Use the quote-ready checklist</Button>

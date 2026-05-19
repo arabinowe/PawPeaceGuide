@@ -8,6 +8,7 @@ import { PetImagePanel, petImages } from "@/components/PetImage";
 import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
 import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
+import { getPrimaryProvider } from "@/data/providers";
 import { siteConfig } from "@/data/siteConfig";
 import { trackFunnelEvent } from "@/lib/tracking";
 
@@ -37,6 +38,7 @@ export function Calculator() {
   const [values, setValues] = useState(initialState);
   const [showResults, setShowResults] = useState(false);
   const started = useRef(false);
+  const primaryProvider = getPrimaryProvider();
 
   const result = useMemo(() => {
     const annualPremium = values.monthlyPremium * 12;
@@ -165,7 +167,7 @@ export function Calculator() {
                 exclusions, waiting periods, and claim decisions vary by provider.
               </p>
               <div className="rounded-md border border-line bg-white p-4">
-                <p className="text-sm font-semibold text-ink">What to scan on The Swiftest</p>
+                <p className="text-sm font-semibold text-ink">What to scan on {primaryProvider.name}</p>
                 <p className="mt-2 text-sm leading-6 text-muted">
                   Compare the standard plan cost, reimbursement amount, annual benefit, provider notes,
                   and any link to policy details. A lower monthly number can still leave more risk if
@@ -174,7 +176,7 @@ export function Calculator() {
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <PrimaryOfferButton pageSource="/calculator-result" showDevelopmentWarning className="w-full sm:w-auto">
-                  Continue to The Swiftest comparison
+                  Visit {primaryProvider.name} provider site
                 </PrimaryOfferButton>
                 <Button href="/quiz" variant="secondary" className="w-full sm:w-auto">
                   Take the 60-second quiz
@@ -192,10 +194,10 @@ export function Calculator() {
       <QuoteReadinessChecklist pageSource="/calculator-quote-ready" compact className="mt-8" />
 
       <div className="mt-8">
-        <h2 className="text-2xl font-semibold text-ink">Primary comparison handoff</h2>
+        <h2 className="text-2xl font-semibold text-ink">Primary provider handoff</h2>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-          Use the rough math above to review the dog and cat comparison flow from The Swiftest with better
-          context. PawPeaceGuide does not send calculator inputs to Meta Pixel, The Swiftest, or
+          Use the rough math above to review {primaryProvider.name} with better
+          context. PawPeaceGuide does not send calculator inputs to Meta Pixel, {primaryProvider.name}, or
           affiliate links.
         </p>
         <div className="mt-4">
@@ -205,7 +207,7 @@ export function Calculator() {
       <div className="mt-6">
         <h2 className="text-2xl font-semibold text-ink">Backup provider options</h2>
         <p className="mt-2 text-sm leading-6 text-muted">
-          These secondary options stay available below the primary comparison path.
+          These secondary options stay available below the current primary provider path.
         </p>
         <div className="mt-4">
           <ProviderComparisonGrid compact role="backup" pageSource="/calculator-backup" />

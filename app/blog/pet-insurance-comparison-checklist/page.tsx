@@ -159,16 +159,16 @@ export default function PetInsuranceComparisonChecklistBlogPage() {
                 </p>
                 <p>
                   PawPeaceGuide does not sell insurance, recommend a policy, or decide what a
-                  provider will cover. Use this as an education layer before visiting The Swiftest,
-                  a provider site, or another third-party comparison page.
+                  provider will cover. Use this as an education layer before visiting Odie,
+                  another provider site, or a third-party comparison page.
                 </p>
               </div>
               <div className="mt-6 rounded-md border border-line bg-white p-5 shadow-tight">
                 <SearchCheck className="h-5 w-5 text-pine" aria-hidden="true" />
                 <p className="mt-3 text-sm font-semibold text-ink">Organic funnel path</p>
                 <p className="mt-2 text-sm leading-6 text-muted">
-                  Blog reader to checklist to quiz or calculator to ready-to-compare page to The
-                  Swiftest handoff once the approved affiliate link is configured.
+                  Blog reader to checklist to quiz or calculator to ready-to-compare page to the
+                  current approved provider handoff.
                 </p>
               </div>
             </section>

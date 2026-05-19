@@ -9,7 +9,7 @@ export const siteConfig = {
   googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || "TODO_GA_MEASUREMENT_ID",
   googleTagManagerId: "TODO_GTM_ID",
   emailCaptureProvider: "TODO_EMAIL_PROVIDER",
-  appendUtmToAffiliateLinks: process.env.NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS === "true",
+  appendUtmToAffiliateLinks: process.env.NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS !== "false",
   engagementTrackingEnabled: process.env.NEXT_PUBLIC_ENGAGEMENT_TRACKING_ENABLED !== "false",
   engagementEventEndpoint: process.env.NEXT_PUBLIC_ENGAGEMENT_EVENT_ENDPOINT || "/api/engagement",
   engagementSampleRate: Number(process.env.NEXT_PUBLIC_ENGAGEMENT_SAMPLE_RATE || "1"),
@@ -57,23 +57,46 @@ export const siteConfig = {
   } satisfies Record<string, FunnelEventName>,
   providerAffiliateUrls: {
     theSwiftest:
-      process.env.NEXT_PUBLIC_PRIMARY_AFFILIATE_URL || "PLACEHOLDER_PRIMARY_AFFILIATE_URL",
+      process.env.NEXT_PUBLIC_SWIFTEST_AFFILIATE_URL || "PLACEHOLDER_SWIFTEST_AFFILIATE_URL",
+    odie:
+      process.env.NEXT_PUBLIC_PRIMARY_AFFILIATE_URL ||
+      process.env.NEXT_PUBLIC_ODIE_AFFILIATE_URL ||
+      "https://www.awin1.com/cread.php?awinmid=68990&awinaffid=2902179",
+    petted: "",
     petsBest: "",
+    fetch: "",
+    trupanion: "",
+    aspcaPetHealth: "",
     embrace: ""
   },
   providerTrackingSlugs: {
     theSwiftest: "the-swiftest",
+    odie: "odie",
+    petted: "petted",
     petsBest: "pets-best",
+    fetch: "fetch",
+    trupanion: "trupanion",
+    aspcaPetHealth: "aspca-pet-health-insurance",
     embrace: "embrace"
   },
   providerNetwork: {
     theSwiftest: "Everflow",
+    odie: "Awin",
+    petted: "Petted",
     petsBest: "Impact Radius",
+    fetch: "Unknown",
+    trupanion: "Unknown",
+    aspcaPetHealth: "Unknown",
     embrace: "FlexOffers"
   },
   providerCommissionType: {
     theSwiftest: "CPA / conversion",
+    odie: "Unknown",
+    petted: "Unknown",
     petsBest: "qualified lead or signup, verify after approval",
+    fetch: "Unknown",
+    trupanion: "Unknown",
+    aspcaPetHealth: "Unknown",
     embrace: "qualified lead, verify after approval"
   }
 } as const;

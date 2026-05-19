@@ -8,6 +8,7 @@ import { PageEventTracker } from "@/components/PageEventTracker";
 import { PetImagePanel, petImages } from "@/components/PetImage";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
 import { guides } from "@/data/guides";
+import { getPrimaryProvider } from "@/data/providers";
 import { siteConfig } from "@/data/siteConfig";
 import { createMetadata } from "@/lib/seo";
 
@@ -18,6 +19,8 @@ export const metadata = createMetadata({
 });
 
 export default function HomePage() {
+  const primaryProvider = getPrimaryProvider();
+
   return (
     <>
       <PageEventTracker page="/" />
@@ -93,7 +96,7 @@ export default function HomePage() {
         <CTABlock
           eyebrow="Paid traffic path"
           title="Main Facebook ad destination"
-          body="Send broad happy-pet creative to the dog-and-cat pre-sell page, then guide users into the quiz, calculator, and The Swiftest comparison handoff."
+          body={`Send broad happy-pet creative to the dog-and-cat pre-sell page, then guide users into the quiz, calculator, and the current ${primaryProvider.name} provider handoff.`}
           primaryHref="/pet-parent-protection"
           primaryLabel="Open pet parent page"
           secondaryHref="/quiz"

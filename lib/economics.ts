@@ -2,7 +2,7 @@ export const economicsAssumptions = {
   expectedCpcLow: 0.75,
   expectedCpcBase: 1.25,
   expectedCpcHigh: 2.0,
-  primaryOfferPayout: 125,
+  primaryOfferPayout: 25,
   backupLeadPayout: 25,
   assumedProviderConversionLow: 0.02,
   assumedProviderConversionBase: 0.05,

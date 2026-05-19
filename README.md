@@ -13,7 +13,7 @@ Facebook or Instagram ad traffic lands on `/pet-parent-protection`, `/dog-parent
 Preferred paid-traffic path:
 
 ```text
-Facebook ad -> /pet-parent-protection or /dog-parent-protection -> quiz or calculator -> primary comparison offer -> /go/the-swiftest
+Facebook ad -> /pet-parent-protection or /dog-parent-protection -> quiz or calculator -> current primary provider offer -> /go/odie
 ```
 
 Main paths:
@@ -83,6 +83,8 @@ NEXT_PUBLIC_META_PIXEL_ID=
 NEXT_PUBLIC_GA_ID=
 NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true
 NEXT_PUBLIC_PRIMARY_AFFILIATE_URL=
+NEXT_PUBLIC_ODIE_AFFILIATE_URL=
+NEXT_PUBLIC_SWIFTEST_AFFILIATE_URL=
 NEXT_PUBLIC_ENGAGEMENT_TRACKING_ENABLED=true
 NEXT_PUBLIC_ENGAGEMENT_EVENT_ENDPOINT=/api/engagement
 NEXT_PUBLIC_ENGAGEMENT_SAMPLE_RATE=1
@@ -109,9 +111,9 @@ Deploy to Vercel by connecting the GitHub repo, using the default Next.js preset
 
 After `pawpeaceguide.com` is registered, assigned to the Vercel project, and resolving correctly, set `CANONICAL_HOST_REDIRECT_ENABLED=true` and keep `CANONICAL_REDIRECT_HOSTS=pawpeaceguide.vercel.app,www.pawpeaceguide.com`. That makes the Vercel app URL and `www` host redirect to the trusted apex domain without turning it on before DNS is ready.
 
-Add The Swiftest affiliate link in `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL` after approval. Backup affiliate links live in `data/siteConfig.ts` or can be edited directly in `data/providers.ts` if you choose to store public tracking URLs in config. Affiliate tracking links are usually public click-tracking URLs, but do not commit private API keys, dashboard credentials, or partner tokens.
+Odie is the current primary approved affiliate offer. Its Awin tracking URL is configured in `data/siteConfig.ts` so production can earn revenue immediately; you can override it with `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL` or `NEXT_PUBLIC_ODIE_AFFILIATE_URL`. Add The Swiftest affiliate link to `NEXT_PUBLIC_SWIFTEST_AFFILIATE_URL` after approval. Other backup affiliate links live in `data/siteConfig.ts` or can be edited directly in `data/providers.ts`. Affiliate tracking links are usually public click-tracking URLs, but do not commit private API keys, dashboard credentials, or partner tokens.
 
-Test `/go/the-swiftest` after deployment. With no approved link configured, it should show: "This partner link has not been configured yet." Public provider cards should route users back into the quiz or comparison guide instead of firing affiliate click events. With an approved link configured, it should send users to the partner page and preserve UTMs when `NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true`.
+Test `/go/odie` after deployment. It should show the PawPeaceGuide leaving-site page, then redirect through the Awin tracking URL and preserve UTMs when `NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true`. Test `/go/the-swiftest` separately after approval; until then it should show: "This partner link has not been configured yet."
 
 Do not add direct public links to `https://theswiftest.com` anywhere in the app. All consumer paths to The Swiftest must go through `/go/the-swiftest`, which redirects only to the approved affiliate tracking URL. `npm run audit:outbound` checks this rule and CI runs the audit before build.
 
@@ -183,7 +185,7 @@ Mobile QA priorities:
 - Pet image appears in the first scroll without pushing the CTA below the fold.
 - Quiz and calculator inputs use mobile-friendly text sizing to reduce iOS zoom.
 - Users can still reach the deeper desktop-style education sections by scrolling.
-- No public page links directly to The Swiftest; all outbound handoff remains `/go/the-swiftest`.
+- No public page links directly to The Swiftest; any future Swiftest outbound handoff must remain `/go/the-swiftest`.
 
 ## Organic Guided Blog Funnel
 
@@ -192,7 +194,7 @@ The organic funnel is separate from the Facebook ad funnel. Use `/blog` and `/bl
 Recommended organic path:
 
 ```text
-Organic visitor -> /blog/pet-insurance-comparison-checklist -> quiz or calculator -> /ready-to-compare -> /go/the-swiftest
+Organic visitor -> /blog/pet-insurance-comparison-checklist -> quiz or calculator -> /ready-to-compare -> /go/odie
 ```
 
 The checklist article is designed as a linkable asset: it explains deductible, reimbursement, annual limit, waiting period, exclusion, pre-existing condition, and wellness add-on concepts without claiming PawPeaceGuide sells or recommends insurance.
@@ -320,31 +322,33 @@ Do not imply PawPeaceGuide sells, solicits, binds, underwrites, negotiates, or d
 
 ## Primary Affiliate Strategy
 
-The Swiftest is currently the preferred primary offer because the working affiliate strategy is based on a public payout claim of `$125 per conversion`. Treat this as an unverified public claim until PawPeaceGuide is accepted and the final approved terms are visible in the affiliate dashboard.
+Odie is currently the primary offer because PawPeaceGuide has an approved Awin affiliate link and can earn revenue through that path now. Treat Odie as the current direct-provider handoff while preserving flexibility to reprioritize when higher-EPC comparison partners approve the site.
 
-The public funnel is intentionally written as a warm handoff into The Swiftest's pet insurance comparison experience: PawPeaceGuide explains terms first, then routes users toward The Swiftest as the primary third-party comparison destination once the approved tracking URL is configured. Keep the copy clear that PawPeaceGuide is separate from The Swiftest and does not control SwiftScore rankings, provider quote pages, eligibility, pricing, coverage, or claim decisions.
+The Swiftest remains a high-priority pending comparison offer because the working affiliate strategy is based on a public payout claim of `$125 per conversion`. Treat this as an unverified public claim until PawPeaceGuide is accepted and the final approved terms are visible in the affiliate dashboard.
+
+The public funnel is intentionally written as an education-first handoff into the current approved provider option. PawPeaceGuide explains terms first, then routes users toward Odie through `/go/odie`. Keep the copy clear that PawPeaceGuide is separate from every provider and does not control quote pages, eligibility, pricing, coverage, or claim decisions.
 
 Pets Best is a backup/direct provider option and uses Impact Radius according to its official affiliate-program materials. Approved affiliates should receive a unique tracking URL after acceptance. Verify payout, qualifying actions, traffic rules, and tracking details inside Impact before using it in paid campaigns.
 
 Actual approval, payout, traffic rules, cookie windows, qualifying events, and paid social permissions must be verified inside each affiliate dashboard before scaling ads. Paid traffic should not be scaled until the approved affiliate terms confirm Meta/Instagram traffic is allowed.
 
-If the primary partner does not approve PawPeaceGuide, switch the primary provider in `data/providers.ts` by setting another provider to `role: "primary"` and priority `1`.
+When The Swiftest, Petted, Pets Best, Fetch, Trupanion, ASPCA Pet Health Insurance, or another partner approves PawPeaceGuide, add the tracking URL and decide whether its expected EPC justifies making it primary in `data/providers.ts`.
 
 Current provider strategy:
 
-- Primary: The Swiftest, `slug: "the-swiftest"`
-- Backup: Pets Best, `slug: "pets-best"`
-- Backup: Embrace, `slug: "embrace"`
+- Primary: Odie, `slug: "odie"`
+- Pending backup comparison offer: The Swiftest, `slug: "the-swiftest"`
+- Pending backup programs: Petted, Pets Best, Fetch, Trupanion, ASPCA Pet Health Insurance, Embrace
 
 ## How to Add Approved Affiliate Links
 
-1. Apply to The Swiftest first.
-2. Apply to Pets Best and at least one backup provider.
+1. Add approved links as they arrive.
+2. Keep Odie primary until another approved partner has better expected EPC and confirmed paid-social permission.
 3. Confirm paid social is allowed.
 4. Confirm whether direct linking or pre-sell pages are required.
 5. Copy the approved affiliate tracking URL.
 6. Paste it into the provider config `affiliateUrl` field in `data/providers.ts` or the central URL placeholders in `data/siteConfig.ts`.
-7. Test `/go/the-swiftest`.
+7. Test `/go/[providerSlug]`.
 8. Confirm UTMs are preserved.
 9. Click once in test mode if allowed by the affiliate program.
 10. Do not run paid ads until links and disclosures are correct.
@@ -353,11 +357,11 @@ Never link directly to the public The Swiftest homepage or pet insurance page fr
 
 ## Affiliate Link Insertion
 
-1. Wait for The Swiftest approval.
+1. Wait for each program approval.
 2. Copy the approved tracking URL from the affiliate dashboard.
-3. Add it to `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL` or provider config.
+3. Add it to the matching provider URL in `data/siteConfig.ts`, provider config, or an environment variable.
 4. Restart/redeploy the app.
-5. Visit `/go/the-swiftest`.
+5. Visit `/go/[providerSlug]`.
 6. Confirm it redirects to the correct partner page.
 7. Confirm UTMs append correctly if enabled.
 8. Confirm affiliate disclosure appears before users click out.
@@ -366,8 +370,8 @@ Never link directly to the public The Swiftest homepage or pet insurance page fr
 ## Before The Swiftest Link Is Live
 
 - Keep `/pet-parent-protection` and `/dog-parent-protection` available for review, QA, and affiliate approval.
-- Do not scale paid traffic until `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL` is configured.
-- If a visitor reaches the site before the link is live, primary provider cards should send them to the quiz or comparison guide instead of a broken outbound URL.
+- Odie is configured as the current primary revenue path.
+- If a visitor reaches a pending partner before its link is live, provider cards should send them to the quiz or comparison guide instead of a broken outbound URL.
 - Placeholder click paths should track generic guide CTA events, not affiliate clickout events.
 - Re-test `/go/the-swiftest` immediately after adding the approved link.
 
@@ -390,7 +394,8 @@ Never link directly to the public The Swiftest homepage or pet insurance page fr
 - `/quiz` works
 - `/calculator` works
 - `/compare` works
-- `/go/the-swiftest` redirects correctly
+- `/go/odie` redirects correctly
+- `/go/the-swiftest` shows the pending-link page until approved
 - `/go/[providerSlug]` redirects correctly
 - Affiliate disclosure appears near monetized CTAs
 - Privacy, terms, disclaimer, and affiliate disclosure pages exist

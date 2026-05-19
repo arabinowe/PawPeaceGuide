@@ -6,7 +6,7 @@
 - Run `npm run lint`.
 - Run `npm run build`.
 - Start the app with `npm run dev`.
-- Confirm `/pet-parent-protection`, `/dog-parent-protection`, `/emergency-vet-bills`, `/start-60-second-check`, `/cat-insurance`, `/pet-insurance`, `/quiz`, `/calculator`, `/compare`, and `/go/the-swiftest` load locally.
+- Confirm `/pet-parent-protection`, `/dog-parent-protection`, `/emergency-vet-bills`, `/start-60-second-check`, `/cat-insurance`, `/pet-insurance`, `/quiz`, `/calculator`, `/compare`, `/go/odie`, and `/go/the-swiftest` load locally.
 
 ## Production QA
 
@@ -18,11 +18,10 @@
 
 ## Affiliate Link QA
 
-- Wait for The Swiftest approval.
-- Add the approved tracking URL to `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL`.
-- Redeploy after adding the URL.
-- Visit `/go/the-swiftest`.
-- Confirm it redirects to the approved partner page.
+- Confirm Odie is configured as the current primary provider offer.
+- Visit `/go/odie`.
+- Confirm it redirects through the approved Awin tracking URL.
+- Confirm `/go/the-swiftest` shows the pending-link page until approval.
 - Confirm the public site has no direct links to `theswiftest.com`; every consumer click path must use `/go/the-swiftest`.
 - Run `npm run audit:outbound` before launch.
 - Confirm an unconfigured backup link shows a graceful placeholder instead of redirecting.
@@ -72,7 +71,7 @@
 
 - Confirm `/blog` is indexable and linked from the public nav.
 - Confirm `/blog/pet-insurance-comparison-checklist` has a table of contents, internal links, affiliate disclosure, and bottom disclaimer.
-- Confirm the organic path can move from blog article to quiz, calculator, `/ready-to-compare`, `/compare`, and `/go/the-swiftest`.
+- Confirm the organic path can move from blog article to quiz, calculator, `/ready-to-compare`, `/compare`, and `/go/odie`.
 - Confirm the blog does not use fake statistics, fake reviews, fake testimonials, fake star ratings, or unsupported savings claims.
 - Confirm outreach targets understand PawPeaceGuide is affiliate-supported before requesting backlinks from professional or veterinary resource pages.
 

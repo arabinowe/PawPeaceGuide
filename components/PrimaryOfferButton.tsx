@@ -59,7 +59,7 @@ export function PrimaryOfferButton({
       </Button>
       {showDevelopmentWarning && !configured && process.env.NODE_ENV !== "production" ? (
         <p className="mt-2 text-xs leading-5 text-clay">
-          Development placeholder: The Swiftest affiliate URL is not configured, so this CTA routes to /compare.
+          Development placeholder: the {provider.name} affiliate URL is not configured, so this CTA routes to /compare.
         </p>
       ) : null}
       {showDisclosure ? (

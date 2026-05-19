@@ -94,18 +94,18 @@ export function BehavioralNudge() {
       <p className="pr-7 text-xs font-semibold uppercase tracking-[0.16em] text-clay">
         Ready to compare?
       </p>
-      <h2 className="mt-2 text-lg font-semibold text-ink">Use the comparison flow when you are quote-ready.</h2>
+      <h2 className="mt-2 text-lg font-semibold text-ink">Use the provider path when you are quote-ready.</h2>
       <p className="mt-2 text-sm leading-6 text-muted">
         You have reviewed enough of the guide to start checking quote options and policy details directly.
       </p>
       <div className="mt-4">
         <Button href={href} onClick={onClick} className="w-full" variant={configured ? "primary" : "secondary"}>
-          Compare quote options
+          {configured ? `Visit ${provider.name} provider site` : "Compare quote options"}
         </Button>
       </div>
       <p className="mt-3 text-xs leading-5 text-muted">
         {configured
-          ? "You may leave PawPeaceGuide for a third-party comparison site."
+          ? `You may leave PawPeaceGuide for ${provider.name}, a third-party provider site.`
           : "The primary partner link is pending, so this opens the comparison guide."}
       </p>
     </aside>

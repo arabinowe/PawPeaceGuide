@@ -56,7 +56,7 @@ export default async function ProviderRedirectPage({ params, searchParams }: Red
         <p className="mt-4 text-base leading-7 text-muted">
           {isConfigured
             ? `PawPeaceGuide is not an insurer or broker. Review all policy terms directly with ${provider.name}.`
-            : `${provider.name} is the intended third-party comparison destination, but the approved affiliate link is not live yet. PawPeaceGuide is not an insurer or broker.`}
+            : `${provider.name} is an intended third-party destination, but the approved affiliate link is not live yet. PawPeaceGuide is not an insurer or broker.`}
         </p>
         <div className="mt-6">
           {isConfigured ? (

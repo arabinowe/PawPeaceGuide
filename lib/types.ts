@@ -1,4 +1,5 @@
 export type AffiliateNetwork =
+  | "Awin"
   | "Impact"
   | "Impact Radius"
   | "CJ"
