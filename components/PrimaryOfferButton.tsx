@@ -8,7 +8,7 @@ import { getAffiliateRedirectHref } from "@/lib/affiliate";
 import { trackFunnelEvent } from "@/lib/tracking";
 
 type PrimaryOfferButtonProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   pageSource: string;
   variant?: "primary" | "secondary" | "ghost";
   className?: string;
@@ -55,7 +55,7 @@ export function PrimaryOfferButton({
   return (
     <div>
       <Button href={href} variant={variant} className={className} onClick={onClick}>
-        {children}
+        {children ?? provider.ctaText}
       </Button>
       {showDevelopmentWarning && !configured && process.env.NODE_ENV !== "production" ? (
         <p className="mt-2 text-xs leading-5 text-clay">

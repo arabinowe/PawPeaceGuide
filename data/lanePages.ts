@@ -28,7 +28,7 @@ export const lanePages: LanePageConfig[] = [
       "Start with the basics: your dog's age, breed context, deductible comfort, reimbursement rate, annual limit, waiting periods, and exclusions. If you are ready for one live provider quote path, Odie is currently available through PawPeaceGuide.",
     petType: "dog",
     userIntent: "dog insurance",
-    readinessPrompt: "Best for dog owners who want to understand the terms before reviewing quote options.",
+    readinessPrompt: "Useful for dog owners who want to understand the terms before reviewing quote options.",
     calmPoints: [
       "You do not need to know every policy term before starting.",
       "Compare the few moving parts that drive most of the decision.",
@@ -55,7 +55,7 @@ export const lanePages: LanePageConfig[] = [
       "Cat insurance comparison can be calmer when you know what to scan: indoor/outdoor lifestyle, diagnostics, medication, dental limitations, waiting periods, and pre-existing condition rules.",
     petType: "cat",
     userIntent: "cat insurance",
-    readinessPrompt: "Best for cat owners comparing before an illness, injury, or diagnostic bill is in front of them.",
+    readinessPrompt: "Useful for cat owners comparing before an illness, injury, or diagnostic bill is in front of them.",
     calmPoints: [
       "Indoor cats can still face illness, dental, medication, and diagnostic costs.",
       "Outdoor or mixed-lifestyle cats may raise different accident questions.",
@@ -82,7 +82,7 @@ export const lanePages: LanePageConfig[] = [
       "Puppies bring new routines and new budget questions. Compare early so waiting periods, wellness add-ons, swallowed-object scenarios, and future health history are easier to understand.",
     petType: "puppy",
     userIntent: "puppy insurance",
-    readinessPrompt: "Best for new dog owners who want to compare before health history gets complicated.",
+    readinessPrompt: "Useful for new dog owners who want to compare before health history gets complicated.",
     calmPoints: [
       "Routine puppy care and accident/illness coverage are different things.",
       "Age eligibility and waiting periods deserve an early look.",
@@ -109,7 +109,7 @@ export const lanePages: LanePageConfig[] = [
       "Kitten owners can compare early while the questions are still manageable: routine care, accident and illness coverage, dental details, waiting periods, and future eligibility.",
     petType: "kitten",
     userIntent: "kitten insurance",
-    readinessPrompt: "Best for new cat owners preparing while there is room to compare.",
+    readinessPrompt: "Useful for new cat owners preparing while there is room to compare.",
     calmPoints: [
       "Kitten wellness care is usually separate from accident and illness coverage.",
       "Waiting periods can matter before symptoms appear.",
@@ -136,7 +136,7 @@ export const lanePages: LanePageConfig[] = [
       "Senior pets deserve careful planning. The goal is to compare realistic future coverage, not assume existing symptoms or past diagnoses will be covered.",
     petType: "senior pet",
     userIntent: "senior pet planning",
-    readinessPrompt: "Best for owners of older dogs or cats who want clear questions before quote review.",
+    readinessPrompt: "Useful for owners of older dogs or cats who want clear questions before quote review.",
     calmPoints: [
       "Past health history may affect future claim expectations.",
       "Accident coverage may still be worth understanding even when some illness questions are complicated.",
@@ -160,10 +160,10 @@ export const lanePages: LanePageConfig[] = [
       "A calm guide to emergency vet bill planning, insurance tradeoffs, emergency funds, and quote-readiness questions.",
     eyebrow: "Emergency bill planning",
     intro:
-      "Emergency planning works best before the emergency. Use this lane to understand premium, deductible, reimbursement, annual limit, and emergency fund tradeoffs.",
+      "Emergency planning is calmer before the emergency. Use this lane to understand premium, deductible, reimbursement, annual limit, and emergency fund tradeoffs.",
     petType: "unknown",
     userIntent: "emergency vet bill planning",
-    readinessPrompt: "Best for owners who want to reduce confusion before a bill requires a quick decision.",
+    readinessPrompt: "Useful for owners who want to reduce confusion before a bill requires a quick decision.",
     calmPoints: [
       "The calculator can help you compare rough scenarios without pressure.",
       "Insurance is not a guarantee, but it can be part of a planning conversation.",
@@ -190,7 +190,7 @@ export const lanePages: LanePageConfig[] = [
       "Wellness products may support day-to-day comfort, but they are not insurance, do not reimburse vet bills, and are not a substitute for veterinary care.",
     petType: "unknown",
     userIntent: "wellness or comfort products",
-    readinessPrompt: "Best for pet owners who want comfort extras after understanding insurance separately.",
+    readinessPrompt: "Useful for pet owners who want comfort extras after understanding insurance separately.",
     calmPoints: [
       "Keep wellness products separate from coverage decisions.",
       "Ask your veterinarian about health or behavior concerns.",
@@ -217,7 +217,7 @@ export const lanePages: LanePageConfig[] = [
       "Many pet insurance providers focus on dogs and cats. If you are planning for another animal, start by verifying species eligibility directly before comparing price or policy features.",
     petType: "other",
     userIntent: "other pet type",
-    readinessPrompt: "Best for owners who need an honest answer instead of being pushed to a dog/cat affiliate link.",
+    readinessPrompt: "Useful for owners who need an honest answer instead of being pushed to a dog/cat affiliate link.",
     calmPoints: [
       "PawPeaceGuide will not pretend dog/cat providers fit other pets.",
       "Eligibility comes before price comparison.",

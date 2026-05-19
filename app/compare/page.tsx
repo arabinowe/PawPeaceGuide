@@ -16,6 +16,7 @@ import { CTABlock } from "@/components/CTABlock";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
 import { FeatureCard } from "@/components/FeatureCard";
+import { InsuranceDecisionGuide } from "@/components/InsuranceDecisionGuide";
 import { IntentPathRouter } from "@/components/IntentPathRouter";
 import { MethodologyNote } from "@/components/MethodologyNote";
 import { PetImagePanel, petImages } from "@/components/PetImage";
@@ -98,9 +99,9 @@ export default function ComparePage() {
       <section className="mx-auto max-w-6xl px-5 py-10 md:py-14">
         <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Primary partner path</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Provider learning path</p>
             <h1 className="mt-3 text-4xl font-semibold text-ink md:text-5xl">
-              Best next step depends on what you need.
+              The right next step depends on what you need.
             </h1>
             <p className="mt-4 text-lg leading-8 text-muted">
               PawPeaceGuide helps pet owners decide whether to learn more, estimate costs, compare
@@ -151,6 +152,8 @@ export default function ComparePage() {
         </div>
 
         <IntentPathRouter pageSource="/compare-intent-router" className="mt-8" />
+
+        <InsuranceDecisionGuide className="mt-8" />
 
         <div className="mt-8 rounded-md border border-line bg-mist p-5 md:p-7">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">

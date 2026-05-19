@@ -13,10 +13,11 @@ import { getPrimaryProvider, isProviderAffiliateConfigured } from "@/data/provid
 import { siteConfig } from "@/data/siteConfig";
 import { routeIntent } from "@/lib/intentRouting";
 import { trackFunnelEvent } from "@/lib/tracking";
-import type { PetType, Provider } from "@/lib/types";
+import type { PetType, Provider, UserIntent } from "@/lib/types";
 
 type QuizAnswers = {
   petType: string;
+  decisionPriority: string;
   ageRange: string;
   breed: string;
   lifestyle: string;
@@ -40,6 +41,19 @@ const steps: QuizStep[] = [
     question: "What type of pet are you shopping for?",
     help: "This only shapes the education summary on this page.",
     options: ["Dog", "Cat", "Other pet"]
+  },
+  {
+    key: "decisionPriority",
+    question: "What do you most want help deciding?",
+    help: "This helps PawPeaceGuide choose the most useful next step without forcing a provider.",
+    options: [
+      "One quote option to review now",
+      "Compare several providers",
+      "Understand costs first",
+      "Waiting periods or pre-existing condition rules",
+      "Dental, exam fee, or direct-pay details",
+      "Wellness or comfort support"
+    ]
   },
   {
     key: "ageRange",
@@ -87,6 +101,7 @@ const steps: QuizStep[] = [
 
 const emptyAnswers: QuizAnswers = {
   petType: "",
+  decisionPriority: "",
   ageRange: "",
   breed: "",
   lifestyle: "",
@@ -124,7 +139,11 @@ export function Quiz() {
         ? "Ask providers how they define pre-existing conditions and whether medical records affect eligibility."
         : "Even without known conditions, waiting periods and exclusions are still important to review.";
 
-    return `For your ${petLabel}, ${budgetPhrase} ${conditionPhrase}`;
+    const priorityPhrase = answers.decisionPriority
+      ? `Your main decision lens is: ${answers.decisionPriority.toLowerCase()}.`
+      : "Your main decision lens is still open.";
+
+    return `For your ${petLabel}, ${budgetPhrase} ${conditionPhrase} ${priorityPhrase}`;
   }, [answers]);
 
   const handoffFocus = useMemo(() => {
@@ -147,29 +166,46 @@ export function Quiz() {
       summary:
         answers.petType === "Other pet"
           ? "Start with species eligibility before reviewing any provider quote page. Many pet insurance providers focus on dogs and cats."
+          : answers.decisionPriority === "Compare several providers"
+            ? "Use the comparison checklist first, then review the live provider path only if a direct-provider quote option fits your goal today."
+            : answers.decisionPriority === "Understand costs first"
+              ? "Use the calculator before leaving PawPeaceGuide, then review provider quote details with the deductible, reimbursement, and annual limit tradeoffs in view."
+              : answers.decisionPriority === "Waiting periods or pre-existing condition rules"
+                ? "Bring waiting-period, exclusion, and pre-existing-condition questions to the provider page before relying on any quote."
+                : answers.decisionPriority === "Dental, exam fee, or direct-pay details"
+                  ? "Use provider pages to verify dental wording, exam fee treatment, claim payment flow, and any direct-pay availability before deciding."
+                  : answers.decisionPriority === "Wellness or comfort support"
+                    ? "Separate wellness products, routine care add-ons, and accident/illness insurance before deciding what fits the need."
           : `Use ${primaryProvider.name}'s provider page to review quote-page details for a ${petLabel}. ` +
             `Keep ${breedLabel}, age range, deductible comfort, reimbursement rate, annual benefit, waiting periods, and exclusions in view.`
     };
-  }, [answers.ageRange, answers.breed, answers.petType, primaryProvider.name]);
+  }, [answers.ageRange, answers.breed, answers.decisionPriority, answers.petType, primaryProvider.name]);
 
   const routingResult = useMemo(() => {
     const petType = toPetType(answers.petType, answers.ageRange);
+    const userIntent = getUserIntentFromAnswers(answers.decisionPriority, petType);
     return routeIntent({
       petType,
       lifeStage: answers.ageRange === "Under 1" ? (answers.petType === "Cat" ? "kitten" : "puppy") : "unknown",
-      userIntent:
-        petType === "other"
-          ? "other pet type"
-          : petType === "cat"
-            ? "cat insurance"
-            : petType === "kitten"
-              ? "kitten insurance"
-              : petType === "puppy"
-                ? "puppy insurance"
-                : "dog insurance",
-      readinessLevel: "comparing soon"
+      userIntent,
+      readinessLevel:
+        answers.decisionPriority === "One quote option to review now"
+          ? "ready to review quote options"
+          : "comparing soon",
+      wantsComparison: answers.decisionPriority === "Compare several providers",
+      wantsWellnessExtras: answers.decisionPriority === "Wellness or comfort support"
     });
-  }, [answers.ageRange, answers.petType]);
+  }, [answers.ageRange, answers.decisionPriority, answers.petType]);
+
+  const isOtherPet = answers.petType === "Other pet";
+  const directInsurancePriorities = [
+    "",
+    "One quote option to review now",
+    "Waiting periods or pre-existing condition rules",
+    "Dental, exam fee, or direct-pay details"
+  ];
+  const showInsuranceHandoff =
+    completed && !isOtherPet && directInsurancePriorities.includes(answers.decisionPriority);
 
   function setAnswer(value: string) {
     setAnswers((current) => ({ ...current, [step.key]: value }));
@@ -195,7 +231,7 @@ export function Quiz() {
               <h1 className="mt-3 text-4xl font-semibold text-ink">Your pet insurance shopping profile</h1>
               <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">{shoppingProfile}</p>
               <div className="mt-6">
-                <DisclosureBanner />
+                <DisclosureBanner compact />
               </div>
             </div>
             <PetImagePanel
@@ -239,13 +275,11 @@ export function Quiz() {
         </div>
 
         <div className="mt-8 rounded-md border border-line bg-mist p-5">
-          <h2 className="text-2xl font-semibold text-ink">Ready for the provider review step</h2>
+          <h2 className="text-2xl font-semibold text-ink">Your next useful step</h2>
           <p className="mt-3 text-base leading-7 text-muted">
-            Quote options can vary by pet age, breed, location, deductible, reimbursement rate,
-            annual limit, wellness add-ons, underwriting rules, and provider availability. PawPeaceGuide
-            does not recommend a specific provider from your answers, and your quiz answers stay in
-            this browser session. Use this profile as a checklist when you review {primaryProvider.name} or
-            any provider quote page.
+            {isOtherPet
+              ? "Many pet insurance providers focus on dogs and cats. Use this result to verify species eligibility, product type, exclusions, and provider availability before comparing price."
+              : "Quote options can vary by pet age, breed, location, deductible, reimbursement rate, annual limit, wellness add-ons, underwriting rules, and provider availability. PawPeaceGuide does not recommend a specific provider from your answers, and your quiz answers stay in this browser session."}
           </p>
           <div className="mt-5 rounded-md border border-line bg-white p-4">
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-clay">
@@ -261,11 +295,18 @@ export function Quiz() {
               Use the cost calculator
             </Button>
           </div>
+          {routingResult.disclosureNeeded ? (
+            <div className="mt-4">
+              <DisclosureBanner compact />
+            </div>
+          ) : null}
         </div>
 
-        <QuoteReadinessChecklist pageSource="/quiz-result-quote-ready" compact className="mt-8" />
+        {showInsuranceHandoff ? (
+          <QuoteReadinessChecklist pageSource="/quiz-result-quote-ready" compact className="mt-8" />
+        ) : null}
 
-        {routingResult.matchingLiveProviders.length > 0 ? (
+        {showInsuranceHandoff && routingResult.matchingLiveProviders.length > 0 ? (
           <div className="mt-8">
             <h2 className="text-2xl font-semibold text-ink">Matched live path</h2>
             <p className="mt-2 text-sm leading-6 text-muted">
@@ -284,12 +325,24 @@ export function Quiz() {
         <div className="mt-6">
           <h2 className="text-2xl font-semibold text-ink">Other helpful options</h2>
           <p className="mt-2 text-sm leading-6 text-muted">
-            Pending partners and educational tools can still help you compare at your own pace.
-            Pending partner links are not live clickouts yet.
+            {isOtherPet
+              ? "For pets other than dogs or cats, start with eligibility and product-type questions before reviewing any provider quote page."
+              : "Pending partners and educational tools can still help you compare at your own pace. Pending partner links are not live clickouts yet."}
           </p>
-          <div className="mt-4">
-            <ProviderComparisonGrid compact role="backup" pageSource="/quiz-result-backup" />
-          </div>
+          {isOtherPet ? (
+            <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+              <Button href="/other-pet-insurance-options" variant="secondary">
+                Review other-pet checklist
+              </Button>
+              <Button href="/glossary" variant="secondary">
+                Learn policy terms
+              </Button>
+            </div>
+          ) : (
+            <div className="mt-4">
+              <ProviderComparisonGrid compact role="backup" limit={4} pageSource="/quiz-result-backup" />
+            </div>
+          )}
         </div>
         <div className="mt-8">
           <EmailCaptureForm />
@@ -402,4 +455,22 @@ function toPetType(petType: string, ageRange: string): PetType {
   if (petType === "Cat") return ageRange === "Under 1" ? "kitten" : "cat";
   if (petType === "Dog") return ageRange === "Under 1" ? "puppy" : "dog";
   return "unknown";
+}
+
+function getUserIntentFromAnswers(decisionPriority: string, petType: PetType): UserIntent {
+  if (petType === "other") return "other pet type";
+
+  if (decisionPriority === "Compare several providers") return "compare multiple options";
+  if (decisionPriority === "One quote option to review now") return "ready to get a quote";
+  if (decisionPriority === "Understand costs first") return "understand costs first";
+  if (decisionPriority === "Waiting periods or pre-existing condition rules") {
+    return "waiting periods / pre-existing condition concerns";
+  }
+  if (decisionPriority === "Dental, exam fee, or direct-pay details") return "dental coverage questions";
+  if (decisionPriority === "Wellness or comfort support") return "wellness or comfort products";
+
+  if (petType === "cat") return "cat insurance";
+  if (petType === "kitten") return "kitten insurance";
+  if (petType === "puppy") return "puppy insurance";
+  return "dog insurance";
 }

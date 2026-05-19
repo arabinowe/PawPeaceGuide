@@ -39,12 +39,12 @@ export function ProviderCard({
     ? getAffiliateRedirectHref(provider.slug)
     : provider.role === "primary"
       ? "/ready-to-compare"
-      : "/compare";
+      : "/find-my-path";
   const ctaText = affiliateConfigured
     ? provider.ctaText
     : provider.role === "primary"
       ? "Use quote-ready checklist"
-      : "Review comparison guide";
+      : "Find your path";
 
   useEffect(() => {
     trackFunnelEvent(siteConfig.eventNames.providerCardViewed, {

@@ -175,9 +175,7 @@ export function Calculator() {
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <PrimaryOfferButton pageSource="/calculator-result" showDevelopmentWarning className="w-full sm:w-auto">
-                  Continue to comparison partner
-                </PrimaryOfferButton>
+                <PrimaryOfferButton pageSource="/calculator-result" showDevelopmentWarning className="w-full sm:w-auto" />
                 <Button href="/quiz" variant="secondary" className="w-full sm:w-auto">
                   Start the 60-second check
                 </Button>

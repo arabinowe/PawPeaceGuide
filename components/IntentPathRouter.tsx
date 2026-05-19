@@ -59,9 +59,7 @@ export function IntentPathRouter({ pageSource, className = "" }: IntentPathRoute
               </div>
             </div>
             <div className="mt-4">
-              <PrimaryOfferButton pageSource={pageSource} showDisclosure={false}>
-                Continue to comparison partner
-              </PrimaryOfferButton>
+              <PrimaryOfferButton pageSource={pageSource} showDisclosure={false} />
             </div>
           </div>
           <div className="mt-4">

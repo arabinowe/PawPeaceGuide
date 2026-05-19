@@ -22,7 +22,7 @@ export function ProviderComparisonGrid({
     role === "backup"
       ? configuredBackupProviders.length > 0
         ? configuredBackupProviders
-        : filteredProviders.slice(0, 2)
+        : filteredProviders
       : filteredProviders;
   const visibleProviders =
     typeof limit === "number" ? publicProviders.slice(0, limit) : publicProviders;

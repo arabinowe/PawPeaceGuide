@@ -4,6 +4,7 @@ import { CheckCircle2, Compass, HeartHandshake } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/Button";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
+import { InsuranceDecisionGuide } from "@/components/InsuranceDecisionGuide";
 import { MethodologyNote } from "@/components/MethodologyNote";
 import { PartnerOfferCard } from "@/components/PartnerOfferCard";
 import { ProviderCard } from "@/components/ProviderCard";
@@ -98,7 +99,7 @@ export function FindMyPath() {
           <div>
             <div className="flex items-center gap-2">
               <Compass className="h-5 w-5 text-pine" aria-hidden="true" />
-              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-clay">Best next step</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-clay">Suggested next step</p>
             </div>
             <h2 className="mt-3 text-3xl font-semibold text-ink">{result.primaryNextStep.title}</h2>
             <p className="mt-3 text-base leading-7 text-muted">{result.primaryNextStep.body}</p>
@@ -143,6 +144,8 @@ export function FindMyPath() {
           </div>
         </div>
       </section>
+
+      <InsuranceDecisionGuide className="mt-8" />
 
       {liveProviders.length > 0 ? (
         <section className="mt-8">

@@ -76,7 +76,7 @@ export default function ReadyToComparePage() {
                 <div className="flex gap-3 rounded-md bg-mist p-4">
                   <Clock className="mt-1 h-5 w-5 shrink-0 text-pine" aria-hidden="true" />
                   <div>
-                    <p className="text-sm font-semibold text-ink">Best for warm visitors</p>
+                    <p className="text-sm font-semibold text-ink">For warm visitors</p>
                     <p className="mt-1 text-sm leading-6 text-muted">
                       Use this route when you are close to reviewing quote options and want one
                       final, low-pressure checklist first.
@@ -104,7 +104,7 @@ export default function ReadyToComparePage() {
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
-              Purchase-intent filter
+              Readiness check
             </p>
             <h2 className="mt-3 text-3xl font-semibold text-ink">
               Good-fit visitors for the comparison step
@@ -132,7 +132,7 @@ export default function ReadyToComparePage() {
 
       <section className="mx-auto max-w-6xl px-5 pb-12">
         <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-7">
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Best-fit routing</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Fit-based routing</p>
           <h2 className="mt-3 text-3xl font-semibold text-ink">Choose the handoff that matches your goal.</h2>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <div className="rounded-md border border-line bg-mist p-4">

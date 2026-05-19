@@ -360,9 +360,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
                 the third-party destination.
               </p>
               <div className="mt-5">
-                <PrimaryOfferButton pageSource={`${pageSourceBase}-comparison-section`}>
-                  Continue to comparison partner
-                </PrimaryOfferButton>
+                <PrimaryOfferButton pageSource={`${pageSourceBase}-comparison-section`} />
               </div>
             </div>
           </div>
@@ -450,9 +448,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
                 prioritizes the approved offer.
               </p>
             </div>
-            <PrimaryOfferButton pageSource={`${pageSourceBase}-provider-preview`} variant="secondary">
-              Continue to comparison partner
-            </PrimaryOfferButton>
+            <PrimaryOfferButton pageSource={`${pageSourceBase}-provider-preview`} variant="secondary" />
           </div>
           <div className="mt-6">
             <ProviderComparisonGrid compact role="primary" emphasizePrimary pageSource={pageSourceBase} />

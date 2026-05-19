@@ -88,7 +88,7 @@ export function LanePage({ page }: { page: LanePageConfig }) {
           <div className="rounded-md border border-line bg-mist p-5 md:p-7">
             <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Best next step</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Suggested next step</p>
                 <h2 className="mt-3 text-3xl font-semibold text-ink">{routing.primaryNextStep.title}</h2>
                 <p className="mt-3 text-base leading-7 text-muted">{routing.primaryNextStep.body}</p>
                 <div className="mt-5">
