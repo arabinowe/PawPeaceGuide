@@ -1,5 +1,7 @@
 # PawPeaceGuide
 
+pawpeaceguide.com
+
 PawPeaceGuide is a static-first Next.js affiliate funnel for pet insurance education. It is built for Facebook/Instagram/Meta paid traffic, plain-English pre-sell content, a 60-second quiz, a vet bill calculator, provider comparison cards, and tracked third-party affiliate clickouts.
 
 PawPeaceGuide does not sell insurance, bind coverage, collect full insurance applications, quote exact premiums, process insurance payments, or act as an insurer, agency, broker, producer, underwriter, financial advisor, or legal advisor.
