@@ -6,6 +6,9 @@ import { siteConfig } from "@/data/siteConfig";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
+    "/blog",
+    "/blog/pet-insurance-comparison-checklist",
+    "/ready-to-compare",
     "/quiz",
     "/calculator",
     "/compare",

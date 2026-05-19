@@ -27,5 +27,8 @@ jobs:
       - name: Run lint
         run: npm run lint --if-present
 
+      - name: Audit outbound affiliate links
+        run: npm run audit:outbound --if-present
+
       - name: Build
         run: npm run build

@@ -1,20 +1,29 @@
 import { CTABlock } from "@/components/CTABlock";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { GuideCtaButtons } from "@/components/GuideCtaButtons";
+import { IntentPathRouter } from "@/components/IntentPathRouter";
+import { PetImagePanel, getPetImageForPath } from "@/components/PetImage";
 import { siteConfig } from "@/data/siteConfig";
 import type { Guide } from "@/lib/types";
 
 export function ArticleLayout({ guide }: { guide: Guide }) {
+  const image = getPetImageForPath(guide.slug);
+
   return (
     <article className="mx-auto max-w-4xl px-5 py-10 md:py-14">
       <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Pet insurance guide</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-normal text-ink md:text-5xl">
-          {guide.title}
-        </h1>
-        <p className="mt-4 text-lg leading-8 text-muted">{guide.intro}</p>
-        <div className="mt-6">
-          <DisclosureBanner />
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Pet insurance guide</p>
+            <h1 className="mt-3 text-4xl font-semibold tracking-normal text-ink md:text-5xl">
+              {guide.title}
+            </h1>
+            <p className="mt-4 text-lg leading-8 text-muted">{guide.intro}</p>
+            <div className="mt-6">
+              <DisclosureBanner />
+            </div>
+          </div>
+          <PetImagePanel image={image} label="Plain-English pet insurance guide" priority unframed />
         </div>
       </div>
 
@@ -62,6 +71,8 @@ export function ArticleLayout({ guide }: { guide: Guide }) {
       <div className="mt-10">
         <GuideCtaButtons guideSlug={guide.slug} />
       </div>
+
+      <IntentPathRouter pageSource={`/guides/${guide.slug}-intent-router`} className="mt-8" />
 
       <p className="mt-8 rounded-md border border-line bg-mist px-4 py-3 text-sm leading-6 text-muted">
         {siteConfig.legalDisclaimer}

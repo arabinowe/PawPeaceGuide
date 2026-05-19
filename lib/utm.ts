@@ -48,6 +48,7 @@ export function captureUtmFromCurrentUrl() {
 }
 
 export function appendUtmToHref(href: string, params: UtmParams = getStoredUtmParams()) {
+  if (href.startsWith("#")) return href;
   if (!hasUtm(params)) return href;
 
   const isAbsolute = /^https?:\/\//.test(href);

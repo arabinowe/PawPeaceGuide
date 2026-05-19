@@ -62,5 +62,6 @@ export const navLinks = [
   { href: "/quiz", label: "Quiz" },
   { href: "/calculator", label: "Calculator" },
   { href: "/compare", label: "Compare" },
+  { href: "/blog", label: "Blog" },
   { href: "/guides/is-pet-insurance-worth-it", label: "Guides" }
 ];

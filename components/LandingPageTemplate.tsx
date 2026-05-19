@@ -19,9 +19,12 @@ import { CTABlock } from "@/components/CTABlock";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { FeatureCard } from "@/components/FeatureCard";
+import { IntentPathRouter } from "@/components/IntentPathRouter";
 import { PageEventTracker } from "@/components/PageEventTracker";
+import { getPetImageForPath, petImages } from "@/components/PetImage";
 import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
+import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { UTMLink } from "@/components/UTMLink";
 import { siteConfig } from "@/data/siteConfig";
@@ -32,36 +35,32 @@ const animalPaths = [
     icon: Dog,
     label: "Dog owners",
     href: "/dog-parent-protection",
-    image:
-      "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=80",
-    alt: "Happy golden retriever sitting with its owner at home",
+    image: petImages.dogOwner.src,
+    alt: petImages.dogOwner.alt,
     note: "The default Facebook ad path for adult dogs, breed questions, and emergency-bill planning."
   },
   {
     icon: Cat,
     label: "Cat owners",
     href: "/cat-insurance",
-    image:
-      "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=900&q=80",
-    alt: "Happy orange cat looking up at home",
+    image: petImages.catHome.src,
+    alt: petImages.catHome.alt,
     note: "For indoor, outdoor, and mixed-lifestyle cats where illness and diagnostics can drive costs."
   },
   {
     icon: Dog,
     label: "Puppies",
     href: "/puppy-insurance",
-    image:
-      "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=900&q=80",
-    alt: "Happy puppy outdoors in soft natural light",
+    image: petImages.puppy.src,
+    alt: petImages.puppy.alt,
     note: "For new dog owners comparing early, before a long health history develops."
   },
   {
     icon: PawPrint,
     label: "Kittens",
     href: "/kitten-insurance",
-    image:
-      "https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?auto=format&fit=crop&w=900&q=80",
-    alt: "Happy kitten with a playful open-mouth expression",
+    image: petImages.kitten.src,
+    alt: petImages.kitten.alt,
     note: "For new cat owners weighing routine care, accident risk, and future illness protection."
   }
 ];
@@ -85,6 +84,7 @@ const swiftestPrepItems = [
 ];
 
 export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
+  const heroImage = getPetImageForPath(page.slug);
   const isPrimaryPaidPage =
     page.slug === "pet-insurance" ||
     page.slug === "pet-parent-protection" ||
@@ -97,7 +97,7 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
         className="relative isolate overflow-hidden border-b border-line bg-ink"
         style={{
           backgroundImage:
-            "linear-gradient(90deg, rgba(248,250,247,0.98) 0%, rgba(248,250,247,0.94) 43%, rgba(248,250,247,0.64) 66%, rgba(23,33,43,0.12) 100%), url('https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1600&q=80')",
+            `linear-gradient(90deg, rgba(248,250,247,0.98) 0%, rgba(248,250,247,0.94) 43%, rgba(248,250,247,0.64) 66%, rgba(23,33,43,0.12) 100%), url('${heroImage.src}')`,
           backgroundPosition: "center right",
           backgroundSize: "cover"
         }}
@@ -156,6 +156,12 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
           ))}
         </div>
       </section>
+
+      <QuoteReadinessChecklist
+        pageSource={`/${page.slug}-quote-ready`}
+        compact
+        className="mx-auto max-w-6xl px-5 py-12"
+      />
 
       <section className="bg-white py-12">
         <div className="mx-auto max-w-6xl px-5">
@@ -229,6 +235,11 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
           </div>
         </div>
       </section>
+
+      <IntentPathRouter
+        pageSource={`/${page.slug}-intent-router`}
+        className="mx-auto max-w-6xl px-5 pb-12"
+      />
 
       <section className="bg-white py-12">
         <div className="mx-auto max-w-6xl px-5">

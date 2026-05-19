@@ -102,6 +102,8 @@ Add The Swiftest affiliate link in `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL` after app
 
 Test `/go/the-swiftest` after deployment. With no approved link configured, it should show: "This partner link has not been configured yet." Public provider cards should route users back into the quiz or comparison guide instead of firing affiliate click events. With an approved link configured, it should send users to the partner page and preserve UTMs when `NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true`.
 
+Do not add direct public links to `https://theswiftest.com` anywhere in the app. All consumer paths to The Swiftest must go through `/go/the-swiftest`, which redirects only to the approved affiliate tracking URL. `npm run audit:outbound` checks this rule and CI runs the audit before build.
+
 Connect Meta Pixel by setting `NEXT_PUBLIC_META_PIXEL_ID` and implementing the TODOs in `lib/tracking.ts`. Connect Google Analytics by setting `NEXT_PUBLIC_GA_ID` and implementing the GA4 TODO in `lib/tracking.ts`. Until those integrations are added, the app only dispatches local placeholder funnel events.
 
 ## Facebook And Instagram Ad Funnel Setup
@@ -144,6 +146,29 @@ Before running ads, confirm partner paid-ad rules, avoid restricted provider bra
 - Avoid sick-pet imagery, graphic vet scenes, fearmongering, fake urgency, fake reviews, fake star ratings, or claims that coverage is guaranteed.
 - Keep the ad promise simple: plain-English education first, then compare quote options through a third-party comparison path.
 
+## Organic Guided Blog Funnel
+
+The organic funnel is separate from the Facebook ad funnel. Use `/blog` and `/blog/pet-insurance-comparison-checklist` for search, community sharing, newsletter mentions, and backlink outreach.
+
+Recommended organic path:
+
+```text
+Organic visitor -> /blog/pet-insurance-comparison-checklist -> quiz or calculator -> /ready-to-compare -> /go/the-swiftest
+```
+
+The checklist article is designed as a linkable asset: it explains deductible, reimbursement, annual limit, waiting period, exclusion, pre-existing condition, and wellness add-on concepts without claiming PawPeaceGuide sells or recommends insurance.
+
+Backlink outreach ideas:
+
+- Pet adoption groups that maintain new-owner resource pages
+- Local veterinary clinic blog/resource pages, only where affiliate disclosure is acceptable
+- Dog trainer and cat behaviorist resource pages
+- Breed club or rescue newsletters
+- Personal finance blogs covering emergency funds and pet ownership
+- Apartment living, new puppy, and new kitten checklists
+
+Every public page family uses real, happy pet imagery. Keep future images calm, bright, and relevant to the page route. Avoid clinical, distressed, graphic, or fear-based imagery.
+
 ## Primary Affiliate Strategy
 
 The Swiftest is currently the preferred primary offer because the working affiliate strategy is based on a public payout claim of `$125 per conversion`. Treat this as an unverified public claim until PawPeaceGuide is accepted and the final approved terms are visible in the affiliate dashboard.
@@ -174,6 +199,8 @@ Current provider strategy:
 8. Confirm UTMs are preserved.
 9. Click once in test mode if allowed by the affiliate program.
 10. Do not run paid ads until links and disclosures are correct.
+
+Never link directly to the public The Swiftest homepage or pet insurance page from consumer-facing UI. Use `/go/the-swiftest` so the approved affiliate tracking link is the only outbound path.
 
 ## Affiliate Link Insertion
 

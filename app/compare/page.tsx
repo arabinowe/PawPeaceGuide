@@ -16,7 +16,10 @@ import { CTABlock } from "@/components/CTABlock";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
 import { FeatureCard } from "@/components/FeatureCard";
+import { IntentPathRouter } from "@/components/IntentPathRouter";
+import { PetImagePanel, petImages } from "@/components/PetImage";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
+import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
 import { siteConfig } from "@/data/siteConfig";
 import { createMetadata } from "@/lib/seo";
 
@@ -101,20 +104,23 @@ export default function ComparePage() {
               bind, underwrite, negotiate, or directly offer insurance.
             </p>
           </div>
-          <div className="rounded-md border border-line bg-white p-5 shadow-tight">
-            <p className="text-sm font-semibold text-ink">What to review before clicking out</p>
-            <p className="mt-2 text-sm leading-6 text-muted">
-              The Swiftest may show provider comparison details such as plan cost assumptions,
-              reimbursement amount, annual benefit, provider notes, and SwiftScore context. Treat
-              those as starting points, then verify policy terms directly.
-            </p>
-            <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-              <Button href="/quiz" variant="secondary">
-                Take quiz
-              </Button>
-              <Button href="/calculator" variant="secondary">
-                Use calculator
-              </Button>
+          <div className="grid gap-4">
+            <PetImagePanel image={petImages.calmTrust} label="Dog and cat quote option prep" priority />
+            <div className="rounded-md border border-line bg-white p-5 shadow-tight">
+              <p className="text-sm font-semibold text-ink">What to review before clicking out</p>
+              <p className="mt-2 text-sm leading-6 text-muted">
+                The Swiftest may show provider comparison details such as plan cost assumptions,
+                reimbursement amount, annual benefit, provider notes, and SwiftScore context. Treat
+                those as starting points, then verify policy terms directly.
+              </p>
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+                <Button href="/quiz" variant="secondary">
+                  Take quiz
+                </Button>
+                <Button href="/calculator" variant="secondary">
+                  Use calculator
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -136,6 +142,8 @@ export default function ComparePage() {
             body="The Swiftest and its provider partners control their quote flow, rankings, eligibility, and policy terms. Review details directly before applying."
           />
         </div>
+
+        <IntentPathRouter pageSource="/compare-intent-router" className="mt-8" />
 
         <div className="mt-8 rounded-md border border-line bg-mist p-5 md:p-7">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
@@ -175,6 +183,8 @@ export default function ComparePage() {
             />
           </div>
         </div>
+
+        <QuoteReadinessChecklist pageSource="/compare-quote-ready" compact className="mt-8" />
 
         <div className="mt-8">
           <div className="mb-4">

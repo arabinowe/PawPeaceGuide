@@ -27,12 +27,12 @@ export function ProviderCard({
   const ctaHref = affiliateConfigured
     ? getAffiliateRedirectHref(provider.slug)
     : provider.role === "primary"
-      ? "/quiz"
+      ? "/ready-to-compare"
       : "/compare";
   const ctaText = affiliateConfigured
     ? provider.ctaText
     : provider.role === "primary"
-      ? "Use the 60-second check"
+      ? "Use quote-ready checklist"
       : "Review comparison guide";
 
   useEffect(() => {
@@ -158,7 +158,7 @@ export function ProviderCard({
           {affiliateConfigured
             ? "You will leave PawPeaceGuide for a third-party provider site."
             : provider.role === "primary"
-              ? "The approved partner link is not live yet. Use the quiz and calculator to prepare before clickout is enabled."
+              ? "The approved partner link is not live yet. Use the quote-ready checklist to prepare before clickout is enabled."
               : "This backup partner link is not live yet. Review the comparison guide first."}
         </p>
         <div className="mt-4">

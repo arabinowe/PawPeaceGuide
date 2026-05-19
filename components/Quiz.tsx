@@ -5,8 +5,10 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/Button";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
+import { PetImagePanel, petImages } from "@/components/PetImage";
 import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
+import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
 import { siteConfig } from "@/data/siteConfig";
 import { trackFunnelEvent } from "@/lib/tracking";
 
@@ -162,11 +164,20 @@ export function Quiz() {
     return (
       <section className="mx-auto max-w-6xl px-5 py-10 md:py-14">
         <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Quiz result</p>
-          <h1 className="mt-3 text-4xl font-semibold text-ink">Your pet insurance shopping profile</h1>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">{shoppingProfile}</p>
-          <div className="mt-6">
-            <DisclosureBanner />
+          <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr] lg:items-center">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Quiz result</p>
+              <h1 className="mt-3 text-4xl font-semibold text-ink">Your pet insurance shopping profile</h1>
+              <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">{shoppingProfile}</p>
+              <div className="mt-6">
+                <DisclosureBanner />
+              </div>
+            </div>
+            <PetImagePanel
+              image={answers.petType === "Cat" ? petImages.catHome : petImages.dogOwner}
+              label={`${handoffFocus.petLabel} comparison prep`}
+              unframed
+            />
           </div>
         </div>
 
@@ -226,6 +237,8 @@ export function Quiz() {
           </div>
         </div>
 
+        <QuoteReadinessChecklist pageSource="/quiz-result-quote-ready" compact className="mt-8" />
+
         <div className="mt-8">
           <ProviderComparisonGrid compact role="primary" emphasizePrimary pageSource="/quiz-result-primary" />
         </div>
@@ -249,6 +262,9 @@ export function Quiz() {
   return (
     <section className="mx-auto max-w-3xl px-5 py-10 md:py-14">
       <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
+        <div className="mb-6">
+          <PetImagePanel image={petImages.puppy} label="Quick dog and cat shopping profile" priority unframed />
+        </div>
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
           60-second pet insurance check
         </p>

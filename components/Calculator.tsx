@@ -4,8 +4,10 @@ import { FormEvent, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/Button";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
+import { PetImagePanel, petImages } from "@/components/PetImage";
 import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
+import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
 import { siteConfig } from "@/data/siteConfig";
 import { trackFunnelEvent } from "@/lib/tracking";
 
@@ -76,13 +78,18 @@ export function Calculator() {
   return (
     <section className="mx-auto max-w-6xl px-5 py-10 md:py-14">
       <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Vet bill calculator</p>
-        <h1 className="mt-3 text-4xl font-semibold text-ink">Estimate pet insurance cost tradeoffs</h1>
-        <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">
-          Use hypothetical numbers to see how premium, deductible, reimbursement rate, and coverage limits can change the out-of-pocket picture.
-        </p>
-        <div className="mt-6">
-          <DisclosureBanner />
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Vet bill calculator</p>
+            <h1 className="mt-3 text-4xl font-semibold text-ink">Estimate pet insurance cost tradeoffs</h1>
+            <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">
+              Use hypothetical numbers to see how premium, deductible, reimbursement rate, and coverage limits can change the out-of-pocket picture.
+            </p>
+            <div className="mt-6">
+              <DisclosureBanner />
+            </div>
+          </div>
+          <PetImagePanel image={petImages.dogSolo} label="Happy-pet cost planning" priority unframed />
         </div>
       </div>
 
@@ -175,6 +182,8 @@ export function Calculator() {
           )}
         </div>
       </div>
+
+      <QuoteReadinessChecklist pageSource="/calculator-quote-ready" compact className="mt-8" />
 
       <div className="mt-8">
         <h2 className="text-2xl font-semibold text-ink">Primary comparison handoff</h2>

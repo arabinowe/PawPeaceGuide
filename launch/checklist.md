@@ -23,6 +23,8 @@
 - Redeploy after adding the URL.
 - Visit `/go/the-swiftest`.
 - Confirm it redirects to the approved partner page.
+- Confirm the public site has no direct links to `theswiftest.com`; every consumer click path must use `/go/the-swiftest`.
+- Run `npm run audit:outbound` before launch.
 - Confirm an unconfigured backup link shows a graceful placeholder instead of redirecting.
 - Confirm affiliate disclosures are visible before provider clickout.
 
@@ -30,6 +32,7 @@
 
 - Test `/pet-parent-protection` and `/dog-parent-protection` on mobile.
 - Confirm happy dog, cat, puppy, and kitten images load without slowing or crowding the first CTA.
+- Confirm `/blog`, `/blog/pet-insurance-comparison-checklist`, `/ready-to-compare`, `/quiz`, `/calculator`, `/compare`, guide pages, and legal pages all include relevant happy pet imagery.
 - Confirm the primary CTA is visible above the fold.
 - Confirm sticky mobile CTA works.
 - Complete the quiz on mobile.
@@ -55,6 +58,14 @@
 - Do not imply the viewer's pet is currently sick.
 - Do not use fake urgency, fake countdown timers, fake testimonials, fake reviews, or fake star ratings.
 - Confirm affiliate terms allow Meta/Instagram paid social traffic before launching.
+
+## Organic Funnel QA
+
+- Confirm `/blog` is indexable and linked from the public nav.
+- Confirm `/blog/pet-insurance-comparison-checklist` has a table of contents, internal links, affiliate disclosure, and bottom disclaimer.
+- Confirm the organic path can move from blog article to quiz, calculator, `/ready-to-compare`, `/compare`, and `/go/the-swiftest`.
+- Confirm the blog does not use fake statistics, fake reviews, fake testimonials, fake star ratings, or unsupported savings claims.
+- Confirm outreach targets understand PawPeaceGuide is affiliate-supported before requesting backlinks from professional or veterinary resource pages.
 
 ## Compliance QA
 

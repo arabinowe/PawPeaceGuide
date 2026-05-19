@@ -1,3 +1,4 @@
+import { PetImagePanel, getPetImageForPath } from "@/components/PetImage";
 import { siteConfig } from "@/data/siteConfig";
 
 type LegalPageProps = {
@@ -8,11 +9,18 @@ type LegalPageProps = {
 };
 
 export function LegalPage({ eyebrow, title, intro, sections }: LegalPageProps) {
+  const image = getPetImageForPath(title.toLowerCase());
+
   return (
-    <section className="mx-auto max-w-4xl px-5 py-10 md:py-14">
-      <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">{eyebrow}</p>
-      <h1 className="mt-3 text-4xl font-semibold text-ink md:text-5xl">{title}</h1>
-      <p className="mt-4 text-lg leading-8 text-muted">{intro}</p>
+    <section className="mx-auto max-w-5xl px-5 py-10 md:py-14">
+      <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">{eyebrow}</p>
+          <h1 className="mt-3 text-4xl font-semibold text-ink md:text-5xl">{title}</h1>
+          <p className="mt-4 text-lg leading-8 text-muted">{intro}</p>
+        </div>
+        <PetImagePanel image={image} label="Calm pet-owner trust center" priority />
+      </div>
       <div className="mt-8 space-y-8 rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
         {sections.map((section) => (
           <section key={section.heading}>

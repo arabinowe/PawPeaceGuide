@@ -1,3 +1,4 @@
+import { PetImagePanel, petImages } from "@/components/PetImage";
 import { getBackupProviders, getPrimaryProvider } from "@/data/providers";
 import {
   buildEconomicsScenario,
@@ -54,16 +55,19 @@ export default function EconomicsPage() {
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-10 md:py-14">
-      <div className="rounded-md border border-clay/30 bg-[#fff4ef] p-5">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
-          Internal planning
-        </p>
-        <h1 className="mt-3 text-4xl font-semibold text-ink">Funnel economics</h1>
-        <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">
-          Development-only planning page. This route is not linked in public navigation and should
-          not be used as consumer-facing insurance guidance. Assumptions are placeholders until
-          affiliate approval, payout rules, and paid social permissions are confirmed.
-        </p>
+      <div className="grid gap-6 rounded-md border border-clay/30 bg-[#fff4ef] p-5 lg:grid-cols-[1fr_0.75fr] lg:items-center">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
+            Internal planning
+          </p>
+          <h1 className="mt-3 text-4xl font-semibold text-ink">Funnel economics</h1>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">
+            Development-only planning page. This route is not linked in public navigation and should
+            not be used as consumer-facing insurance guidance. Assumptions are placeholders until
+            affiliate approval, payout rules, and paid social permissions are confirmed.
+          </p>
+        </div>
+        <PetImagePanel image={petImages.calmTrust} label="Internal planning view" priority unframed />
       </div>
 
       <div className="mt-8 grid gap-5 md:grid-cols-3">

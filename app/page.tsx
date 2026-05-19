@@ -3,7 +3,9 @@ import { Button } from "@/components/Button";
 import { CTABlock } from "@/components/CTABlock";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { GuideCard } from "@/components/GuideCard";
+import { IntentPathRouter } from "@/components/IntentPathRouter";
 import { PageEventTracker } from "@/components/PageEventTracker";
+import { PetImagePanel, petImages } from "@/components/PetImage";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
 import { guides } from "@/data/guides";
 import { siteConfig } from "@/data/siteConfig";
@@ -36,9 +38,11 @@ export default function HomePage() {
               </Button>
             </div>
           </div>
-          <div className="rounded-md border border-line bg-white p-5 shadow-soft">
-            <DisclosureBanner />
-            <div className="mt-5 grid gap-3">
+          <div className="grid gap-4">
+            <PetImagePanel image={petImages.dogOwner} label="Plain-English pet insurance guidance" priority />
+            <div className="rounded-md border border-line bg-white p-5 shadow-soft">
+              <DisclosureBanner />
+              <div className="mt-5 grid gap-3">
               {[
                 {
                   title: "Quiz",
@@ -55,13 +59,14 @@ export default function HomePage() {
                   body: "Provider cards that can be updated with approved affiliate links.",
                   Icon: ShieldCheck
                 }
-              ].map(({ title, body, Icon }) => (
-                <div key={title} className="rounded-md bg-mist p-4">
-                  <Icon className="h-5 w-5 text-pine" aria-hidden="true" />
-                  <p className="mt-3 text-sm font-semibold text-ink">{title}</p>
-                  <p className="mt-1 text-sm leading-6 text-muted">{body}</p>
-                </div>
-              ))}
+                ].map(({ title, body, Icon }) => (
+                  <div key={title} className="rounded-md bg-mist p-4">
+                    <Icon className="h-5 w-5 text-pine" aria-hidden="true" />
+                    <p className="mt-3 text-sm font-semibold text-ink">{title}</p>
+                    <p className="mt-1 text-sm leading-6 text-muted">{body}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -95,6 +100,8 @@ export default function HomePage() {
           secondaryLabel="Start quiz"
         />
       </section>
+
+      <IntentPathRouter pageSource="/home-intent-router" className="mx-auto max-w-6xl px-5 pb-12" />
 
       <section className="bg-mist py-12">
         <div className="mx-auto max-w-6xl px-5">
