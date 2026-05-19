@@ -10,24 +10,25 @@ export const providers = ([
     affiliateUrl: siteConfig.providerAffiliateUrls.theSwiftest,
     affiliateNetwork: "Everflow",
     commissionType: "CPA / conversion",
-    publicPayoutClaim: "$125 per conversion, verify in affiliate dashboard",
+    publicPayoutClaim:
+      "$125 per conversion referenced in public materials; verify final approved terms in affiliate dashboard",
     estimatedPayout:
       "Public payout claim only. Verify approved payout, qualifying action, cookie window, and paid traffic rules after affiliate acceptance.",
     approvalStatus: "Pending approval",
-    bestForLabel: "Compare pet insurance quote options",
+    bestForLabel: "Start with a pet insurance comparison flow",
     shortDescription:
-      "Primary comparison option for PawPeaceGuide once approved affiliate terms and tracking are confirmed.",
+      "Primary third-party comparison destination for PawPeaceGuide once approved affiliate terms and tracking are confirmed.",
     notes:
-      "Primary comparison offer. Final tracking URL and terms must be verified after approval.",
+      "Primary comparison offer. The Swiftest's public pet insurance page is built around provider comparisons and SwiftScore context; final tracking URL and terms must be verified after approval.",
     pros: [
-      "Comparison flow may be simpler than checking one insurer at a time",
-      "Public materials reference an EverFlow affiliate dashboard",
-      "Good fit after education, quiz, or calculator pre-sell content"
+      "Pet-focused comparison page rather than a single-carrier handoff",
+      "Public site presents an explore, compare, then continue-to-provider flow",
+      "Comparison context can help users review cost, reimbursement, annual benefit, and provider details"
     ],
     cons: [
-      "Affiliate approval is not guaranteed",
-      "Public payout claims must be verified inside the approved affiliate dashboard",
-      "Paid social permissions and qualifying conversion rules must be confirmed before scaling"
+      "PawPeaceGuide is not The Swiftest and does not control their rankings, quote pages, eligibility, or policy terms",
+      "Approval, payout, cookie window, paid social permissions, and tracking URL still require affiliate dashboard confirmation",
+      "Users should review provider details and policy terms directly before applying"
     ],
     trafficRestrictionsNotes:
       "Placeholder. Confirm Meta/Instagram paid social, retargeting, bridge page, and pre-sell page rules after approval.",

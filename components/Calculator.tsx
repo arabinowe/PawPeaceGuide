@@ -153,7 +153,7 @@ export function Calculator() {
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <PrimaryOfferButton pageSource="/calculator-result" showDevelopmentWarning>
-                  Compare quote options
+                  Continue to The Swiftest comparison
                 </PrimaryOfferButton>
                 <Button href="/quiz" variant="secondary">
                   Take the 60-second quiz
@@ -169,7 +169,14 @@ export function Calculator() {
       </div>
 
       <div className="mt-8">
+        <h2 className="text-2xl font-semibold text-ink">Primary comparison handoff</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
+          Use the rough math above to review The Swiftest comparison flow with better context.
+          PawPeaceGuide does not send calculator inputs to Meta Pixel, The Swiftest, or affiliate links.
+        </p>
+        <div className="mt-4">
         <ProviderComparisonGrid compact role="primary" emphasizePrimary pageSource="/calculator-primary" />
+        </div>
       </div>
       <div className="mt-6">
         <h2 className="text-2xl font-semibold text-ink">Backup provider options</h2>

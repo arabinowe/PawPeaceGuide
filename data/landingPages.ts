@@ -27,7 +27,7 @@ export const landingPages: LandingPageVariant[] = [
     eyebrow: "Pet insurance education",
     headline: "Know before you need it.",
     subheadline:
-      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps dog owners understand coverage features, costs, exclusions, and quote options in plain English.",
+      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps pet owners understand coverage features, costs, exclusions, and quote options before continuing to The Swiftest or another third-party quote option.",
     primaryCta: "Start the 60-second pet insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:
@@ -58,7 +58,7 @@ export const landingPages: LandingPageVariant[] = [
     eyebrow: "Dog owner guide",
     headline: "Know before you need it.",
     subheadline:
-      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps dog owners understand coverage features, costs, exclusions, and quote options in plain English.",
+      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps dog owners understand coverage features, costs, exclusions, and quote options before continuing to The Swiftest's third-party comparison flow.",
     primaryCta: "Start the 60-second pet insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:

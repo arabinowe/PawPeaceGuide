@@ -102,28 +102,53 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
           <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
-                Primary comparison path
+                The Swiftest handoff
               </p>
               <h2 className="mt-3 text-3xl font-semibold text-ink">
-                One comparison flow can save you time
+                Prepared visitors make better use of comparison pages
               </h2>
             </div>
             <div className="rounded-md border border-line bg-mist p-5">
               <p className="text-base leading-7 text-muted">
-                Instead of opening a dozen tabs, start with a comparison option and learn what to
-                look for: deductibles, reimbursement rates, annual limits, waiting periods,
-                exclusions, and pre-existing condition rules.
+                The Swiftest is the intended third-party comparison destination for PawPeaceGuide.
+                Their public pet insurance page organizes provider options with comparison details
+                and SwiftScore context. PawPeaceGuide helps you understand the terms to scan before
+                you leave this site.
               </p>
               <p className="mt-3 text-sm leading-6 text-muted">
                 PawPeaceGuide does not sell insurance. PawPeaceGuide is an educational,
                 affiliate-supported site that links to third-party providers and comparison tools.
+                Policy terms, quote availability, pricing, and provider rankings are controlled by
+                the third-party destination.
               </p>
               <div className="mt-5">
                 <PrimaryOfferButton pageSource={`/${page.slug}-comparison-section`}>
-                  Compare quote options
+                  Continue to The Swiftest comparison
                 </PrimaryOfferButton>
               </div>
             </div>
+          </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {[
+              [
+                "Explore the terms",
+                "Use PawPeaceGuide to understand deductibles, reimbursement rates, annual limits, waiting periods, exclusions, and pre-existing condition rules."
+              ],
+              [
+                "Compare with context",
+                "Arrive at The Swiftest ready to review provider cards, plan assumptions, and comparison details without treating any one metric as the whole answer."
+              ],
+              [
+                "Continue off-site carefully",
+                "When you click out, review all quote details directly with the provider or comparison tool before applying or purchasing."
+              ]
+            ].map(([title, body], index) => (
+              <div key={title} className="rounded-md border border-line bg-white p-5 shadow-tight">
+                <p className="text-sm font-semibold text-clay">0{index + 1}</p>
+                <h3 className="mt-3 text-lg font-semibold text-ink">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted">{body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -190,13 +215,14 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Provider preview</p>
-              <h2 className="mt-3 text-3xl font-semibold text-ink">Quote options to review</h2>
+              <h2 className="mt-3 text-3xl font-semibold text-ink">The Swiftest first, backups below</h2>
               <p className="mt-3 max-w-2xl text-base leading-7 text-muted">
-                These are configurable placeholder cards. Replace them with approved affiliate providers and required disclosures after partner acceptance.
+                The primary handoff is The Swiftest comparison flow once the approved affiliate URL
+                is configured. Backup direct-provider cards remain available below the main path.
               </p>
             </div>
             <PrimaryOfferButton pageSource={`/${page.slug}-provider-preview`} variant="secondary">
-              Compare quote options
+              Review The Swiftest path
             </PrimaryOfferButton>
           </div>
           <div className="mt-6">

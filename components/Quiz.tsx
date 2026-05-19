@@ -179,15 +179,17 @@ export function Quiz() {
         </div>
 
         <div className="mt-8 rounded-md border border-line bg-mist p-5">
-          <h2 className="text-2xl font-semibold text-ink">Why quotes may vary</h2>
+          <h2 className="text-2xl font-semibold text-ink">Ready for The Swiftest comparison flow</h2>
           <p className="mt-3 text-base leading-7 text-muted">
             Quote options can vary by pet age, breed, location, deductible, reimbursement rate,
             annual limit, wellness add-ons, underwriting rules, and provider availability. PawPeaceGuide
-            does not recommend a specific provider from your answers.
+            does not recommend a specific provider from your answers, and your quiz answers stay in
+            this browser session. Use this profile as a checklist when you review The Swiftest or
+            any provider quote page.
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
             <PrimaryOfferButton pageSource="/quiz-result" showDevelopmentWarning>
-              Compare quote options
+              Continue to The Swiftest comparison
             </PrimaryOfferButton>
             <Button href="/calculator" variant="secondary">
               Use the cost calculator

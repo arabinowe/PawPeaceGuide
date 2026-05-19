@@ -70,19 +70,22 @@ export default function ComparePage() {
         <DisclosureBanner />
         <div className="mt-8 grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Quote options</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Primary partner path</p>
             <h1 className="mt-3 text-4xl font-semibold text-ink md:text-5xl">
-              Compare pet insurance quote options
+              Start with The Swiftest comparison flow
             </h1>
             <p className="mt-4 text-lg leading-8 text-muted">
-              Review policy features, questions to ask, and third-party provider quote pages. PawPeaceGuide does not sell or bind insurance.
+              PawPeaceGuide prepares pet owners to leave for The Swiftest, a third-party
+              pet insurance comparison destination. PawPeaceGuide does not sell, solicit,
+              bind, underwrite, negotiate, or directly offer insurance.
             </p>
           </div>
           <div className="rounded-md border border-line bg-white p-5 shadow-tight">
-            <p className="text-sm font-semibold text-ink">What users should compare</p>
+            <p className="text-sm font-semibold text-ink">What to review before clicking out</p>
             <p className="mt-2 text-sm leading-6 text-muted">
-              Do not compare on monthly premium alone. Deductibles, reimbursement rates, annual limits,
-              waiting periods, exclusions, and claim rules can materially change the real out-of-pocket result.
+              The Swiftest may show provider comparison details such as plan cost assumptions,
+              reimbursement amount, annual benefit, provider notes, and SwiftScore context. Treat
+              those as starting points, then verify policy terms directly.
             </p>
             <div className="mt-4 flex flex-col gap-3 sm:flex-row">
               <Button href="/quiz" variant="secondary">
@@ -95,15 +98,35 @@ export default function ComparePage() {
           </div>
         </div>
 
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          <FeatureCard
+            icon={FileSearch}
+            title="Arrive ready to scan"
+            body="Use PawPeaceGuide to understand the insurance terms you are likely to see on a comparison page before leaving for The Swiftest."
+          />
+          <FeatureCard
+            icon={Percent}
+            title="Compare beyond premium"
+            body="Monthly price is only one input. Reimbursement, deductible, annual benefit, waiting periods, and exclusions can change the real tradeoff."
+          />
+          <FeatureCard
+            icon={Gauge}
+            title="Verify every detail"
+            body="The Swiftest and its provider partners control their quote flow, rankings, eligibility, and policy terms. Review details directly before applying."
+          />
+        </div>
+
         <div className="mt-8 rounded-md border border-line bg-white p-5 shadow-soft md:p-7">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
-            Start with the comparison option
+            Start with The Swiftest
           </p>
-          <h2 className="mt-3 text-3xl font-semibold text-ink">Primary comparison option</h2>
+          <h2 className="mt-3 text-3xl font-semibold text-ink">Primary pet insurance comparison option</h2>
           <p className="mt-3 max-w-3xl text-base leading-7 text-muted">
-            For many pet owners, starting with a comparison flow can be simpler than checking one
-            insurer at a time. PawPeaceGuide is affiliate-supported and may earn compensation if
-            you visit a provider through our links and purchase a policy.
+            For many pet owners, starting with a third-party comparison flow can be simpler than
+            checking one insurer at a time. The Swiftest is the intended primary destination for
+            this funnel after the education, quiz, or calculator step. PawPeaceGuide is
+            affiliate-supported and may earn compensation if you visit a provider through our links
+            and purchase a policy.
           </p>
           <div className="mt-6">
             <ProviderComparisonGrid

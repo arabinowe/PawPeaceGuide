@@ -132,6 +132,8 @@ Before running ads, confirm partner paid-ad rules, avoid restricted provider bra
 
 The Swiftest is currently the preferred primary offer because the working affiliate strategy is based on a public payout claim of `$125 per conversion`. Treat this as an unverified public claim until PawPeaceGuide is accepted and the final approved terms are visible in the affiliate dashboard.
 
+The public funnel is intentionally written as a warm handoff into The Swiftest's pet insurance comparison experience: PawPeaceGuide explains terms first, then routes users toward The Swiftest as the primary third-party comparison destination once the approved tracking URL is configured. Keep the copy clear that PawPeaceGuide is separate from The Swiftest and does not control SwiftScore rankings, provider quote pages, eligibility, pricing, coverage, or claim decisions.
+
 Pets Best is a backup/direct provider option and uses Impact Radius according to its official affiliate-program materials. Approved affiliates should receive a unique tracking URL after acceptance. Verify payout, qualifying actions, traffic rules, and tracking details inside Impact before using it in paid campaigns.
 
 Actual approval, payout, traffic rules, cookie windows, qualifying events, and paid social permissions must be verified inside each affiliate dashboard before scaling ads. Paid traffic should not be scaled until the approved affiliate terms confirm Meta/Instagram traffic is allowed.
