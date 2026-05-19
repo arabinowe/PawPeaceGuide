@@ -27,14 +27,14 @@ export const landingPages: LandingPageVariant[] = [
     eyebrow: "Pet insurance education",
     headline: "Know before you need it.",
     subheadline:
-      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps pet owners understand coverage features, costs, exclusions, and quote options before continuing to Odie or another third-party quote option.",
+      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps pet owners understand coverage features, costs, exclusions, and quote options before choosing a fitting next step.",
     primaryCta: "Start the 60-second pet insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:
       "Built for pet owners who want practical context before clicking into a licensed provider quote page.",
     compareReasonTitle: "Why pet owners compare insurance before something goes wrong",
     compareReasons: [
-      "Emergency care can force fast financial decisions when emotions are already high.",
+      "Unexpected care is easier to think through when you have already seen the main policy terms.",
       "Waiting periods and pre-existing condition rules can make timing important.",
       "Deductibles, reimbursement rates, annual limits, and exclusions can change the real out-of-pocket picture."
     ],
@@ -58,7 +58,7 @@ export const landingPages: LandingPageVariant[] = [
     eyebrow: "Dog and cat owner guide",
     headline: "Know before you need it.",
     subheadline:
-      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps dog and cat owners understand coverage features, costs, exclusions, and quote-page details before continuing to Odie or another third-party option.",
+      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps dog and cat owners understand coverage features, costs, exclusions, and quote-page details before choosing a fitting next step.",
     primaryCta: "Start the 60-second pet insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:
@@ -89,14 +89,14 @@ export const landingPages: LandingPageVariant[] = [
     eyebrow: "Dog owner guide",
     headline: "Know before you need it.",
     subheadline:
-      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps dog owners understand coverage features, costs, exclusions, and quote options before continuing to Odie or another third-party option.",
+      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps dog owners understand coverage features, costs, exclusions, and quote options before choosing a fitting next step.",
     primaryCta: "Start the 60-second pet insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:
       "Built for dog owners coming from paid social who want plain-English guidance before visiting third-party quote pages.",
     compareReasonTitle: "Why dog owners compare before something goes wrong",
     compareReasons: [
-      "Emergency care can force fast financial decisions when emotions are already high.",
+      "Unexpected care is easier to think through when you have already seen the main policy terms.",
       "A comparison flow can help you review multiple quote options before checking one provider at a time.",
       "Deductibles, reimbursement rates, annual limits, waiting periods, and exclusions can change the real out-of-pocket picture."
     ],
@@ -186,7 +186,7 @@ export const landingPages: LandingPageVariant[] = [
     primaryCta: "Start the cat insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:
-      "Built for cat owners who want to understand the fine print before a stressful vet visit.",
+      "Built for cat owners who want to understand the fine print at a comfortable pace.",
     compareReasonTitle: "Why cat owners compare before the surprise bill",
     compareReasons: [
       "Indoor cats and outdoor cats can have different risk patterns.",
@@ -275,7 +275,7 @@ export const landingPages: LandingPageVariant[] = [
     eyebrow: "Surprise vet bill planning",
     headline: "A surprise vet bill is easier to face with options.",
     subheadline:
-      "Understand your options before the stressful moment. PawPeaceGuide helps pet owners compare policy features, emergency-fund tradeoffs, and quote-page details in plain English.",
+      "Understand your options while you have room to think. PawPeaceGuide helps pet owners compare policy features, emergency-fund tradeoffs, and quote-page details in plain English.",
     primaryCta: "Start the 60-second check",
     secondaryCta: "Use the cost calculator",
     audienceNote:
@@ -311,7 +311,7 @@ export const landingPages: LandingPageVariant[] = [
     secondaryCta: "Use the cost calculator",
     audienceNote:
       "A practical guide for pet owners thinking through premiums, deductibles, reimbursement, and emergency savings.",
-    compareReasonTitle: "Why planning beats panic",
+    compareReasonTitle: "Why planning helps",
     compareReasons: [
       "Pet insurance generally does not erase every cost or cover every situation.",
       "A policy's deductible, reimbursement rate, and limits can change the value of a claim.",

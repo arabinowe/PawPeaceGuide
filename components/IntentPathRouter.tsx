@@ -41,12 +41,11 @@ export function IntentPathRouter({ pageSource, className = "" }: IntentPathRoute
             Choose your next step
           </p>
           <h2 className="mt-3 text-3xl font-semibold text-ink">
-            Move forward when you are actually ready to compare.
+            Move forward when you feel ready to compare.
           </h2>
           <p className="mt-3 text-base leading-7 text-muted">
-            The highest-intent click is a visitor who understands the basic tradeoffs and is
-            ready to review third-party quote options. If that is you, continue toward the
-            current primary provider path. If not, use the tools first.
+            Some visitors are ready for quote options now. Others want to check the math, learn the
+            terms, or read one more guide first. Pick the path that makes the decision feel clearer.
           </p>
           <div className="mt-5 rounded-md border border-pine/20 bg-sky/35 p-4">
             <div className="flex gap-3">

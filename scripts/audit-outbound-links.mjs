@@ -5,7 +5,9 @@ const root = process.cwd();
 const scanDirs = ["app", "components", "data", "lib"];
 const blockedPatterns = [
   /https?:\/\/(?:www\.)?theswiftest\.com/i,
-  /https?:\/\/[^"'\s)]*swiftest[^"'\s)]*/i
+  /https?:\/\/[^"'\s)]*swiftest[^"'\s)]*/i,
+  /https?:\/\/www\.awin1\.com\/cread\.php\?[^"'\s)]*awinmid=68990/i,
+  /https?:\/\/www\.awin1\.com\/cread\.php\?[^"'\s)]*awinmid=118489/i
 ];
 
 const allowedFiles = new Set([
@@ -42,10 +44,10 @@ function walk(dir) {
 scanDirs.forEach((dir) => walk(join(root, dir)));
 
 if (violations.length > 0) {
-  console.error("Direct Swiftest outbound URLs are not allowed in public source files.");
-  console.error("Use /go/the-swiftest and configure the approved affiliate URL instead.");
+  console.error("Direct partner outbound URLs are not allowed in public source files.");
+  console.error("Use /go/[providerSlug] and configure approved affiliate URLs in provider config instead.");
   violations.forEach((file) => console.error(`- ${file}`));
   process.exit(1);
 }
 
-console.log("Outbound link audit passed: no direct Swiftest URLs in public source files.");
+console.log("Outbound link audit passed: no direct partner URLs in public source files.");

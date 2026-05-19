@@ -6,12 +6,14 @@ import { Button } from "@/components/Button";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
 import { PetImagePanel, petImages } from "@/components/PetImage";
-import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
+import { ProviderCard } from "@/components/ProviderCard";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
 import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
-import { getPrimaryProvider } from "@/data/providers";
+import { getPrimaryProvider, isProviderAffiliateConfigured } from "@/data/providers";
 import { siteConfig } from "@/data/siteConfig";
+import { routeIntent } from "@/lib/intentRouting";
 import { trackFunnelEvent } from "@/lib/tracking";
+import type { PetType, Provider } from "@/lib/types";
 
 type QuizAnswers = {
   petType: string;
@@ -37,7 +39,7 @@ const steps: QuizStep[] = [
     key: "petType",
     question: "What type of pet are you shopping for?",
     help: "This only shapes the education summary on this page.",
-    options: ["Dog", "Cat"]
+    options: ["Dog", "Cat", "Other pet"]
   },
   {
     key: "ageRange",
@@ -143,10 +145,31 @@ export function Quiz() {
       petLabel,
       breedLabel,
       summary:
-        `Use ${primaryProvider.name}'s provider page to review quote-page details for a ${petLabel}. ` +
-        `Keep ${breedLabel}, age range, deductible comfort, reimbursement rate, annual benefit, waiting periods, and exclusions in view.`
+        answers.petType === "Other pet"
+          ? "Start with species eligibility before reviewing any provider quote page. Many pet insurance providers focus on dogs and cats."
+          : `Use ${primaryProvider.name}'s provider page to review quote-page details for a ${petLabel}. ` +
+            `Keep ${breedLabel}, age range, deductible comfort, reimbursement rate, annual benefit, waiting periods, and exclusions in view.`
     };
   }, [answers.ageRange, answers.breed, answers.petType, primaryProvider.name]);
+
+  const routingResult = useMemo(() => {
+    const petType = toPetType(answers.petType, answers.ageRange);
+    return routeIntent({
+      petType,
+      lifeStage: answers.ageRange === "Under 1" ? (answers.petType === "Cat" ? "kitten" : "puppy") : "unknown",
+      userIntent:
+        petType === "other"
+          ? "other pet type"
+          : petType === "cat"
+            ? "cat insurance"
+            : petType === "kitten"
+              ? "kitten insurance"
+              : petType === "puppy"
+                ? "puppy insurance"
+                : "dog insurance",
+      readinessLevel: "comparing soon"
+    });
+  }, [answers.ageRange, answers.petType]);
 
   function setAnswer(value: string) {
     setAnswers((current) => ({ ...current, [step.key]: value }));
@@ -231,9 +254,9 @@ export function Quiz() {
             <p className="mt-2 text-sm leading-6 text-muted">{handoffFocus.summary}</p>
           </div>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <PrimaryOfferButton pageSource="/quiz-result" showDevelopmentWarning className="w-full sm:w-auto">
-              Continue to comparison partner
-            </PrimaryOfferButton>
+            <Button href={routingResult.primaryNextStep.href} className="w-full sm:w-auto">
+              {routingResult.primaryNextStep.cta}
+            </Button>
             <Button href="/calculator" variant="secondary" className="w-full sm:w-auto">
               Use the cost calculator
             </Button>
@@ -242,14 +265,27 @@ export function Quiz() {
 
         <QuoteReadinessChecklist pageSource="/quiz-result-quote-ready" compact className="mt-8" />
 
-        <div className="mt-8">
-          <ProviderComparisonGrid compact role="primary" emphasizePrimary pageSource="/quiz-result-primary" />
-        </div>
+        {routingResult.matchingLiveProviders.length > 0 ? (
+          <div className="mt-8">
+            <h2 className="text-2xl font-semibold text-ink">Matched live path</h2>
+            <p className="mt-2 text-sm leading-6 text-muted">
+              This appears to fit your pet type and shopping goal. Review all details directly with
+              the provider before buying.
+            </p>
+            <div className="mt-4 grid gap-5 lg:grid-cols-2">
+              {routingResult.matchingLiveProviders
+                .filter((partner): partner is Provider => partner.role !== "supplemental" && isProviderAffiliateConfigured(partner))
+                .map((provider) => (
+                  <ProviderCard key={provider.slug} provider={provider} compact emphasized pageSource="/quiz-result-primary" />
+                ))}
+            </div>
+          </div>
+        ) : null}
         <div className="mt-6">
-          <h2 className="text-2xl font-semibold text-ink">Backup provider options</h2>
+          <h2 className="text-2xl font-semibold text-ink">Other helpful options</h2>
           <p className="mt-2 text-sm leading-6 text-muted">
-            These secondary options are available below the current primary path. Review policy
-            details directly with each provider.
+            Pending partners and educational tools can still help you compare at your own pace.
+            Pending partner links are not live clickouts yet.
           </p>
           <div className="mt-4">
             <ProviderComparisonGrid compact role="backup" pageSource="/quiz-result-backup" />
@@ -359,4 +395,11 @@ export function Quiz() {
       </div>
     </section>
   );
+}
+
+function toPetType(petType: string, ageRange: string): PetType {
+  if (petType === "Other pet") return "other";
+  if (petType === "Cat") return ageRange === "Under 1" ? "kitten" : "cat";
+  if (petType === "Dog") return ageRange === "Under 1" ? "puppy" : "dog";
+  return "unknown";
 }

@@ -12,7 +12,7 @@ export function GET() {
 PawPeaceGuide is an educational, affiliate-supported pet insurance guidance website.
 
 Canonical site: ${siteConfig.siteUrl}
-Positioning: Pet insurance explained before the stressful vet bill moment.
+Positioning: Plain-English pet coverage and pet care decisions before choices feel rushed.
 Important compliance: PawPeaceGuide does not sell, solicit, bind, underwrite, negotiate, or directly recommend insurance. Policy terms vary. Users should review details directly with providers.
 
 Core public routes:
@@ -21,6 +21,14 @@ Core public routes:
 - 60-second check: ${absoluteUrl("/quiz")}
 - Vet bill calculator: ${absoluteUrl("/calculator")}
 - Compare quote options: ${absoluteUrl("/compare")}
+- Find my path: ${absoluteUrl("/find-my-path")}
+- Dog insurance options: ${absoluteUrl("/dog-insurance-options")}
+- Cat insurance options: ${absoluteUrl("/cat-insurance-options")}
+- Puppy insurance options: ${absoluteUrl("/puppy-insurance-options")}
+- Kitten insurance options: ${absoluteUrl("/kitten-insurance-options")}
+- Senior pet insurance: ${absoluteUrl("/senior-pet-insurance")}
+- Pet wellness extras: ${absoluteUrl("/pet-wellness-extras")}
+- Other pet insurance options: ${absoluteUrl("/other-pet-insurance-options")}
 
 Published guides:
 ${guideLines}

@@ -159,7 +159,7 @@ export default function PetInsuranceComparisonChecklistBlogPage() {
                 </p>
                 <p>
                   PawPeaceGuide does not sell insurance, recommend a policy, or decide what a
-                  provider will cover. Use this as an education layer before visiting Odie,
+                  provider may treat as eligible. Use this as an education layer before visiting Odie,
                   another provider site, or a third-party comparison page.
                 </p>
               </div>

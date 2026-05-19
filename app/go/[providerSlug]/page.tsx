@@ -14,7 +14,7 @@ type RedirectPageProps = {
 
 export const metadata = createMetadata({
   title: "Leaving PawPeaceGuide",
-  description: "You are being redirected to a third-party provider site.",
+  description: "You are being redirected to a third-party partner site.",
   path: "/go",
   noIndex: true,
   noFollow: true
@@ -50,12 +50,14 @@ export default async function ProviderRedirectPage({ params, searchParams }: Red
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Third-party provider</p>
         <h1 className="mt-3 text-4xl font-semibold text-ink">
           {isConfigured
-            ? "You are being redirected to a third-party provider site."
+            ? "You are being redirected to a third-party partner site."
             : "This partner link has not been configured yet."}
         </h1>
         <p className="mt-4 text-base leading-7 text-muted">
           {isConfigured
-            ? `PawPeaceGuide is not an insurer or broker. Review all policy terms directly with ${provider.name}.`
+            ? provider.partnerType === "wellness"
+              ? `${provider.name} is not pet insurance. Review product details directly before purchasing.`
+              : `PawPeaceGuide is not an insurer or broker. Review all policy terms directly with ${provider.name}.`
             : `${provider.name} is an intended third-party destination, but the approved affiliate link is not live yet. PawPeaceGuide is not an insurer or broker.`}
         </p>
         <div className="mt-6">

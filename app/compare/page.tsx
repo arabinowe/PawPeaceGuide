@@ -17,6 +17,7 @@ import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
 import { FeatureCard } from "@/components/FeatureCard";
 import { IntentPathRouter } from "@/components/IntentPathRouter";
+import { MethodologyNote } from "@/components/MethodologyNote";
 import { PetImagePanel, petImages } from "@/components/PetImage";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
 import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
@@ -99,12 +100,12 @@ export default function ComparePage() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Primary partner path</p>
             <h1 className="mt-3 text-4xl font-semibold text-ink md:text-5xl">
-              Start with the current approved provider option
+              Best next step depends on what you need.
             </h1>
             <p className="mt-4 text-lg leading-8 text-muted">
-              PawPeaceGuide prepares pet owners to leave for {primaryProvider.name}, a third-party
-              pet insurance provider site. PawPeaceGuide does not sell, solicit,
-              bind, underwrite, negotiate, or directly offer insurance.
+              PawPeaceGuide helps pet owners decide whether to learn more, estimate costs, compare
+              multiple options, or review a live provider quote path. The current live insurance
+              affiliate path is {primaryProvider.name}; pending partners are labeled clearly.
             </p>
             <div className="mt-5 max-w-2xl">
               <DisclosureBanner compact />
@@ -172,13 +173,12 @@ export default function ComparePage() {
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
             Start with {primaryProvider.name}
           </p>
-          <h2 className="mt-3 text-3xl font-semibold text-ink">Current primary pet insurance provider option</h2>
-          <p className="mt-3 max-w-3xl text-base leading-7 text-muted">
-            For many pet owners, the useful first step is understanding what to compare before
-            opening a provider quote flow. {primaryProvider.name} is the current approved primary
-            destination for this funnel after the education, quiz, or calculator step. PawPeaceGuide
-            is affiliate-supported and may earn compensation if you visit a provider through our
-            links and purchase a policy.
+            <h2 className="mt-3 text-3xl font-semibold text-ink">Current primary pet insurance provider option</h2>
+            <p className="mt-3 max-w-3xl text-base leading-7 text-muted">
+            For dog and cat shoppers who are ready to review a live quote option, {primaryProvider.name}
+            is the current approved destination for this funnel after the education, quiz, or
+            calculator step. This placement reflects both fit and current link availability, not a
+            claim that any provider is best, cheapest, or guaranteed.
           </p>
           <div className="mt-6">
             <ProviderComparisonGrid
@@ -201,13 +201,16 @@ export default function ComparePage() {
               {configuredBackupProvider
                 ? `${configuredBackupProvider.name} is also configured as a live direct-provider option. `
                 : "These backup cards preserve flexibility as additional partner approvals arrive. "}
-              Direct-provider quote options can be useful to review below the primary comparison
-              path. Policy terms vary, so review details directly with each provider.
+              Direct-provider and comparison options can be useful once approved. Until then, these
+              cards are educational context and future routing slots, not live partner clickouts.
+              Policy terms vary, so review details directly with each provider.
             </p>
           </div>
           <ProviderComparisonGrid role="backup" pageSource="/compare-backup" />
         </div>
       </section>
+
+      <MethodologyNote className="mx-auto max-w-6xl px-5 pb-12" />
 
       <section className="bg-white py-12">
         <div className="mx-auto max-w-6xl px-5">

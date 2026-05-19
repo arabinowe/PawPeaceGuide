@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, CheckCircle2, ExternalLink } from "lucide-react";
+import { CheckCircle2, ClipboardCheck, ExternalLink, Info } from "lucide-react";
 import { useEffect } from "react";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { UTMLink } from "@/components/UTMLink";
@@ -26,10 +26,10 @@ export function ProviderCard({
   const affiliateConfigured = isProviderAffiliateConfigured(provider);
   const offerLabel =
     provider.role === "primary"
-      ? "Primary approved option"
+      ? "Current live quote option"
       : affiliateConfigured
         ? "Approved provider option"
-        : "Backup quote option";
+        : "Pending helpful option";
   const statusText = affiliateConfigured
     ? "Available option"
     : provider.role === "primary"
@@ -127,13 +127,32 @@ export function ProviderCard({
 
       <p className="mt-3 text-sm font-semibold text-pine">{provider.bestForLabel}</p>
       <p className="mt-2 text-sm leading-6 text-muted">{provider.shortDescription}</p>
+      <div className="mt-4 grid gap-3 rounded-md border border-line bg-mist p-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-clay">Good fit for</p>
+          <p className="mt-1 text-sm leading-6 text-muted">{provider.bestFitUseCases[0]}</p>
+        </div>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-clay">Pet types</p>
+          <p className="mt-1 text-sm leading-6 text-muted">
+            {provider.supportedPetTypes
+              .map((type) => (type === "unknown" ? "Verify directly" : type))
+              .join(", ")}
+          </p>
+        </div>
+        {!affiliateConfigured ? (
+          <p className="text-xs leading-5 text-muted">
+            This partner is modeled for education and future routing, but its affiliate link is not live yet.
+          </p>
+        ) : null}
+      </div>
 
       {!compact ? (
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div>
-            <p className="text-sm font-semibold text-ink">Features to review</p>
+            <p className="text-sm font-semibold text-ink">Why it may fit</p>
             <ul className="mt-2 space-y-2">
-              {provider.pros.map((pro) => (
+              {provider.bestFitUseCases.slice(0, 3).map((pro) => (
                 <li key={pro} className="flex gap-2 text-sm leading-5 text-muted">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sage" aria-hidden="true" />
                   <span>{pro}</span>
@@ -144,14 +163,20 @@ export function ProviderCard({
           <div>
             <p className="text-sm font-semibold text-ink">Confirm directly</p>
             <ul className="mt-2 space-y-2">
-              {provider.cons.map((con) => (
+              {provider.verificationNeeded.slice(0, 3).map((con) => (
                 <li key={con} className="flex gap-2 text-sm leading-5 text-muted">
-                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-clay" aria-hidden="true" />
+                  <ClipboardCheck className="mt-0.5 h-4 w-4 shrink-0 text-clay" aria-hidden="true" />
                   <span>{con}</span>
                 </li>
               ))}
             </ul>
           </div>
+        </div>
+      ) : null}
+      {compact ? (
+        <div className="mt-4 flex gap-2 rounded-md bg-mist px-3 py-2 text-xs leading-5 text-muted">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-pine" aria-hidden="true" />
+          <span>Verify coverage, exclusions, waiting periods, reimbursement, and state availability directly.</span>
         </div>
       ) : null}
 

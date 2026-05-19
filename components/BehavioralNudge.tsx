@@ -28,6 +28,15 @@ export function BehavioralNudge() {
     pathname === "/calculator" ||
     pathname === "/compare" ||
     pathname === "/ready-to-compare" ||
+    pathname === "/find-my-path" ||
+    pathname === "/dog-insurance-options" ||
+    pathname === "/cat-insurance-options" ||
+    pathname === "/puppy-insurance-options" ||
+    pathname === "/kitten-insurance-options" ||
+    pathname === "/senior-pet-insurance" ||
+    pathname === "/emergency-vet-bill-planning" ||
+    pathname === "/pet-wellness-extras" ||
+    pathname === "/other-pet-insurance-options" ||
     pathname.startsWith("/guides") ||
     pathname === "/glossary";
 
@@ -100,7 +109,7 @@ export function BehavioralNudge() {
       </p>
       <div className="mt-4">
         <Button href={href} onClick={onClick} className="w-full" variant={configured ? "primary" : "secondary"}>
-          {configured ? "Continue to comparison partner" : "Compare quote options"}
+          {configured ? provider.ctaText : "Compare quote options"}
         </Button>
       </div>
       <p className="mt-3 text-xs leading-5 text-muted">

@@ -24,11 +24,43 @@ export type ApprovalStatus = "Not applied" | "Pending approval" | "Applied" | "A
 
 export type BrandBiddingAllowed = boolean | "unknown";
 
+export type PartnerType = "insurance" | "comparison" | "wellness" | "product" | "safety" | "other";
+export type PartnerStatus = "live" | "pending" | "fallback" | "educational-only";
+export type PetType = "dog" | "cat" | "puppy" | "kitten" | "senior pet" | "other" | "unknown";
+export type UserIntent =
+  | "dog insurance"
+  | "cat insurance"
+  | "puppy insurance"
+  | "kitten insurance"
+  | "senior pet planning"
+  | "compare multiple options"
+  | "ready to get a quote"
+  | "understand costs first"
+  | "emergency vet bill planning"
+  | "waiting periods / pre-existing condition concerns"
+  | "dental coverage questions"
+  | "direct vet pay interest"
+  | "wellness or comfort products"
+  | "other pet type"
+  | "just researching";
+export type ReadinessLevel = "just researching" | "comparing soon" | "ready to review quote options";
+
 export type Provider = {
   name: string;
   slug: string;
   role: ProviderRole;
   priority: number;
+  isLive: boolean;
+  partnerType: PartnerType;
+  status: PartnerStatus;
+  supportedPetTypes: string[];
+  bestFitUseCases: string[];
+  notBestFor: string[];
+  differentiators: string[];
+  verificationNeeded: string[];
+  monetizationPriority: number;
+  userValuePriority: number;
+  routeWeight: number;
   affiliateUrl: string;
   affiliateNetwork: AffiliateNetwork;
   commissionType: CommissionType;
@@ -45,6 +77,37 @@ export type Provider = {
   brandBiddingAllowed: BrandBiddingAllowed;
   ctaText: string;
   disclosureText: string;
+  complianceNotes: string[];
+};
+
+export type PartnerOffer = {
+  name: string;
+  slug: string;
+  role: "supplemental";
+  priority: number;
+  isLive: boolean;
+  partnerType: PartnerType;
+  status: PartnerStatus;
+  category: "pet wellness" | "pet comfort" | "pet care";
+  affiliateUrl: string;
+  affiliateNetwork: AffiliateNetwork;
+  commissionType: CommissionType;
+  publicPayoutClaim: string;
+  approvalStatus: ApprovalStatus;
+  bestForLabel: string;
+  shortDescription: string;
+  notes: string;
+  supportedPetTypes: string[];
+  bestFitUseCases: string[];
+  notBestFor: string[];
+  differentiators: string[];
+  verificationNeeded: string[];
+  monetizationPriority: number;
+  userValuePriority: number;
+  routeWeight: number;
+  ctaText: string;
+  disclosureText: string;
+  complianceNotes: string[];
 };
 
 export type FunnelEventName =
@@ -115,6 +178,12 @@ export type GuideExampleScenario = {
   body: string[];
 };
 
+export type GuideSourceNote = {
+  label: string;
+  url: string;
+  note: string;
+};
+
 export type Guide = {
   slug: string;
   title: string;
@@ -141,4 +210,5 @@ export type Guide = {
   readingTimeMinutes: number;
   affiliateDisclosureRequired: boolean;
   disclaimerRequired: boolean;
+  sourceNotes?: GuideSourceNote[];
 };

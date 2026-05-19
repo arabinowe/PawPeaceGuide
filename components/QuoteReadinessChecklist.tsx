@@ -74,14 +74,14 @@ export function QuoteReadinessChecklist({
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
-              High-intent checklist
+              Quote-ready checklist
             </p>
             <h2 className="mt-2 text-2xl font-semibold text-ink md:mt-3 md:text-3xl">
               Ready to compare quote options?
             </h2>
             <p className="mt-3 text-sm leading-6 text-muted md:text-base md:leading-7">
               Use this quick checkpoint before leaving PawPeaceGuide for {provider.name}. It helps
-              shoppers arrive prepared without turning this site into an insurance application.
+              you arrive prepared without turning this site into an insurance application.
             </p>
             {!affiliateConfigured ? (
               <p className="mt-4 rounded-md border border-gold/35 bg-[#fff9ea] px-3 py-2 text-xs leading-5 text-muted md:px-4 md:py-3 md:text-sm md:leading-6">
@@ -91,7 +91,7 @@ export function QuoteReadinessChecklist({
             ) : null}
             <div className="mt-5 flex flex-col gap-3 sm:flex-row">
               <PrimaryOfferButton pageSource={pageSource} showDisclosure={false} className="w-full sm:w-auto">
-                Continue to comparison partner
+                {affiliateConfigured ? provider.ctaText : "Compare quote options"}
               </PrimaryOfferButton>
               <Button href="/quiz" variant="secondary" className="w-full sm:w-auto">
                 Start the 60-second check

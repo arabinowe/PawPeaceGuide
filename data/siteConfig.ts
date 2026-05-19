@@ -69,6 +69,11 @@ export const siteConfig = {
     aspcaPetHealth: "",
     embrace: ""
   },
+  supplementalAffiliateUrls: {
+    moodifypet:
+      process.env.NEXT_PUBLIC_MOODIFYPET_AFFILIATE_URL ||
+      "https://www.awin1.com/cread.php?awinmid=118489&awinaffid=2902179"
+  },
   providerTrackingSlugs: {
     theSwiftest: "the-swiftest",
     odie: "odie",
@@ -78,6 +83,9 @@ export const siteConfig = {
     trupanion: "trupanion",
     aspcaPetHealth: "aspca-pet-health-insurance",
     embrace: "embrace"
+  },
+  supplementalTrackingSlugs: {
+    moodifypet: "moodifypet"
   },
   providerNetwork: {
     theSwiftest: "Everflow",
@@ -102,6 +110,7 @@ export const siteConfig = {
 } as const;
 
 export const navLinks = [
+  { href: "/find-my-path", label: "Find Path" },
   { href: "/pet-insurance", label: "Pet Insurance" },
   { href: "/quiz", label: "Quiz" },
   { href: "/calculator", label: "Calculator" },

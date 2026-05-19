@@ -2,17 +2,21 @@ import { CheckCircle2, Clock, FileSearch, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/Button";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
+import { MethodologyNote } from "@/components/MethodologyNote";
 import { PageEventTracker } from "@/components/PageEventTracker";
 import { PetImagePanel, petImages } from "@/components/PetImage";
+import { ProviderCard } from "@/components/ProviderCard";
 import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
-import { getPrimaryProvider } from "@/data/providers";
+import { isProviderAffiliateConfigured } from "@/data/providers";
 import { siteConfig } from "@/data/siteConfig";
+import { routeIntent } from "@/lib/intentRouting";
 import { createMetadata } from "@/lib/seo";
+import type { Provider } from "@/lib/types";
 
 export const metadata = createMetadata({
   title: "Ready to Compare Pet Insurance Quote Options",
   description:
-    "A high-intent PawPeaceGuide checkpoint before visiting a third-party pet insurance provider or comparison option.",
+    "A calm PawPeaceGuide checkpoint before visiting a third-party pet insurance provider or comparison option.",
   path: "/ready-to-compare"
 });
 
@@ -24,7 +28,20 @@ const intentSignals = [
 ];
 
 export default function ReadyToComparePage() {
-  const primaryProvider = getPrimaryProvider();
+  const directRoute = routeIntent({
+    petType: "dog",
+    userIntent: "ready to get a quote",
+    readinessLevel: "ready to review quote options"
+  });
+  const comparisonRoute = routeIntent({
+    petType: "dog",
+    userIntent: "compare multiple options",
+    readinessLevel: "ready to review quote options",
+    wantsComparison: true
+  });
+  const liveProviders = directRoute.matchingLiveProviders.filter(
+    (partner): partner is Provider => partner.role !== "supplemental" && isProviderAffiliateConfigured(partner)
+  );
 
   return (
     <>
@@ -39,11 +56,12 @@ export default function ReadyToComparePage() {
               Ready to compare pet insurance quote options?
             </h1>
             <p className="mt-5 text-lg leading-8 text-muted">
-              If you already understand the basics, use this checkpoint and continue toward the
-              current {primaryProvider.name} provider option when you are ready.
+              You are ready to compare when you understand the major moving parts: deductible,
+              reimbursement rate, annual limit, waiting periods, exclusions, and pre-existing
+              condition rules.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Button href="/quiz">Start the 60-second check</Button>
+              <Button href={directRoute.primaryNextStep.href}>{directRoute.primaryNextStep.cta}</Button>
               <Button href="/compare" variant="secondary">
                 Compare quote options
               </Button>
@@ -60,8 +78,8 @@ export default function ReadyToComparePage() {
                   <div>
                     <p className="text-sm font-semibold text-ink">Best for warm visitors</p>
                     <p className="mt-1 text-sm leading-6 text-muted">
-                      Use this route for retargeting, email follow-up, or ad sets aimed at people
-                      who are already close to comparing quote options.
+                      Use this route when you are close to reviewing quote options and want one
+                      final, low-pressure checklist first.
                     </p>
                   </div>
                 </div>
@@ -92,9 +110,8 @@ export default function ReadyToComparePage() {
               Good-fit visitors for the comparison step
             </h2>
             <p className="mt-3 text-base leading-7 text-muted">
-              This page is designed for people who are already thinking about a quote, not for
-              broad awareness traffic. It keeps the next click focused while preserving clear
-              education and affiliate disclosure.
+              This page keeps the next click focused without forcing a partner. If a live partner
+              fits, we show it. If the broader comparison path is still pending, we say that.
             </p>
           </div>
           <div className="grid gap-3">
@@ -112,6 +129,40 @@ export default function ReadyToComparePage() {
         pageSource="/ready-to-compare"
         className="mx-auto max-w-6xl px-5 pb-12"
       />
+
+      <section className="mx-auto max-w-6xl px-5 pb-12">
+        <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-7">
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Best-fit routing</p>
+          <h2 className="mt-3 text-3xl font-semibold text-ink">Choose the handoff that matches your goal.</h2>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <div className="rounded-md border border-line bg-mist p-4">
+              <p className="text-sm font-semibold text-ink">I want a live quote option now</p>
+              <p className="mt-2 text-sm leading-6 text-muted">{directRoute.primaryNextStep.body}</p>
+              <div className="mt-4">
+                <Button href={directRoute.primaryNextStep.href}>{directRoute.primaryNextStep.cta}</Button>
+              </div>
+            </div>
+            <div className="rounded-md border border-line bg-mist p-4">
+              <p className="text-sm font-semibold text-ink">I want a broader comparison flow</p>
+              <p className="mt-2 text-sm leading-6 text-muted">{comparisonRoute.primaryNextStep.body}</p>
+              <div className="mt-4">
+                <Button href={comparisonRoute.primaryNextStep.href} variant="secondary">
+                  {comparisonRoute.primaryNextStep.cta}
+                </Button>
+              </div>
+            </div>
+          </div>
+          {liveProviders.length > 0 ? (
+            <div className="mt-6 grid gap-5 lg:grid-cols-2">
+              {liveProviders.map((provider) => (
+                <ProviderCard key={provider.slug} provider={provider} compact emphasized pageSource="/ready-to-compare" />
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </section>
+
+      <MethodologyNote className="mx-auto max-w-6xl px-5 pb-12" />
 
       <section className="bg-white py-12">
         <div className="mx-auto grid max-w-6xl gap-6 px-5 lg:grid-cols-[1fr_0.9fr]">

@@ -35,34 +35,50 @@ const animalPaths = [
   {
     icon: Dog,
     label: "Dog owners",
-    href: "/dog-parent-protection",
+    href: "/dog-insurance-options",
     image: petImages.dogOwner.src,
     alt: petImages.dogOwner.alt,
-    note: "The default Facebook ad path for adult dogs, breed questions, and emergency-bill planning."
+    note: "A calm path for age, breed, deductible, reimbursement, and quote-readiness questions."
   },
   {
     icon: Cat,
     label: "Cat owners",
-    href: "/cat-insurance",
+    href: "/cat-insurance-options",
     image: petImages.catHome.src,
     alt: petImages.catHome.alt,
-    note: "For indoor, outdoor, and mixed-lifestyle cats where illness and diagnostics can drive costs."
+    note: "For indoor, outdoor, and mixed-lifestyle cats where policy details deserve a careful look."
   },
   {
     icon: Dog,
     label: "Puppies",
-    href: "/puppy-insurance",
+    href: "/puppy-insurance-options",
     image: petImages.puppy.src,
     alt: petImages.puppy.alt,
-    note: "For new dog owners comparing early, before a long health history develops."
+    note: "For new dog owners comparing early, while questions are still manageable."
   },
   {
     icon: PawPrint,
     label: "Kittens",
-    href: "/kitten-insurance",
+    href: "/kitten-insurance-options",
     image: petImages.kitten.src,
     alt: petImages.kitten.alt,
-    note: "For new cat owners weighing routine care, accident risk, and future illness protection."
+    note: "For new cat owners separating routine wellness from accident and illness coverage."
+  },
+  {
+    icon: HeartPulse,
+    label: "Senior pets",
+    href: "/senior-pet-insurance",
+    image: petImages.calmTrust.src,
+    alt: petImages.calmTrust.alt,
+    note: "For older dog and cat owners who want realistic questions around health history and eligibility."
+  },
+  {
+    icon: PawPrint,
+    label: "Other pets",
+    href: "/other-pet-insurance-options",
+    image: petImages.calmTrust.src,
+    alt: petImages.calmTrust.alt,
+    note: "For species eligibility questions without being pushed into a dog or cat path."
   },
   {
     icon: SearchCheck,
@@ -202,7 +218,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
           {[
             ["Plain-English guidance", "We break down insurance terms so the quote page makes more sense."],
             ["Compare quote options", "See features to review across provider sites."],
-            ["Plan ahead", "Be ready before a surprise vet bill becomes a crisis."]
+    ["Plan ahead", "Be ready before surprise costs make the decision harder."]
           ].map(([title, body]) => (
             <div key={title} className="flex gap-3 rounded-md bg-mist p-3 md:p-4">
               <Stethoscope className="mt-1 h-5 w-5 shrink-0 text-pine" aria-hidden="true" />
@@ -222,7 +238,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
             {[
               "Answer a few pet and budget questions",
               "See the policy features to compare",
-              "Continue through the tracked partner handoff when ready"
+              "Continue to a fitting partner path when ready"
             ].map((step, index) => (
               <div key={step} className="flex items-center gap-3 rounded-md bg-white px-3 py-2 shadow-tight">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-pine text-xs font-semibold text-white">
@@ -247,24 +263,24 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Popular pet paths</p>
               <h2 className="mt-3 text-3xl font-semibold text-ink">
-                Start with the happy pet in your household.
+                Start with the path that matches your pet.
               </h2>
               <p className="mt-4 text-base leading-7 text-muted">
-                PawPeaceGuide keeps this pre-sell flow centered on dog, cat, puppy, and kitten
-                shoppers because those are the clearest pet insurance paths for the current
-                provider set. Verify any animal-specific availability directly with the provider.
+                PawPeaceGuide helps dog, cat, puppy, kitten, senior-pet, and other-pet shoppers
+                understand the next useful step. Live partner links appear only when they fit the
+                selected path.
               </p>
             </div>
             <div className="rounded-md border border-line bg-mist p-5">
-              <p className="text-sm font-semibold text-ink">Facebook traffic angle</p>
+              <p className="text-sm font-semibold text-ink">Choose a calmer lane</p>
               <p className="mt-2 text-sm leading-6 text-muted">
-                Use happy, everyday pet creative that matches the landing page. Send dog creative
-                into the dog-owner path and cat creative into the cat-owner path. Keep ad copy
-                educational and avoid implying a viewer has a sick pet or that coverage is guaranteed.
+                Pick the path that matches your pet and pace. PawPeaceGuide keeps the explanation
+                educational, then shows a live partner route only when it fits what you are trying
+                to solve.
               </p>
             </div>
           </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {animalPaths.map((path) => (
               <UTMLink
                 key={path.href}
@@ -300,7 +316,8 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Why compare early</p>
             <h2 className="mt-3 text-3xl font-semibold text-ink">{page.compareReasonTitle}</h2>
             <p className="mt-4 text-base leading-7 text-muted">
-              Pet insurance is easiest to evaluate before a stressful diagnosis or emergency invoice is in front of you.
+              Pet insurance is easiest to evaluate when you have room to learn, compare, and ask
+              better questions.
             </p>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
