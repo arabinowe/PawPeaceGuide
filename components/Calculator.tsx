@@ -151,6 +151,14 @@ export function Calculator() {
                 This is only a rough estimate. Real policy terms, reimbursement calculations, annual limits,
                 exclusions, waiting periods, and claim decisions vary by provider.
               </p>
+              <div className="rounded-md border border-line bg-white p-4">
+                <p className="text-sm font-semibold text-ink">What to scan on The Swiftest</p>
+                <p className="mt-2 text-sm leading-6 text-muted">
+                  Compare the standard plan cost, reimbursement amount, annual benefit, provider notes,
+                  and any link to policy details. A lower monthly number can still leave more risk if
+                  the deductible, annual limit, waiting period, or exclusion language is a poor fit.
+                </p>
+              </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <PrimaryOfferButton pageSource="/calculator-result" showDevelopmentWarning>
                   Continue to The Swiftest comparison
@@ -171,11 +179,12 @@ export function Calculator() {
       <div className="mt-8">
         <h2 className="text-2xl font-semibold text-ink">Primary comparison handoff</h2>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-          Use the rough math above to review The Swiftest comparison flow with better context.
-          PawPeaceGuide does not send calculator inputs to Meta Pixel, The Swiftest, or affiliate links.
+          Use the rough math above to review the dog and cat comparison flow from The Swiftest with better
+          context. PawPeaceGuide does not send calculator inputs to Meta Pixel, The Swiftest, or
+          affiliate links.
         </p>
         <div className="mt-4">
-        <ProviderComparisonGrid compact role="primary" emphasizePrimary pageSource="/calculator-primary" />
+          <ProviderComparisonGrid compact role="primary" emphasizePrimary pageSource="/calculator-primary" />
         </div>
       </div>
       <div className="mt-6">

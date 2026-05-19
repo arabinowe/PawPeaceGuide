@@ -121,6 +121,29 @@ export function Quiz() {
     return `For your ${petLabel}, ${budgetPhrase} ${conditionPhrase}`;
   }, [answers]);
 
+  const handoffFocus = useMemo(() => {
+    const isYoung = answers.ageRange === "Under 1";
+    const petLabel =
+      answers.petType === "Dog"
+        ? isYoung
+          ? "puppy"
+          : "dog"
+        : answers.petType === "Cat"
+          ? isYoung
+            ? "kitten"
+            : "cat"
+          : "pet";
+    const breedLabel = answers.breed.trim() ? answers.breed.trim() : "mixed or unknown breed";
+
+    return {
+      petLabel,
+      breedLabel,
+      summary:
+        `Use The Swiftest's dog and cat comparison flow to review quote-page details for a ${petLabel}. ` +
+        `Keep ${breedLabel}, age range, deductible comfort, reimbursement rate, annual benefit, waiting periods, and exclusions in view.`
+    };
+  }, [answers.ageRange, answers.breed, answers.petType]);
+
   function setAnswer(value: string) {
     setAnswers((current) => ({ ...current, [step.key]: value }));
   }
@@ -187,6 +210,12 @@ export function Quiz() {
             this browser session. Use this profile as a checklist when you review The Swiftest or
             any provider quote page.
           </p>
+          <div className="mt-5 rounded-md border border-line bg-white p-4">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-clay">
+              Your comparison focus
+            </p>
+            <p className="mt-2 text-sm leading-6 text-muted">{handoffFocus.summary}</p>
+          </div>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
             <PrimaryOfferButton pageSource="/quiz-result" showDevelopmentWarning>
               Continue to The Swiftest comparison

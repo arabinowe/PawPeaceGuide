@@ -1,12 +1,19 @@
 import {
   Calculator,
+  Cat,
   ClipboardCheck,
+  Dog,
   FileText,
   HeartPulse,
   ListChecks,
+  PawPrint,
+  SearchCheck,
   ShieldAlert,
-  Stethoscope
+  Stethoscope,
+  TableProperties,
+  WalletCards
 } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/Button";
 import { CTABlock } from "@/components/CTABlock";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
@@ -16,11 +23,72 @@ import { PageEventTracker } from "@/components/PageEventTracker";
 import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
+import { UTMLink } from "@/components/UTMLink";
 import { siteConfig } from "@/data/siteConfig";
 import type { LandingPageVariant } from "@/lib/types";
 
+const animalPaths = [
+  {
+    icon: Dog,
+    label: "Dog owners",
+    href: "/dog-parent-protection",
+    image:
+      "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=80",
+    alt: "Happy golden retriever sitting with its owner at home",
+    note: "The default Facebook ad path for adult dogs, breed questions, and emergency-bill planning."
+  },
+  {
+    icon: Cat,
+    label: "Cat owners",
+    href: "/cat-insurance",
+    image:
+      "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=900&q=80",
+    alt: "Relaxed happy cat looking toward the camera at home",
+    note: "For indoor, outdoor, and mixed-lifestyle cats where illness and diagnostics can drive costs."
+  },
+  {
+    icon: Dog,
+    label: "Puppies",
+    href: "/puppy-insurance",
+    image:
+      "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=900&q=80",
+    alt: "Happy puppy outdoors in soft natural light",
+    note: "For new dog owners comparing early, before a long health history develops."
+  },
+  {
+    icon: PawPrint,
+    label: "Kittens",
+    href: "/kitten-insurance",
+    image:
+      "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=900&q=80",
+    alt: "Content kitten resting indoors",
+    note: "For new cat owners weighing routine care, accident risk, and future illness protection."
+  }
+];
+
+const swiftestPrepItems = [
+  {
+    icon: TableProperties,
+    title: "Provider table context",
+    body: "The Swiftest's public pet page compares multiple dog and cat insurance options. Scan each card as a starting point, then verify terms directly."
+  },
+  {
+    icon: WalletCards,
+    title: "Cost assumptions",
+    body: "Monthly cost examples are only useful when you also check deductible, reimbursement amount, annual benefit, pet age, breed, and location."
+  },
+  {
+    icon: SearchCheck,
+    title: "SwiftScore context",
+    body: "Treat any score or ranking as one input. Policy wording, exclusions, waiting periods, and claim rules still deserve your own review."
+  }
+];
+
 export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
-  const isPrimaryPaidPage = page.slug === "pet-insurance" || page.slug === "dog-parent-protection";
+  const isPrimaryPaidPage =
+    page.slug === "pet-insurance" ||
+    page.slug === "pet-parent-protection" ||
+    page.slug === "dog-parent-protection";
 
   return (
     <>
@@ -55,6 +123,18 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
               </Button>
             </div>
             <p className="mt-4 text-sm text-muted">{siteConfig.shortDisclosure}</p>
+            <div className="mt-6 grid max-w-2xl gap-3 sm:grid-cols-3">
+              {[
+                ["60 sec", "shopping profile"],
+                ["Dogs + cats", "primary pet paths"],
+                ["No quote app", "education only"]
+              ].map(([stat, label]) => (
+                <div key={label} className="rounded-md border border-white/70 bg-white/75 px-4 py-3 shadow-tight">
+                  <p className="text-lg font-semibold text-ink">{stat}</p>
+                  <p className="text-xs font-medium uppercase tracking-[0.12em] text-muted">{label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -74,6 +154,59 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="bg-white py-12">
+        <div className="mx-auto max-w-6xl px-5">
+          <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Popular pet paths</p>
+              <h2 className="mt-3 text-3xl font-semibold text-ink">
+                Start with the happy pet in your household.
+              </h2>
+              <p className="mt-4 text-base leading-7 text-muted">
+                The public Swiftest pet insurance comparison content focuses on dogs and cats.
+                PawPeaceGuide keeps this pre-sell flow centered on dog, cat, puppy, and kitten
+                shoppers until a partner confirms any additional animal categories.
+              </p>
+            </div>
+            <div className="rounded-md border border-line bg-mist p-5">
+              <p className="text-sm font-semibold text-ink">Facebook traffic angle</p>
+              <p className="mt-2 text-sm leading-6 text-muted">
+                Use happy, everyday pet creative that matches the landing page. Send dog creative
+                into the dog-owner path and cat creative into the cat-owner path. Keep ad copy
+                educational and avoid implying a viewer has a sick pet or that coverage is guaranteed.
+              </p>
+            </div>
+          </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {animalPaths.map((path) => (
+              <UTMLink
+                key={path.href}
+                href={path.href}
+                className="group overflow-hidden rounded-md border border-line bg-white shadow-tight transition hover:-translate-y-0.5 hover:border-pine/40 hover:shadow-soft"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-mist">
+                  <Image
+                    src={path.image}
+                    alt={path.alt}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center gap-2">
+                    <path.icon className="h-5 w-5 text-pine" aria-hidden="true" />
+                    <h3 className="text-lg font-semibold text-ink">{path.label}</h3>
+                  </div>
+                  <p className="mt-2 text-sm leading-6 text-muted">{path.note}</p>
+                </div>
+              </UTMLink>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -129,24 +262,12 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
             </div>
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {[
-              [
-                "Explore the terms",
-                "Use PawPeaceGuide to understand deductibles, reimbursement rates, annual limits, waiting periods, exclusions, and pre-existing condition rules."
-              ],
-              [
-                "Compare with context",
-                "Arrive at The Swiftest ready to review provider cards, plan assumptions, and comparison details without treating any one metric as the whole answer."
-              ],
-              [
-                "Continue off-site carefully",
-                "When you click out, review all quote details directly with the provider or comparison tool before applying or purchasing."
-              ]
-            ].map(([title, body], index) => (
-              <div key={title} className="rounded-md border border-line bg-white p-5 shadow-tight">
-                <p className="text-sm font-semibold text-clay">0{index + 1}</p>
-                <h3 className="mt-3 text-lg font-semibold text-ink">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted">{body}</p>
+            {swiftestPrepItems.map((item, index) => (
+              <div key={item.title} className="rounded-md border border-line bg-white p-5 shadow-tight">
+                <item.icon className="h-5 w-5 text-pine" aria-hidden="true" />
+                <p className="mt-4 text-sm font-semibold text-clay">0{index + 1}</p>
+                <h3 className="mt-3 text-lg font-semibold text-ink">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted">{item.body}</p>
               </div>
             ))}
           </div>
@@ -158,7 +279,7 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
           <div className="grid gap-5 md:grid-cols-2">
             <FeatureCard
               icon={HeartPulse}
-              title="What pet insurance may help with"
+              title="What dog and cat insurance may help with"
               body={page.helpWith.join(" ")}
             />
             <FeatureCard
@@ -190,12 +311,12 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
       <section className="mx-auto max-w-6xl px-5 py-12">
         <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">How the funnel works</p>
-          <h2 className="mt-3 text-3xl font-semibold text-ink">Three calm steps before provider quote pages</h2>
+          <h2 className="mt-3 text-3xl font-semibold text-ink">Three calm steps before The Swiftest handoff</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {[
-              "Answer a few pet and budget questions",
-              "See features to compare",
-              "Visit licensed provider quote pages"
+              "Answer a few pet and budget questions without sharing health details",
+              "See which quote-page details deserve attention",
+              "Continue to the primary comparison option once the approved link is live"
             ].map((step, index) => (
               <div key={step} className="rounded-md bg-mist p-5">
                 <ClipboardCheck className="h-5 w-5 text-pine" aria-hidden="true" />
@@ -257,8 +378,8 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
       <section className="mx-auto max-w-6xl px-5 py-12 pb-28 md:pb-12">
         <CTABlock
           eyebrow="Ready when you are"
-          title="Start with education, then visit provider quote pages."
-          body="PawPeaceGuide helps you prepare better questions before leaving for third-party provider sites."
+          title="Start with education, then continue to the comparison path."
+          body="PawPeaceGuide helps you prepare better questions before leaving for The Swiftest or another third-party quote option."
           primaryHref="/quiz"
           primaryLabel={page.primaryCta}
           secondaryHref="/compare"

@@ -22,7 +22,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [...staticRoutes, ...landingRoutes, ...guideRoutes].map((route) => ({
     url: `${siteConfig.siteUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: route === "" || route === "/pet-insurance" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : route === "/pet-insurance" ? 0.95 : 0.7
+    changeFrequency:
+      route === "" || route === "/pet-insurance" || route === "/pet-parent-protection"
+        ? "weekly"
+        : "monthly",
+    priority:
+      route === ""
+        ? 1
+        : route === "/pet-parent-protection"
+          ? 0.98
+          : route === "/pet-insurance"
+            ? 0.95
+            : 0.7
   }));
 }

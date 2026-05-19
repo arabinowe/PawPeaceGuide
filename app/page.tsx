@@ -30,7 +30,7 @@ export default function HomePage() {
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">{siteConfig.tagline}</p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Button href="/pet-insurance">Start the pet insurance guide</Button>
+              <Button href="/pet-parent-protection">Start the pet parent guide</Button>
               <Button href="/compare" variant="secondary">
                 Compare quote options
               </Button>
@@ -87,10 +87,10 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-5 py-12">
         <CTABlock
           eyebrow="Paid traffic path"
-          title="Main Instagram ad destination"
-          body="Send cold Instagram traffic to the focused pet insurance landing page, then guide users into the quiz, calculator, and third-party quote options."
-          primaryHref="/pet-insurance"
-          primaryLabel="Open /pet-insurance"
+          title="Main Facebook ad destination"
+          body="Send broad happy-pet creative to the dog-and-cat pre-sell page, then guide users into the quiz, calculator, and The Swiftest comparison handoff."
+          primaryHref="/pet-parent-protection"
+          primaryLabel="Open pet parent page"
           secondaryHref="/quiz"
           secondaryLabel="Start quiz"
         />

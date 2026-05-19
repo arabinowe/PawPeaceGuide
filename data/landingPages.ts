@@ -51,6 +51,37 @@ export const landingPages: LandingPageVariant[] = [
     faq: sharedFaq
   },
   {
+    slug: "pet-parent-protection",
+    title: "Pet Parent Insurance Comparison Guide | PawPeaceGuide",
+    description:
+      "A paid-social pre-sell page for dog and cat owners preparing to compare pet insurance quote options through The Swiftest.",
+    eyebrow: "Dog and cat owner guide",
+    headline: "Know before you need it.",
+    subheadline:
+      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps dog and cat owners understand coverage features, costs, exclusions, and quote-page details before continuing to The Swiftest's third-party comparison flow.",
+    primaryCta: "Start the 60-second pet insurance check",
+    secondaryCta: "Compare quote options",
+    audienceNote:
+      "Built for broad Facebook traffic from happy dog, cat, puppy, and kitten creative.",
+    compareReasonTitle: "Why pet parents compare before something goes wrong",
+    compareReasons: [
+      "Dogs and cats can face sudden accident, illness, diagnostic, medication, or surgery costs.",
+      "A comparison flow can help you review multiple quote options before checking one provider at a time.",
+      "Breed, age, location, deductible, reimbursement rate, annual benefit, waiting periods, and exclusions can all change the tradeoff."
+    ],
+    helpWith: [
+      "Future eligible accidents and illnesses, depending on the policy",
+      "Diagnostics, surgery, hospitalization, and prescription medication in many accident and illness plans",
+      "Optional wellness add-ons from some providers, when purchased separately"
+    ],
+    usuallyNotCovered: [
+      "Pre-existing conditions, unless a provider has a specific exception",
+      "Routine care unless a wellness add-on is included",
+      "Costs outside the policy terms, annual limits, waiting periods, or exclusions"
+    ],
+    faq: sharedFaq
+  },
+  {
     slug: "dog-parent-protection",
     title: "Dog Parent Protection Guide | PawPeaceGuide",
     description:

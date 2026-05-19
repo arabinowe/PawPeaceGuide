@@ -1,9 +1,12 @@
 import {
   BadgeDollarSign,
   CalendarClock,
+  Cat,
+  Dog,
   FileSearch,
   Gauge,
   HeartHandshake,
+  PawPrint,
   Percent,
   ShieldQuestion
 } from "lucide-react";
@@ -62,6 +65,24 @@ const comparisonFeatures = [
   }
 ];
 
+const animalFitCards = [
+  {
+    icon: Dog,
+    title: "Dogs",
+    body: "Compare breed, age, location, deductible, reimbursement, annual benefit, and accident/illness tradeoffs."
+  },
+  {
+    icon: Cat,
+    title: "Cats",
+    body: "Review indoor/outdoor lifestyle, illness coverage, diagnostics, dental limitations, and medication rules."
+  },
+  {
+    icon: PawPrint,
+    title: "Puppies and kittens",
+    body: "Look closely at enrollment age, waiting periods, wellness add-ons, and how future health history may be treated."
+  }
+];
+
 export default function ComparePage() {
   return (
     <>
@@ -114,6 +135,24 @@ export default function ComparePage() {
             title="Verify every detail"
             body="The Swiftest and its provider partners control their quote flow, rankings, eligibility, and policy terms. Review details directly before applying."
           />
+        </div>
+
+        <div className="mt-8 rounded-md border border-line bg-mist p-5 md:p-7">
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
+            Animal paths
+          </p>
+          <h2 className="mt-3 text-3xl font-semibold text-ink">Designed for dog and cat shoppers</h2>
+          <p className="mt-3 max-w-3xl text-base leading-7 text-muted">
+            The public Swiftest pet insurance comparison content is built around dog and cat
+            insurance. PawPeaceGuide uses puppies and kittens as age-specific dog and cat paths,
+            not as separate insurance products. If you are shopping for another animal, verify
+            availability directly with providers before relying on any comparison page.
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {animalFitCards.map((item) => (
+              <FeatureCard key={item.title} {...item} />
+            ))}
+          </div>
         </div>
 
         <div className="mt-8 rounded-md border border-line bg-white p-5 shadow-soft md:p-7">

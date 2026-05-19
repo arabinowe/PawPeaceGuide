@@ -1,22 +1,23 @@
 # PawPeaceGuide
 
-PawPeaceGuide is a static-first Next.js affiliate funnel for pet insurance education. It is built for Instagram/Meta paid traffic, plain-English pre-sell content, a 60-second quiz, a vet bill calculator, provider comparison cards, and tracked third-party affiliate clickouts.
+PawPeaceGuide is a static-first Next.js affiliate funnel for pet insurance education. It is built for Facebook/Instagram/Meta paid traffic, plain-English pre-sell content, a 60-second quiz, a vet bill calculator, provider comparison cards, and tracked third-party affiliate clickouts.
 
 PawPeaceGuide does not sell insurance, bind coverage, collect full insurance applications, quote exact premiums, process insurance payments, or act as an insurer, agency, broker, producer, underwriter, financial advisor, or legal advisor.
 
 ## How The Funnel Works
 
-Instagram ad traffic lands on `/pet-insurance` or another focused ad page. Users read educational context, start the quiz or calculator, compare provider quote options, and then click through `/go/[providerSlug]` to a third-party provider or marketplace.
+Facebook or Instagram ad traffic lands on `/pet-parent-protection`, `/dog-parent-protection`, `/pet-insurance`, or another focused ad page. Users read educational context, start the quiz or calculator, compare provider quote options, and then click through `/go/[providerSlug]` to a third-party provider or marketplace once the approved affiliate link is configured.
 
 Preferred paid-traffic path:
 
 ```text
-Instagram ad -> /dog-parent-protection -> quiz or calculator -> primary comparison offer -> /go/the-swiftest
+Facebook ad -> /pet-parent-protection or /dog-parent-protection -> quiz or calculator -> primary comparison offer -> /go/the-swiftest
 ```
 
 Main paths:
 
-- `/pet-insurance` for the primary paid ad landing page
+- `/pet-parent-protection` for broad happy dog/cat/puppy/kitten Facebook creative
+- `/pet-insurance` for the primary general paid ad landing page
 - `/dog-parent-protection` for the dog-owner paid ad variant referenced in the launch checklist
 - `/dog-insurance`, `/cat-insurance`, `/puppy-insurance`, `/kitten-insurance`, `/emergency-vet-bills`, `/vet-bill-help`
 - `/quiz`
@@ -86,9 +87,10 @@ Public analytics values are read in `data/siteConfig.ts`. Real Meta Pixel and Go
 
 ## Public Launch Milestone
 
-Use `/dog-parent-protection` as the first Instagram/Meta ad destination for the public MVP:
+Use `/pet-parent-protection` for broad dog/cat Facebook traffic and `/dog-parent-protection` for dog-specific creative:
 
 ```text
+https://your-production-domain.com/pet-parent-protection?utm_source=facebook&utm_medium=paid_social&utm_campaign=pet_parent_test_1&utm_content=happy_pet_presell
 https://your-production-domain.com/dog-parent-protection?utm_source=instagram&utm_medium=paid_social&utm_campaign=dog_parent_test_1&utm_content=know_before_you_need_it
 ```
 
@@ -102,18 +104,24 @@ Test `/go/the-swiftest` after deployment. With no approved link configured, it s
 
 Connect Meta Pixel by setting `NEXT_PUBLIC_META_PIXEL_ID` and implementing the TODOs in `lib/tracking.ts`. Connect Google Analytics by setting `NEXT_PUBLIC_GA_ID` and implementing the GA4 TODO in `lib/tracking.ts`. Until those integrations are added, the app only dispatches local placeholder funnel events.
 
-## Instagram Ad Funnel Setup
+## Facebook And Instagram Ad Funnel Setup
 
-Recommended starting URL:
+Recommended broad starting URL:
 
 ```text
-https://your-production-domain.com/pet-insurance
+https://your-production-domain.com/pet-parent-protection
+```
+
+Recommended dog-specific starting URL:
+
+```text
+https://your-production-domain.com/dog-parent-protection
 ```
 
 Example UTM URL:
 
 ```text
-https://your-production-domain.com/pet-insurance?utm_source=instagram&utm_medium=paid_social&utm_campaign=before_you_need_it&utm_content=ad_image_01
+https://your-production-domain.com/pet-parent-protection?utm_source=facebook&utm_medium=paid_social&utm_campaign=happy_pet_presell&utm_content=happy_dog_01
 ```
 
 Where to configure things:
@@ -127,6 +135,14 @@ Where to configure things:
 - UTM handling: `lib/utm.ts`
 
 Before running ads, confirm partner paid-ad rules, avoid restricted provider brand terms unless explicitly allowed, and review Meta ad policies plus insurance compliance requirements before scaling.
+
+## Paid Animal Creative Notes
+
+- Use real, happy-looking pets in ordinary home or outdoor settings.
+- Keep broad creative to dogs, cats, puppies, and kittens unless the affiliate partner confirms other animal categories.
+- Match creative to the landing page: dog creative to `/dog-parent-protection`, cat creative to `/cat-insurance`, broad pet creative to `/pet-parent-protection`.
+- Avoid sick-pet imagery, graphic vet scenes, fearmongering, fake urgency, fake reviews, fake star ratings, or claims that coverage is guaranteed.
+- Keep the ad promise simple: plain-English education first, then compare quote options through a third-party comparison path.
 
 ## Primary Affiliate Strategy
 
@@ -173,7 +189,7 @@ Current provider strategy:
 
 ## Before The Swiftest Link Is Live
 
-- Keep `/dog-parent-protection` available for review, QA, and affiliate approval.
+- Keep `/pet-parent-protection` and `/dog-parent-protection` available for review, QA, and affiliate approval.
 - Do not scale paid traffic until `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL` is configured.
 - If a visitor reaches the site before the link is live, primary provider cards should send them to the quiz or comparison guide instead of a broken outbound URL.
 - Placeholder click paths should track generic guide CTA events, not affiliate clickout events.
@@ -193,6 +209,7 @@ Current provider strategy:
 - Production URL works
 - Production site deployed
 - Custom domain connected
+- `/pet-parent-protection` works on mobile
 - `/dog-parent-protection` works on mobile
 - `/quiz` works
 - `/calculator` works

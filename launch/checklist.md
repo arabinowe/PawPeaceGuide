@@ -6,7 +6,7 @@
 - Run `npm run lint`.
 - Run `npm run build`.
 - Start the app with `npm run dev`.
-- Confirm `/dog-parent-protection`, `/pet-insurance`, `/quiz`, `/calculator`, `/compare`, and `/go/the-swiftest` load locally.
+- Confirm `/pet-parent-protection`, `/dog-parent-protection`, `/cat-insurance`, `/pet-insurance`, `/quiz`, `/calculator`, `/compare`, and `/go/the-swiftest` load locally.
 
 ## Production QA
 
@@ -28,7 +28,8 @@
 
 ## Mobile QA
 
-- Test `/dog-parent-protection` on mobile.
+- Test `/pet-parent-protection` and `/dog-parent-protection` on mobile.
+- Confirm happy dog, cat, puppy, and kitten images load without slowing or crowding the first CTA.
 - Confirm the primary CTA is visible above the fold.
 - Confirm sticky mobile CTA works.
 - Complete the quiz on mobile.
@@ -46,7 +47,9 @@
 
 ## Ad Readiness QA
 
-- Use `/dog-parent-protection` as the first ad destination.
+- Use `/pet-parent-protection` for broad happy-pet creative and `/dog-parent-protection` for dog-specific creative.
+- Match ad images to the landing page path: dog to dog, cat to cat, puppy to puppy, kitten to kitten.
+- Use real, happy-looking pets in ordinary settings rather than fear-based or clinical imagery.
 - Target insurance-related ads to 18+.
 - Do not imply the viewer has financial problems.
 - Do not imply the viewer's pet is currently sick.
