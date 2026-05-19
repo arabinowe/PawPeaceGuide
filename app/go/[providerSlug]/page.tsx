@@ -50,8 +50,9 @@ export default async function ProviderRedirectPage({ params, searchParams }: Red
           : "This partner link has not been configured yet."}
       </h1>
       <p className="mt-4 text-base leading-7 text-muted">
-        PawPeaceGuide is not an insurer or broker. Review all policy terms directly with {provider.name}
-        {isConfigured ? "." : " once an approved affiliate link is available."}
+        {isConfigured
+          ? `PawPeaceGuide is not an insurer or broker. Review all policy terms directly with ${provider.name}.`
+          : `${provider.name} is the intended third-party comparison destination, but the approved affiliate link is not live yet. PawPeaceGuide is not an insurer or broker.`}
       </p>
       <div className="mt-6">
         {isConfigured ? (
@@ -75,10 +76,14 @@ export default async function ProviderRedirectPage({ params, searchParams }: Red
               commissionType={provider.commissionType}
             />
             <div className="mt-5">
-              <Button href="/compare" variant="secondary">
-                Back to compare
+              <Button href="/quiz" variant="secondary">
+                Use the 60-second check
               </Button>
             </div>
+            <p className="mt-3 text-sm leading-6 text-muted">
+              You can still use the quiz, calculator, and comparison checklist while the partner
+              tracking URL is being finalized.
+            </p>
           </>
         )}
       </div>

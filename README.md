@@ -98,7 +98,7 @@ Deploy to Vercel by connecting the GitHub repo, using the default Next.js preset
 
 Add The Swiftest affiliate link in `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL` after approval. Backup affiliate links live in `data/siteConfig.ts` or can be edited directly in `data/providers.ts` if you choose to store public tracking URLs in config. Affiliate tracking links are usually public click-tracking URLs, but do not commit private API keys, dashboard credentials, or partner tokens.
 
-Test `/go/the-swiftest` after deployment. With no approved link configured, it should show: "This partner link has not been configured yet." With an approved link configured, it should send users to the partner page and preserve UTMs when `NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true`.
+Test `/go/the-swiftest` after deployment. With no approved link configured, it should show: "This partner link has not been configured yet." Public provider cards should route users back into the quiz or comparison guide instead of firing affiliate click events. With an approved link configured, it should send users to the partner page and preserve UTMs when `NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true`.
 
 Connect Meta Pixel by setting `NEXT_PUBLIC_META_PIXEL_ID` and implementing the TODOs in `lib/tracking.ts`. Connect Google Analytics by setting `NEXT_PUBLIC_GA_ID` and implementing the GA4 TODO in `lib/tracking.ts`. Until those integrations are added, the app only dispatches local placeholder funnel events.
 
@@ -170,6 +170,14 @@ Current provider strategy:
 7. Confirm UTMs append correctly if enabled.
 8. Confirm affiliate disclosure appears before users click out.
 9. Do not run paid ads until the redirect works.
+
+## Before The Swiftest Link Is Live
+
+- Keep `/dog-parent-protection` available for review, QA, and affiliate approval.
+- Do not scale paid traffic until `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL` is configured.
+- If a visitor reaches the site before the link is live, primary provider cards should send them to the quiz or comparison guide instead of a broken outbound URL.
+- Placeholder click paths should track generic guide CTA events, not affiliate clickout events.
+- Re-test `/go/the-swiftest` immediately after adding the approved link.
 
 ## Meta/Instagram Compliance Notes
 

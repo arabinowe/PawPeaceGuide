@@ -24,6 +24,16 @@ export function ProviderCard({
   pageSource = "provider_card"
 }: ProviderCardProps) {
   const affiliateConfigured = isProviderAffiliateConfigured(provider);
+  const ctaHref = affiliateConfigured
+    ? getAffiliateRedirectHref(provider.slug)
+    : provider.role === "primary"
+      ? "/quiz"
+      : "/compare";
+  const ctaText = affiliateConfigured
+    ? provider.ctaText
+    : provider.role === "primary"
+      ? "Use the 60-second check"
+      : "Review comparison guide";
 
   useEffect(() => {
     trackFunnelEvent(siteConfig.eventNames.providerCardViewed, {
@@ -44,6 +54,22 @@ export function ProviderCard({
 
   function handleClick() {
     const params = new URLSearchParams(window.location.search);
+    const pendingPayload = {
+      providerSlug: provider.slug,
+      providerRole: provider.role,
+      commissionType: provider.commissionType,
+      campaignSource: params.get("utm_source") ?? undefined,
+      utm_campaign: params.get("utm_campaign") ?? undefined,
+      utm_content: params.get("utm_content") ?? undefined,
+      pageSource,
+      linkStatus: "pending"
+    };
+
+    if (!affiliateConfigured) {
+      trackFunnelEvent(siteConfig.eventNames.guideCtaClicked, pendingPayload);
+      return;
+    }
+
     const offerEvent =
       provider.role === "primary"
         ? siteConfig.eventNames.primaryOfferClicked
@@ -116,18 +142,24 @@ export function ProviderCard({
 
       <div className="mt-auto pt-5">
         <UTMLink
-          href={getAffiliateRedirectHref(provider.slug)}
+          href={ctaHref}
           onClick={handleClick}
           className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-pine px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1b433c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine"
-          ariaLabel={`Visit third-party quote page for ${provider.name}`}
+          ariaLabel={
+            affiliateConfigured
+              ? `Visit third-party quote page for ${provider.name}`
+              : `Continue preparing for ${provider.name}`
+          }
         >
-          <span>{provider.ctaText}</span>
-          <ExternalLink className="h-4 w-4" aria-hidden="true" />
+          <span>{ctaText}</span>
+          {affiliateConfigured ? <ExternalLink className="h-4 w-4" aria-hidden="true" /> : null}
         </UTMLink>
         <p className="mt-2 text-center text-xs text-muted">
           {affiliateConfigured
             ? "You will leave PawPeaceGuide for a third-party provider site."
-            : "Partner link placeholder. Add the approved affiliate URL before sending paid traffic."}
+            : provider.role === "primary"
+              ? "The approved partner link is not live yet. Use the quiz and calculator to prepare before clickout is enabled."
+              : "This backup partner link is not live yet. Review the comparison guide first."}
         </p>
         <div className="mt-4">
           <DisclosureBanner compact text={provider.disclosureText} />

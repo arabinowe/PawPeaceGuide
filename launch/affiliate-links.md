@@ -30,11 +30,13 @@
 
 ## Link QA Steps
 
-1. Add approved tracking URL.
-2. Redeploy.
-3. Visit `/go/the-swiftest`.
-4. Confirm redirect destination.
-5. Test with UTMs:
+1. Before the approved URL is added, visit `/compare` and confirm provider cards route users back into the quiz or guide instead of promising an outbound quote page.
+2. Before the approved URL is added, visit `/go/the-swiftest` and confirm it shows the graceful pending-link page.
+3. Add approved tracking URL.
+4. Redeploy.
+5. Visit `/go/the-swiftest`.
+6. Confirm redirect destination.
+7. Test with UTMs:
    `/go/the-swiftest?utm_source=instagram&utm_medium=paid_social&utm_campaign=dog_parent_test_1&utm_content=know_before_you_need_it`
-6. Confirm disclosure appears before clickout.
-7. Confirm no blank, malformed, placeholder, or `example.com` URL redirects.
+8. Confirm disclosure appears before clickout.
+9. Confirm no blank, malformed, placeholder, or `example.com` URL redirects.

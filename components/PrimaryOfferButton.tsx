@@ -30,7 +30,7 @@ export function PrimaryOfferButton({
 
   function onClick() {
     const params = new URLSearchParams(window.location.search);
-    trackFunnelEvent(siteConfig.eventNames.primaryOfferClicked, {
+    const payload = {
       providerSlug: provider.slug,
       providerRole: provider.role,
       commissionType: provider.commissionType,
@@ -38,13 +38,18 @@ export function PrimaryOfferButton({
       utm_campaign: params.get("utm_campaign") ?? undefined,
       utm_content: params.get("utm_content") ?? undefined,
       pageSource
-    });
-    trackFunnelEvent(siteConfig.eventNames.affiliateCtaClicked, {
-      providerSlug: provider.slug,
-      providerRole: provider.role,
-      commissionType: provider.commissionType,
-      pageSource
-    });
+    };
+
+    if (!configured) {
+      trackFunnelEvent(siteConfig.eventNames.guideCtaClicked, {
+        ...payload,
+        linkStatus: "pending"
+      });
+      return;
+    }
+
+    trackFunnelEvent(siteConfig.eventNames.primaryOfferClicked, payload);
+    trackFunnelEvent(siteConfig.eventNames.affiliateCtaClicked, payload);
   }
 
   return (

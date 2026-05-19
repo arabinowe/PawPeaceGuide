@@ -66,11 +66,12 @@ export function UnconfiguredPartnerNotice({
   commissionType: string;
 }) {
   useEffect(() => {
-    trackFunnelEvent(siteConfig.eventNames.affiliateCtaClicked, {
+    trackFunnelEvent(siteConfig.eventNames.guideCtaClicked, {
       providerSlug,
       providerRole,
       commissionType,
-      pageSource: "/go-unconfigured"
+      pageSource: "/go-unconfigured",
+      linkStatus: "pending"
     });
   }, [commissionType, providerRole, providerSlug]);
 
