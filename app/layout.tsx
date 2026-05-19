@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "@/app/globals.css";
 import { BehavioralNudge } from "@/components/BehavioralNudge";
 import { EngagementTracker } from "@/components/EngagementTracker";
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main>{children}</main>
         <Footer />
         <BehavioralNudge />
+        <Analytics />
       </body>
     </html>
   );
