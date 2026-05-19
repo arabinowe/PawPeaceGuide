@@ -81,11 +81,16 @@ NEXT_PUBLIC_META_PIXEL_ID=
 NEXT_PUBLIC_GA_ID=
 NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true
 NEXT_PUBLIC_PRIMARY_AFFILIATE_URL=
+NEXT_PUBLIC_ENGAGEMENT_TRACKING_ENABLED=true
+NEXT_PUBLIC_ENGAGEMENT_EVENT_ENDPOINT=/api/engagement
+NEXT_PUBLIC_ENGAGEMENT_SAMPLE_RATE=1
+CANONICAL_HOST_REDIRECT_ENABLED=false
+CANONICAL_REDIRECT_HOSTS=pawpeaceguide.vercel.app,www.pawpeaceguide.com
 ```
 
 Do not commit real affiliate links, private API keys, partner tokens, or private tracking credentials.
 
-Public analytics values are read in `data/siteConfig.ts`. Real Meta Pixel and Google Analytics scripts are intentionally left as TODO integrations in the funnel tracking utility.
+Public analytics and engagement values are read in `data/siteConfig.ts`. Real Meta Pixel and Google Analytics scripts are intentionally left as TODO integrations in the funnel tracking utility.
 
 ## Public Launch Milestone
 
@@ -100,13 +105,15 @@ Run locally with `npm install` and `npm run dev`. Build and QA with `npm run lin
 
 Deploy to Vercel by connecting the GitHub repo, using the default Next.js preset, and setting the required environment variables from `.env.example`. Set `NEXT_PUBLIC_SITE_URL` to the production origin, for example `https://pawpeaceguide.com`, so canonical URLs, robots, sitemap, and Open Graph metadata use the production domain.
 
+After `pawpeaceguide.com` is registered, assigned to the Vercel project, and resolving correctly, set `CANONICAL_HOST_REDIRECT_ENABLED=true` and keep `CANONICAL_REDIRECT_HOSTS=pawpeaceguide.vercel.app,www.pawpeaceguide.com`. That makes the Vercel app URL and `www` host redirect to the trusted apex domain without turning it on before DNS is ready.
+
 Add The Swiftest affiliate link in `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL` after approval. Backup affiliate links live in `data/siteConfig.ts` or can be edited directly in `data/providers.ts` if you choose to store public tracking URLs in config. Affiliate tracking links are usually public click-tracking URLs, but do not commit private API keys, dashboard credentials, or partner tokens.
 
 Test `/go/the-swiftest` after deployment. With no approved link configured, it should show: "This partner link has not been configured yet." Public provider cards should route users back into the quiz or comparison guide instead of firing affiliate click events. With an approved link configured, it should send users to the partner page and preserve UTMs when `NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true`.
 
 Do not add direct public links to `https://theswiftest.com` anywhere in the app. All consumer paths to The Swiftest must go through `/go/the-swiftest`, which redirects only to the approved affiliate tracking URL. `npm run audit:outbound` checks this rule and CI runs the audit before build.
 
-Connect Meta Pixel by setting `NEXT_PUBLIC_META_PIXEL_ID` and implementing the TODOs in `lib/tracking.ts`. Connect Google Analytics by setting `NEXT_PUBLIC_GA_ID` and implementing the GA4 TODO in `lib/tracking.ts`. Until those integrations are added, the app only dispatches local placeholder funnel events.
+Connect Meta Pixel by setting `NEXT_PUBLIC_META_PIXEL_ID` and implementing the TODOs in `lib/tracking.ts`. Connect Google Analytics by setting `NEXT_PUBLIC_GA_ID` and implementing the GA4 TODO in `lib/tracking.ts`. Until those integrations are added, the app captures privacy-safe engagement events through `/api/engagement`, stores the current browser session locally, and writes generic production events to Vercel Runtime Logs.
 
 ## Facebook And Instagram Ad Funnel Setup
 
@@ -280,6 +287,9 @@ Never link directly to the public The Swiftest homepage or pet insurance page fr
 - Google Analytics placeholder is ready
 - Google Analytics installed or intentionally left blank
 - UTM parameters are preserved
+- `/admin/engagement` shows current-session events during QA
+- Vercel Runtime Logs receive generic `ppg_engagement_event` entries
+- Engagement payloads do not include quiz answers, health details, emails, or calculator inputs
 - Provider affiliate programs have approved paid social traffic
 - Affiliate program confirms paid social traffic is allowed
 - No fake claims, fake reviews, fake testimonials, or fake urgency
@@ -322,12 +332,59 @@ If `affiliateUrl` is empty, `/go/[providerSlug]` shows: "This partner link has n
 
 UTMs are stored in `sessionStorage`, appended to internal links, and optionally appended to affiliate URLs when `NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true`.
 
+## Engagement Tracking
+
+The site includes lightweight, privacy-safe engagement tracking for launch QA and early paid-traffic optimization.
+
+Tracked generic signals:
+
+- Landing page, quiz, calculator, compare, offer, and outbound redirect events
+- Session start
+- Scroll depth milestones
+- Time-on-page milestones
+- Section visibility
+- CTA clicks and sticky mobile CTA clicks
+- Email checklist placeholder submissions
+- Engagement score thresholds for `engaged_session` and `high_intent_signal`
+
+Not tracked by default:
+
+- Quiz answers
+- Pet health details
+- Email addresses
+- Calculator cost inputs
+- Personal financial details
+
+Production monitoring:
+
+1. Deploy to Vercel.
+2. Open Vercel Runtime Logs.
+3. Filter for `ppg_engagement_event`.
+4. Compare event quality by `utm_campaign`, `utm_content`, page, and event name.
+5. Use `/admin/engagement` for current-browser QA and to confirm events are firing before traffic goes live.
+
+Real-time behavior:
+
+- `components/BehavioralNudge.tsx` listens for high-engagement sessions and shows a restrained comparison prompt when a visitor appears quote-ready.
+- Edit score weights in `lib/tracking.ts` if early traffic shows that different behaviors are stronger purchase-intent signals.
+- Keep payloads generic unless a future consent-aware analytics plan explicitly approves more detail.
+
 ## Funnel Events
 
 Events are defined in `data/siteConfig.ts` and handled in `lib/tracking.ts`:
 
 - `landing_page_view`
 - `paid_landing_page_view`
+- `session_started`
+- `section_viewed`
+- `scroll_depth_reached`
+- `time_on_page_milestone`
+- `cta_clicked`
+- `mobile_sticky_cta_clicked`
+- `engaged_session`
+- `high_intent_signal`
+- `behavioral_nudge_shown`
+- `behavioral_nudge_clicked`
 - `quiz_started`
 - `quiz_step_completed`
 - `quiz_completed`
@@ -343,7 +400,7 @@ Events are defined in `data/siteConfig.ts` and handled in `lib/tracking.ts`:
 - `guide_cta_clicked`
 - `outbound_redirect_started`
 
-Privacy rule: do not send quiz answers, pet health details, or user email addresses to Meta Pixel by default. Send generic events only unless a future consent-aware implementation explicitly changes that.
+Privacy rule: do not send quiz answers, pet health details, calculator inputs, personal financial details, or user email addresses to Meta Pixel or the engagement endpoint by default. Send generic events only unless a future consent-aware implementation explicitly changes that.
 
 Offer-specific tracking payloads can include `providerSlug`, `providerRole`, `commissionType`, `campaignSource`, `utm_campaign`, `utm_content`, and `pageSource`. Do not add pet health details or email addresses to these payloads.
 

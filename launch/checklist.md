@@ -44,7 +44,12 @@
 ## Analytics QA
 
 - Confirm generic events are dispatched for landing page, quiz, calculator, compare page, primary offer, affiliate click, outbound redirect, and email capture.
+- Confirm `/admin/engagement` shows the current browser session score and recent events.
+- Confirm Vercel Runtime Logs receive generic `ppg_engagement_event` entries after production deployment.
+- Confirm scroll depth, time-on-page, section visibility, CTA click, sticky mobile CTA, and high-intent threshold events fire without page errors.
+- Confirm the behavioral nudge appears only after meaningful engagement and does not block the primary mobile CTA.
 - Confirm no quiz answers, pet health details, emails, or financial details are sent to Meta Pixel by default.
+- Confirm no quiz answers, pet health details, emails, calculator inputs, or financial details are sent to `/api/engagement`.
 - If Meta Pixel is intentionally blank, document that decision.
 - If Google Analytics is intentionally blank, document that decision.
 - Confirm UTMs persist through internal links.

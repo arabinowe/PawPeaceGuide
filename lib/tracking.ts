@@ -1,7 +1,8 @@
 import { siteConfig } from "@/data/siteConfig";
 import type { FunnelEventName } from "@/lib/types";
+import { getStoredUtmParams } from "@/lib/utm";
 
-type EventPayload = {
+export type EventPayload = {
   page?: string;
   providerSlug?: string;
   providerRole?: string;
@@ -13,27 +14,79 @@ type EventPayload = {
   step?: number;
   guideSlug?: string;
   source?: string;
+  section?: string;
+  scrollDepth?: number;
+  seconds?: number;
+  score?: number;
+  ctaLabel?: string;
+  ctaHref?: string;
+  linkType?: string;
+  viewport?: string;
+  linkStatus?: string;
   [key: string]: string | number | boolean | undefined;
 };
+
+export type StoredEngagementEvent = {
+  eventId: string;
+  eventName: FunnelEventName;
+  timestamp: string;
+  sessionId: string;
+  page: string;
+  score: number;
+  payload: EventPayload;
+};
+
+type EngagementState = {
+  sessionId: string;
+  score: number;
+  engagedFired: boolean;
+  highIntentFired: boolean;
+};
+
+const RECENT_EVENT_LIMIT = 80;
 
 export function trackFunnelEvent(eventName: FunnelEventName, payload: EventPayload = {}) {
   const safePayload = sanitizePayload(payload);
 
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(
-      new CustomEvent("pawpeaceguide:event", {
-        detail: { eventName, payload: safePayload }
-      })
-    );
-
-    if (process.env.NODE_ENV !== "production") {
-      console.info("[PawPeaceGuide event]", eventName, safePayload);
-    }
+  if (typeof window === "undefined") {
+    return;
   }
+
+  const state = updateEngagementState(eventName);
+  const enrichedEvent: StoredEngagementEvent = {
+    eventId: createId("evt"),
+    eventName,
+    timestamp: new Date().toISOString(),
+    sessionId: state.sessionId,
+    page: window.location.pathname,
+    score: state.score,
+    payload: enrichPayload(safePayload)
+  };
+
+  storeRecentEvent(enrichedEvent);
+
+  window.dispatchEvent(
+    new CustomEvent("pawpeaceguide:event", {
+      detail: enrichedEvent
+    })
+  );
+  window.dispatchEvent(
+    new CustomEvent("pawpeaceguide:engagement-score", {
+      detail: getEngagementSnapshot()
+    })
+  );
+
+  if (process.env.NODE_ENV !== "production") {
+    console.info("[PawPeaceGuide event]", eventName, enrichedEvent.payload);
+  }
+
+  sendEngagementEvent(enrichedEvent);
+
+  maybeFireIntentThresholdEvents(state);
 
   // TODO Meta Pixel: send generic events only. Do not send quiz answers, pet health details, or email addresses by default.
   // TODO Google Analytics / GTM: map these events to GA4 conversions after measurement ID is configured.
-  // TODO affiliate click tracking: add server-side click logging for outbound provider clicks.
+  // TODO affiliate click tracking: add durable server-side storage or a warehouse if click-level attribution is needed.
   // TODO Conversion API later: only send privacy-reviewed, consent-aware, non-sensitive payloads.
 }
 
@@ -44,17 +97,234 @@ export function trackPageView(page: string, paid = false) {
   }
 }
 
-function sanitizePayload(payload: EventPayload): EventPayload {
+export function getEngagementSnapshot() {
+  if (typeof window === "undefined") {
+    return {
+      sessionId: "",
+      score: 0,
+      events: [] as StoredEngagementEvent[]
+    };
+  }
+
+  const state = getEngagementState();
+  return {
+    sessionId: state.sessionId,
+    score: state.score,
+    events: getRecentEvents()
+  };
+}
+
+export function sanitizePayload(payload: EventPayload): EventPayload {
   const blockedKeys = new Set([
     "email",
     "petName",
+    "petType",
+    "ageRange",
     "breed",
+    "lifestyle",
     "existingConditions",
+    "budget",
+    "emergencyFund",
+    "riskTolerance",
     "healthDetails",
-    "quizAnswers"
+    "quizAnswers",
+    "monthlyPremium",
+    "deductible",
+    "reimbursementRate",
+    "vetBill",
+    "annualLimit",
+    "financialDetails"
   ]);
 
   return Object.fromEntries(
-    Object.entries(payload).filter(([key, value]) => value !== undefined && !blockedKeys.has(key))
+    Object.entries(payload)
+      .filter(([key, value]) => value !== undefined && !blockedKeys.has(key))
+      .map(([key, value]) => [key, sanitizeValue(value)])
   ) as EventPayload;
+}
+
+function enrichPayload(payload: EventPayload): EventPayload {
+  const utm = getStoredUtmParams();
+  const viewport =
+    typeof window !== "undefined"
+      ? `${window.innerWidth}x${window.innerHeight}`
+      : undefined;
+
+  return sanitizePayload({
+    ...payload,
+    utm_source: utm.utm_source,
+    utm_medium: utm.utm_medium,
+    utm_campaign: payload.utm_campaign ?? utm.utm_campaign,
+    utm_content: payload.utm_content ?? utm.utm_content,
+    utm_term: utm.utm_term,
+    referrerHost: getReferrerHost(),
+    viewport
+  });
+}
+
+function sendEngagementEvent(event: StoredEngagementEvent) {
+  if (!siteConfig.engagementTrackingEnabled) return;
+  if (!shouldSample()) return;
+
+  const endpoint = siteConfig.engagementEventEndpoint;
+  if (!endpoint) return;
+
+  const body = JSON.stringify(event);
+
+  try {
+    if (navigator.sendBeacon) {
+      const blob = new Blob([body], { type: "application/json" });
+      if (navigator.sendBeacon(endpoint, blob)) {
+        return;
+      }
+    }
+
+    void fetch(endpoint, {
+      method: "POST",
+      body,
+      headers: {
+        "content-type": "application/json"
+      },
+      keepalive: true
+    });
+  } catch {
+    // Tracking must never interrupt the funnel.
+  }
+}
+
+function shouldSample() {
+  const rate = siteConfig.engagementSampleRate;
+  if (!Number.isFinite(rate)) return true;
+  if (rate >= 1) return true;
+  if (rate <= 0) return false;
+  return Math.random() <= rate;
+}
+
+function updateEngagementState(eventName: FunnelEventName) {
+  const state = getEngagementState();
+  const nextScore = Math.min(100, state.score + scoreForEvent(eventName));
+  const nextState = {
+    ...state,
+    score: nextScore
+  };
+  setEngagementState(nextState);
+  return nextState;
+}
+
+function maybeFireIntentThresholdEvents(state: EngagementState) {
+  if (!state.engagedFired && state.score >= 8) {
+    const nextState = { ...state, engagedFired: true };
+    setEngagementState(nextState);
+    trackFunnelEvent(siteConfig.eventNames.engagedSession, { score: state.score });
+    return;
+  }
+
+  if (!state.highIntentFired && state.score >= 18) {
+    const nextState = { ...state, highIntentFired: true };
+    setEngagementState(nextState);
+    trackFunnelEvent(siteConfig.eventNames.highIntentSignal, { score: state.score });
+  }
+}
+
+function getEngagementState(): EngagementState {
+  const fallback: EngagementState = {
+    sessionId: createId("ses"),
+    score: 0,
+    engagedFired: false,
+    highIntentFired: false
+  };
+
+  try {
+    const value = window.sessionStorage.getItem(siteConfig.engagementSessionStorageKey);
+    if (!value) {
+      setEngagementState(fallback);
+      return fallback;
+    }
+    return {
+      ...fallback,
+      ...(JSON.parse(value) as Partial<EngagementState>)
+    };
+  } catch {
+    return fallback;
+  }
+}
+
+function setEngagementState(state: EngagementState) {
+  try {
+    window.sessionStorage.setItem(siteConfig.engagementSessionStorageKey, JSON.stringify(state));
+    window.sessionStorage.setItem(siteConfig.engagementScoreStorageKey, String(state.score));
+  } catch {
+    // Ignore storage failures.
+  }
+}
+
+function storeRecentEvent(event: StoredEngagementEvent) {
+  try {
+    const events = getRecentEvents();
+    events.unshift(event);
+    window.sessionStorage.setItem(
+      siteConfig.engagementEventsStorageKey,
+      JSON.stringify(events.slice(0, RECENT_EVENT_LIMIT))
+    );
+  } catch {
+    // Ignore storage failures.
+  }
+}
+
+function getRecentEvents() {
+  try {
+    const value = window.sessionStorage.getItem(siteConfig.engagementEventsStorageKey);
+    return value ? (JSON.parse(value) as StoredEngagementEvent[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function scoreForEvent(eventName: FunnelEventName) {
+  const weights: Partial<Record<FunnelEventName, number>> = {
+    section_viewed: 1,
+    scroll_depth_reached: 2,
+    time_on_page_milestone: 1,
+    cta_clicked: 2,
+    mobile_sticky_cta_clicked: 3,
+    guide_cta_clicked: 3,
+    quiz_started: 4,
+    quiz_completed: 8,
+    calculator_started: 4,
+    calculator_completed: 7,
+    compare_page_viewed: 5,
+    provider_card_viewed: 3,
+    primary_offer_viewed: 4,
+    primary_offer_clicked: 10,
+    backup_offer_clicked: 5,
+    affiliate_cta_clicked: 12,
+    outbound_redirect_started: 15,
+    email_capture_submitted: 5,
+    behavioral_nudge_clicked: 4
+  };
+
+  return weights[eventName] ?? 0;
+}
+
+function createId(prefix: string) {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return `${prefix}_${crypto.randomUUID()}`;
+  }
+
+  return `${prefix}_${Math.random().toString(36).slice(2)}_${Date.now().toString(36)}`;
+}
+
+function sanitizeValue(value: string | number | boolean | undefined) {
+  if (typeof value !== "string") return value;
+  return value.slice(0, 140).replace(/[<>]/g, "");
+}
+
+function getReferrerHost() {
+  if (typeof document === "undefined" || !document.referrer) return undefined;
+
+  try {
+    return new URL(document.referrer).host;
+  } catch {
+    return undefined;
+  }
 }
