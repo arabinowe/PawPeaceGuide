@@ -1,4 +1,4 @@
-import { ShieldCheck } from "lucide-react";
+import { BrandLogo } from "@/components/BrandLogo";
 import { Button } from "@/components/Button";
 import { UTMLink } from "@/components/UTMLink";
 import { navLinks, siteConfig } from "@/data/siteConfig";
@@ -8,9 +8,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-line/80 bg-white/92 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
         <UTMLink href="/pet-insurance" className="flex items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-md bg-pine text-white">
-            <ShieldCheck className="h-5 w-5" aria-hidden="true" />
-          </span>
+          <BrandLogo />
           <span>
             <span className="block text-base font-semibold leading-tight text-ink">
               {siteConfig.brandName}

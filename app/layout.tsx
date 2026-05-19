@@ -29,6 +29,22 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.brandName} | ${siteConfig.tagline}`,
     description: siteConfig.tagline
+  },
+  icons: {
+    icon: [
+      {
+        url: "/brand/pawpeaceguide-logo-small.png",
+        type: "image/png",
+        sizes: "180x180"
+      }
+    ],
+    apple: [
+      {
+        url: "/brand/pawpeaceguide-logo.png",
+        sizes: "512x512",
+        type: "image/png"
+      }
+    ]
   }
 };
 
