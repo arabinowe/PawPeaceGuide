@@ -42,8 +42,8 @@ const animalPaths = [
     label: "Cat owners",
     href: "/cat-insurance",
     image:
-      "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=900&q=80",
-    alt: "Relaxed happy cat looking toward the camera at home",
+      "https://images.unsplash.com/photo-1561948955-570b270e7c36?auto=format&fit=crop&w=900&q=80",
+    alt: "Happy white cat looking up with a playful expression",
     note: "For indoor, outdoor, and mixed-lifestyle cats where illness and diagnostics can drive costs."
   },
   {
@@ -60,8 +60,8 @@ const animalPaths = [
     label: "Kittens",
     href: "/kitten-insurance",
     image:
-      "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=900&q=80",
-    alt: "Content kitten resting indoors",
+      "https://images.unsplash.com/photo-1748992341370-41c189086595?auto=format&fit=crop&w=900&q=80",
+    alt: "Happy playful kitten rolling on a carpet",
     note: "For new cat owners weighing routine care, accident risk, and future illness protection."
   }
 ];
