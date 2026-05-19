@@ -43,9 +43,9 @@ export default function ReadyToComparePage() {
               current {primaryProvider.name} provider option when you are ready.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Button href="#quote-ready">Use the quote-ready checklist</Button>
-              <Button href="/calculator" variant="secondary">
-                Check the cost math first
+              <Button href="/quiz">Start the 60-second check</Button>
+              <Button href="/compare" variant="secondary">
+                Compare quote options
               </Button>
             </div>
             <p className="mt-4 text-sm text-muted">{siteConfig.shortDisclosure}</p>
@@ -125,7 +125,7 @@ export default function ReadyToComparePage() {
             </p>
             <div className="mt-5 flex flex-col gap-3 sm:flex-row">
               <Button href="/quiz" variant="secondary">
-                Take quiz
+                Start the 60-second check
               </Button>
               <Button href="/calculator" variant="secondary">
                 Use calculator

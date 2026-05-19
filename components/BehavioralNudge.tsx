@@ -100,12 +100,12 @@ export function BehavioralNudge() {
       </p>
       <div className="mt-4">
         <Button href={href} onClick={onClick} className="w-full" variant={configured ? "primary" : "secondary"}>
-          {configured ? `Visit ${provider.name} provider site` : "Compare quote options"}
+          {configured ? "Continue to comparison partner" : "Compare quote options"}
         </Button>
       </div>
       <p className="mt-3 text-xs leading-5 text-muted">
         {configured
-          ? `You may leave PawPeaceGuide for ${provider.name}, a third-party provider site.`
+          ? `Affiliate-supported handoff to ${provider.name}, a third-party provider site. PawPeaceGuide is not an insurer or broker.`
           : "The primary partner link is pending, so this opens the comparison guide."}
       </p>
     </aside>

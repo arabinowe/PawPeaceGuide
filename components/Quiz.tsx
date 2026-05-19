@@ -232,7 +232,7 @@ export function Quiz() {
           </div>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
             <PrimaryOfferButton pageSource="/quiz-result" showDevelopmentWarning className="w-full sm:w-auto">
-              Visit {primaryProvider.name} provider site
+              Continue to comparison partner
             </PrimaryOfferButton>
             <Button href="/calculator" variant="secondary" className="w-full sm:w-auto">
               Use the cost calculator
@@ -263,34 +263,38 @@ export function Quiz() {
   }
 
   return (
-    <section className="mx-auto max-w-3xl px-5 py-10 md:py-14">
-      <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
-        <div className="mb-6">
-          <PetImagePanel
-            image={petImages.puppy}
-            label="Quick dog and cat shopping profile"
-            priority
-            unframed
-            aspectClass="aspect-[5/2] sm:aspect-[4/3]"
-          />
-        </div>
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
-          60-second pet insurance check
-        </p>
-        <h1 className="mt-3 text-3xl font-semibold text-ink md:text-4xl">{step.question}</h1>
-        <p className="mt-3 text-base leading-7 text-muted">{step.help}</p>
+    <section className="mx-auto max-w-4xl px-4 py-6 md:px-5 md:py-10">
+      <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-7">
+        <div className="grid gap-4 md:grid-cols-[1fr_170px] md:items-start">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clay md:text-sm">
+              60-second pet insurance check
+            </p>
+            <h1 className="mt-2 text-2xl font-semibold text-ink md:mt-3 md:text-4xl">{step.question}</h1>
+            <p className="mt-2 text-sm leading-6 text-muted md:text-base md:leading-7">{step.help}</p>
 
-        <div className="mt-6" aria-label={`Step ${stepIndex + 1} of ${steps.length}`}>
-          <div className="flex items-center justify-between text-xs font-semibold text-muted">
-            <span>Progress</span>
-            <span>{progress}%</span>
+            <div className="mt-4" aria-label={`Step ${stepIndex + 1} of ${steps.length}`}>
+              <div className="flex items-center justify-between text-xs font-semibold text-muted">
+                <span>Progress</span>
+                <span>{progress}%</span>
+              </div>
+              <div className="mt-2 h-2 rounded-full bg-mist">
+                <div className="h-2 rounded-full bg-pine transition-all" style={{ width: `${progress}%` }} />
+              </div>
+            </div>
           </div>
-          <div className="mt-2 h-2 rounded-full bg-mist">
-            <div className="h-2 rounded-full bg-pine transition-all" style={{ width: `${progress}%` }} />
+          <div className="hidden md:block">
+            <PetImagePanel
+              image={petImages.puppy}
+              label="Quick dog and cat shopping profile"
+              priority
+              unframed
+              aspectClass="aspect-square"
+            />
           </div>
         </div>
 
-        <div className="mt-7">
+        <div className="mt-5 md:mt-7">
           {step.options ? (
             <fieldset>
               <legend className="sr-only">{step.question}</legend>

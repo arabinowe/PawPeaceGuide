@@ -15,27 +15,27 @@ export const petImages: Record<PetImageKey, { src: string; alt: string }> = {
     alt: "Happy golden retriever and orange cat relaxing with their owner in a warm home"
   },
   dogOwner: {
-    src: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=1400&q=80",
+    src: "/pets/dog-owner.jpg",
     alt: "Happy golden retriever sitting with its owner at home"
   },
   catHome: {
-    src: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=1400&q=80",
+    src: "/pets/cat-home.jpg",
     alt: "Happy orange cat looking up at home"
   },
   puppy: {
-    src: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=1400&q=80",
+    src: "/pets/puppy.jpg",
     alt: "Happy puppy outdoors in soft natural light"
   },
   kitten: {
-    src: "https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?auto=format&fit=crop&w=1400&q=80",
+    src: "/pets/kitten.jpg",
     alt: "Happy kitten with a playful open-mouth expression"
   },
   dogSolo: {
-    src: "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&w=1400&q=80",
+    src: "/pets/dog-solo.jpg",
     alt: "Happy dog running outside in natural light"
   },
   calmTrust: {
-    src: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1400&q=80",
+    src: "/pets/calm-trust.jpg",
     alt: "Two happy dogs sitting together outdoors"
   }
 };

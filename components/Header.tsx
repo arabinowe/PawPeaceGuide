@@ -7,7 +7,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-white/92 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-        <UTMLink href="/pet-insurance" className="flex items-center gap-2">
+        <UTMLink href="/" className="flex items-center gap-2">
           <BrandLogo />
           <span>
             <span className="block text-base font-semibold leading-tight text-ink">
@@ -33,7 +33,7 @@ export function Header() {
 
         <div className="hidden sm:block">
           <Button href="/quiz" className="px-4 py-2" icon={false}>
-            Start quiz
+            Start check
           </Button>
         </div>
       </div>

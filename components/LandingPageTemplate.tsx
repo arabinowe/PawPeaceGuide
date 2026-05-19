@@ -63,6 +63,14 @@ const animalPaths = [
     image: petImages.kitten.src,
     alt: petImages.kitten.alt,
     note: "For new cat owners weighing routine care, accident risk, and future illness protection."
+  },
+  {
+    icon: SearchCheck,
+    label: "Ready to compare",
+    href: "/ready-to-compare",
+    image: petImages.calmTrust.src,
+    alt: petImages.calmTrust.alt,
+    note: "For shoppers who already understand the basics and want a final checklist before clickout."
   }
 ];
 
@@ -84,8 +92,10 @@ const providerPrepItems = [
   }
 ];
 
-export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
+export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVariant; pagePath?: string }) {
   const primaryProvider = getPrimaryProvider();
+  const routePath = pagePath ?? `/${page.slug}`;
+  const pageSourceBase = routePath === "/" ? "/home" : routePath;
   const heroImage = getPetImageForPath(page.slug);
   const heroBackgroundImage = usesHeroBackground(page.slug) ? petImages.heroPets : heroImage;
   const usesKnowBeforeHero =
@@ -103,7 +113,7 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
 
   return (
     <>
-      <PageEventTracker page={`/${page.slug}`} paid />
+      <PageEventTracker page={routePath} paid />
       <section className="relative isolate overflow-hidden border-b border-line bg-[#f7f2e9]">
         <div className="absolute inset-0 hidden md:block">
           <Image
@@ -212,7 +222,7 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
             {[
               "Answer a few pet and budget questions",
               "See the policy features to compare",
-              "Continue through the tracked partner handoff once approved"
+              "Continue through the tracked partner handoff when ready"
             ].map((step, index) => (
               <div key={step} className="flex items-center gap-3 rounded-md bg-white px-3 py-2 shadow-tight">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-pine text-xs font-semibold text-white">
@@ -226,7 +236,7 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
       </section>
 
       <QuoteReadinessChecklist
-        pageSource={`/${page.slug}-quote-ready`}
+        pageSource={`${pageSourceBase}-quote-ready`}
         compact
         className="mx-auto max-w-6xl px-4 py-8 sm:px-5 md:py-12"
       />
@@ -254,7 +264,7 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
               </p>
             </div>
           </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             {animalPaths.map((path) => (
               <UTMLink
                 key={path.href}
@@ -266,7 +276,7 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
                     src={path.image}
                     alt={path.alt}
                     fill
-                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+                    sizes="(min-width: 1024px) 20vw, (min-width: 768px) 50vw, 100vw"
                     className="object-cover transition duration-500 group-hover:scale-[1.03]"
                     loading="lazy"
                   />
@@ -305,7 +315,7 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
       </section>
 
       <IntentPathRouter
-        pageSource={`/${page.slug}-intent-router`}
+        pageSource={`${pageSourceBase}-intent-router`}
         className="mx-auto max-w-6xl px-5 pb-12"
       />
 
@@ -333,8 +343,8 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
                 the third-party destination.
               </p>
               <div className="mt-5">
-                <PrimaryOfferButton pageSource={`/${page.slug}-comparison-section`}>
-                  Visit {primaryProvider.name} provider site
+                <PrimaryOfferButton pageSource={`${pageSourceBase}-comparison-section`}>
+                  Continue to comparison partner
                 </PrimaryOfferButton>
               </div>
             </div>
@@ -423,12 +433,12 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
                 prioritizes the approved offer.
               </p>
             </div>
-            <PrimaryOfferButton pageSource={`/${page.slug}-provider-preview`} variant="secondary">
-              Review {primaryProvider.name} option
+            <PrimaryOfferButton pageSource={`${pageSourceBase}-provider-preview`} variant="secondary">
+              Continue to comparison partner
             </PrimaryOfferButton>
           </div>
           <div className="mt-6">
-            <ProviderComparisonGrid compact role="primary" emphasizePrimary pageSource={`/${page.slug}`} />
+            <ProviderComparisonGrid compact role="primary" emphasizePrimary pageSource={pageSourceBase} />
           </div>
         </div>
       </section>

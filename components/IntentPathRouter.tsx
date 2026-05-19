@@ -2,7 +2,6 @@ import { Calculator, ClipboardCheck, FileSearch, ShieldCheck } from "lucide-reac
 import { Button } from "@/components/Button";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
-import { getPrimaryProvider } from "@/data/providers";
 
 type IntentPathRouterProps = {
   pageSource: string;
@@ -34,8 +33,6 @@ const pathCards = [
 ];
 
 export function IntentPathRouter({ pageSource, className = "" }: IntentPathRouterProps) {
-  const primaryProvider = getPrimaryProvider();
-
   return (
     <section className={className}>
       <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
@@ -64,7 +61,7 @@ export function IntentPathRouter({ pageSource, className = "" }: IntentPathRoute
             </div>
             <div className="mt-4">
               <PrimaryOfferButton pageSource={pageSource} showDisclosure={false}>
-                Visit {primaryProvider.name} provider site
+                Continue to comparison partner
               </PrimaryOfferButton>
             </div>
           </div>

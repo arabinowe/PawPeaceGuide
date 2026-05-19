@@ -116,11 +116,11 @@ export default function PetInsuranceComparisonChecklistBlogPage() {
                 options without treating the lowest monthly premium as the whole decision.
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Button href="/blog/pet-insurance-comparison-checklist#comparison-checklist">
-                  Read the checklist
+                <Button href="/quiz">
+                  Start the 60-second check
                 </Button>
-                <Button href="/ready-to-compare" variant="secondary">
-                  I am ready to compare
+                <Button href="/compare" variant="secondary">
+                  Compare quote options
                 </Button>
               </div>
               <p className="mt-4 text-sm text-muted">{siteConfig.shortDisclosure}</p>

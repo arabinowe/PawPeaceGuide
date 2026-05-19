@@ -176,10 +176,10 @@ export function Calculator() {
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <PrimaryOfferButton pageSource="/calculator-result" showDevelopmentWarning className="w-full sm:w-auto">
-                  Visit {primaryProvider.name} provider site
+                  Continue to comparison partner
                 </PrimaryOfferButton>
                 <Button href="/quiz" variant="secondary" className="w-full sm:w-auto">
-                  Take the 60-second quiz
+                  Start the 60-second check
                 </Button>
               </div>
             </div>

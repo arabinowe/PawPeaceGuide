@@ -23,10 +23,18 @@ export function Footer() {
               <p className="text-sm leading-6 text-muted">{siteConfig.tagline}</p>
             </div>
           </div>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
+          <div className="mt-4 max-w-2xl rounded-md border border-line bg-mist px-4 py-3">
+            <p className="text-sm font-semibold text-ink">How PawPeaceGuide makes money</p>
+            <p className="mt-1 text-sm leading-6 text-muted">
+              PawPeaceGuide is affiliate-supported. If you visit a provider through a tracked
+              PawPeaceGuide link and purchase a policy, we may earn compensation. Our content is
+              educational and policy terms should be reviewed directly with the provider.
+            </p>
+          </div>
+          <p className="mt-3 max-w-2xl text-xs leading-5 text-muted">
             {siteConfig.affiliateDisclosure}
           </p>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">{siteConfig.legalDisclaimer}</p>
+          <p className="mt-2 max-w-2xl text-xs leading-5 text-muted">{siteConfig.legalDisclaimer}</p>
         </div>
         <div className="flex flex-col gap-3 md:items-end">
           {footerLinks.map((link) => (

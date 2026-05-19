@@ -77,7 +77,7 @@ export function ArticleLayout({ guide }: { guide: Guide }) {
             </p>
             {guide.affiliateDisclosureRequired ? (
               <div className="mt-6">
-                <DisclosureBanner />
+                <DisclosureBanner compact />
               </div>
             ) : null}
           </div>

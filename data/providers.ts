@@ -34,7 +34,7 @@ export const providers = ([
     paidSearchRestrictionsNotes:
       "Placeholder. Confirm Awin trademark, competitor, paid search, and brand bidding restrictions before running search campaigns.",
     brandBiddingAllowed: "unknown",
-    ctaText: "Visit provider site",
+    ctaText: "Continue to comparison partner",
     disclosureText: siteConfig.affiliateDisclosure
   },
   {

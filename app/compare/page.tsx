@@ -95,8 +95,7 @@ export default function ComparePage() {
     <>
       <ComparePageTracker />
       <section className="mx-auto max-w-6xl px-5 py-10 md:py-14">
-        <DisclosureBanner />
-        <div className="mt-8 grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Primary partner path</p>
             <h1 className="mt-3 text-4xl font-semibold text-ink md:text-5xl">
@@ -107,6 +106,9 @@ export default function ComparePage() {
               pet insurance provider site. PawPeaceGuide does not sell, solicit,
               bind, underwrite, negotiate, or directly offer insurance.
             </p>
+            <div className="mt-5 max-w-2xl">
+              <DisclosureBanner compact />
+            </div>
           </div>
           <div className="grid gap-4">
             <PetImagePanel image={petImages.calmTrust} label="Dog and cat quote option prep" priority />
@@ -119,7 +121,7 @@ export default function ComparePage() {
               </p>
               <div className="mt-4 flex flex-col gap-3 sm:flex-row">
                 <Button href="/quiz" variant="secondary">
-                  Take quiz
+                  Start the 60-second check
                 </Button>
                 <Button href="/calculator" variant="secondary">
                   Use calculator
@@ -227,7 +229,7 @@ export default function ComparePage() {
           title="Use the quiz or calculator before leaving for provider sites."
           body="The quiz builds an educational shopping profile. The calculator shows rough claim math. Neither replaces provider policy review."
           primaryHref="/quiz"
-          primaryLabel="Take the quiz"
+          primaryLabel="Start the 60-second check"
           secondaryHref="/calculator"
           secondaryLabel="Use calculator"
         />

@@ -6,10 +6,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/pet-insurance",
+    "/pet-parent-protection",
     "/dog-parent-protection",
+    "/dog-insurance",
+    "/cat-insurance",
+    "/puppy-insurance",
+    "/kitten-insurance",
+    "/emergency-vet-bills",
+    "/vet-bill-help",
+    "/start-60-second-check",
     "/quiz",
     "/calculator",
     "/compare",
+    "/ready-to-compare",
     "/guides",
     "/glossary",
     "/blog",
@@ -29,7 +38,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ? new Date(guides.find((guide) => `/guides/${guide.slug}` === route)?.dateModified || new Date())
         : new Date(),
     changeFrequency:
-      route === "" || route === "/pet-insurance" || route === "/dog-parent-protection"
+      route === "" ||
+      route === "/pet-insurance" ||
+      route === "/pet-parent-protection" ||
+      route === "/dog-parent-protection"
         ? "weekly"
         : "monthly",
     priority:
@@ -37,7 +49,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ? 1
         : route === "/dog-parent-protection"
           ? 0.98
-          : route === "/pet-insurance"
+          : route === "/pet-parent-protection"
+            ? 0.97
+            : route === "/pet-insurance"
             ? 0.95
             : 0.7
   }));
