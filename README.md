@@ -19,7 +19,9 @@ Main paths:
 - `/pet-parent-protection` for broad happy dog/cat/puppy/kitten Facebook creative
 - `/pet-insurance` for the primary general paid ad landing page
 - `/dog-parent-protection` for the dog-owner paid ad variant referenced in the launch checklist
-- `/dog-insurance`, `/cat-insurance`, `/puppy-insurance`, `/kitten-insurance`, `/emergency-vet-bills`, `/vet-bill-help`
+- `/emergency-vet-bills` for surprise-vet-bill creative
+- `/start-60-second-check` for creative focused on starting the 60-second check
+- `/dog-insurance`, `/cat-insurance`, `/puppy-insurance`, `/kitten-insurance`, `/vet-bill-help`
 - `/quiz`
 - `/calculator`
 - `/compare`
@@ -124,6 +126,21 @@ Example UTM URL:
 
 ```text
 https://your-production-domain.com/pet-parent-protection?utm_source=facebook&utm_medium=paid_social&utm_campaign=happy_pet_presell&utm_content=happy_dog_01
+```
+
+Recommended creative-to-URL map:
+
+- "Before you need it" square creative: `/pet-parent-protection`
+- "A surprise vet bill..." wide creative: `/emergency-vet-bills`
+- "Start the 60-second pet insurance check" wide creative: `/start-60-second-check`
+- Dog-specific variants: `/dog-parent-protection`
+
+Use matching `utm_content` values so performance can be read by creative:
+
+```text
+utm_content=before_you_need_it_square
+utm_content=surprise_vet_bill_wide
+utm_content=start_60_second_check_wide
 ```
 
 Where to configure things:

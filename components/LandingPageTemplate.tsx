@@ -85,10 +85,17 @@ const swiftestPrepItems = [
 
 export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
   const heroImage = getPetImageForPath(page.slug);
-  const isPrimaryPaidPage =
+  const usesKnowBeforeHero =
     page.slug === "pet-insurance" ||
     page.slug === "pet-parent-protection" ||
     page.slug === "dog-parent-protection";
+  const isAdLandingPage =
+    usesKnowBeforeHero ||
+    page.slug === "start-60-second-check" ||
+    page.slug === "emergency-vet-bills" ||
+    page.slug === "vet-bill-help";
+  const secondaryHeroHref =
+    page.slug === "emergency-vet-bills" || page.slug === "vet-bill-help" ? "/calculator" : "/compare";
 
   return (
     <>
@@ -105,20 +112,22 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
         <div className="mx-auto min-h-[520px] max-w-6xl px-5 py-8 md:flex md:items-center md:py-10">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">{page.eyebrow}</p>
-            {isPrimaryPaidPage ? (
+            {usesKnowBeforeHero ? (
               <h1 className="mt-4 max-w-2xl text-5xl font-black uppercase leading-none text-ink md:text-7xl">
                 Know before <span className="block text-[#4d6538]">you need it.</span>
               </h1>
             ) : null}
-            {!isPrimaryPaidPage ? (
+            {!usesKnowBeforeHero ? (
               <h1 className="mt-5 max-w-3xl text-4xl font-semibold tracking-normal text-ink md:text-6xl">
                 {page.headline}
               </h1>
             ) : null}
             <p className="mt-5 max-w-2xl text-lg leading-8 text-muted">{page.subheadline}</p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Button href="/quiz">{page.primaryCta}</Button>
-              <Button href="/compare" variant="secondary">
+              <Button href="/quiz" variant={isAdLandingPage ? "accent" : "primary"}>
+                {page.primaryCta}
+              </Button>
+              <Button href={secondaryHeroHref} variant="secondary">
                 {page.secondaryCta}
               </Button>
             </div>
@@ -337,7 +346,9 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
             ))}
           </div>
           <div className="mt-6">
-            <Button href="/quiz">Start the 60-second pet insurance check</Button>
+            <Button href="/quiz" variant={isAdLandingPage ? "accent" : "primary"}>
+              Start the 60-second pet insurance check
+            </Button>
           </div>
         </div>
       </section>
@@ -397,7 +408,7 @@ export function LandingPageTemplate({ page }: { page: LandingPageVariant }) {
           secondaryLabel="Compare quote options"
         />
       </section>
-      <StickyMobileCTA href="/quiz" label="Start quiz" />
+      <StickyMobileCTA href="/quiz" label="Start quiz" variant={isAdLandingPage ? "accent" : "primary"} />
     </>
   );
 }

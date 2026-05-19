@@ -36,6 +36,7 @@ export const petImages: Record<PetImageKey, { src: string; alt: string }> = {
 };
 
 export function getPetImageForPath(pathOrSlug: string) {
+  if (pathOrSlug.includes("start-60")) return petImages.dogSolo;
   if (pathOrSlug.includes("cat")) return petImages.catHome;
   if (pathOrSlug.includes("kitten")) return petImages.kitten;
   if (pathOrSlug.includes("puppy")) return petImages.puppy;

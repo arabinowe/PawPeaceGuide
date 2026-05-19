@@ -113,6 +113,37 @@ export const landingPages: LandingPageVariant[] = [
     faq: sharedFaq
   },
   {
+    slug: "start-60-second-check",
+    title: "Start the 60-Second Pet Insurance Check | PawPeaceGuide",
+    description:
+      "A paid-social pre-sell page for dog owners ready to start PawPeaceGuide's 60-second pet insurance education check.",
+    eyebrow: "60-second pet insurance check",
+    headline: "Start the 60-second pet insurance check.",
+    subheadline:
+      "Understand your options, compare with more confidence, and plan ahead before an unexpected vet bill is in front of you. PawPeaceGuide helps dog owners prepare for The Swiftest's third-party comparison flow in plain English.",
+    primaryCta: "Start the 60-second pet insurance check",
+    secondaryCta: "Compare quote options",
+    audienceNote:
+      "Built for Facebook creative that directly asks dog owners to start the 60-second check.",
+    compareReasonTitle: "Why the check starts before the quote page",
+    compareReasons: [
+      "A little context can help you review quote-page details instead of reacting only to monthly premium.",
+      "Deductible, reimbursement rate, annual benefit, waiting periods, and exclusions all shape the real tradeoff.",
+      "PawPeaceGuide keeps the education step separate from the third-party provider or comparison site."
+    ],
+    helpWith: [
+      "Future eligible accidents and illnesses, depending on the policy",
+      "Diagnostics, surgery, hospitalization, and prescription medication in many accident and illness plans",
+      "Optional wellness add-ons from some providers, when purchased separately"
+    ],
+    usuallyNotCovered: [
+      "Pre-existing conditions, unless a provider has a specific exception",
+      "Routine care unless a wellness add-on is included",
+      "Costs outside the policy terms, annual limits, waiting periods, or exclusions"
+    ],
+    faq: sharedFaq
+  },
+  {
     slug: "dog-insurance",
     title: "Dog Insurance Quote Options | PawPeaceGuide",
     description:
@@ -240,15 +271,15 @@ export const landingPages: LandingPageVariant[] = [
     slug: "emergency-vet-bills",
     title: "Emergency Vet Bill Planning | PawPeaceGuide",
     description:
-      "Use a simple pet insurance education flow and calculator to think through emergency vet bill risk.",
-    eyebrow: "Emergency vet bill planning",
-    headline: "A surprise vet bill is easier to face with a plan.",
+      "Understand pet insurance quote options, calculator tradeoffs, and emergency vet bill planning before pressure takes over.",
+    eyebrow: "Surprise vet bill planning",
+    headline: "A surprise vet bill is easier to face with options.",
     subheadline:
-      "Use a quick quiz and cost calculator to understand the tradeoffs before you compare third-party quote options.",
-    primaryCta: "Start the emergency bill check",
+      "Understand your options before the stressful moment. PawPeaceGuide helps pet owners compare policy features, emergency-fund tradeoffs, and quote-page details in plain English.",
+    primaryCta: "Start the 60-second check",
     secondaryCta: "Use the cost calculator",
     audienceNote:
-      "For pet owners who want a practical plan before an urgent clinic visit turns into a financial scramble.",
+      "Built for Facebook creative about surprise vet bills, with calm education instead of fear-based urgency.",
     compareReasonTitle: "Why emergency planning matters",
     compareReasons: [
       "Emergency visits can include exam fees, diagnostics, treatment, and hospitalization.",
@@ -272,12 +303,12 @@ export const landingPages: LandingPageVariant[] = [
     title: "Vet Bill Help Planning | PawPeaceGuide",
     description:
       "Learn how pet insurance quote options, savings, and emergency planning can fit together.",
-    eyebrow: "Vet bill help guide",
-    headline: "Sort your vet bill options before pressure takes over.",
+    eyebrow: "Vet bill options guide",
+    headline: "Understand your vet bill options before pressure takes over.",
     subheadline:
-      "Understand where pet insurance may help with future costs and why direct provider details matter.",
-    primaryCta: "Start the vet bill planning check",
-    secondaryCta: "Compare quote options",
+      "Use a plain-English guide, quick quiz, and cost calculator to prepare better questions before comparing third-party quote options.",
+    primaryCta: "Start the 60-second check",
+    secondaryCta: "Use the cost calculator",
     audienceNote:
       "A practical guide for pet owners thinking through premiums, deductibles, reimbursement, and emergency savings.",
     compareReasonTitle: "Why planning beats panic",

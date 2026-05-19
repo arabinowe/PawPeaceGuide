@@ -6,7 +6,7 @@
 - Run `npm run lint`.
 - Run `npm run build`.
 - Start the app with `npm run dev`.
-- Confirm `/pet-parent-protection`, `/dog-parent-protection`, `/cat-insurance`, `/pet-insurance`, `/quiz`, `/calculator`, `/compare`, and `/go/the-swiftest` load locally.
+- Confirm `/pet-parent-protection`, `/dog-parent-protection`, `/emergency-vet-bills`, `/start-60-second-check`, `/cat-insurance`, `/pet-insurance`, `/quiz`, `/calculator`, `/compare`, and `/go/the-swiftest` load locally.
 
 ## Production QA
 
@@ -51,6 +51,8 @@
 ## Ad Readiness QA
 
 - Use `/pet-parent-protection` for broad happy-pet creative and `/dog-parent-protection` for dog-specific creative.
+- Use `/emergency-vet-bills` for the surprise-vet-bill creative.
+- Use `/start-60-second-check` for the 60-second-check creative.
 - Match ad images to the landing page path: dog to dog, cat to cat, puppy to puppy, kitten to kitten.
 - Use real, happy-looking pets in ordinary settings rather than fear-based or clinical imagery.
 - Target insurance-related ads to 18+.
