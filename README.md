@@ -163,6 +163,19 @@ Before running ads, confirm partner paid-ad rules, avoid restricted provider bra
 - Avoid sick-pet imagery, graphic vet scenes, fearmongering, fake urgency, fake reviews, fake star ratings, or claims that coverage is guaranteed.
 - Keep the ad promise simple: plain-English education first, then compare quote options through a third-party comparison path.
 
+## Mobile Conversion Notes
+
+Most paid social visitors should be assumed to arrive on mobile. The ad landing pages are structured so the first thumb-scroll includes the ad-matched headline, full-width primary CTA, disclosure, trust chips, relevant happy-pet image, and a short "what happens next" strip before longer educational content.
+
+Mobile QA priorities:
+
+- CTA is visible without hunting.
+- Sticky mobile CTA says `Start 60-sec check` on paid pages.
+- Pet image appears in the first scroll without pushing the CTA below the fold.
+- Quiz and calculator inputs use mobile-friendly text sizing to reduce iOS zoom.
+- Users can still reach the deeper desktop-style education sections by scrolling.
+- No public page links directly to The Swiftest; all outbound handoff remains `/go/the-swiftest`.
+
 ## Organic Guided Blog Funnel
 
 The organic funnel is separate from the Facebook ad funnel. Use `/blog` and `/blog/pet-insurance-comparison-checklist` for search, community sharing, newsletter mentions, and backlink outreach.

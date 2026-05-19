@@ -59,12 +59,14 @@ export function PetImagePanel({
   label,
   priority = false,
   unframed = false,
+  aspectClass = "aspect-[4/3]",
   className = ""
 }: {
   image?: { src: string; alt: string };
   label?: string;
   priority?: boolean;
   unframed?: boolean;
+  aspectClass?: string;
   className?: string;
 }) {
   const frameClass = unframed
@@ -73,7 +75,7 @@ export function PetImagePanel({
 
   return (
     <div className={`${frameClass} ${className}`}>
-      <div className="relative aspect-[4/3] bg-mist">
+      <div className={`relative ${aspectClass} bg-mist`}>
         <Image
           src={image.src}
           alt={image.alt}

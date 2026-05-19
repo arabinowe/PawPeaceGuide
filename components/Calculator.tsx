@@ -89,7 +89,13 @@ export function Calculator() {
               <DisclosureBanner />
             </div>
           </div>
-          <PetImagePanel image={petImages.dogSolo} label="Happy-pet cost planning" priority unframed />
+          <PetImagePanel
+            image={petImages.dogSolo}
+            label="Happy-pet cost planning"
+            priority
+            unframed
+            aspectClass="aspect-[5/2] lg:aspect-[4/3]"
+          />
         </div>
       </div>
 
@@ -167,10 +173,10 @@ export function Calculator() {
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <PrimaryOfferButton pageSource="/calculator-result" showDevelopmentWarning>
+                <PrimaryOfferButton pageSource="/calculator-result" showDevelopmentWarning className="w-full sm:w-auto">
                   Continue to The Swiftest comparison
                 </PrimaryOfferButton>
-                <Button href="/quiz" variant="secondary">
+                <Button href="/quiz" variant="secondary" className="w-full sm:w-auto">
                   Take the 60-second quiz
                 </Button>
               </div>
@@ -243,7 +249,7 @@ function NumberField({
           max={max}
           value={value}
           onChange={(event) => onChange(Number(event.target.value))}
-          className="min-h-11 w-full rounded-md border-0 bg-transparent px-4 py-3 text-sm text-ink outline-none"
+          className="min-h-11 w-full rounded-md border-0 bg-transparent px-4 py-3 text-base text-ink outline-none sm:text-sm"
         />
         {suffix ? <span className="pr-4 text-sm font-semibold text-muted">{suffix}</span> : null}
       </div>
@@ -254,7 +260,7 @@ function NumberField({
 
 function ResultRow({ label, value }: { label: string; value: number }) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-md bg-white p-4">
+    <div className="flex flex-col gap-1 rounded-md bg-white p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
       <p className="text-sm font-semibold text-ink">{label}</p>
       <p className="text-lg font-semibold text-pine">{currencyFormatter.format(value)}</p>
     </div>

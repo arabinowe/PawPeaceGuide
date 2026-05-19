@@ -176,6 +176,7 @@ export function Quiz() {
             <PetImagePanel
               image={answers.petType === "Cat" ? petImages.catHome : petImages.dogOwner}
               label={`${handoffFocus.petLabel} comparison prep`}
+              aspectClass="aspect-[16/9] lg:aspect-[4/3]"
               unframed
             />
           </div>
@@ -228,10 +229,10 @@ export function Quiz() {
             <p className="mt-2 text-sm leading-6 text-muted">{handoffFocus.summary}</p>
           </div>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <PrimaryOfferButton pageSource="/quiz-result" showDevelopmentWarning>
+            <PrimaryOfferButton pageSource="/quiz-result" showDevelopmentWarning className="w-full sm:w-auto">
               Continue to The Swiftest comparison
             </PrimaryOfferButton>
-            <Button href="/calculator" variant="secondary">
+            <Button href="/calculator" variant="secondary" className="w-full sm:w-auto">
               Use the cost calculator
             </Button>
           </div>
@@ -263,7 +264,13 @@ export function Quiz() {
     <section className="mx-auto max-w-3xl px-5 py-10 md:py-14">
       <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
         <div className="mb-6">
-          <PetImagePanel image={petImages.puppy} label="Quick dog and cat shopping profile" priority unframed />
+          <PetImagePanel
+            image={petImages.puppy}
+            label="Quick dog and cat shopping profile"
+            priority
+            unframed
+            aspectClass="aspect-[5/2] sm:aspect-[4/3]"
+          />
         </div>
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
           60-second pet insurance check
@@ -318,7 +325,7 @@ export function Quiz() {
                 value={currentValue}
                 onChange={(event) => setAnswer(event.target.value)}
                 placeholder={step.placeholder}
-                className="mt-2 min-h-11 w-full rounded-md border border-line bg-white px-4 py-3 text-sm text-ink outline-none transition placeholder:text-muted/70 focus:border-pine focus:ring-2 focus:ring-sky"
+                className="mt-2 min-h-11 w-full rounded-md border border-line bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted/70 focus:border-pine focus:ring-2 focus:ring-sky sm:text-sm"
               />
             </div>
           )}

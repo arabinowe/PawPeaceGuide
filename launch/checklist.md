@@ -31,9 +31,11 @@
 ## Mobile QA
 
 - Test `/pet-parent-protection` and `/dog-parent-protection` on mobile.
+- Test `/emergency-vet-bills` and `/start-60-second-check` on mobile against their matching ad creatives.
 - Confirm happy dog, cat, puppy, and kitten images load without slowing or crowding the first CTA.
 - Confirm `/blog`, `/blog/pet-insurance-comparison-checklist`, `/ready-to-compare`, `/quiz`, `/calculator`, `/compare`, guide pages, and legal pages all include relevant happy pet imagery.
-- Confirm the primary CTA is visible above the fold.
+- Confirm the primary CTA, disclosure, trust chips, and "what happens next" strip are visible in the first mobile scroll.
+- Confirm the sticky mobile CTA reads `Start 60-sec check` on paid pages.
 - Confirm sticky mobile CTA works.
 - Complete the quiz on mobile.
 - Use the calculator on mobile.
