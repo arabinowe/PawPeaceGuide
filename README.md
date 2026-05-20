@@ -87,6 +87,7 @@ Copy `.env.example` to `.env.local` for local development:
 NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_META_PIXEL_ID=
 NEXT_PUBLIC_GA_ID=
+NEXT_PUBLIC_GTM_ID=
 NEXT_PUBLIC_GOOGLE_ADS_ID=AW-18175565397
 NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL=
 NEXT_PUBLIC_GOOGLE_ADS_CLICKOUT_CONVERSION_LABEL=
@@ -118,7 +119,11 @@ CANONICAL_REDIRECT_HOSTS=pawpeaceguide.vercel.app,www.pawpeaceguide.com
 
 Do not commit real affiliate links, private API keys, partner tokens, or private tracking credentials.
 
-Public analytics and engagement values are read in `data/siteConfig.ts`. The Google tag loads only when `NEXT_PUBLIC_GA_ID` or `NEXT_PUBLIC_GOOGLE_ADS_ID` is configured. Google Ads clickout conversion tracking fires only from the actual `/go/[provider]` outbound handoff when `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CLICKOUT_CONVERSION_LABEL` are set. The older `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL` name is still accepted as a fallback. Treat this as a tracked partner clickout, not proof of an Odie purchase. Confirm actual affiliate leads or sales inside Awin/Odie reporting. Optional Google Ads micro-conversion tracking fires for primary-proxy events when `NEXT_PUBLIC_GOOGLE_ADS_MICRO_CONVERSION_LABEL` is set. Meta Pixel remains a TODO integration and should only receive generic, privacy-reviewed events if added later.
+Public analytics and engagement values are read in `data/siteConfig.ts`. Google Tag Manager loads only when `NEXT_PUBLIC_GTM_ID` is configured. The Google tag loads when `NEXT_PUBLIC_GA_ID` or `NEXT_PUBLIC_GOOGLE_ADS_ID` is configured. Google Ads clickout conversion tracking fires only from the actual `/go/[provider]` outbound handoff when `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CLICKOUT_CONVERSION_LABEL` are set. The older `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL` name is still accepted as a fallback. Treat this as a tracked partner clickout, not proof of an Odie purchase. Confirm actual affiliate leads or sales inside Awin/Odie reporting. Optional Google Ads micro-conversion tracking fires for primary-proxy events when `NEXT_PUBLIC_GOOGLE_ADS_MICRO_CONVERSION_LABEL` is set. Meta Pixel remains a TODO integration and should only receive generic, privacy-reviewed events if added later.
+
+Google Tag Manager receives privacy-safe `dataLayer` events for funnel actions. The most important GTM custom event is `ppg_partner_quote_clickout`, which fires only when a visitor reaches the tracked outbound partner handoff. If you later move conversion ownership into GTM, create a Custom Event trigger for `ppg_partner_quote_clickout` and attach the Google Ads conversion action `Partner quote clickout`. Do not also fire the same Google Ads conversion in both GTM and direct site code unless you intentionally remove one path first.
+
+Enhanced conversions for leads should stay off for now. PawPeaceGuide does not currently collect real lead-form email or phone data, and there is no CRM/offline import process to reconcile qualified leads or sales. If email capture becomes a real consented integration later, revisit enhanced conversions with a privacy review and avoid sending pet health details, quote assumptions, or other sensitive data.
 
 The Awin Publisher MasterTag is enabled with `NEXT_PUBLIC_AWIN_PUBLISHER_ID=2902179` and loads `https://www.dwin2.com/pub.2902179.min.js` after hydration. Disable it with `NEXT_PUBLIC_AWIN_PUBLISHER_TAG_ENABLED=false` if Awin asks for a temporary removal during QA.
 

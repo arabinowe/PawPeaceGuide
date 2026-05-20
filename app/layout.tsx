@@ -10,6 +10,7 @@ import { Footer } from "@/components/Footer";
 import { GoogleAdSense } from "@/components/GoogleAdSense";
 import { GoogleRouteTracker } from "@/components/GoogleRouteTracker";
 import { GoogleTag } from "@/components/GoogleTag";
+import { GoogleTagManagerHead, GoogleTagManagerNoScript } from "@/components/GoogleTagManager";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { siteConfig } from "@/data/siteConfig";
@@ -85,9 +86,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        <GoogleTagManagerHead />
         <GoogleAdSense />
       </head>
       <body className="font-sans antialiased">
+        <GoogleTagManagerNoScript />
         <JsonLd data={[organizationSchema, websiteSchema]} />
         <EngagementTracker />
         <Header />

@@ -33,7 +33,7 @@ export const siteConfig = {
     secondary: process.env.NEXT_PUBLIC_ADSENSE_SLOT_SECONDARY || ""
   },
   googleAdSenseSearchEngineId: process.env.NEXT_PUBLIC_ADSENSE_SEARCH_ENGINE_ID || "",
-  googleTagManagerId: "TODO_GTM_ID",
+  googleTagManagerId: process.env.NEXT_PUBLIC_GTM_ID || "TODO_GTM_ID",
   experimentId:
     process.env.NEXT_PUBLIC_EXPERIMENT_ID || "2026-05-20-search-conversion-simplification",
   awinPublisherTagEnabled: process.env.NEXT_PUBLIC_AWIN_PUBLISHER_TAG_ENABLED !== "false",

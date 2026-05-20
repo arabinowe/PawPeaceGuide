@@ -6,6 +6,7 @@ import { getStoredUtmParams } from "@/lib/utm";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    dataLayer?: Record<string, unknown>[];
   }
 }
 
@@ -103,6 +104,11 @@ export function trackFunnelEvent(eventName: FunnelEventName, payload: EventPaylo
   }
 
   sendEngagementEvent(enrichedEvent);
+  sendGoogleTagManagerEvent(eventName, enrichedEvent.payload, {
+    eventId: enrichedEvent.eventId,
+    sessionId: enrichedEvent.sessionId,
+    score: enrichedEvent.score
+  });
   sendGoogleFunnelEvent(eventName, enrichedEvent.payload);
 
   maybeFireIntentThresholdEvents(state);
@@ -272,6 +278,15 @@ function sendGoogleFunnelEvent(eventName: FunnelEventName, payload: EventPayload
 }
 
 export function fireGoogleAdsClickoutConversion(payload: EventPayload = {}, onComplete?: () => void) {
+  const safePayload = sanitizePayload(payload);
+  sendGoogleTagManagerEvent("ppg_partner_quote_clickout", safePayload, {
+    conversionName: "Partner quote clickout",
+    googleAdsId: siteConfig.googleAdsId,
+    googleAdsConversionLabel: siteConfig.googleAdsConversionLabel,
+    value: siteConfig.googleAdsClickoutConversionValue,
+    currency: "USD"
+  });
+
   if (
     typeof window === "undefined" ||
     typeof window.gtag !== "function" ||
@@ -282,7 +297,6 @@ export function fireGoogleAdsClickoutConversion(payload: EventPayload = {}, onCo
   }
 
   let completed = false;
-  const safePayload = sanitizePayload(payload);
   const finish = () => {
     if (completed) return;
     completed = true;
@@ -308,6 +322,36 @@ export function fireGoogleAdsClickoutConversion(payload: EventPayload = {}, onCo
   });
 
   return true;
+}
+
+function sendGoogleTagManagerEvent(
+  eventName: string,
+  payload: EventPayload,
+  metadata: Record<string, string | number | boolean | undefined> = {}
+) {
+  if (typeof window === "undefined") return;
+
+  const safePayload = sanitizePayload(payload);
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: eventName,
+    event_category: "pawpeaceguide_funnel",
+    event_label:
+      safePayload.providerSlug ??
+      safePayload.pageSource ??
+      safePayload.page ??
+      safePayload.ctaLabel ??
+      eventName,
+    provider_slug: safePayload.providerSlug,
+    provider_role: safePayload.providerRole,
+    page_source: safePayload.pageSource,
+    link_status: safePayload.linkStatus,
+    campaign_source: safePayload.campaignSource,
+    utm_campaign: safePayload.utm_campaign,
+    utm_content: safePayload.utm_content,
+    experiment_id: siteConfig.experimentId,
+    ...metadata
+  });
 }
 
 export function isGoogleAdsClickoutConversionConfigured() {
