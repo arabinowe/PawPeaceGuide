@@ -1,4 +1,5 @@
 import { siteConfig } from "@/data/siteConfig";
+import { getMicroConversionDefinition, type MicroConversionStage } from "@/lib/microConversions";
 import type { FunnelEventName } from "@/lib/types";
 import { getStoredUtmParams } from "@/lib/utm";
 
@@ -39,6 +40,12 @@ export type StoredEngagementEvent = {
   sessionId: string;
   page: string;
   score: number;
+  microConversion?: {
+    name: string;
+    stage: MicroConversionStage;
+    value: number;
+    optimizationUse: string;
+  };
   payload: EventPayload;
 };
 
@@ -59,6 +66,7 @@ export function trackFunnelEvent(eventName: FunnelEventName, payload: EventPaylo
   }
 
   const state = updateEngagementState(eventName);
+  const microConversion = getMicroConversionDefinition(eventName);
   const enrichedEvent: StoredEngagementEvent = {
     eventId: createId("evt"),
     eventName,
@@ -66,6 +74,14 @@ export function trackFunnelEvent(eventName: FunnelEventName, payload: EventPaylo
     sessionId: state.sessionId,
     page: window.location.pathname,
     score: state.score,
+    microConversion: microConversion
+      ? {
+          name: microConversion.name,
+          stage: microConversion.stage,
+          value: microConversion.value,
+          optimizationUse: microConversion.optimizationUse
+        }
+      : undefined,
     payload: enrichPayload(safePayload)
   };
 
@@ -164,6 +180,7 @@ function enrichPayload(payload: EventPayload): EventPayload {
     utm_campaign: payload.utm_campaign ?? utm.utm_campaign,
     utm_content: payload.utm_content ?? utm.utm_content,
     utm_term: utm.utm_term,
+    experimentId: siteConfig.experimentId,
     referrerHost: getReferrerHost(),
     viewport
   });
@@ -203,6 +220,7 @@ function sendGoogleFunnelEvent(eventName: FunnelEventName, payload: EventPayload
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
 
   const safePayload = sanitizePayload(payload);
+  const microConversion = getMicroConversionDefinition(eventName);
   const googlePayload = {
     event_category: "pawpeaceguide_funnel",
     event_label:
@@ -217,10 +235,22 @@ function sendGoogleFunnelEvent(eventName: FunnelEventName, payload: EventPayload
     link_status: safePayload.linkStatus,
     campaign_source: safePayload.campaignSource,
     utm_campaign: safePayload.utm_campaign,
-    utm_content: safePayload.utm_content
+    utm_content: safePayload.utm_content,
+    experiment_id: siteConfig.experimentId
   };
 
   window.gtag("event", eventName, googlePayload);
+
+  if (microConversion) {
+    window.gtag("event", "ppg_micro_conversion", {
+      ...googlePayload,
+      event_label: microConversion.name,
+      micro_conversion_name: microConversion.name,
+      micro_conversion_stage: microConversion.stage,
+      micro_conversion_value: microConversion.value,
+      optimization_use: microConversion.optimizationUse
+    });
+  }
 
   if (
     eventName === siteConfig.eventNames.affiliateCtaClicked &&
@@ -231,6 +261,18 @@ function sendGoogleFunnelEvent(eventName: FunnelEventName, payload: EventPayload
       send_to: `${siteConfig.googleAdsId}/${siteConfig.googleAdsConversionLabel}`,
       event_category: "pawpeaceguide_funnel",
       event_label: safePayload.providerSlug ?? "affiliate_clickout"
+    });
+  }
+
+  if (
+    microConversion?.optimizationUse === "primary_proxy" &&
+    isConfiguredPublicId(siteConfig.googleAdsId) &&
+    isConfiguredPublicId(siteConfig.googleAdsMicroConversionLabel)
+  ) {
+    window.gtag("event", "conversion", {
+      send_to: `${siteConfig.googleAdsId}/${siteConfig.googleAdsMicroConversionLabel}`,
+      event_category: "pawpeaceguide_micro_conversion",
+      event_label: microConversion.name
     });
   }
 }
@@ -340,6 +382,7 @@ function scoreForEvent(eventName: FunnelEventName) {
     calculator_started: 4,
     calculator_completed: 7,
     compare_page_viewed: 5,
+    ready_to_compare_viewed: 7,
     provider_card_viewed: 3,
     guide_page_viewed: 1,
     glossary_viewed: 1,

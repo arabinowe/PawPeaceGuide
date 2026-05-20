@@ -42,6 +42,7 @@ export function EngagementDebugPanel() {
   }, []);
 
   const counts = useMemo(() => countEvents(snapshot.events), [snapshot.events]);
+  const microConversions = useMemo(() => countMicroConversions(snapshot.events), [snapshot.events]);
 
   return (
     <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
@@ -64,6 +65,21 @@ export function EngagementDebugPanel() {
           Session: {snapshot.sessionId || "No client session yet"}
         </p>
         <div className="mt-5 grid gap-3">
+          {microConversions.length > 0 ? (
+            <div className="rounded-md border border-pine/15 bg-sky/35 p-3">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-clay">
+                Micro-conversions
+              </p>
+              <div className="mt-3 grid gap-2">
+                {microConversions.slice(0, 6).map(([name, count]) => (
+                  <div key={name} className="flex items-center justify-between text-sm">
+                    <span className="font-medium text-ink">{name}</span>
+                    <span className="font-semibold text-pine">{count}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
           {counts.slice(0, 8).map(([name, count]) => (
             <div key={name} className="flex items-center justify-between rounded-md bg-mist px-3 py-2 text-sm">
               <span className="font-medium text-ink">{name}</span>
@@ -94,6 +110,7 @@ export function EngagementDebugPanel() {
                   <th className="px-4 py-3 font-semibold">Time</th>
                   <th className="px-4 py-3 font-semibold">Event</th>
                   <th className="px-4 py-3 font-semibold">Page</th>
+                  <th className="px-4 py-3 font-semibold">Micro</th>
                   <th className="px-4 py-3 font-semibold">Signal</th>
                   <th className="px-4 py-3 font-semibold">Score</th>
                 </tr>
@@ -104,6 +121,7 @@ export function EngagementDebugPanel() {
                     <td className="px-4 py-3 text-muted">{formatTime(event.timestamp)}</td>
                     <td className="px-4 py-3 font-medium text-ink">{event.eventName}</td>
                     <td className="px-4 py-3 text-muted">{event.payload.page || event.page}</td>
+                    <td className="px-4 py-3 text-muted">{event.microConversion?.name || "-"}</td>
                     <td className="px-4 py-3 text-muted">
                       {event.payload.section ||
                         event.payload.ctaLabel ||
@@ -131,6 +149,17 @@ function countEvents(events: StoredEngagementEvent[]) {
 
   events.forEach((event) => {
     counts.set(event.eventName, (counts.get(event.eventName) || 0) + 1);
+  });
+
+  return Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+}
+
+function countMicroConversions(events: StoredEngagementEvent[]) {
+  const counts = new Map<string, number>();
+
+  events.forEach((event) => {
+    if (!event.microConversion) return;
+    counts.set(event.microConversion.name, (counts.get(event.microConversion.name) || 0) + 1);
   });
 
   return Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);

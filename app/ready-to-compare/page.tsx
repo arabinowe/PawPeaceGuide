@@ -45,7 +45,7 @@ export default function ReadyToComparePage() {
 
   return (
     <>
-      <PageEventTracker page="/ready-to-compare" paid />
+      <PageEventTracker page="/ready-to-compare" eventName={siteConfig.eventNames.readyToCompareViewed} />
       <section className="border-b border-line bg-mist">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 md:py-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>

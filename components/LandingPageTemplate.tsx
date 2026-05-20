@@ -146,8 +146,13 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
     page.slug === "emergency-vet-bills" ||
     page.slug === "vet-bill-help";
   const isSearchLandingPage = page.slug === "pet-insurance";
+  const isLeanLandingPage = isSearchLandingPage || isPaidSocialLandingPage;
   const secondaryHeroHref =
-    page.slug === "emergency-vet-bills" || page.slug === "vet-bill-help" ? "/calculator" : "/compare";
+    page.slug === "emergency-vet-bills" || page.slug === "vet-bill-help"
+      ? "/calculator"
+      : isSearchLandingPage || isPaidSocialLandingPage
+        ? "/ready-to-compare"
+        : "/compare";
   const mobileStickyLabel = isPaidSocialLandingPage ? "Find my path" : "Start quiz";
   const primaryEducationHref = isPaidSocialLandingPage ? "/find-my-path" : "/quiz";
 
@@ -418,7 +423,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
             </div>
           </div>
         </section>
-      ) : (
+      ) : isSearchLandingPage ? null : (
         <QuoteReadinessChecklist
           pageSource={`${pageSourceBase}-quote-ready`}
           compact
@@ -426,198 +431,197 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
         />
       )}
 
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Popular pet paths</p>
-              <h2 className="mt-3 text-3xl font-semibold text-ink">
-                Start with the path that matches your pet.
-              </h2>
-              <p className="mt-4 text-base leading-7 text-muted">
-                PawPeaceGuide helps dog, cat, puppy, kitten, senior-pet, and other-pet shoppers
-                understand the next useful step. Live partner links appear only when they fit the
-                selected path.
-              </p>
+      {!isSearchLandingPage ? (
+        <section className="bg-white py-12">
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Popular pet paths</p>
+                <h2 className="mt-3 text-3xl font-semibold text-ink">
+                  Start with the path that matches your pet.
+                </h2>
+                <p className="mt-4 text-base leading-7 text-muted">
+                  PawPeaceGuide helps dog, cat, puppy, kitten, senior-pet, and other-pet shoppers
+                  understand the next useful step. Live partner links appear only when they fit the
+                  selected path.
+                </p>
+              </div>
+              <div className="rounded-md border border-line bg-mist p-5">
+                <p className="text-sm font-semibold text-ink">Choose a calmer lane</p>
+                <p className="mt-2 text-sm leading-6 text-muted">
+                  Pick the path that matches your pet and pace. PawPeaceGuide keeps the explanation
+                  educational, then shows a live partner route only when it fits what you are trying
+                  to solve.
+                </p>
+              </div>
             </div>
-            <div className="rounded-md border border-line bg-mist p-5">
-              <p className="text-sm font-semibold text-ink">Choose a calmer lane</p>
-              <p className="mt-2 text-sm leading-6 text-muted">
-                Pick the path that matches your pet and pace. PawPeaceGuide keeps the explanation
-                educational, then shows a live partner route only when it fits what you are trying
-                to solve.
-              </p>
-            </div>
-          </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {animalPaths.map((path) => (
-              <UTMLink
-                key={path.href}
-                href={path.href}
-                className="group overflow-hidden rounded-md border border-line bg-white shadow-tight transition hover:-translate-y-0.5 hover:border-pine/40 hover:shadow-soft"
-              >
-                <div className="relative aspect-[4/3] overflow-hidden bg-mist">
-                  <Image
-                    src={path.image}
-                    alt={path.alt}
-                    fill
-                    sizes="(min-width: 1024px) 20vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center gap-2">
-                    <path.icon className="h-5 w-5 text-pine" aria-hidden="true" />
-                    <h3 className="text-lg font-semibold text-ink">{path.label}</h3>
+            <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {animalPaths.map((path) => (
+                <UTMLink
+                  key={path.href}
+                  href={path.href}
+                  className="group overflow-hidden rounded-md border border-line bg-white shadow-tight transition hover:-translate-y-0.5 hover:border-pine/40 hover:shadow-soft"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden bg-mist">
+                    <Image
+                      src={path.image}
+                      alt={path.alt}
+                      fill
+                      sizes="(min-width: 1024px) 20vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                      loading="lazy"
+                    />
                   </div>
-                  <p className="mt-2 text-sm leading-6 text-muted">{path.note}</p>
-                </div>
-              </UTMLink>
-            ))}
+                  <div className="p-5">
+                    <div className="flex items-center gap-2">
+                      <path.icon className="h-5 w-5 text-pine" aria-hidden="true" />
+                      <h3 className="text-lg font-semibold text-ink">{path.label}</h3>
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-muted">{path.note}</p>
+                  </div>
+                </UTMLink>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
-      <section className="mx-auto max-w-6xl px-5 py-12">
-        <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Why compare early</p>
-            <h2 className="mt-3 text-3xl font-semibold text-ink">{page.compareReasonTitle}</h2>
-            <p className="mt-4 text-base leading-7 text-muted">
-              Pet insurance is easiest to evaluate when you have room to learn, compare, and ask
-              better questions.
-            </p>
-          </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {page.compareReasons.map((reason, index) => (
-              <div key={reason} className="rounded-md border border-line bg-white p-5 shadow-tight">
-                <p className="text-sm font-semibold text-clay">0{index + 1}</p>
-                <p className="mt-3 text-sm leading-6 text-muted">{reason}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <IntentPathRouter
-        pageSource={`${pageSourceBase}-intent-router`}
-        className="mx-auto max-w-6xl px-5 pb-12"
-        directProviderCta={!isPaidSocialLandingPage}
-      />
-
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+      {!isLeanLandingPage ? (
+        <section className="mx-auto max-w-6xl px-5 py-12">
+          <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
-                Provider handoff
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Why compare early</p>
+              <h2 className="mt-3 text-3xl font-semibold text-ink">{page.compareReasonTitle}</h2>
+              <p className="mt-4 text-base leading-7 text-muted">
+                Pet insurance is easiest to evaluate when you have room to learn, compare, and ask
+                better questions.
               </p>
-              <h2 className="mt-3 text-3xl font-semibold text-ink">
-                Prepared visitors make better use of provider pages
-              </h2>
             </div>
-            <div className="rounded-md border border-line bg-mist p-5">
-              <p className="text-base leading-7 text-muted">
-                {isPaidSocialLandingPage
-                  ? "This page helps you understand the terms to scan before you choose a next step. When a live partner path fits your goal, PawPeaceGuide routes you through a disclosed tracking page."
-                  : `${primaryProvider.name} is the current approved provider clickout for PawPeaceGuide. This page helps you understand the terms to scan before you leave this site for a third-party provider.`}
-              </p>
-              <p className="mt-3 text-sm leading-6 text-muted">
-                PawPeaceGuide does not sell insurance. PawPeaceGuide is an educational,
-                affiliate-supported site that links to third-party providers and comparison tools.
-                Policy terms, quote availability, pricing, and claim decisions are controlled by
-                the third-party destination.
-              </p>
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                {isPaidSocialLandingPage ? (
-                  <>
-                    <Button href="/find-my-path" variant="accent">
-                      Find my path
-                    </Button>
-                    <Button href="/ready-to-compare" variant="secondary">
-                      Use ready checklist
-                    </Button>
-                  </>
-                ) : (
+            <div className="grid gap-4 md:grid-cols-3">
+              {page.compareReasons.map((reason, index) => (
+                <div key={reason} className="rounded-md border border-line bg-white p-5 shadow-tight">
+                  <p className="text-sm font-semibold text-clay">0{index + 1}</p>
+                  <p className="mt-3 text-sm leading-6 text-muted">{reason}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {!isLeanLandingPage ? (
+        <IntentPathRouter
+          pageSource={`${pageSourceBase}-intent-router`}
+          className="mx-auto max-w-6xl px-5 pb-12"
+          directProviderCta={!isPaidSocialLandingPage}
+        />
+      ) : null}
+
+      {!isLeanLandingPage ? (
+        <section className="bg-white py-12">
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
+                  Provider handoff
+                </p>
+                <h2 className="mt-3 text-3xl font-semibold text-ink">
+                  Prepared visitors make better use of provider pages
+                </h2>
+              </div>
+              <div className="rounded-md border border-line bg-mist p-5">
+                <p className="text-base leading-7 text-muted">
+                  {`${primaryProvider.name} is the current approved provider clickout for PawPeaceGuide. This page helps you understand the terms to scan before you leave this site for a third-party provider.`}
+                </p>
+                <p className="mt-3 text-sm leading-6 text-muted">
+                  PawPeaceGuide does not sell insurance. PawPeaceGuide is an educational,
+                  affiliate-supported site that links to third-party providers and comparison tools.
+                  Policy terms, quote availability, pricing, and claim decisions are controlled by
+                  the third-party destination.
+                </p>
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                   <PrimaryOfferButton pageSource={`${pageSourceBase}-comparison-section`} />
-                )}
+                </div>
               </div>
             </div>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {providerPrepItems.map((item, index) => (
+                <div key={item.title} className="rounded-md border border-line bg-white p-5 shadow-tight">
+                  <item.icon className="h-5 w-5 text-pine" aria-hidden="true" />
+                  <p className="mt-4 text-sm font-semibold text-clay">0{index + 1}</p>
+                  <h3 className="mt-3 text-lg font-semibold text-ink">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-muted">{item.body}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {providerPrepItems.map((item, index) => (
-              <div key={item.title} className="rounded-md border border-line bg-white p-5 shadow-tight">
-                <item.icon className="h-5 w-5 text-pine" aria-hidden="true" />
-                <p className="mt-4 text-sm font-semibold text-clay">0{index + 1}</p>
-                <h3 className="mt-3 text-lg font-semibold text-ink">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted">{item.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="grid gap-5 md:grid-cols-2">
-            <FeatureCard
-              icon={HeartPulse}
-              title="What dog and cat insurance may help with"
-              body={page.helpWith.join(" ")}
-            />
-            <FeatureCard
-              icon={ShieldAlert}
-              title="What pet insurance usually does not cover"
-              body={page.usuallyNotCovered.join(" ")}
-            />
+      {!isLeanLandingPage ? (
+        <section className="bg-white py-12">
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="grid gap-5 md:grid-cols-2">
+              <FeatureCard
+                icon={HeartPulse}
+                title="What dog and cat insurance may help with"
+                body={page.helpWith.join(" ")}
+              />
+              <FeatureCard
+                icon={ShieldAlert}
+                title="What pet insurance usually does not cover"
+                body={page.usuallyNotCovered.join(" ")}
+              />
+            </div>
+            <div className="mt-5 grid gap-5 md:grid-cols-3">
+              <FeatureCard
+                icon={Calculator}
+                title="Deductibles"
+                body="The amount you pay before eligible reimbursement begins. Higher deductibles can change monthly premium and claim math."
+              />
+              <FeatureCard
+                icon={ListChecks}
+                title="Reimbursement and limits"
+                body="Reimbursement rates and annual limits influence how much of an eligible bill may still be your responsibility."
+              />
+              <FeatureCard
+                icon={FileText}
+                title="Waiting periods and exclusions"
+                body="Coverage may not apply immediately, and policy wording controls what is eligible. Review details directly with the provider."
+              />
+            </div>
           </div>
-          <div className="mt-5 grid gap-5 md:grid-cols-3">
-            <FeatureCard
-              icon={Calculator}
-              title="Deductibles"
-              body="The amount you pay before eligible reimbursement begins. Higher deductibles can change monthly premium and claim math."
-            />
-            <FeatureCard
-              icon={ListChecks}
-              title="Reimbursement and limits"
-              body="Reimbursement rates and annual limits influence how much of an eligible bill may still be your responsibility."
-            />
-            <FeatureCard
-              icon={FileText}
-              title="Waiting periods and exclusions"
-              body="Coverage may not apply immediately, and policy wording controls what is eligible. Review details directly with the provider."
-            />
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
-      <section className="mx-auto max-w-6xl px-5 py-12">
-        <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">How the funnel works</p>
-          <h2 className="mt-3 text-3xl font-semibold text-ink">Three calm steps before provider handoff</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {[
-              "Choose your pet type and shopping goal without sharing sensitive details",
-              "See which quote-page details deserve attention",
-              `Continue to ${primaryProvider.name} or another approved provider option when you are ready`
-            ].map((step, index) => (
-              <div key={step} className="rounded-md bg-mist p-5">
-                <ClipboardCheck className="h-5 w-5 text-pine" aria-hidden="true" />
-                <p className="mt-4 text-sm font-semibold text-ink">Step {index + 1}</p>
-                <p className="mt-2 text-sm leading-6 text-muted">{step}</p>
-              </div>
-            ))}
+      {!isLeanLandingPage ? (
+        <section className="mx-auto max-w-6xl px-5 py-12">
+          <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">How the funnel works</p>
+            <h2 className="mt-3 text-3xl font-semibold text-ink">Three calm steps before provider handoff</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {[
+                "Choose your pet type and shopping goal without sharing sensitive details",
+                "See which quote-page details deserve attention",
+                `Continue to ${primaryProvider.name} or another approved provider option when you are ready`
+              ].map((step, index) => (
+                <div key={step} className="rounded-md bg-mist p-5">
+                  <ClipboardCheck className="h-5 w-5 text-pine" aria-hidden="true" />
+                  <p className="mt-4 text-sm font-semibold text-ink">Step {index + 1}</p>
+                  <p className="mt-2 text-sm leading-6 text-muted">{step}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6">
+              <Button href={primaryEducationHref}>
+                Start the 60-second pet insurance check
+              </Button>
+            </div>
           </div>
-          <div className="mt-6">
-            <Button href={primaryEducationHref} variant={isPaidSocialLandingPage || isSearchLandingPage ? "accent" : "primary"}>
-              {isPaidSocialLandingPage ? page.primaryCta : "Start the 60-second pet insurance check"}
-            </Button>
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
-      {isSearchLandingPage ? (
+      {isSearchLandingPage && !isLeanLandingPage ? (
         <section className="bg-white py-12">
           <div className="mx-auto max-w-6xl px-5">
             <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
@@ -671,12 +675,18 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Provider preview</p>
               <h2 className="mt-3 text-3xl font-semibold text-ink">
-                {isPaidSocialLandingPage ? "Live partner paths after self-selection" : `${primaryProvider.name} first, comparison backups below`}
+                {isPaidSocialLandingPage
+                  ? "Live partner paths after self-selection"
+                  : isSearchLandingPage
+                    ? `Ready visitors can review ${primaryProvider.name}`
+                    : `${primaryProvider.name} first, comparison backups below`}
               </h2>
               <p className="mt-3 max-w-2xl text-base leading-7 text-muted">
                 {isPaidSocialLandingPage
                   ? `${primaryProvider.name} is the current live affiliate-supported path when it fits a visitor's pet type and shopping goal. Start with the path finder or comparison page before leaving PawPeaceGuide.`
-                  : `${primaryProvider.name} is the current live affiliate-supported path. Pending comparison and provider programs stay configurable below it, but the main CTA now prioritizes the approved offer.`}
+                  : isSearchLandingPage
+                    ? `${primaryProvider.name} is the current live affiliate-supported path for dog and cat shoppers who feel ready to review quote options. If you still need context, use the quiz or calculator first.`
+                    : `${primaryProvider.name} is the current live affiliate-supported path. Pending comparison and provider programs stay configurable below it, but the main CTA now prioritizes the approved offer.`}
               </p>
             </div>
             {isPaidSocialLandingPage ? (
@@ -713,33 +723,20 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-6 px-5 py-12 lg:grid-cols-[1fr_0.9fr]">
-        <CTABlock
-          eyebrow="Cost calculator"
-          title="Preview how premium, deductible, and reimbursement can change the math."
-          body="Use a simplified calculator to compare a hypothetical bill with and without insurance. It is educational only and does not predict claim approval."
-          primaryHref="/calculator"
-          primaryLabel="Use the cost calculator"
-          secondaryHref="/compare"
-          secondaryLabel="Compare quote options"
-        />
-        {isPaidSocialLandingPage ? (
-          <section className="rounded-md border border-line bg-white p-5 shadow-tight md:p-7">
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
-              Privacy-safe education
-            </p>
-            <h2 className="mt-2 text-2xl font-semibold text-ink md:text-3xl">
-              No application or sensitive intake on PawPeaceGuide.
-            </h2>
-            <p className="mt-3 text-base leading-7 text-muted">
-              This landing page does not collect full quote applications or private intake
-              details. Provider quote pages control their own forms and policy terms.
-            </p>
-          </section>
-        ) : (
+      {!isLeanLandingPage ? (
+        <section className="mx-auto grid max-w-6xl gap-6 px-5 py-12 lg:grid-cols-[1fr_0.9fr]">
+          <CTABlock
+            eyebrow="Cost calculator"
+            title="Preview how premium, deductible, and reimbursement can change the math."
+            body="Use a simplified calculator to compare a hypothetical bill with and without insurance. It is educational only and does not predict claim approval."
+            primaryHref="/calculator"
+            primaryLabel="Use the cost calculator"
+            secondaryHref="/compare"
+            secondaryLabel="Compare quote options"
+          />
           <EmailCaptureForm />
-        )}
-      </section>
+        </section>
+      ) : null}
 
       <section className="bg-white py-12">
         <div className="mx-auto max-w-4xl px-5">
@@ -758,7 +755,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
           body={`PawPeaceGuide helps you prepare better questions before leaving for ${primaryProvider.name} or another third-party quote option.`}
           primaryHref={primaryEducationHref}
           primaryLabel={page.primaryCta}
-          secondaryHref="/compare"
+          secondaryHref={isLeanLandingPage ? "/ready-to-compare" : "/compare"}
           secondaryLabel="Compare quote options"
         />
       </section>

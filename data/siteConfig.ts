@@ -10,14 +10,29 @@ export const siteConfig = {
   googleAdsId: process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "AW-18175565397",
   googleAdsConversionLabel:
     process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL || "TODO_GOOGLE_ADS_CONVERSION_LABEL",
+  googleAdsMicroConversionLabel:
+    process.env.NEXT_PUBLIC_GOOGLE_ADS_MICRO_CONVERSION_LABEL ||
+    "TODO_GOOGLE_ADS_MICRO_CONVERSION_LABEL",
   googleAdSenseEnabled: process.env.NEXT_PUBLIC_ADSENSE_ENABLED !== "false",
   googleAdSenseClientId:
     process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-6197257851905887",
   googleAdSenseSlots: {
+    display:
+      process.env.NEXT_PUBLIC_ADSENSE_SLOT_DISPLAY ||
+      process.env.NEXT_PUBLIC_ADSENSE_SLOT_SECONDARY ||
+      "",
     inArticle: process.env.NEXT_PUBLIC_ADSENSE_SLOT_IN_ARTICLE || "",
+    inFeed: process.env.NEXT_PUBLIC_ADSENSE_SLOT_IN_FEED || "",
+    inFeedLayoutKey: process.env.NEXT_PUBLIC_ADSENSE_IN_FEED_LAYOUT_KEY || "",
+    multiplex: process.env.NEXT_PUBLIC_ADSENSE_SLOT_MULTIPLEX || "",
     secondary: process.env.NEXT_PUBLIC_ADSENSE_SLOT_SECONDARY || ""
   },
+  googleAdSenseSearchEngineId: process.env.NEXT_PUBLIC_ADSENSE_SEARCH_ENGINE_ID || "",
   googleTagManagerId: "TODO_GTM_ID",
+  experimentId:
+    process.env.NEXT_PUBLIC_EXPERIMENT_ID || "2026-05-20-search-conversion-simplification",
+  awinPublisherTagEnabled: process.env.NEXT_PUBLIC_AWIN_PUBLISHER_TAG_ENABLED !== "false",
+  awinPublisherId: process.env.NEXT_PUBLIC_AWIN_PUBLISHER_ID || "2902179",
   emailCaptureProvider: "TODO_EMAIL_PROVIDER",
   appendUtmToAffiliateLinks: process.env.NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS !== "false",
   engagementTrackingEnabled: process.env.NEXT_PUBLIC_ENGAGEMENT_TRACKING_ENABLED !== "false",
@@ -51,6 +66,7 @@ export const siteConfig = {
     calculatorStarted: "calculator_started",
     calculatorCompleted: "calculator_completed",
     comparePageViewed: "compare_page_viewed",
+    readyToCompareViewed: "ready_to_compare_viewed",
     providerCardViewed: "provider_card_viewed",
     affiliateCtaClicked: "affiliate_cta_clicked",
     emailCaptureSubmitted: "email_capture_submitted",

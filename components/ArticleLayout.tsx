@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AdSenseUnit } from "@/components/AdSenseUnit";
 import { CTABlock } from "@/components/CTABlock";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
+import { EndOfPathQuoteNudge } from "@/components/EndOfPathQuoteNudge";
 import { GuideCtaButtons } from "@/components/GuideCtaButtons";
 import { IntentPathRouter } from "@/components/IntentPathRouter";
 import { JsonLd } from "@/components/JsonLd";
@@ -18,6 +19,7 @@ export function ArticleLayout({ guide }: { guide: Guide }) {
   const relatedGuides = getRelatedGuides(guide);
   const pagePath = `/guides/${guide.slug}`;
   const pageUrl = absoluteUrl(pagePath);
+  const inferredPetType = inferGuidePetType(guide.slug);
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -42,6 +44,30 @@ export function ArticleLayout({ guide }: { guide: Guide }) {
     mainEntityOfPage: pageUrl,
     url: pageUrl
   };
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: absoluteUrl("/")
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Guides",
+        item: absoluteUrl("/guides")
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: guide.title,
+        item: pageUrl
+      }
+    ]
+  };
   const faqSchema =
     guide.faqs.length > 0
       ? {
@@ -61,14 +87,16 @@ export function ArticleLayout({ guide }: { guide: Guide }) {
   return (
     <article className="mx-auto max-w-4xl px-5 py-10 md:py-14">
       <PageEventTracker page={pagePath} eventName={siteConfig.eventNames.guidePageViewed} />
-      <JsonLd data={faqSchema ? [articleSchema, faqSchema] : articleSchema} />
+      <JsonLd data={faqSchema ? [articleSchema, faqSchema, breadcrumbSchema] : [articleSchema, breadcrumbSchema]} />
 
       <div className="rounded-md border border-line bg-white p-5 shadow-soft md:p-8">
         <div className="grid gap-6 lg:grid-cols-[1fr_0.85fr] lg:items-center">
           <div>
-            <Link href="/guides" className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
-              Pet insurance guides
-            </Link>
+            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-clay">
+              <Link href="/" className="transition hover:text-pine">Home</Link>
+              <span aria-hidden="true">/</span>
+              <Link href="/guides" className="transition hover:text-pine">Guides</Link>
+            </nav>
             <h1 className="mt-3 text-4xl font-semibold tracking-normal text-ink md:text-5xl">
               {guide.title}
             </h1>
@@ -164,8 +192,9 @@ export function ArticleLayout({ guide }: { guide: Guide }) {
             {index === 1 ? (
               <AdSenseUnit
                 slot={siteConfig.googleAdSenseSlots.inArticle}
+                format="inArticle"
                 label="Advertisement"
-                className="bg-mist/40"
+                className="bg-white/60"
               />
             ) : null}
           </section>
@@ -234,6 +263,13 @@ export function ArticleLayout({ guide }: { guide: Guide }) {
         </Link>
       </section>
 
+      <AdSenseUnit
+        slot={siteConfig.googleAdSenseSlots.multiplex}
+        format="multiplex"
+        label="Advertisement"
+        className="bg-white/60"
+      />
+
       <div className="mt-10">
         <GuideCtaButtons guideSlug={guide.slug} />
       </div>
@@ -245,6 +281,24 @@ export function ArticleLayout({ guide }: { guide: Guide }) {
           {siteConfig.legalDisclaimer}
         </p>
       ) : null}
+
+      <EndOfPathQuoteNudge pageSource={`${pagePath}-end-nudge`} petType={inferredPetType} />
     </article>
   );
+}
+
+function inferGuidePetType(slug: string) {
+  if (slug.includes("cat") || slug.includes("kitten")) return "cat";
+  if (
+    slug.includes("dog") ||
+    slug.includes("puppy") ||
+    slug.includes("labrador") ||
+    slug.includes("retriever") ||
+    slug.includes("shepherd") ||
+    slug.includes("bulldog")
+  ) {
+    return "dog";
+  }
+
+  return "unknown";
 }

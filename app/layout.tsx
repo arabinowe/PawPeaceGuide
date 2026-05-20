@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Suspense } from "react";
 import "@/app/globals.css";
+import { AwinPublisherTag } from "@/components/AwinPublisherTag";
 import { BehavioralNudge } from "@/components/BehavioralNudge";
 import { EngagementTracker } from "@/components/EngagementTracker";
 import { Footer } from "@/components/Footer";
@@ -97,6 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Suspense fallback={null}>
           <GoogleRouteTracker />
         </Suspense>
+        <AwinPublisherTag />
         <Analytics />
       </body>
     </html>

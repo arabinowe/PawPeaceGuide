@@ -1,4 +1,4 @@
-import type { Guide, GuideCategory } from "@/lib/types";
+import type { Guide, GuideCategory, GuideExampleScenario, GuideFaq } from "@/lib/types";
 
 const published = "2026-05-19";
 
@@ -13,37 +13,1103 @@ export const guideCategories: GuideCategory[] = [
 
 export const plannedGuideTopics: Record<GuideCategory, string[]> = {
   "Pet Insurance Basics": [
-    "How pet insurance works",
-    "Pet insurance costs",
-    "When to buy pet insurance"
+    "How to compare pet insurance quotes",
+    "Questions to ask before you buy pet insurance",
+    "Pet insurance for multi-pet households"
   ],
   "Dog Insurance Guides": [
-    "Is pet insurance worth it for dogs?",
-    "Emergency vet bills for dogs",
-    "Dog surgery costs and insurance"
-  ],
-  "Cat Insurance Guides": [
-    "Is pet insurance worth it for cats?",
-    "Pet insurance for kittens",
-    "Indoor cat pet insurance"
-  ],
-  "Vet Bill Planning": [
-    "Emergency vet bill planning",
-    "How to compare vet bill savings with insurance",
-    "Questions to ask before a large procedure"
-  ],
-  "Policy Fine Print": [
-    "Pet insurance reimbursement rates",
-    "Pet insurance annual limits",
-    "How to read a pet insurance policy"
-  ],
-  "Breed-Specific Guides": [
     "Pet insurance for French bulldogs",
     "Pet insurance for golden retrievers",
-    "Pet insurance for German shepherds",
-    "Pet insurance for Labradors"
+    "Pet insurance for German shepherds"
+  ],
+  "Cat Insurance Guides": [
+    "Pet insurance for kittens",
+    "Cat emergency vet bills",
+    "Cat dental insurance"
+  ],
+  "Vet Bill Planning": [
+    "How to compare vet bill savings with insurance",
+    "Questions to ask before a large procedure",
+    "Specialist vet visit cost planning"
+  ],
+  "Policy Fine Print": [
+    "How to read a pet insurance policy",
+    "Benefit schedules vs reimbursement",
+    "Direct vet pay questions"
+  ],
+  "Breed-Specific Guides": [
+    "Pet insurance for Labradors",
+    "Pet insurance for dachshunds",
+    "Pet insurance for mixed-breed dogs"
   ]
 };
+
+type SeoGuideInput = {
+  slug: string;
+  title: string;
+  metaDescription: string;
+  category: GuideCategory;
+  summary: string;
+  shortAnswer: string;
+  intro: string;
+  keyTakeaways: string[];
+  sections: Guide["sections"];
+  exampleScenario: GuideExampleScenario;
+  whatToCompare: string[];
+  commonMistakes: string[];
+  faqs: GuideFaq[];
+  relatedGuideSlugs: string[];
+  readingTimeMinutes: number;
+};
+
+function makeSeoGuide(input: SeoGuideInput): Guide {
+  return {
+    slug: input.slug,
+    title: input.title,
+    metaTitle: input.title,
+    metaDescription: input.metaDescription,
+    category: input.category,
+    summary: input.summary,
+    shortAnswer: input.shortAnswer,
+    keyTakeaways: input.keyTakeaways,
+    description: input.summary,
+    intro: input.intro,
+    sections: input.sections,
+    exampleScenario: input.exampleScenario,
+    whatToCompare: input.whatToCompare,
+    commonMistakes: input.commonMistakes,
+    faqs: input.faqs,
+    relatedGuideSlugs: input.relatedGuideSlugs,
+    datePublished: published,
+    dateModified: published,
+    readingTimeMinutes: input.readingTimeMinutes,
+    affiliateDisclosureRequired: true,
+    disclaimerRequired: true
+  };
+}
+
+const additionalSeoGuides: SeoGuideInput[] = [
+  {
+    slug: "pet-insurance-costs",
+    title: "Pet Insurance Costs",
+    metaDescription:
+      "Understand the main factors that can influence pet insurance cost, including pet age, location, deductible, reimbursement rate, annual limit, and coverage type.",
+    category: "Pet Insurance Basics",
+    summary:
+      "A plain-English cost guide for comparing premium, deductible, reimbursement, annual limits, and policy tradeoffs.",
+    shortAnswer:
+      "Pet insurance cost usually depends on the pet, location, coverage type, deductible, reimbursement rate, annual limit, and optional add-ons. The lowest monthly premium is not always the lowest-risk choice, because policy terms decide what may be eligible later.",
+    intro:
+      "Pet insurance cost searches often start with one question: how much will this cost each month? That number matters, but it is only useful when you compare it against the risk you keep through deductible, reimbursement, annual limit, exclusions, and waiting periods.",
+    keyTakeaways: [
+      "Monthly premium is only one part of total cost.",
+      "Higher deductibles or lower reimbursement rates can reduce premium while leaving more future bill risk with you.",
+      "Senior pets, breed context, location, and optional wellness add-ons may affect quotes.",
+      "Use provider pages to verify real pricing and policy details directly."
+    ],
+    sections: [
+      {
+        id: "what-drives-cost",
+        heading: "What can drive pet insurance cost",
+        body: [
+          "Common cost inputs include pet age, species, breed context, ZIP code, coverage type, deductible, reimbursement rate, annual limit, and optional routine-care add-ons. Providers may weigh those inputs differently, so two quote pages can produce different monthly prices for similar-looking coverage.",
+          "Older pets may require closer review because eligibility, renewal rules, and medical history language can matter more. Do not assume a senior pet quote has the same rules as a young-pet quote."
+        ]
+      },
+      {
+        id: "premium-is-not-the-whole-cost",
+        heading: "Why premium is not the whole cost",
+        body: [
+          "A lower premium can be appealing, but it may come with a higher deductible, lower reimbursement rate, lower annual limit, or narrower policy language. The better question is how the policy behaves if a future eligible bill happens.",
+          "Compare the premium with the amount of risk you would still keep. If the plan looks inexpensive but excludes the issue you are worried about, the monthly price alone does not tell the full story."
+        ]
+      },
+      {
+        id: "how-to-compare-costs",
+        heading: "How to compare costs calmly",
+        body: [
+          "Start by setting a realistic monthly range. Then compare two or three deductible and reimbursement settings. Finally, review the annual limit and exclusions to understand how much large-bill risk stays with you.",
+          "If you are ready to see real numbers, use PawPeaceGuide to prepare the terms first, then verify quote details directly with a provider."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: cheaper premium, different risk",
+      body: [
+        "Imagine one quote has a lower monthly premium but a higher deductible and lower reimbursement rate. Another quote costs more each month but may leave less out of pocket in a covered high-bill scenario.",
+        "Neither is automatically better. The useful comparison is whether the monthly cost and possible future out-of-pocket amount fit your household."
+      ]
+    },
+    whatToCompare: [
+      "Monthly premium and annual premium",
+      "Deductible amount and structure",
+      "Reimbursement percentage",
+      "Annual limit",
+      "Waiting periods and exclusions",
+      "Optional wellness add-ons"
+    ],
+    commonMistakes: [
+      "Choosing only the lowest premium",
+      "Ignoring annual limits",
+      "Comparing wellness add-ons as if they are accident and illness coverage",
+      "Skipping waiting-period and exclusion language"
+    ],
+    faqs: [
+      {
+        question: "What is a good pet insurance price?",
+        answer:
+          "A good price depends on the policy details and your risk tolerance. Compare premium with deductible, reimbursement rate, annual limit, exclusions, and waiting periods."
+      },
+      {
+        question: "Can PawPeaceGuide quote exact premiums?",
+        answer:
+          "No. PawPeaceGuide is educational. Real quotes and policy terms must be reviewed directly with providers."
+      }
+    ],
+    relatedGuideSlugs: [
+      "pet-insurance-deductibles",
+      "pet-insurance-reimbursement-rates",
+      "pet-insurance-annual-limits",
+      "how-to-compare-pet-insurance"
+    ],
+    readingTimeMinutes: 7
+  },
+  {
+    slug: "how-pet-insurance-works",
+    title: "How Pet Insurance Works",
+    metaDescription:
+      "Learn how pet insurance generally works, including premiums, deductibles, reimbursement, claims, waiting periods, exclusions, and provider review.",
+    category: "Pet Insurance Basics",
+    summary:
+      "A beginner-friendly explanation of premiums, claims, reimbursement, waiting periods, and policy review.",
+    shortAnswer:
+      "Pet insurance generally involves paying a premium, meeting policy rules, submitting eligible vet expenses, and receiving reimbursement according to the deductible, reimbursement rate, limits, and exclusions. Exact details vary by provider and policy.",
+    intro:
+      "Pet insurance can feel more complicated than it needs to because quote pages often show price first and policy mechanics second. This guide explains the moving parts before you compare provider options.",
+    keyTakeaways: [
+      "Insurance is usually designed for future eligible accidents and illnesses, not bills that already happened.",
+      "Deductible, reimbursement rate, annual limit, waiting period, and exclusions shape how useful a policy may be.",
+      "Claims and reimbursement rules vary by provider.",
+      "Sample policy terms are worth reading before purchase."
+    ],
+    sections: [
+      {
+        id: "basic-flow",
+        heading: "The basic flow",
+        body: [
+          "A pet owner chooses a policy, pays a premium, waits through any applicable waiting periods, and submits claims for eligible future vet expenses. The provider reviews the claim against policy terms before deciding reimbursement.",
+          "Some providers may offer different claim or payment workflows. PawPeaceGuide does not control those workflows, so verify details directly with the provider."
+        ]
+      },
+      {
+        id: "main-policy-levers",
+        heading: "The main policy levers",
+        body: [
+          "The deductible is the amount you pay before eligible reimbursement begins. The reimbursement rate is the share of eligible expenses the policy may reimburse after the deductible. The annual limit is the maximum benefit for a policy year if one applies.",
+          "Those levers interact. A plan can look simple on a quote page while still having exclusions, waiting periods, or claim rules that matter later."
+        ]
+      },
+      {
+        id: "what-to-verify",
+        heading: "What to verify before buying",
+        body: [
+          "Before buying, confirm what is covered, what is excluded, how pre-existing condition rules work, which waiting periods apply, how claims are paid, and whether optional wellness benefits are separate from accident and illness coverage.",
+          "If you cannot find sample policy terms, slow down before relying on the quote."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: reimbursement after deductible",
+      body: [
+        "If an eligible future bill is $2,000, a $500 deductible would leave $1,500 potentially subject to reimbursement. At an 80% reimbursement rate, the rough reimbursement before other limits and exclusions might be $1,200.",
+        "Real outcomes depend on policy wording, eligibility, limits, taxes, fees, and claim review."
+      ]
+    },
+    whatToCompare: [
+      "Premium",
+      "Deductible",
+      "Reimbursement rate",
+      "Annual limit",
+      "Claims process",
+      "Pre-existing condition language"
+    ],
+    commonMistakes: [
+      "Assuming every vet bill is eligible",
+      "Confusing wellness add-ons with insurance",
+      "Ignoring waiting periods",
+      "Not checking how claims are submitted and paid"
+    ],
+    faqs: [
+      {
+        question: "Does pet insurance pay the vet directly?",
+        answer:
+          "Some providers may offer direct-pay options in certain situations, but availability varies. Verify payment workflow directly with the provider and your veterinarian."
+      },
+      {
+        question: "Does coverage start immediately?",
+        answer:
+          "Not always. Waiting periods may apply for accidents, illnesses, orthopedic conditions, or other categories."
+      }
+    ],
+    relatedGuideSlugs: [
+      "what-does-pet-insurance-cover",
+      "what-does-pet-insurance-not-cover",
+      "pet-insurance-waiting-periods",
+      "pre-existing-conditions-pet-insurance"
+    ],
+    readingTimeMinutes: 7
+  },
+  {
+    slug: "when-to-buy-pet-insurance",
+    title: "When to Buy Pet Insurance",
+    metaDescription:
+      "Understand why many pet owners compare pet insurance before symptoms or injuries appear, and what to review before buying.",
+    category: "Pet Insurance Basics",
+    summary:
+      "A timing guide for comparing pet insurance before a stressful vet bill or medical-history question changes the decision.",
+    shortAnswer:
+      "Many pet owners compare pet insurance before symptoms, injuries, or large bills appear because waiting periods and pre-existing condition rules can affect future eligibility. The right timing still depends on your budget, pet, and provider terms.",
+    intro:
+      "Timing matters in pet insurance because policies are generally built around future eligible events. This guide helps you understand why comparing earlier can be calmer than comparing after a problem starts.",
+    keyTakeaways: [
+      "Waiting periods can delay when coverage may apply.",
+      "Symptoms or diagnoses before enrollment may affect eligibility later.",
+      "Young pets may be easier to compare before medical history grows, but policy terms still vary.",
+      "Senior pets deserve careful age and medical-history review."
+    ],
+    sections: [
+      {
+        id: "before-there-is-a-problem",
+        heading: "Before there is a problem",
+        body: [
+          "The cleanest time to compare is often before symptoms, injuries, or emergency bills appear. That does not guarantee coverage later, but it may reduce confusion around what was known before enrollment.",
+          "If a pet already has symptoms, read policy wording closely and ask the provider how medical records are reviewed."
+        ]
+      },
+      {
+        id: "puppies-kittens-and-young-pets",
+        heading: "Puppies, kittens, and young pets",
+        body: [
+          "New pet owners often compare early because there may be fewer medical-history questions and more time to understand waiting periods. Age eligibility and policy start rules still need direct provider verification.",
+          "Separate routine wellness care from accident and illness coverage so you are not comparing different products as if they are the same."
+        ]
+      },
+      {
+        id: "senior-pet-timing",
+        heading: "Senior pet timing",
+        body: [
+          "Senior pets can still be worth researching, but the review should be more careful. Confirm enrollment age, renewal rules, medical-record review, chronic-condition language, and state availability.",
+          "The goal is not to force a quote. The goal is to understand what is realistically available before relying on it."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: waiting until symptoms appear",
+      body: [
+        "A pet owner compares policies after a limp has already started. Even if the owner buys a policy, the provider may review medical records and decide whether that symptom affects future eligibility.",
+        "That is why many people compare before there is a known issue, then review waiting periods and pre-existing condition definitions directly."
+      ]
+    },
+    whatToCompare: [
+      "Enrollment age",
+      "Waiting periods",
+      "Medical-record review",
+      "Pre-existing condition definitions",
+      "Renewal language",
+      "State availability"
+    ],
+    commonMistakes: [
+      "Waiting until a bill is already due",
+      "Assuming a new policy applies to symptoms that already started",
+      "Skipping senior-pet eligibility questions",
+      "Ignoring wellness plan differences"
+    ],
+    faqs: [
+      {
+        question: "Is it too late to buy pet insurance for an older pet?",
+        answer:
+          "Not necessarily, but you need to verify age eligibility, medical-history review, exclusions, and state availability directly with providers."
+      },
+      {
+        question: "Should I buy pet insurance right after adoption?",
+        answer:
+          "It can be worth comparing early, especially before medical issues appear, but policy terms and waiting periods still control eligibility."
+      }
+    ],
+    relatedGuideSlugs: [
+      "pet-insurance-for-puppies",
+      "pet-insurance-for-senior-dogs",
+      "pre-existing-conditions-pet-insurance",
+      "pet-insurance-waiting-periods"
+    ],
+    readingTimeMinutes: 7
+  },
+  {
+    slug: "pet-insurance-reimbursement-rates",
+    title: "Pet Insurance Reimbursement Rates",
+    metaDescription:
+      "Learn how pet insurance reimbursement rates work and why they should be compared with deductible, annual limit, exclusions, and eligible expenses.",
+    category: "Policy Fine Print",
+    summary:
+      "A guide to reimbursement percentages, eligible expenses, deductible interaction, and out-of-pocket planning.",
+    shortAnswer:
+      "A reimbursement rate is the percentage of eligible expenses a policy may reimburse after deductible and policy rules. It does not apply to every bill automatically, so compare it with exclusions, limits, and claim rules.",
+    intro:
+      "Reimbursement rate is one of the most visible quote-page settings, but it can be misunderstood. An 80% or 90% setting only matters after you know what expenses are eligible and how the deductible applies.",
+    keyTakeaways: [
+      "Reimbursement applies to eligible expenses, not necessarily the entire invoice.",
+      "Deductible structure changes the math.",
+      "Annual limits and exclusions can cap or prevent reimbursement.",
+      "Provider policy terms decide claim outcomes."
+    ],
+    sections: [
+      {
+        id: "what-it-means",
+        heading: "What reimbursement rate means",
+        body: [
+          "A reimbursement rate describes the share of eligible costs a provider may pay back after the deductible and policy rules are applied. Common quote-page settings may show different percentages, but eligibility is still controlled by the policy.",
+          "If a service is excluded, outside the waiting period, above a limit, or not considered eligible, the reimbursement percentage may not help with that cost."
+        ]
+      },
+      {
+        id: "how-it-interacts",
+        heading: "How it interacts with deductible and limits",
+        body: [
+          "A higher reimbursement rate may reduce out-of-pocket cost for eligible claims, but it may also affect premium. A lower reimbursement rate may reduce premium but leave more cost with you after a claim.",
+          "Annual limits can also cap the amount reimbursed in a policy year, so the rate alone is not enough."
+        ]
+      },
+      {
+        id: "questions-to-ask",
+        heading: "Questions to ask providers",
+        body: [
+          "Ask whether reimbursement is calculated before or after certain fees, how exam fees are treated, whether taxes or administrative costs are eligible, and how annual limits affect reimbursement.",
+          "Also ask whether sample claim examples are available so the math is easier to understand before purchase."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: 80% after deductible",
+      body: [
+        "If a future eligible bill is $1,500 and the deductible is $500, the remaining $1,000 may be the amount subject to reimbursement. At 80%, the rough reimbursement could be $800 before considering limits or exclusions.",
+        "This is a simplified example, not a prediction of claim approval."
+      ]
+    },
+    whatToCompare: [
+      "Reimbursement percentage",
+      "Eligible expense definition",
+      "Deductible timing",
+      "Annual limit",
+      "Exam fee treatment",
+      "Claim documentation"
+    ],
+    commonMistakes: [
+      "Applying reimbursement to the full invoice without checking eligibility",
+      "Ignoring deductible first",
+      "Comparing reimbursement rate without annual limit",
+      "Assuming every provider calculates reimbursement the same way"
+    ],
+    faqs: [
+      {
+        question: "Is a higher reimbursement rate always better?",
+        answer:
+          "Not always. It may reduce eligible out-of-pocket costs, but compare premium, deductible, annual limit, exclusions, and your budget."
+      },
+      {
+        question: "Does reimbursement happen instantly?",
+        answer:
+          "Claim timing and payment workflow vary by provider. Verify the process directly before relying on it."
+      }
+    ],
+    relatedGuideSlugs: [
+      "pet-insurance-deductibles",
+      "pet-insurance-annual-limits",
+      "how-pet-insurance-works",
+      "how-to-compare-pet-insurance"
+    ],
+    readingTimeMinutes: 6
+  },
+  {
+    slug: "pet-insurance-annual-limits",
+    title: "Pet Insurance Annual Limits",
+    metaDescription:
+      "Learn how pet insurance annual limits can affect large vet bill risk and how to compare limits with premium, deductible, and reimbursement.",
+    category: "Policy Fine Print",
+    summary:
+      "A guide to annual limits, benefit caps, and why a low premium may still leave large-bill exposure.",
+    shortAnswer:
+      "An annual limit is the maximum amount a policy may reimburse in a policy year if eligible claims occur. Compare it with premium, deductible, reimbursement rate, exclusions, and the size of bills you want to plan for.",
+    intro:
+      "Annual limits are easy to overlook because they may sit below the monthly premium on a quote page. But for large vet bills, the limit can be one of the most important policy details.",
+    keyTakeaways: [
+      "Annual limits can cap reimbursement in a policy year.",
+      "A lower annual limit may reduce premium but keep more large-bill risk with you.",
+      "Some policies may use different benefit structures, so compare wording carefully.",
+      "Exclusions and waiting periods still apply even when a limit looks generous."
+    ],
+    sections: [
+      {
+        id: "what-annual-limit-means",
+        heading: "What an annual limit means",
+        body: [
+          "An annual limit is the most a policy may reimburse during a policy year for eligible claims. If eligible bills exceed that limit, the remaining cost may be your responsibility.",
+          "Some products may use benefit schedules, per-condition limits, or other structures. Review the sample policy instead of assuming every limit works the same way."
+        ]
+      },
+      {
+        id: "why-limits-matter",
+        heading: "Why limits matter for emergencies",
+        body: [
+          "Large emergencies, surgeries, hospital stays, or specialist work can push costs higher than a pet owner expected. An annual limit affects how much of that future eligible cost could still remain with you.",
+          "A policy with a lower premium and lower annual limit may fit some budgets, but it is not the same risk profile as a policy with a higher limit."
+        ]
+      },
+      {
+        id: "how-to-compare-limits",
+        heading: "How to compare annual limits",
+        body: [
+          "Compare the limit against the kind of bill you are worried about, not just against the monthly premium. Then check whether the reimbursement rate, deductible, and exclusions make the limit meaningful.",
+          "Ask providers how limits reset, whether any separate limits apply, and whether sample policy terms explain the structure clearly."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: limit below the bill",
+      body: [
+        "If a future eligible bill is $12,000 and a policy has a $5,000 annual limit, the limit may cap reimbursement even if the reimbursement percentage is high.",
+        "The exact result depends on deductible, eligible expenses, exclusions, and claim review."
+      ]
+    },
+    whatToCompare: [
+      "Annual reimbursement limit",
+      "Per-condition or benefit schedule rules",
+      "Deductible",
+      "Reimbursement rate",
+      "Limit reset timing",
+      "Exclusions"
+    ],
+    commonMistakes: [
+      "Ignoring limits because the premium looks affordable",
+      "Assuming the limit applies to every type of cost",
+      "Missing per-condition or benefit schedule language",
+      "Not comparing the limit with realistic emergency scenarios"
+    ],
+    faqs: [
+      {
+        question: "Is no annual limit always necessary?",
+        answer:
+          "Not for every household. Compare the premium and risk tradeoff, then verify how the provider defines limits and eligible expenses."
+      },
+      {
+        question: "Do annual limits reset?",
+        answer:
+          "Many annual limits are tied to the policy year, but reset rules vary. Confirm directly with the provider."
+      }
+    ],
+    relatedGuideSlugs: [
+      "pet-insurance-costs",
+      "pet-insurance-reimbursement-rates",
+      "pet-insurance-deductibles",
+      "dog-surgery-costs-and-insurance"
+    ],
+    readingTimeMinutes: 6
+  },
+  {
+    slug: "is-pet-insurance-worth-it-for-dogs",
+    title: "Is Pet Insurance Worth It for Dogs?",
+    metaDescription:
+      "A dog-owner guide to deciding whether pet insurance is worth comparing, including age, breed context, emergency risk, and policy fine print.",
+    category: "Dog Insurance Guides",
+    summary:
+      "A dog-specific framework for comparing emergency risk, breed context, age, deductibles, reimbursement, and exclusions.",
+    shortAnswer:
+      "Pet insurance can be worth comparing for dogs if an unexpected surgery, emergency visit, or illness workup would be financially stressful. The value depends on your dog, budget, policy terms, and how much future bill risk you want to keep.",
+    intro:
+      "Dog insurance searches often begin after someone hears about a large surgery or emergency bill. A calmer approach is to compare before there is a problem, while you can still read policy details carefully.",
+    keyTakeaways: [
+      "Dogs can face accident, illness, surgery, and breed-related risk questions.",
+      "Breed context can matter, but provider definitions and exclusions vary.",
+      "Age and medical history deserve direct provider review.",
+      "A quote is only useful after you understand deductible, reimbursement, annual limit, and exclusions."
+    ],
+    sections: [
+      {
+        id: "why-dog-owners-compare",
+        heading: "Why dog owners compare pet insurance",
+        body: [
+          "Dogs can be active, curious, and expensive to treat when something unexpected happens. Pet insurance may help with some future eligible accident or illness costs, but it does not make every bill covered.",
+          "Dog owners often compare policies to understand how much large-bill risk they want to transfer to a provider versus keep in savings."
+        ]
+      },
+      {
+        id: "dog-specific-questions",
+        heading: "Dog-specific questions to ask",
+        body: [
+          "Ask how the provider treats breed-related conditions, orthopedic waiting periods, dental injury or disease, exam fees, diagnostics, medications, and specialist care. Do not rely on marketing summaries alone.",
+          "If your dog is older or has past symptoms, ask how medical records and pre-existing condition rules are reviewed."
+        ]
+      },
+      {
+        id: "when-it-may-fit",
+        heading: "When it may fit your household",
+        body: [
+          "Dog insurance may be worth comparing if a sudden bill would force a stressful decision, if you prefer predictable monthly planning, or if you want a policy in place before future issues appear.",
+          "It may be less useful if you can comfortably self-fund large bills or mainly want routine wellness reimbursement."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: dog surgery planning",
+      body: [
+        "A dog owner comparing policies may model a future $4,000 eligible surgery. The deductible, reimbursement rate, annual limit, and exclusions decide how much might be reimbursed.",
+        "The exact claim result can only be reviewed by the provider under policy terms."
+      ]
+    },
+    whatToCompare: [
+      "Breed-related language",
+      "Orthopedic waiting periods",
+      "Dental rules",
+      "Exam fee treatment",
+      "Deductible and reimbursement",
+      "Annual limit"
+    ],
+    commonMistakes: [
+      "Assuming breed-related issues are handled the same everywhere",
+      "Waiting until after symptoms appear",
+      "Ignoring orthopedic waiting periods",
+      "Comparing only premium"
+    ],
+    faqs: [
+      {
+        question: "Should every dog owner buy pet insurance?",
+        answer:
+          "No. It depends on budget, emergency savings, policy terms, and risk tolerance. PawPeaceGuide helps you compare features, not choose for you."
+      },
+      {
+        question: "Can dog insurance cover surgery?",
+        answer:
+          "Some future eligible surgeries may be covered under some policies, but exclusions, waiting periods, and claim review matter. Verify directly with the provider."
+      }
+    ],
+    relatedGuideSlugs: [
+      "dog-surgery-costs-and-insurance",
+      "emergency-vet-bills-for-dogs",
+      "pet-insurance-for-senior-dogs",
+      "how-to-compare-pet-insurance"
+    ],
+    readingTimeMinutes: 7
+  },
+  {
+    slug: "is-pet-insurance-worth-it-for-cats",
+    title: "Is Pet Insurance Worth It for Cats?",
+    metaDescription:
+      "A cat-owner guide to comparing pet insurance for indoor, outdoor, kitten, senior, emergency, dental, and illness-related questions.",
+    category: "Cat Insurance Guides",
+    summary:
+      "A cat-specific framework for comparing illness risk, indoor/outdoor lifestyle, dental rules, deductibles, and exclusions.",
+    shortAnswer:
+      "Pet insurance can be worth comparing for cats if an unexpected illness, emergency, dental issue, or diagnostic workup would be hard to pay from savings. The value depends on policy terms, your cat's age and lifestyle, and your budget.",
+    intro:
+      "Cat owners sometimes assume indoor cats have little risk, but illness, diagnostics, dental questions, and emergency visits can still create large bills. This guide helps you compare calmly without assuming insurance is always the answer.",
+    keyTakeaways: [
+      "Indoor cats can still have illness or emergency costs.",
+      "Outdoor or mixed-lifestyle cats may raise different accident-risk questions.",
+      "Dental, diagnostics, medication, and exam fee language deserve direct review.",
+      "Senior cats need careful age and medical-history questions."
+    ],
+    sections: [
+      {
+        id: "why-cat-owners-compare",
+        heading: "Why cat owners compare insurance",
+        body: [
+          "Cats may need emergency care, diagnostic testing, medication, dental treatment, or chronic-condition management. Insurance may help with some future eligible costs, but policy wording controls what is eligible.",
+          "The decision often comes down to whether a predictable premium feels useful compared with the risk of a future unexpected bill."
+        ]
+      },
+      {
+        id: "cat-specific-details",
+        heading: "Cat-specific details to review",
+        body: [
+          "Ask about dental disease, diagnostics, exam fees, prescriptions, chronic conditions, and indoor/outdoor lifestyle. Do not assume a brief quote summary explains all exclusions.",
+          "For senior cats, ask about enrollment age, medical records, chronic condition language, and state availability."
+        ]
+      },
+      {
+        id: "how-to-compare",
+        heading: "How to compare cat insurance options",
+        body: [
+          "Start with the policy type: accident-only, accident and illness, or wellness add-ons. Then compare deductible, reimbursement rate, annual limit, waiting periods, and exclusions.",
+          "If you are ready for a quote page, bring a short checklist so you do not judge only by monthly premium."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: cat diagnostic bill",
+      body: [
+        "A cat owner may want to model a future $1,800 eligible diagnostic and treatment bill. The deductible, reimbursement rate, annual limit, and exclusions decide the possible reimbursement math.",
+        "Exam fees, taxes, waiting periods, and policy definitions can change the real outcome."
+      ]
+    },
+    whatToCompare: [
+      "Indoor/outdoor risk context",
+      "Dental disease language",
+      "Diagnostics and medication",
+      "Deductible",
+      "Reimbursement rate",
+      "Senior cat eligibility"
+    ],
+    commonMistakes: [
+      "Assuming indoor cats have no emergency risk",
+      "Overlooking dental exclusions",
+      "Ignoring chronic-condition language",
+      "Skipping sample policy terms"
+    ],
+    faqs: [
+      {
+        question: "Is pet insurance useful for indoor cats?",
+        answer:
+          "It can be worth comparing because indoor cats can still face illness, diagnostics, dental issues, and emergencies. Policy terms vary."
+      },
+      {
+        question: "Does cat insurance include dental care?",
+        answer:
+          "Dental rules vary widely. Ask providers how injury, disease, cleanings, and exclusions are handled."
+      }
+    ],
+    relatedGuideSlugs: [
+      "indoor-cat-pet-insurance",
+      "cat-emergency-vet-bills",
+      "cat-dental-insurance",
+      "pet-insurance-for-kittens"
+    ],
+    readingTimeMinutes: 7
+  },
+  {
+    slug: "emergency-vet-bills-for-dogs",
+    title: "Emergency Vet Bills for Dogs",
+    metaDescription:
+      "Plan for emergency vet bills for dogs with plain-English guidance on savings, pet insurance, deductibles, reimbursement, and quote readiness.",
+    category: "Vet Bill Planning",
+    summary:
+      "A dog emergency planning guide for comparing savings, insurance, deductibles, reimbursement, and provider questions.",
+    shortAnswer:
+      "Emergency vet bills for dogs can be stressful because they often require quick decisions. Planning ahead means comparing emergency savings, pet insurance terms, and the policy details that decide eligible reimbursement.",
+    intro:
+      "A dog emergency is the wrong moment to learn insurance vocabulary for the first time. Use this guide to understand the questions before you need them.",
+    keyTakeaways: [
+      "Emergency planning is about reducing rushed decisions.",
+      "Insurance may help with some future eligible emergencies, but it is not retroactive.",
+      "Deductible, reimbursement, annual limit, waiting periods, and exclusions matter.",
+      "A dedicated emergency fund and insurance can play different roles."
+    ],
+    sections: [
+      {
+        id: "what-emergency-planning-means",
+        heading: "What emergency planning means",
+        body: [
+          "Emergency planning means deciding how you would handle a sudden eligible vet bill before the pressure is high. That may include savings, insurance, credit options, or a mix of tools.",
+          "PawPeaceGuide focuses on the insurance and planning questions, not on emergency medical advice. If your dog may be in distress, contact a veterinarian."
+        ]
+      },
+      {
+        id: "insurance-role",
+        heading: "Where pet insurance may fit",
+        body: [
+          "Pet insurance may help with some future eligible emergency costs after deductible, reimbursement, limits, and exclusions. Waiting periods and pre-existing condition rules can affect whether a claim is eligible.",
+          "That is why the useful time to compare is before the emergency, not while a bill is already due."
+        ]
+      },
+      {
+        id: "questions-before-quote",
+        heading: "Questions before you review quote options",
+        body: [
+          "Ask how the provider handles emergency visits, specialists, diagnostics, hospitalization, surgery, medications, and follow-up care. Then ask how claims are submitted and paid.",
+          "Keep the comparison focused on the policy mechanics that would matter during a stressful visit."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: emergency bill math",
+      body: [
+        "A dog owner may compare a future $3,500 emergency bill against a policy deductible, reimbursement rate, and annual limit. If the bill is eligible, those settings shape possible reimbursement.",
+        "If the emergency is related to an excluded condition or a waiting period, the result may be different."
+      ]
+    },
+    whatToCompare: [
+      "Emergency visit eligibility",
+      "Specialist care",
+      "Diagnostics",
+      "Hospitalization",
+      "Surgery",
+      "Claim payment timing"
+    ],
+    commonMistakes: [
+      "Waiting until the emergency happens",
+      "Assuming an active symptom is new after purchase",
+      "Ignoring waiting periods",
+      "Not knowing whether exam fees are eligible"
+    ],
+    faqs: [
+      {
+        question: "Can I buy pet insurance after an emergency starts?",
+        answer:
+          "You can apply for insurance, but a bill or symptom that already happened may be reviewed under pre-existing condition rules. Verify directly with providers."
+      },
+      {
+        question: "Should emergency savings replace pet insurance?",
+        answer:
+          "Some households prefer savings, some prefer insurance, and some use both. Compare the risk you want to keep versus transfer."
+      }
+    ],
+    relatedGuideSlugs: [
+      "dog-surgery-costs-and-insurance",
+      "pet-insurance-costs",
+      "when-to-buy-pet-insurance",
+      "pet-insurance-waiting-periods"
+    ],
+    readingTimeMinutes: 7
+  },
+  {
+    slug: "dog-surgery-costs-and-insurance",
+    title: "Dog Surgery Costs and Insurance",
+    metaDescription:
+      "Understand how dog surgery costs can interact with pet insurance deductibles, reimbursement rates, annual limits, exclusions, and waiting periods.",
+    category: "Vet Bill Planning",
+    summary:
+      "A surgery-planning guide for dog owners comparing future eligible bills against insurance policy mechanics.",
+    shortAnswer:
+      "Dog surgery costs can be difficult to plan for because eligibility, deductible, reimbursement, annual limit, exclusions, and waiting periods decide whether insurance may help. Use quote pages to verify surgery-related terms directly.",
+    intro:
+      "Surgery is one of the scenarios dog owners often have in mind when comparing pet insurance. The key is to compare policy mechanics before a procedure is on the calendar.",
+    keyTakeaways: [
+      "Future eligible surgeries may be treated differently depending on policy terms.",
+      "Orthopedic waiting periods and exclusions deserve special attention.",
+      "The invoice amount is not the same as eligible reimbursable cost.",
+      "Provider review controls claim decisions."
+    ],
+    sections: [
+      {
+        id: "surgery-cost-planning",
+        heading: "How to think about surgery cost planning",
+        body: [
+          "A surgery bill may include consultation, diagnostics, anesthesia, procedure fees, hospitalization, medication, follow-up visits, and rehabilitation. Policies can treat those pieces differently.",
+          "When comparing, ask which parts of a future eligible surgery may be considered, which are excluded, and whether any category-specific waiting period applies."
+        ]
+      },
+      {
+        id: "orthopedic-questions",
+        heading: "Orthopedic and breed-related questions",
+        body: [
+          "Some dog surgery searches involve orthopedic issues. Ask providers about orthopedic waiting periods, bilateral condition rules, breed-related exclusions, and medical-record review.",
+          "Do not assume a plan will cover a future surgery just because it covers accidents or illnesses generally."
+        ]
+      },
+      {
+        id: "quote-page-checklist",
+        heading: "Quote-page checklist for surgery concerns",
+        body: [
+          "Review deductible, reimbursement rate, annual limit, exclusions, waiting periods, claims workflow, and whether specialist or rehabilitation care has separate rules.",
+          "Ask for sample policy terms before buying if surgery risk is one of your main concerns."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: eligible surgery bill",
+      body: [
+        "A future eligible surgery bill of $5,000 might first be reduced by deductible, then reimbursed at the policy's reimbursement rate, subject to annual limits and exclusions.",
+        "That simplified math can change if diagnostics, follow-up care, or certain fees are not eligible."
+      ]
+    },
+    whatToCompare: [
+      "Surgery eligibility",
+      "Orthopedic waiting periods",
+      "Specialist care",
+      "Diagnostics",
+      "Rehabilitation",
+      "Annual limit"
+    ],
+    commonMistakes: [
+      "Assuming all surgery-related fees are eligible",
+      "Missing orthopedic waiting periods",
+      "Ignoring bilateral condition language",
+      "Buying after symptoms appear and expecting coverage"
+    ],
+    faqs: [
+      {
+        question: "Can pet insurance help with dog surgery?",
+        answer:
+          "It may help with some future eligible surgeries, but policy terms, waiting periods, exclusions, and claim review decide the result."
+      },
+      {
+        question: "Should I compare insurance if my dog already needs surgery?",
+        answer:
+          "You can research options, but the current need may be treated under pre-existing condition rules. Ask providers directly."
+      }
+    ],
+    relatedGuideSlugs: [
+      "emergency-vet-bills-for-dogs",
+      "torn-acl-dog-insurance",
+      "pet-insurance-reimbursement-rates",
+      "pet-insurance-annual-limits"
+    ],
+    readingTimeMinutes: 7
+  },
+  {
+    slug: "indoor-cat-pet-insurance",
+    title: "Indoor Cat Pet Insurance",
+    metaDescription:
+      "A guide for indoor cat owners comparing pet insurance, illness risk, dental questions, diagnostics, emergency care, and policy fine print.",
+    category: "Cat Insurance Guides",
+    summary:
+      "A practical guide for indoor cat owners deciding whether pet insurance is worth comparing.",
+    shortAnswer:
+      "Indoor cats may have lower exposure to some outdoor accidents, but they can still face illness, dental issues, diagnostics, medication, and emergency care. Pet insurance may be worth comparing if those future costs would be stressful.",
+    intro:
+      "Indoor cat owners often wonder whether insurance is unnecessary. The more useful question is which future costs you are worried about and whether a policy's terms fit those risks.",
+    keyTakeaways: [
+      "Indoor cats can still need emergency or illness care.",
+      "Dental, diagnostics, and chronic-condition language deserve review.",
+      "Premium should be compared with deductible, reimbursement, annual limit, and exclusions.",
+      "Senior indoor cats need medical-history and age questions."
+    ],
+    sections: [
+      {
+        id: "indoor-does-not-mean-no-risk",
+        heading: "Indoor does not mean no risk",
+        body: [
+          "Indoor cats may avoid some outdoor hazards, but illness, urinary issues, dental disease, medication, imaging, and emergency visits can still happen. Insurance may help with some future eligible costs if policy terms allow.",
+          "The goal is not to scare yourself into buying. The goal is to compare realistic future scenarios before relying on savings alone."
+        ]
+      },
+      {
+        id: "what-to-review",
+        heading: "What indoor cat owners should review",
+        body: [
+          "Review illness coverage, dental wording, diagnostics, medications, exam fees, chronic conditions, waiting periods, and pre-existing condition definitions.",
+          "If your cat is older, also ask about enrollment age, renewal rules, and medical-record review."
+        ]
+      },
+      {
+        id: "compare-calmly",
+        heading: "How to compare calmly",
+        body: [
+          "Start with whether you want accident-only, accident and illness, or wellness add-ons. Then compare policy mechanics instead of only the monthly premium.",
+          "If routine care is your main concern, a wellness plan or product may be a separate discussion from insurance."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: indoor cat illness visit",
+      body: [
+        "An indoor cat may need diagnostics and medication for a future eligible illness. The deductible, reimbursement rate, annual limit, and exclusions decide whether insurance helps and by how much.",
+        "If the issue is tied to prior symptoms or excluded services, the result can differ."
+      ]
+    },
+    whatToCompare: [
+      "Illness coverage",
+      "Dental disease wording",
+      "Diagnostics and imaging",
+      "Medication",
+      "Exam fees",
+      "Pre-existing condition definitions"
+    ],
+    commonMistakes: [
+      "Assuming indoor cats have no vet-bill risk",
+      "Comparing only accident scenarios",
+      "Ignoring dental language",
+      "Confusing wellness with insurance"
+    ],
+    faqs: [
+      {
+        question: "Do indoor cats need pet insurance?",
+        answer:
+          "Not every indoor cat owner needs it, but it can be worth comparing if illness, diagnostics, dental issues, or emergency costs would be stressful."
+      },
+      {
+        question: "Is wellness care the same as cat insurance?",
+        answer:
+          "No. Wellness products or add-ons may help with routine care planning, but they are not the same as accident and illness insurance."
+      }
+    ],
+    relatedGuideSlugs: [
+      "is-pet-insurance-worth-it-for-cats",
+      "cat-emergency-vet-bills",
+      "cat-dental-insurance",
+      "pet-insurance-vs-wellness-plan"
+    ],
+    readingTimeMinutes: 6
+  },
+  {
+    slug: "cat-emergency-vet-bills",
+    title: "Cat Emergency Vet Bills",
+    metaDescription:
+      "Plan for cat emergency vet bills with plain-English guidance on insurance, savings, reimbursement, exclusions, and quote-page questions.",
+    category: "Vet Bill Planning",
+    summary:
+      "An emergency planning guide for cat owners comparing savings, insurance, and provider quote details.",
+    shortAnswer:
+      "Cat emergency vet bills can be easier to plan for before anything is wrong. Compare emergency savings, insurance policy terms, deductible, reimbursement, annual limit, waiting periods, and exclusions before relying on a quote.",
+    intro:
+      "Cats can hide symptoms, and emergency decisions can feel rushed. This guide helps you understand insurance and planning questions before a stressful visit.",
+    keyTakeaways: [
+      "Emergency planning should happen before symptoms appear when possible.",
+      "Insurance may help with future eligible emergencies, not every bill.",
+      "Diagnostics, hospitalization, and medication rules deserve review.",
+      "Provider policy terms and claim review control reimbursement."
+    ],
+    sections: [
+      {
+        id: "common-planning-questions",
+        heading: "Common planning questions",
+        body: [
+          "Cat emergency planning often includes urgent visits, diagnostics, hospitalization, medication, and follow-up care. Ask how a provider treats those categories before you buy.",
+          "If your cat already has symptoms, ask providers how pre-existing condition rules and medical records may affect eligibility."
+        ]
+      },
+      {
+        id: "insurance-and-savings",
+        heading: "Insurance and savings can play different roles",
+        body: [
+          "Emergency savings can help with immediate payment. Insurance may help with some future eligible costs after claim review. Neither tool removes the need to understand the policy.",
+          "Some households prefer one tool, some use both. Compare the risk you want to keep."
+        ]
+      },
+      {
+        id: "before-quote-page",
+        heading: "Before you review quote options",
+        body: [
+          "Have a short checklist ready: deductible, reimbursement rate, annual limit, waiting periods, exclusions, exam fees, diagnostics, and claim payment workflow.",
+          "Do not judge the quote only by monthly cost."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: emergency diagnostics",
+      body: [
+        "A cat emergency might involve an exam, bloodwork, imaging, medication, and monitoring. A policy may treat those charges differently depending on eligibility and exclusions.",
+        "The quote page should lead you to policy terms that explain how those categories are reviewed."
+      ]
+    },
+    whatToCompare: [
+      "Emergency visit rules",
+      "Diagnostics",
+      "Medication",
+      "Hospitalization",
+      "Exam fees",
+      "Claims workflow"
+    ],
+    commonMistakes: [
+      "Waiting until symptoms are obvious",
+      "Assuming all emergency charges are eligible",
+      "Ignoring exam-fee rules",
+      "Not having a payment plan outside insurance"
+    ],
+    faqs: [
+      {
+        question: "Can insurance help with cat emergency bills?",
+        answer:
+          "It may help with some future eligible emergency costs, depending on policy terms, waiting periods, exclusions, and claim review."
+      },
+      {
+        question: "Should I compare insurance if my cat is already sick?",
+        answer:
+          "You can research options, but current symptoms may be reviewed as pre-existing. Verify directly with providers."
+      }
+    ],
+    relatedGuideSlugs: [
+      "indoor-cat-pet-insurance",
+      "is-pet-insurance-worth-it-for-cats",
+      "pet-insurance-waiting-periods",
+      "pre-existing-conditions-pet-insurance"
+    ],
+    readingTimeMinutes: 6
+  },
+  {
+    slug: "cat-dental-insurance",
+    title: "Cat Dental Insurance",
+    metaDescription:
+      "Understand cat dental insurance questions, including dental injury, disease, cleanings, wellness add-ons, exclusions, and provider verification.",
+    category: "Cat Insurance Guides",
+    summary:
+      "A cat dental guide for separating dental injury, disease, cleanings, wellness add-ons, and exclusions.",
+    shortAnswer:
+      "Cat dental coverage varies by provider and policy. Dental injury, dental disease, routine cleanings, extractions, and wellness add-ons may be treated differently, so review policy wording directly.",
+    intro:
+      "Dental questions are a common reason cat owners compare policies, but the wording can be easy to misunderstand. This guide helps you ask better questions before relying on a quote.",
+    keyTakeaways: [
+      "Dental injury and dental disease may be handled differently.",
+      "Routine cleanings are often separate from accident and illness coverage.",
+      "Exclusions, waiting periods, and medical history can matter.",
+      "Provider policy terms decide eligibility."
+    ],
+    sections: [
+      {
+        id: "dental-categories",
+        heading: "Dental categories to separate",
+        body: [
+          "Ask whether the provider distinguishes dental injury, dental disease, extractions, cleanings, preventive care, and oral exams. A policy may cover one category while excluding another.",
+          "Routine dental cleanings may require a wellness add-on or may not be included. Verify directly instead of assuming."
+        ]
+      },
+      {
+        id: "policy-language",
+        heading: "Policy language that matters",
+        body: [
+          "Look for exclusions, waiting periods, pre-existing condition language, medical-record review, and documentation requirements. Dental claims can be especially sensitive to wording.",
+          "Ask whether annual limits, sublimits, or benefit schedules affect dental reimbursement."
+        ]
+      },
+      {
+        id: "how-to-compare",
+        heading: "How to compare dental questions",
+        body: [
+          "Start with the dental problem you are trying to plan for: accident, disease, prevention, or routine care. Then compare providers by the policy category that matches that need.",
+          "If the quote page does not make dental rules clear, look for sample policy terms or ask the provider directly."
+        ]
+      }
+    ],
+    exampleScenario: {
+      title: "Hypothetical example: dental cleaning vs dental disease",
+      body: [
+        "A routine cleaning may be treated as wellness or preventive care, while a future eligible dental disease claim may be reviewed under accident and illness terms if the policy includes it.",
+        "The distinction matters because wellness and insurance are not the same product."
+      ]
+    },
+    whatToCompare: [
+      "Dental injury",
+      "Dental disease",
+      "Routine cleaning",
+      "Extractions",
+      "Waiting periods",
+      "Sublimits or exclusions"
+    ],
+    commonMistakes: [
+      "Assuming all dental care is included",
+      "Confusing wellness cleanings with insurance",
+      "Missing dental exclusions",
+      "Not asking about medical-record review"
+    ],
+    faqs: [
+      {
+        question: "Does pet insurance cover cat dental cleanings?",
+        answer:
+          "Routine cleanings often require wellness benefits or may be excluded. Verify directly with the provider."
+      },
+      {
+        question: "Are cat dental extractions covered?",
+        answer:
+          "They may be eligible under some policies in some situations, but policy wording, exclusions, and claim review decide."
+      }
+    ],
+    relatedGuideSlugs: [
+      "is-pet-insurance-worth-it-for-cats",
+      "indoor-cat-pet-insurance",
+      "pet-insurance-vs-wellness-plan",
+      "what-does-pet-insurance-cover"
+    ],
+    readingTimeMinutes: 6
+  }
+];
 
 export const guides: Guide[] = [
   {
@@ -1057,7 +2123,8 @@ export const guides: Guide[] = [
     readingTimeMinutes: 7,
     affiliateDisclosureRequired: true,
     disclaimerRequired: true
-  }
+  },
+  ...additionalSeoGuides.map(makeSeoGuide)
 ];
 
 export function getGuide(slug: string) {

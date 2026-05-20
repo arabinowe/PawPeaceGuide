@@ -1,7 +1,10 @@
+import { Fragment } from "react";
 import { ArrowRight, BookOpenCheck, Calculator, FileSearch, ShieldCheck } from "lucide-react";
+import { AdSenseUnit } from "@/components/AdSenseUnit";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { PetImagePanel, petImages } from "@/components/PetImage";
 import { UTMLink } from "@/components/UTMLink";
+import { siteConfig } from "@/data/siteConfig";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
@@ -65,23 +68,33 @@ export default function BlogIndexPage() {
 
       <section className="mx-auto max-w-6xl px-5 py-12">
         <div className="grid gap-5 md:grid-cols-3">
-          {posts.map((post) => (
-            <UTMLink
-              key={post.href}
-              href={post.href}
-              className="group rounded-md border border-line bg-white p-5 shadow-tight transition hover:-translate-y-0.5 hover:border-pine/40 hover:shadow-soft"
-            >
-              <post.icon className="h-5 w-5 text-pine" aria-hidden="true" />
-              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-clay">
-                {post.label}
-              </p>
-              <h2 className="mt-2 text-xl font-semibold text-ink">{post.title}</h2>
-              <p className="mt-3 text-sm leading-6 text-muted">{post.description}</p>
-              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-pine">
-                Read more
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
-              </span>
-            </UTMLink>
+          {posts.map((post, index) => (
+            <Fragment key={post.href}>
+              <UTMLink
+                href={post.href}
+                className="group rounded-md border border-line bg-white p-5 shadow-tight transition hover:-translate-y-0.5 hover:border-pine/40 hover:shadow-soft"
+              >
+                <post.icon className="h-5 w-5 text-pine" aria-hidden="true" />
+                <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-clay">
+                  {post.label}
+                </p>
+                <h2 className="mt-2 text-xl font-semibold text-ink">{post.title}</h2>
+                <p className="mt-3 text-sm leading-6 text-muted">{post.description}</p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-pine">
+                  Read more
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
+                </span>
+              </UTMLink>
+              {index === 1 ? (
+                <AdSenseUnit
+                  slot={siteConfig.googleAdSenseSlots.inFeed}
+                  format="inFeed"
+                  layoutKey={siteConfig.googleAdSenseSlots.inFeedLayoutKey}
+                  label="Advertisement"
+                  className="my-0 rounded-md border border-line bg-white px-3 shadow-tight"
+                />
+              ) : null}
+            </Fragment>
           ))}
         </div>
       </section>

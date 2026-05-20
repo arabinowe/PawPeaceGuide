@@ -35,6 +35,8 @@ https://pawpeaceguide.com/cat-insurance?utm_source=google&utm_medium=paid_search
 
 ## Safer Search Ad Copy
 
+Use the fuller Performance Max/search asset pack in `launch/google-ads-asset-pack.md`.
+
 Headline ideas:
 
 - Pet Insurance Explained
@@ -103,8 +105,23 @@ Suggested negatives:
 
 - `/pet-insurance` has original educational content above and below the fold.
 - `/pet-insurance` includes a live Odie CTA through `/go/odie`.
+- `/pet-insurance` stays focused: quiz, calculator, and Odie are the main choices.
 - `/go/odie` is noindex, not in the sitemap, and preserves UTMs.
 - Pending partners are clearly labeled as pending or educational.
 - Legal pages are linked in the footer.
 - Affiliate disclosure is visible near monetized CTAs.
 - `npm run audit:outbound`, `npm run lint`, and `npm run build` pass.
+
+## Early Spend Optimization
+
+Do not overreact to the first few dollars. At a small daily budget, the first goal is to learn which queries and assets produce intent signals before expecting affiliate conversions.
+
+High-intent signals:
+
+- `/quiz` start or completion
+- `/calculator` start or completion
+- `/ready-to-compare` view
+- `/compare` view
+- `/go/odie` click
+
+If spend is going to low-intent search terms, add negatives before rewriting the site. If visitors are reaching `/pet-insurance` but not clicking anything, test a tighter landing-page variant with the primary decision cards above the fold and fewer educational sections.

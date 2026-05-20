@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AdSenseUnit } from "@/components/AdSenseUnit";
+import { AdSenseSearchBox } from "@/components/AdSenseSearchBox";
 import { JsonLd } from "@/components/JsonLd";
 import { PageEventTracker } from "@/components/PageEventTracker";
 import { PetImagePanel, petImages } from "@/components/PetImage";
@@ -64,6 +65,8 @@ export default function GlossaryPage() {
           </div>
         </nav>
 
+        <AdSenseSearchBox className="mt-6" />
+
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {glossaryTerms.map((term) => (
             <section key={term.slug} id={term.slug} className="scroll-mt-24 rounded-md border border-line bg-white p-5 shadow-tight">
@@ -74,9 +77,10 @@ export default function GlossaryPage() {
         </div>
 
         <AdSenseUnit
-          slot={siteConfig.googleAdSenseSlots.secondary}
+          slot={siteConfig.googleAdSenseSlots.display}
+          format="display"
           label="Advertisement"
-          className="bg-mist/40"
+          className="bg-white/60"
         />
 
         <div className="mt-10 rounded-md border border-line bg-mist p-5">

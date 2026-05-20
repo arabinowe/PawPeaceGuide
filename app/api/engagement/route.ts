@@ -68,7 +68,19 @@ function sanitizeEvent(value: unknown) {
     sessionId: sanitizeString(value.sessionId),
     page: sanitizeString(value.page),
     score: sanitizeNumber(value.score),
+    microConversion: sanitizeMicroConversion(isRecord(value.microConversion) ? value.microConversion : null),
     payload: sanitizePayload(isRecord(value.payload) ? value.payload : {})
+  };
+}
+
+function sanitizeMicroConversion(value: Record<string, unknown> | null) {
+  if (!value) return undefined;
+
+  return {
+    name: sanitizeString(value.name),
+    stage: sanitizeString(value.stage),
+    value: sanitizeNumber(value.value),
+    optimizationUse: sanitizeString(value.optimizationUse)
   };
 }
 

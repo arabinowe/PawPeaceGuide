@@ -89,10 +89,19 @@ NEXT_PUBLIC_META_PIXEL_ID=
 NEXT_PUBLIC_GA_ID=
 NEXT_PUBLIC_GOOGLE_ADS_ID=
 NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL=
+NEXT_PUBLIC_GOOGLE_ADS_MICRO_CONVERSION_LABEL=
+NEXT_PUBLIC_EXPERIMENT_ID=
+NEXT_PUBLIC_AWIN_PUBLISHER_TAG_ENABLED=true
+NEXT_PUBLIC_AWIN_PUBLISHER_ID=2902179
 NEXT_PUBLIC_ADSENSE_ENABLED=true
 NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-6197257851905887
+NEXT_PUBLIC_ADSENSE_SLOT_DISPLAY=
 NEXT_PUBLIC_ADSENSE_SLOT_IN_ARTICLE=
+NEXT_PUBLIC_ADSENSE_SLOT_IN_FEED=
+NEXT_PUBLIC_ADSENSE_IN_FEED_LAYOUT_KEY=
+NEXT_PUBLIC_ADSENSE_SLOT_MULTIPLEX=
 NEXT_PUBLIC_ADSENSE_SLOT_SECONDARY=
+NEXT_PUBLIC_ADSENSE_SEARCH_ENGINE_ID=
 NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true
 NEXT_PUBLIC_PRIMARY_AFFILIATE_URL=
 NEXT_PUBLIC_ODIE_AFFILIATE_URL=
@@ -107,11 +116,21 @@ CANONICAL_REDIRECT_HOSTS=pawpeaceguide.vercel.app,www.pawpeaceguide.com
 
 Do not commit real affiliate links, private API keys, partner tokens, or private tracking credentials.
 
-Public analytics and engagement values are read in `data/siteConfig.ts`. The Google tag loads only when `NEXT_PUBLIC_GA_ID` or `NEXT_PUBLIC_GOOGLE_ADS_ID` is configured. Google Ads conversion tracking fires on `affiliate_cta_clicked` when both `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL` are set. Meta Pixel remains a TODO integration and should only receive generic, privacy-reviewed events if added later.
+Public analytics and engagement values are read in `data/siteConfig.ts`. The Google tag loads only when `NEXT_PUBLIC_GA_ID` or `NEXT_PUBLIC_GOOGLE_ADS_ID` is configured. Google Ads conversion tracking fires on `affiliate_cta_clicked` when both `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL` are set. Optional Google Ads micro-conversion tracking fires for primary-proxy events when `NEXT_PUBLIC_GOOGLE_ADS_MICRO_CONVERSION_LABEL` is set. Meta Pixel remains a TODO integration and should only receive generic, privacy-reviewed events if added later.
 
-AdSense verification is configured with `NEXT_PUBLIC_ADSENSE_CLIENT_ID`. The global AdSense script and `google-adsense-account` meta tag load when `NEXT_PUBLIC_ADSENSE_ENABLED` is not `false`. The `ads.txt` route is available at `/ads.txt`. In-page ad units stay off until Google provides real slot IDs for `NEXT_PUBLIC_ADSENSE_SLOT_IN_ARTICLE` and `NEXT_PUBLIC_ADSENSE_SLOT_SECONDARY`.
+The Awin Publisher MasterTag is enabled with `NEXT_PUBLIC_AWIN_PUBLISHER_ID=2902179` and loads `https://www.dwin2.com/pub.2902179.min.js` after hydration. Disable it with `NEXT_PUBLIC_AWIN_PUBLISHER_TAG_ENABLED=false` if Awin asks for a temporary removal during QA.
 
-Keep display ads away from high-intent conversion steps unless revenue data proves they help. Recommended AdSense page exclusions: `/quiz`, `/calculator`, `/compare`, `/ready-to-compare`, `/go/*`, `/pet-parent-protection`, `/dog-parent-protection`, and `/pet-insurance`. Use manual slot IDs first on `/guides`, `/guides/[slug]`, `/glossary`, and the comparison-checklist blog so organic research traffic can monetize without interrupting the provider handoff.
+AdSense verification is configured with `NEXT_PUBLIC_ADSENSE_CLIENT_ID`. The global AdSense script and `google-adsense-account` meta tag load when `NEXT_PUBLIC_ADSENSE_ENABLED` is not `false`. The static `ads.txt` file is available at `/ads.txt`.
+
+Manual AdSense formats are supported on lower-direct-conversion pages:
+
+- Display units: `NEXT_PUBLIC_ADSENSE_SLOT_DISPLAY`
+- In-article units: `NEXT_PUBLIC_ADSENSE_SLOT_IN_ARTICLE`
+- In-feed units: `NEXT_PUBLIC_ADSENSE_SLOT_IN_FEED` plus `NEXT_PUBLIC_ADSENSE_IN_FEED_LAYOUT_KEY`
+- Multiplex units: `NEXT_PUBLIC_ADSENSE_SLOT_MULTIPLEX`
+- Programmable Search Engine: `NEXT_PUBLIC_ADSENSE_SEARCH_ENGINE_ID`
+
+Keep display ads away from high-intent conversion steps unless revenue data proves they help. Recommended AdSense page exclusions: `/quiz`, `/calculator`, `/compare`, `/ready-to-compare`, `/go/*`, `/pet-parent-protection`, `/dog-parent-protection`, and `/pet-insurance`. Use manual slot IDs first on `/guides`, `/guides/[slug]`, `/blog`, `/glossary`, and the comparison-checklist blog so organic research traffic can monetize without interrupting the Odie handoff. Auto Ads formats such as anchor, vignette, and side-rail ads should be controlled in AdSense with those same exclusions.
 
 ## Public Launch Milestone
 
@@ -558,6 +577,7 @@ Production monitoring:
 3. Filter for `ppg_engagement_event`.
 4. Compare event quality by `utm_campaign`, `utm_content`, page, and event name.
 5. Use `/admin/engagement` for current-browser QA and to confirm events are firing before traffic goes live.
+6. For a quick local report, export Vercel logs as JSON lines and run `npm run analyze:engagement -- /path/to/logs.jsonl`.
 
 Real-time behavior:
 

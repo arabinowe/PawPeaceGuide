@@ -1,9 +1,12 @@
+import { Fragment } from "react";
 import { AdSenseUnit } from "@/components/AdSenseUnit";
+import { AdSenseSearchBox } from "@/components/AdSenseSearchBox";
 import { GuideCard } from "@/components/GuideCard";
+import { JsonLd } from "@/components/JsonLd";
 import { PetImagePanel, petImages } from "@/components/PetImage";
-import { getGuidesByCategory, guideCategories, plannedGuideTopics } from "@/data/guides";
+import { getGuidesByCategory, guideCategories, guides, plannedGuideTopics } from "@/data/guides";
 import { siteConfig } from "@/data/siteConfig";
-import { createMetadata } from "@/lib/seo";
+import { absoluteUrl, createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Pet Insurance Guides",
@@ -13,20 +16,46 @@ export const metadata = createMetadata({
 });
 
 export default function GuidesIndexPage() {
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Pet Insurance Guides",
+    url: absoluteUrl("/guides"),
+    description:
+      "Plain-English pet insurance guides for dog owners, cat owners, senior pets, policy fine print, and vet bill planning.",
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.brandName,
+      url: siteConfig.siteUrl
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: guides.map((guide, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: guide.title,
+          url: absoluteUrl(`/guides/${guide.slug}`)
+        }))
+    }
+  };
+
   return (
-    <section className="mx-auto max-w-6xl px-5 py-10 md:py-14">
-      <div className="grid gap-8 lg:grid-cols-[1fr_0.85fr] lg:items-center">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Guides</p>
-          <h1 className="mt-3 text-4xl font-semibold text-ink md:text-5xl">Pet insurance education library</h1>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">
-            Pet insurance explained before the stressful vet bill moment. Use these guides to prepare better
-            questions before comparing third-party provider quote options.
-          </p>
+    <>
+      <JsonLd data={itemListSchema} />
+      <section className="mx-auto max-w-6xl px-5 py-10 md:py-14">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.85fr] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Guides</p>
+            <h1 className="mt-3 text-4xl font-semibold text-ink md:text-5xl">Pet insurance education library</h1>
+            <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">
+              Pet insurance explained before the stressful vet bill moment. Use these guides to prepare better
+              questions before comparing third-party provider quote options.
+            </p>
+          </div>
+          <PetImagePanel image={petImages.calmTrust} label="Helpful dog and cat insurance guides" priority />
         </div>
-        <PetImagePanel image={petImages.calmTrust} label="Helpful dog and cat insurance guides" priority />
-      </div>
-      <div className="mt-10 space-y-10">
+        <AdSenseSearchBox className="mt-8" />
+        <div className="mt-10 space-y-10">
         {guideCategories.map((category, index) => {
           const categoryGuides = getGuidesByCategory(category);
           const plannedTopics = plannedGuideTopics[category] || [];
@@ -48,8 +77,20 @@ export default function GuidesIndexPage() {
 
               {categoryGuides.length > 0 ? (
                 <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                  {categoryGuides.map((guide) => (
-                    <GuideCard key={guide.slug} guide={guide} />
+                  {categoryGuides.map((guide, guideIndex) => (
+                    <Fragment key={guide.slug}>
+                      <GuideCard guide={guide} />
+                      {index === 0 && guideIndex === 2 ? (
+                        <AdSenseUnit
+                          key="guides-in-feed-ad"
+                          slot={siteConfig.googleAdSenseSlots.inFeed}
+                          format="inFeed"
+                          layoutKey={siteConfig.googleAdSenseSlots.inFeedLayoutKey}
+                          label="Advertisement"
+                          className="my-0 rounded-md border border-line bg-white px-3 shadow-tight"
+                        />
+                      ) : null}
+                    </Fragment>
                   ))}
                 </div>
               ) : null}
@@ -67,15 +108,17 @@ export default function GuidesIndexPage() {
 
               {index === 1 ? (
                 <AdSenseUnit
-                  slot={siteConfig.googleAdSenseSlots.secondary}
+                  slot={siteConfig.googleAdSenseSlots.multiplex}
+                  format="multiplex"
                   label="Advertisement"
-                  className="bg-mist/40"
+                  className="bg-white/60"
                 />
               ) : null}
             </section>
           );
         })}
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }

@@ -129,6 +129,7 @@ export type FunnelEventName =
   | "calculator_started"
   | "calculator_completed"
   | "compare_page_viewed"
+  | "ready_to_compare_viewed"
   | "provider_card_viewed"
   | "affiliate_cta_clicked"
   | "email_capture_submitted"
