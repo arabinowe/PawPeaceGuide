@@ -253,6 +253,83 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
         </div>
       </section>
 
+      {isSearchLandingPage ? (
+        <section className="border-b border-line bg-white">
+          <div className="mx-auto max-w-6xl px-4 py-6 sm:px-5 md:py-8">
+            <div className="grid gap-4 rounded-md border border-line bg-mist p-4 shadow-tight md:grid-cols-[0.85fr_1.15fr] md:p-6">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
+                  Pick the search path that fits
+                </p>
+                <h2 className="mt-2 text-2xl font-semibold text-ink">
+                  Here from Google? Start where your question already is.
+                </h2>
+                <p className="mt-3 text-sm leading-6 text-muted md:text-base md:leading-7">
+                  Some visitors want a quick insurance check. Some want cost math. Some are ready
+                  to review Odie as the current live provider path. Choose the next step that
+                  matches your pace.
+                </p>
+              </div>
+              <div className="grid gap-3 md:grid-cols-2">
+                <div className="rounded-md border border-line bg-white p-4">
+                  <p className="text-sm font-semibold text-ink">I want a guided check</p>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    Answer a few non-sensitive shopping questions and get a plain-English profile.
+                  </p>
+                  <div className="mt-4">
+                    <Button href="/quiz" variant="accent" className="w-full">
+                      Start the 60-second check
+                    </Button>
+                  </div>
+                </div>
+                <div className="rounded-md border border-pine/20 bg-white p-4">
+                  <p className="text-sm font-semibold text-ink">I am ready to review quotes</p>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    If you are planning for a dog or cat, continue through the tracked
+                    Odie partner route and verify terms directly.
+                  </p>
+                  <div className="mt-4">
+                    <PrimaryOfferButton
+                      pageSource={`${pageSourceBase}-google-search-fast-path`}
+                      showDisclosure={false}
+                      className="w-full"
+                    >
+                      Review Odie quote options
+                    </PrimaryOfferButton>
+                  </div>
+                  <p className="mt-3 text-xs leading-5 text-muted">
+                    Affiliate-supported handoff. PawPeaceGuide is not an insurer or broker.
+                  </p>
+                </div>
+                <div className="rounded-md border border-line bg-white p-4">
+                  <p className="text-sm font-semibold text-ink">I want dog or cat specifics</p>
+                  <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                    <Button href="/dog-insurance-options" variant="secondary" className="w-full">
+                      Dog options
+                    </Button>
+                    <Button href="/cat-insurance-options" variant="secondary" className="w-full">
+                      Cat options
+                    </Button>
+                  </div>
+                </div>
+                <div className="rounded-md border border-line bg-white p-4">
+                  <p className="text-sm font-semibold text-ink">I want cost context first</p>
+                  <p className="mt-2 text-sm leading-6 text-muted">
+                    Use a rough calculator before deciding whether a provider quote page makes
+                    sense.
+                  </p>
+                  <div className="mt-4">
+                    <Button href="/calculator" variant="secondary" className="w-full">
+                      Use calculator
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       {isPaidSocialLandingPage ? (
         <section className="mx-auto max-w-6xl px-4 py-8 sm:px-5 md:py-12">
           <div className="grid gap-5 rounded-md border border-line bg-white p-5 shadow-soft md:grid-cols-[0.9fr_1.1fr] md:p-7">

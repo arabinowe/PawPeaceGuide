@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { Suspense } from "react";
 import "@/app/globals.css";
 import { BehavioralNudge } from "@/components/BehavioralNudge";
 import { EngagementTracker } from "@/components/EngagementTracker";
 import { Footer } from "@/components/Footer";
+import { GoogleRouteTracker } from "@/components/GoogleRouteTracker";
 import { GoogleTag } from "@/components/GoogleTag";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
@@ -85,6 +87,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <BehavioralNudge />
         <GoogleTag />
+        <Suspense fallback={null}>
+          <GoogleRouteTracker />
+        </Suspense>
         <Analytics />
       </body>
     </html>

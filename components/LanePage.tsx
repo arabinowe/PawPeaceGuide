@@ -1,5 +1,6 @@
 import { CheckCircle2, ClipboardCheck, PawPrint } from "lucide-react";
 import { Button } from "@/components/Button";
+import { EndOfPathQuoteNudge } from "@/components/EndOfPathQuoteNudge";
 import { MethodologyNote } from "@/components/MethodologyNote";
 import { PageEventTracker } from "@/components/PageEventTracker";
 import { PartnerOfferCard } from "@/components/PartnerOfferCard";
@@ -8,6 +9,7 @@ import { ProviderCard } from "@/components/ProviderCard";
 import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
 import { routeIntent } from "@/lib/intentRouting";
 import type { LanePageConfig } from "@/data/lanePages";
+import type { IntentNextStep } from "@/lib/intentRouting";
 
 export function LanePage({ page }: { page: LanePageConfig }) {
   const routing = routeIntent({
@@ -22,7 +24,17 @@ export function LanePage({ page }: { page: LanePageConfig }) {
   });
   const image = getPetImageForPath(page.slug);
   const liveProviders = routing.matchingLiveProviders;
+  const routePath = `/${page.slug}`;
+  const primaryNextStep =
+    routing.primaryNextStep.href === routePath ? getNonSelfNextStep(page) : routing.primaryNextStep;
+  const secondaryNextStep =
+    page.primaryInternalHref === primaryNextStep.href ? getAlternativeNextStep(page) : {
+      href: page.primaryInternalHref,
+      label: page.primaryInternalLabel
+    };
   const showQuoteReadyChecklist =
+    page.userIntent !== "wellness or comfort products" && page.petType !== "other";
+  const showQuoteNudge =
     page.userIntent !== "wellness or comfort products" && page.petType !== "other";
 
   return (
@@ -35,9 +47,9 @@ export function LanePage({ page }: { page: LanePageConfig }) {
             <h1 className="mt-3 text-4xl font-semibold text-ink md:text-5xl">{page.title}</h1>
             <p className="mt-4 text-lg leading-8 text-muted">{page.intro}</p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Button href={routing.primaryNextStep.href}>{routing.primaryNextStep.cta}</Button>
-              <Button href={page.primaryInternalHref} variant="secondary">
-                {page.primaryInternalLabel}
+              <Button href={primaryNextStep.href}>{primaryNextStep.cta}</Button>
+              <Button href={secondaryNextStep.href} variant="secondary">
+                {secondaryNextStep.label}
               </Button>
             </div>
             <p className="mt-4 text-sm leading-6 text-muted">{page.readinessPrompt}</p>
@@ -89,10 +101,10 @@ export function LanePage({ page }: { page: LanePageConfig }) {
             <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Suggested next step</p>
-                <h2 className="mt-3 text-3xl font-semibold text-ink">{routing.primaryNextStep.title}</h2>
-                <p className="mt-3 text-base leading-7 text-muted">{routing.primaryNextStep.body}</p>
+                <h2 className="mt-3 text-3xl font-semibold text-ink">{primaryNextStep.title}</h2>
+                <p className="mt-3 text-base leading-7 text-muted">{primaryNextStep.body}</p>
                 <div className="mt-5">
-                  <Button href={routing.primaryNextStep.href}>{routing.primaryNextStep.cta}</Button>
+                  <Button href={primaryNextStep.href}>{primaryNextStep.cta}</Button>
                 </div>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -153,6 +165,67 @@ export function LanePage({ page }: { page: LanePageConfig }) {
       ) : null}
 
       <MethodologyNote className="mx-auto max-w-6xl px-5 pb-12" />
+      <EndOfPathQuoteNudge pageSource={`/${page.slug}-end-nudge`} petType={page.petType} enabled={showQuoteNudge} />
     </>
   );
+}
+
+function getAlternativeNextStep(page: LanePageConfig) {
+  if (page.userIntent === "emergency vet bill planning") {
+    return { href: "/quiz", label: "Start the 60-second check" };
+  }
+
+  if (page.userIntent === "wellness or comfort products") {
+    return { href: "/pet-wellness-extras", label: "Review wellness extras" };
+  }
+
+  if (page.petType === "other" || page.userIntent === "other pet type") {
+    return { href: "/glossary", label: "Review glossary" };
+  }
+
+  return { href: "/ready-to-compare", label: "Use ready checklist" };
+}
+
+function getNonSelfNextStep(page: LanePageConfig): IntentNextStep {
+  if (page.userIntent === "emergency vet bill planning") {
+    return {
+      title: "Run the emergency bill math next",
+      body:
+        "Use the calculator to compare a hypothetical bill with premium, deductible, reimbursement, and annual limit assumptions before deciding whether to review a provider quote page.",
+      href: "/calculator",
+      cta: "Use calculator",
+      kind: "internal"
+    };
+  }
+
+  if (page.petType === "other" || page.userIntent === "other pet type") {
+    return {
+      title: "Use the eligibility checklist next",
+      body:
+        "For pets other than dogs or cats, start with eligibility, state availability, exclusions, and whether a provider actually supports your species before comparing price.",
+      href: "/guides/how-to-compare-pet-insurance",
+      cta: "Read comparison guide",
+      kind: "education"
+    };
+  }
+
+  if (page.userIntent === "wellness or comfort products") {
+    return {
+      title: "Separate wellness extras from insurance",
+      body:
+        "Wellness products and comfort items can support everyday routines, but they are not insurance and should not be treated as vet-bill reimbursement.",
+      href: "/guides/pet-insurance-vs-wellness-plan",
+      cta: "Read wellness comparison",
+      kind: "education"
+    };
+  }
+
+  return {
+    title: "Start the 60-second check next",
+    body:
+      "Use the short quiz to turn this lane into a practical shopping profile before reviewing quote options.",
+    href: page.primaryInternalHref,
+    cta: page.primaryInternalLabel,
+    kind: "internal"
+  };
 }
