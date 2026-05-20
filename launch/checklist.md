@@ -56,6 +56,10 @@
 
 ## Ad Readiness QA
 
+- For Google Search, use `/pet-insurance`, `/dog-insurance`, `/cat-insurance`, or a matching guide page rather than direct `/go/[providerSlug]` URLs.
+- Confirm Google landing pages include original educational content before provider CTAs.
+- Confirm Google Ads conversion IDs are intentionally blank or configured with `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL`.
+- Do not bid on provider brand terms unless affiliate terms explicitly allow it.
 - Use `/pet-parent-protection` for broad happy-pet education creative and `/dog-parent-protection` for dog-specific education creative.
 - Do not use emergency, crisis, sick-pet, or pressure-heavy creative for the initial Meta review retry.
 - Use `/start-60-second-check` for the 60-second-check creative.

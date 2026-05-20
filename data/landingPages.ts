@@ -21,22 +21,22 @@ const sharedFaq = [
 export const landingPages: LandingPageVariant[] = [
   {
     slug: "pet-insurance",
-    title: "Pet Insurance Guide | PawPeaceGuide",
+    title: "Pet Insurance Guide and Quote Options | PawPeaceGuide",
     description:
-      "Plain-English pet insurance guidance for coverage features, costs, exclusions, and quote options.",
+      "Plain-English pet insurance guidance for coverage features, costs, exclusions, quote options, and provider handoff decisions.",
     eyebrow: "Pet insurance education",
-    headline: "Understand pet insurance options at your own pace.",
+    headline: "Pet insurance, explained before you compare.",
     subheadline:
-      "PawPeaceGuide helps pet owners understand coverage features, costs, exclusions, waiting periods, and quote options before visiting a third-party provider page.",
-    primaryCta: "Find my pet insurance path",
+      "Learn how deductibles, reimbursement rates, annual limits, waiting periods, exclusions, and provider quote pages work. When you are ready, PawPeaceGuide can route you to the current live provider option through a disclosed affiliate path.",
+    primaryCta: "Start the 60-second pet insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:
-      "Built for pet owners who want practical context before clicking into a licensed provider quote page.",
-    compareReasonTitle: "Why pet owners compare insurance while things are calm",
+      "Built for search visitors who want practical context before clicking into a licensed provider quote page.",
+    compareReasonTitle: "Why pet owners compare before choosing a provider path",
     compareReasons: [
-      "Pet insurance is easier to review when the main policy terms are familiar.",
-      "Waiting periods and pre-existing condition rules can make timing important.",
-      "Deductibles, reimbursement rates, annual limits, and exclusions can change the real out-of-pocket picture."
+      "Pet insurance is easier to review when the main policy terms are familiar before a quote page asks for details.",
+      "Waiting periods and pre-existing condition rules can affect timing, eligibility, and what questions to ask.",
+      "Deductibles, reimbursement rates, annual limits, exclusions, and wellness add-ons can change the real tradeoff behind a monthly premium."
     ],
     helpWith: [
       "Unexpected accidents and illnesses, depending on the policy",

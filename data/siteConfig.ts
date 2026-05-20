@@ -3,10 +3,13 @@ import type { FunnelEventName } from "@/lib/types";
 export const siteConfig = {
   brandName: "PawPeaceGuide",
   tagline: "Plain-English pet insurance guidance for calmer decisions.",
-  heroLine: "Understand pet insurance options at your own pace.",
+  heroLine: "Pet insurance explained before you compare.",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://pawpeaceguide.com",
   metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || "TODO_META_PIXEL_ID",
   googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || "TODO_GA_MEASUREMENT_ID",
+  googleAdsId: process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "AW-18175565397",
+  googleAdsConversionLabel:
+    process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL || "TODO_GOOGLE_ADS_CONVERSION_LABEL",
   googleTagManagerId: "TODO_GTM_ID",
   emailCaptureProvider: "TODO_EMAIL_PROVIDER",
   appendUtmToAffiliateLinks: process.env.NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS !== "false",

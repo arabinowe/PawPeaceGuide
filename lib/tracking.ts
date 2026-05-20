@@ -2,6 +2,12 @@ import { siteConfig } from "@/data/siteConfig";
 import type { FunnelEventName } from "@/lib/types";
 import { getStoredUtmParams } from "@/lib/utm";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 export type EventPayload = {
   page?: string;
   providerSlug?: string;
@@ -81,11 +87,12 @@ export function trackFunnelEvent(eventName: FunnelEventName, payload: EventPaylo
   }
 
   sendEngagementEvent(enrichedEvent);
+  sendGoogleFunnelEvent(eventName, enrichedEvent.payload);
 
   maybeFireIntentThresholdEvents(state);
 
   // TODO Meta Pixel: send generic events only. Do not send quiz answers, pet health details, or email addresses by default.
-  // TODO Google Analytics / GTM: map these events to GA4 conversions after measurement ID is configured.
+  // TODO Google Tag Manager: move event routing into GTM if campaign complexity grows.
   // TODO affiliate click tracking: add durable server-side storage or a warehouse if click-level attribution is needed.
   // TODO Conversion API later: only send privacy-reviewed, consent-aware, non-sensitive payloads.
 }
@@ -190,6 +197,46 @@ function sendEngagementEvent(event: StoredEngagementEvent) {
   } catch {
     // Tracking must never interrupt the funnel.
   }
+}
+
+function sendGoogleFunnelEvent(eventName: FunnelEventName, payload: EventPayload) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+
+  const safePayload = sanitizePayload(payload);
+  const googlePayload = {
+    event_category: "pawpeaceguide_funnel",
+    event_label:
+      safePayload.providerSlug ??
+      safePayload.pageSource ??
+      safePayload.page ??
+      safePayload.ctaLabel ??
+      eventName,
+    provider_slug: safePayload.providerSlug,
+    provider_role: safePayload.providerRole,
+    page_source: safePayload.pageSource,
+    link_status: safePayload.linkStatus,
+    campaign_source: safePayload.campaignSource,
+    utm_campaign: safePayload.utm_campaign,
+    utm_content: safePayload.utm_content
+  };
+
+  window.gtag("event", eventName, googlePayload);
+
+  if (
+    eventName === siteConfig.eventNames.affiliateCtaClicked &&
+    isConfiguredPublicId(siteConfig.googleAdsId) &&
+    isConfiguredPublicId(siteConfig.googleAdsConversionLabel)
+  ) {
+    window.gtag("event", "conversion", {
+      send_to: `${siteConfig.googleAdsId}/${siteConfig.googleAdsConversionLabel}`,
+      event_category: "pawpeaceguide_funnel",
+      event_label: safePayload.providerSlug ?? "affiliate_clickout"
+    });
+  }
+}
+
+function isConfiguredPublicId(value: string) {
+  return Boolean(value && !value.startsWith("TODO_") && !value.includes("PLACEHOLDER"));
 }
 
 function shouldSample() {

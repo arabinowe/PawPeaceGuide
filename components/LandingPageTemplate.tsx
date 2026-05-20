@@ -118,15 +118,17 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
     page.slug === "pet-insurance" ||
     page.slug === "pet-parent-protection" ||
     page.slug === "dog-parent-protection";
-  const isAdLandingPage =
-    usesKnowBeforeHero ||
+  const isPaidSocialLandingPage =
+    page.slug === "pet-parent-protection" ||
+    page.slug === "dog-parent-protection" ||
     page.slug === "start-60-second-check" ||
     page.slug === "emergency-vet-bills" ||
     page.slug === "vet-bill-help";
+  const isSearchLandingPage = page.slug === "pet-insurance";
   const secondaryHeroHref =
     page.slug === "emergency-vet-bills" || page.slug === "vet-bill-help" ? "/calculator" : "/compare";
-  const mobileStickyLabel = isAdLandingPage ? "Find my path" : "Start quiz";
-  const primaryEducationHref = isAdLandingPage ? "/find-my-path" : "/quiz";
+  const mobileStickyLabel = isPaidSocialLandingPage ? "Find my path" : "Start quiz";
+  const primaryEducationHref = isPaidSocialLandingPage ? "/find-my-path" : "/quiz";
 
   return (
     <>
@@ -175,7 +177,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
               {page.subheadline}
             </p>
             <div className="mt-5 flex flex-col gap-3 sm:flex-row md:mt-7">
-              <Button href={primaryEducationHref} variant={isAdLandingPage ? "accent" : "primary"} className="w-full sm:w-auto">
+              <Button href={primaryEducationHref} variant={isPaidSocialLandingPage || isSearchLandingPage ? "accent" : "primary"} className="w-full sm:w-auto">
                 {page.primaryCta}
               </Button>
               <Button href={secondaryHeroHref} variant="secondary" className="w-full sm:w-auto">
@@ -251,7 +253,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
         </div>
       </section>
 
-      {isAdLandingPage ? (
+      {isPaidSocialLandingPage ? (
         <section className="mx-auto max-w-6xl px-4 py-8 sm:px-5 md:py-12">
           <div className="grid gap-5 rounded-md border border-line bg-white p-5 shadow-soft md:grid-cols-[0.9fr_1.1fr] md:p-7">
             <div>
@@ -366,7 +368,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
       <IntentPathRouter
         pageSource={`${pageSourceBase}-intent-router`}
         className="mx-auto max-w-6xl px-5 pb-12"
-        directProviderCta={!isAdLandingPage}
+        directProviderCta={!isPaidSocialLandingPage}
       />
 
       <section className="bg-white py-12">
@@ -382,7 +384,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
             </div>
             <div className="rounded-md border border-line bg-mist p-5">
               <p className="text-base leading-7 text-muted">
-                {isAdLandingPage
+                {isPaidSocialLandingPage
                   ? "This page helps you understand the terms to scan before you choose a next step. When a live partner path fits your goal, PawPeaceGuide routes you through a disclosed tracking page."
                   : `${primaryProvider.name} is the current approved provider clickout for PawPeaceGuide. This page helps you understand the terms to scan before you leave this site for a third-party provider.`}
               </p>
@@ -393,7 +395,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
                 the third-party destination.
               </p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                {isAdLandingPage ? (
+                {isPaidSocialLandingPage ? (
                   <>
                     <Button href="/find-my-path" variant="accent">
                       Find my path
@@ -473,12 +475,60 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
             ))}
           </div>
           <div className="mt-6">
-            <Button href={primaryEducationHref} variant={isAdLandingPage ? "accent" : "primary"}>
-              {isAdLandingPage ? page.primaryCta : "Start the 60-second pet insurance check"}
+            <Button href={primaryEducationHref} variant={isPaidSocialLandingPage || isSearchLandingPage ? "accent" : "primary"}>
+              {isPaidSocialLandingPage ? page.primaryCta : "Start the 60-second pet insurance check"}
             </Button>
           </div>
         </div>
       </section>
+
+      {isSearchLandingPage ? (
+        <section className="bg-white py-12">
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
+                  Search shopper guide
+                </p>
+                <h2 className="mt-3 text-3xl font-semibold text-ink">
+                  A useful landing page, not just a redirect.
+                </h2>
+                <p className="mt-3 text-base leading-7 text-muted">
+                  PawPeaceGuide is built to help search visitors understand the actual comparison
+                  work before leaving for a provider site. Start here if you searched for pet
+                  insurance costs, quote options, coverage terms, or whether pet insurance is worth
+                  comparing for your dog or cat.
+                </p>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {[
+                  [
+                    "What you can learn here",
+                    "Deductibles, reimbursement rates, annual limits, waiting periods, exclusions, wellness add-ons, and how provider quote pages differ."
+                  ],
+                  [
+                    "What happens next",
+                    `When you feel ready, PawPeaceGuide can route you to ${primaryProvider.name}, the current live provider path, through a disclosed tracking page.`
+                  ],
+                  [
+                    "What we do not claim",
+                    "No provider is called best, cheapest, guaranteed, or certain to cover a future claim. Policy terms vary and must be reviewed directly."
+                  ],
+                  [
+                    "How we make money",
+                    "PawPeaceGuide may earn compensation from approved affiliate partners when visitors click through and purchase a policy."
+                  ]
+                ].map(([title, body]) => (
+                  <div key={title} className="rounded-md border border-line bg-mist p-5">
+                    <h3 className="text-base font-semibold text-ink">{title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-muted">{body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="bg-mist py-12">
         <div className="mx-auto max-w-6xl px-5">
@@ -486,15 +536,15 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Provider preview</p>
               <h2 className="mt-3 text-3xl font-semibold text-ink">
-                {isAdLandingPage ? "Live partner paths after self-selection" : `${primaryProvider.name} first, comparison backups below`}
+                {isPaidSocialLandingPage ? "Live partner paths after self-selection" : `${primaryProvider.name} first, comparison backups below`}
               </h2>
               <p className="mt-3 max-w-2xl text-base leading-7 text-muted">
-                {isAdLandingPage
+                {isPaidSocialLandingPage
                   ? `${primaryProvider.name} is the current live affiliate-supported path when it fits a visitor's pet type and shopping goal. Start with the path finder or comparison page before leaving PawPeaceGuide.`
                   : `${primaryProvider.name} is the current live affiliate-supported path. Pending comparison and provider programs stay configurable below it, but the main CTA now prioritizes the approved offer.`}
               </p>
             </div>
-            {isAdLandingPage ? (
+            {isPaidSocialLandingPage ? (
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button href="/find-my-path" variant="accent">
                   Find my path
@@ -507,7 +557,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
               <PrimaryOfferButton pageSource={`${pageSourceBase}-provider-preview`} variant="secondary" />
             )}
           </div>
-          {isAdLandingPage ? (
+          {isPaidSocialLandingPage ? (
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
                 ["Choose intent", "Select dog, cat, puppy, kitten, senior pet, or another pet path."],
@@ -538,7 +588,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
           secondaryHref="/compare"
           secondaryLabel="Compare quote options"
         />
-        {isAdLandingPage ? (
+        {isPaidSocialLandingPage ? (
           <section className="rounded-md border border-line bg-white p-5 shadow-tight md:p-7">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
               Privacy-safe education
@@ -577,7 +627,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
           secondaryLabel="Compare quote options"
         />
       </section>
-      <StickyMobileCTA href={primaryEducationHref} label={mobileStickyLabel} variant={isAdLandingPage ? "accent" : "primary"} />
+      <StickyMobileCTA href={primaryEducationHref} label={mobileStickyLabel} variant={isPaidSocialLandingPage || isSearchLandingPage ? "accent" : "primary"} />
     </>
   );
 }

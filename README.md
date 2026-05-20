@@ -2,15 +2,21 @@
 
 https://www.pawpeaceguide.com
 
-PawPeaceGuide is a static-first Next.js affiliate funnel for pet insurance education. It is built for Facebook/Instagram/Meta paid traffic, plain-English pre-sell content, a 60-second quiz, a vet bill calculator, provider comparison cards, and tracked third-party affiliate clickouts.
+PawPeaceGuide is a static-first Next.js affiliate funnel for pet insurance education. It is built for Google Search traffic, organic SEO, plain-English pre-sell content, a 60-second quiz, a vet bill calculator, provider comparison cards, and tracked third-party affiliate clickouts. Conservative Facebook/Instagram landing pages still exist, but Google Search is the preferred paid test channel while Meta treats pet insurance as a financial-products category.
 
 PawPeaceGuide does not sell insurance, bind coverage, collect full insurance applications, quote exact premiums, process insurance payments, or act as an insurer, agency, broker, producer, underwriter, financial advisor, or legal advisor.
 
 ## How The Funnel Works
 
-Facebook or Instagram ad traffic lands on `/pet-parent-protection`, `/dog-parent-protection`, `/pet-insurance`, or another focused ad page. Users read educational context, start the quiz or calculator, compare provider quote options, and then click through `/go/[providerSlug]` to a third-party provider or marketplace once the approved affiliate link is configured.
+Google Search, organic, or social traffic lands on a focused education page. Users read original plain-English context, start the quiz or calculator, compare provider quote options, and then click through `/go/[providerSlug]` to a third-party provider or marketplace once the approved affiliate link is configured.
 
-Preferred paid-traffic path:
+Preferred Google Search path:
+
+```text
+Google Search ad -> /pet-insurance, /dog-insurance, or /cat-insurance -> quiz, calculator, compare, or provider education -> /go/odie when it fits
+```
+
+Conservative Meta review path:
 
 ```text
 Facebook ad -> /pet-parent-protection or /dog-parent-protection -> /find-my-path -> relevant education, quiz, calculator, or current live provider path -> /go/odie when it fits
@@ -18,8 +24,8 @@ Facebook ad -> /pet-parent-protection or /dog-parent-protection -> /find-my-path
 
 Main paths:
 
+- `/pet-insurance` for the primary Google Search and homepage landing page
 - `/pet-parent-protection` for broad happy dog/cat/puppy/kitten Facebook creative
-- `/pet-insurance` for the primary general paid ad landing page
 - `/dog-parent-protection` for the dog-owner paid ad variant referenced in the launch checklist
 - `/emergency-vet-bills` for organic or retargeting education after Meta compliance is stable
 - `/start-60-second-check` for creative focused on starting the 60-second check
@@ -81,6 +87,8 @@ Copy `.env.example` to `.env.local` for local development:
 NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_META_PIXEL_ID=
 NEXT_PUBLIC_GA_ID=
+NEXT_PUBLIC_GOOGLE_ADS_ID=
+NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL=
 NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true
 NEXT_PUBLIC_PRIMARY_AFFILIATE_URL=
 NEXT_PUBLIC_ODIE_AFFILIATE_URL=
@@ -94,7 +102,7 @@ CANONICAL_REDIRECT_HOSTS=pawpeaceguide.vercel.app,www.pawpeaceguide.com
 
 Do not commit real affiliate links, private API keys, partner tokens, or private tracking credentials.
 
-Public analytics and engagement values are read in `data/siteConfig.ts`. Real Meta Pixel and Google Analytics scripts are intentionally left as TODO integrations in the funnel tracking utility.
+Public analytics and engagement values are read in `data/siteConfig.ts`. The Google tag loads only when `NEXT_PUBLIC_GA_ID` or `NEXT_PUBLIC_GOOGLE_ADS_ID` is configured. Google Ads conversion tracking fires on `affiliate_cta_clicked` when both `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL` are set. Meta Pixel remains a TODO integration and should only receive generic, privacy-reviewed events if added later.
 
 ## Public Launch Milestone
 
@@ -117,7 +125,41 @@ Test `/go/odie` after deployment. It should show the PawPeaceGuide leaving-site 
 
 Do not add direct public links to `https://theswiftest.com` anywhere in the app. All consumer paths to The Swiftest must go through `/go/the-swiftest`, which redirects only to the approved affiliate tracking URL. `npm run audit:outbound` checks this rule and CI runs the audit before build.
 
-Connect Meta Pixel by setting `NEXT_PUBLIC_META_PIXEL_ID` and implementing the TODOs in `lib/tracking.ts`. Connect Google Analytics by setting `NEXT_PUBLIC_GA_ID` and implementing the GA4 TODO in `lib/tracking.ts`. Until those integrations are added, the app captures privacy-safe engagement events through `/api/engagement`, stores the current browser session locally, and writes generic production events to Vercel Runtime Logs.
+Connect Google Analytics by setting `NEXT_PUBLIC_GA_ID`. Connect Google Ads conversion tracking by setting `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL`; the conversion fires when a visitor clicks an affiliate CTA such as `/go/odie`. Connect Meta Pixel only after a separate privacy and policy review. The app also captures privacy-safe engagement events through `/api/engagement`, stores the current browser session locally, and writes generic production events to Vercel Runtime Logs.
+
+## Google Search Ads Setup
+
+Use Google Search as the preferred small-budget paid test channel. Search traffic has explicit keyword intent and can land on pages with substantial original content rather than a pure bridge page.
+
+Recommended starting URL:
+
+```text
+https://pawpeaceguide.com/pet-insurance?utm_source=google&utm_medium=paid_search&utm_campaign=pet_insurance_search_test&utm_content=general
+```
+
+Dog-specific:
+
+```text
+https://pawpeaceguide.com/dog-insurance?utm_source=google&utm_medium=paid_search&utm_campaign=dog_insurance_search_test&utm_content=dog
+```
+
+Cat-specific:
+
+```text
+https://pawpeaceguide.com/cat-insurance?utm_source=google&utm_medium=paid_search&utm_campaign=cat_insurance_search_test&utm_content=cat
+```
+
+Google Ads posture:
+
+- Do not send paid ads directly to `/go/[providerSlug]`.
+- Keep original educational content visible before affiliate CTAs.
+- Keep affiliate disclosure near monetized CTAs.
+- Use exact and phrase match first.
+- Avoid provider brand bidding unless affiliate terms explicitly allow it.
+- Do not claim PawPeaceGuide sells insurance, recommends a policy, guarantees coverage, guarantees approval, or guarantees savings.
+- Keep pending partner cards clearly labeled as pending or educational.
+
+More detail lives in `launch/google-ads.md`.
 
 ## Facebook And Instagram Ad Funnel Setup
 

@@ -5,6 +5,7 @@ import "@/app/globals.css";
 import { BehavioralNudge } from "@/components/BehavioralNudge";
 import { EngagementTracker } from "@/components/EngagementTracker";
 import { Footer } from "@/components/Footer";
+import { GoogleTag } from "@/components/GoogleTag";
 import { Header } from "@/components/Header";
 import { JsonLd } from "@/components/JsonLd";
 import { siteConfig } from "@/data/siteConfig";
@@ -83,6 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main>{children}</main>
         <Footer />
         <BehavioralNudge />
+        <GoogleTag />
         <Analytics />
       </body>
     </html>
