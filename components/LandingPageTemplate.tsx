@@ -125,7 +125,8 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
     page.slug === "vet-bill-help";
   const secondaryHeroHref =
     page.slug === "emergency-vet-bills" || page.slug === "vet-bill-help" ? "/calculator" : "/compare";
-  const mobileStickyLabel = isAdLandingPage ? "Start 60-sec check" : "Start quiz";
+  const mobileStickyLabel = isAdLandingPage ? "Find my path" : "Start quiz";
+  const primaryEducationHref = isAdLandingPage ? "/find-my-path" : "/quiz";
 
   return (
     <>
@@ -161,21 +162,20 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clay sm:text-sm">
               {page.eyebrow}
             </p>
-            {usesKnowBeforeHero ? (
-              <h1 className="mt-3 max-w-2xl text-[3.35rem] font-black uppercase leading-[0.92] text-ink sm:text-6xl md:mt-4 md:text-7xl">
-                Know before <span className="block text-[#4d6538]">you need it.</span>
-              </h1>
-            ) : null}
-            {!usesKnowBeforeHero ? (
-              <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-normal text-ink md:mt-5 md:text-6xl">
-                {page.headline}
-              </h1>
-            ) : null}
+            <h1
+              className={
+                usesKnowBeforeHero
+                  ? "mt-3 max-w-3xl text-[2.9rem] font-black uppercase leading-[0.95] text-ink sm:text-6xl md:mt-4 md:text-7xl"
+                  : "mt-4 max-w-3xl text-4xl font-semibold tracking-normal text-ink md:mt-5 md:text-6xl"
+              }
+            >
+              {page.headline}
+            </h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-muted md:mt-5 md:text-lg md:leading-8">
               {page.subheadline}
             </p>
             <div className="mt-5 flex flex-col gap-3 sm:flex-row md:mt-7">
-              <Button href="/quiz" variant={isAdLandingPage ? "accent" : "primary"} className="w-full sm:w-auto">
+              <Button href={primaryEducationHref} variant={isAdLandingPage ? "accent" : "primary"} className="w-full sm:w-auto">
                 {page.primaryCta}
               </Button>
               <Button href={secondaryHeroHref} variant="secondary" className="w-full sm:w-auto">
@@ -218,7 +218,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
           {[
             ["Plain-English guidance", "We break down insurance terms so the quote page makes more sense."],
             ["Compare quote options", "See features to review across provider sites."],
-    ["Plan ahead", "Be ready before surprise costs make the decision harder."]
+            ["Review calmly", "Learn the key details before visiting a third-party provider page."]
           ].map(([title, body]) => (
             <div key={title} className="flex gap-3 rounded-md bg-mist p-3 md:p-4">
               <Stethoscope className="mt-1 h-5 w-5 shrink-0 text-pine" aria-hidden="true" />
@@ -236,7 +236,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-clay">What happens next</p>
           <div className="mt-3 grid gap-2">
             {[
-              "Answer a few pet and budget questions",
+              "Choose your pet type and shopping goal",
               "See the policy features to compare",
               "Continue to a fitting partner path when ready"
             ].map((step, index) => (
@@ -251,11 +251,44 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
         </div>
       </section>
 
-      <QuoteReadinessChecklist
-        pageSource={`${pageSourceBase}-quote-ready`}
-        compact
-        className="mx-auto max-w-6xl px-4 py-8 sm:px-5 md:py-12"
-      />
+      {isAdLandingPage ? (
+        <section className="mx-auto max-w-6xl px-4 py-8 sm:px-5 md:py-12">
+          <div className="grid gap-5 rounded-md border border-line bg-white p-5 shadow-soft md:grid-cols-[0.9fr_1.1fr] md:p-7">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
+                Education-first path
+              </p>
+              <h2 className="mt-3 text-2xl font-semibold text-ink md:text-3xl">
+                Start by choosing what you want to understand.
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-muted md:text-base md:leading-7">
+                PawPeaceGuide is not an insurance application and does not ask for bank details,
+                card details, Social Security numbers, or sensitive pet health records. The goal is
+                to help you learn the policy features to compare before visiting a third-party
+                provider page.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                ["Dog or cat path", "/find-my-path"],
+                ["Cost examples", "/calculator"],
+                ["Coverage terms", "/guides/what-does-pet-insurance-cover"],
+                ["Ready checklist", "/ready-to-compare"]
+              ].map(([label, href]) => (
+                <Button key={href} href={href} variant="secondary" className="w-full">
+                  {label}
+                </Button>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : (
+        <QuoteReadinessChecklist
+          pageSource={`${pageSourceBase}-quote-ready`}
+          compact
+          className="mx-auto max-w-6xl px-4 py-8 sm:px-5 md:py-12"
+        />
+      )}
 
       <section className="bg-white py-12">
         <div className="mx-auto max-w-6xl px-5">
@@ -334,6 +367,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
       <IntentPathRouter
         pageSource={`${pageSourceBase}-intent-router`}
         className="mx-auto max-w-6xl px-5 pb-12"
+        directProviderCta={!isAdLandingPage}
       />
 
       <section className="bg-white py-12">
@@ -349,9 +383,9 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
             </div>
             <div className="rounded-md border border-line bg-mist p-5">
               <p className="text-base leading-7 text-muted">
-                {primaryProvider.name} is the current approved provider clickout for
-                PawPeaceGuide. This page helps you understand the terms to scan before you leave
-                this site for a third-party provider.
+                {isAdLandingPage
+                  ? "This page helps you understand the terms to scan before you choose a next step. When a live partner path fits your goal, PawPeaceGuide routes you through a disclosed tracking page."
+                  : `${primaryProvider.name} is the current approved provider clickout for PawPeaceGuide. This page helps you understand the terms to scan before you leave this site for a third-party provider.`}
               </p>
               <p className="mt-3 text-sm leading-6 text-muted">
                 PawPeaceGuide does not sell insurance. PawPeaceGuide is an educational,
@@ -359,8 +393,19 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
                 Policy terms, quote availability, pricing, and claim decisions are controlled by
                 the third-party destination.
               </p>
-              <div className="mt-5">
-                <PrimaryOfferButton pageSource={`${pageSourceBase}-comparison-section`} />
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                {isAdLandingPage ? (
+                  <>
+                    <Button href="/find-my-path" variant="accent">
+                      Find my path
+                    </Button>
+                    <Button href="/ready-to-compare" variant="secondary">
+                      Use ready checklist
+                    </Button>
+                  </>
+                ) : (
+                  <PrimaryOfferButton pageSource={`${pageSourceBase}-comparison-section`} />
+                )}
               </div>
             </div>
           </div>
@@ -417,7 +462,7 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
           <h2 className="mt-3 text-3xl font-semibold text-ink">Three calm steps before provider handoff</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {[
-              "Answer a few pet and budget questions without sharing health details",
+              "Choose your pet type and shopping goal without sharing sensitive details",
               "See which quote-page details deserve attention",
               `Continue to ${primaryProvider.name} or another approved provider option when you are ready`
             ].map((step, index) => (
@@ -429,8 +474,8 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
             ))}
           </div>
           <div className="mt-6">
-            <Button href="/quiz" variant={isAdLandingPage ? "accent" : "primary"}>
-              Start the 60-second pet insurance check
+            <Button href={primaryEducationHref} variant={isAdLandingPage ? "accent" : "primary"}>
+              {isAdLandingPage ? page.primaryCta : "Start the 60-second pet insurance check"}
             </Button>
           </div>
         </div>
@@ -441,18 +486,46 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
           <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Provider preview</p>
-              <h2 className="mt-3 text-3xl font-semibold text-ink">{primaryProvider.name} first, comparison backups below</h2>
+              <h2 className="mt-3 text-3xl font-semibold text-ink">
+                {isAdLandingPage ? "Live partner paths after self-selection" : `${primaryProvider.name} first, comparison backups below`}
+              </h2>
               <p className="mt-3 max-w-2xl text-base leading-7 text-muted">
-                {primaryProvider.name} is the current live affiliate-supported path. Pending
-                comparison and provider programs stay configurable below it, but the main CTA now
-                prioritizes the approved offer.
+                {isAdLandingPage
+                  ? `${primaryProvider.name} is the current live affiliate-supported path when it fits a visitor's pet type and shopping goal. Start with the path finder or comparison page before leaving PawPeaceGuide.`
+                  : `${primaryProvider.name} is the current live affiliate-supported path. Pending comparison and provider programs stay configurable below it, but the main CTA now prioritizes the approved offer.`}
               </p>
             </div>
-            <PrimaryOfferButton pageSource={`${pageSourceBase}-provider-preview`} variant="secondary" />
+            {isAdLandingPage ? (
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button href="/find-my-path" variant="accent">
+                  Find my path
+                </Button>
+                <Button href="/compare" variant="secondary">
+                  Compare quote options
+                </Button>
+              </div>
+            ) : (
+              <PrimaryOfferButton pageSource={`${pageSourceBase}-provider-preview`} variant="secondary" />
+            )}
           </div>
-          <div className="mt-6">
-            <ProviderComparisonGrid compact role="primary" emphasizePrimary pageSource={pageSourceBase} />
-          </div>
+          {isAdLandingPage ? (
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {[
+                ["Choose intent", "Select dog, cat, puppy, kitten, senior pet, or another pet path."],
+                ["Review terms", "Check deductible, reimbursement, limits, waiting periods, exclusions, and eligibility."],
+                ["Continue when ready", `If ${primaryProvider.name} fits, you can continue through PawPeaceGuide's tracked provider route.`]
+              ].map(([title, body]) => (
+                <div key={title} className="rounded-md border border-line bg-white p-5 shadow-tight">
+                  <p className="text-base font-semibold text-ink">{title}</p>
+                  <p className="mt-2 text-sm leading-6 text-muted">{body}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-6">
+              <ProviderComparisonGrid compact role="primary" emphasizePrimary pageSource={pageSourceBase} />
+            </div>
+          )}
         </div>
       </section>
 
@@ -466,7 +539,23 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
           secondaryHref="/compare"
           secondaryLabel="Compare quote options"
         />
-        <EmailCaptureForm />
+        {isAdLandingPage ? (
+          <section className="rounded-md border border-line bg-white p-5 shadow-tight md:p-7">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
+              Privacy-safe education
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold text-ink md:text-3xl">
+              No application or sensitive intake on PawPeaceGuide.
+            </h2>
+            <p className="mt-3 text-base leading-7 text-muted">
+              This landing page does not ask for bank details, payment information, Social Security
+              numbers, full applications, or sensitive pet health records. Provider quote pages
+              control their own forms and policy terms.
+            </p>
+          </section>
+        ) : (
+          <EmailCaptureForm />
+        )}
       </section>
 
       <section className="bg-white py-12">
@@ -484,13 +573,13 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
           eyebrow="Ready when you are"
           title="Start with education, then continue to the comparison path."
           body={`PawPeaceGuide helps you prepare better questions before leaving for ${primaryProvider.name} or another third-party quote option.`}
-          primaryHref="/quiz"
+          primaryHref={primaryEducationHref}
           primaryLabel={page.primaryCta}
           secondaryHref="/compare"
           secondaryLabel="Compare quote options"
         />
       </section>
-      <StickyMobileCTA href="/quiz" label={mobileStickyLabel} variant={isAdLandingPage ? "accent" : "primary"} />
+      <StickyMobileCTA href={primaryEducationHref} label={mobileStickyLabel} variant={isAdLandingPage ? "accent" : "primary"} />
     </>
   );
 }

@@ -4,7 +4,7 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "Vet Bill Calculator",
   description:
-    "Estimate hypothetical pet insurance premium, deductible, reimbursement, and out-of-pocket tradeoffs.",
+    "Use example pet insurance premium, deductible, reimbursement, and out-of-pocket tradeoffs for education.",
   path: "/calculator"
 });
 

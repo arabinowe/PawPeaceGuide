@@ -3,7 +3,7 @@ import type { FunnelEventName } from "@/lib/types";
 export const siteConfig = {
   brandName: "PawPeaceGuide",
   tagline: "Plain-English pet insurance guidance for calmer decisions.",
-  heroLine: "Know before you need it.",
+  heroLine: "Understand pet insurance options at your own pace.",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://pawpeaceguide.com",
   metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || "TODO_META_PIXEL_ID",
   googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || "TODO_GA_MEASUREMENT_ID",

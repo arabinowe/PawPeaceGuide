@@ -24,6 +24,13 @@ export function BehavioralNudge() {
   const shouldSuppress =
     pathname.startsWith("/admin") ||
     pathname.startsWith("/go") ||
+    pathname === "/" ||
+    pathname === "/pet-insurance" ||
+    pathname === "/pet-parent-protection" ||
+    pathname === "/dog-parent-protection" ||
+    pathname === "/start-60-second-check" ||
+    pathname === "/emergency-vet-bills" ||
+    pathname === "/vet-bill-help" ||
     pathname === "/quiz" ||
     pathname === "/calculator" ||
     pathname === "/compare" ||

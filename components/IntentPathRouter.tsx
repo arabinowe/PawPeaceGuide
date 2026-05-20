@@ -6,6 +6,7 @@ import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
 type IntentPathRouterProps = {
   pageSource: string;
   className?: string;
+  directProviderCta?: boolean;
 };
 
 const pathCards = [
@@ -32,7 +33,7 @@ const pathCards = [
   }
 ];
 
-export function IntentPathRouter({ pageSource, className = "" }: IntentPathRouterProps) {
+export function IntentPathRouter({ pageSource, className = "", directProviderCta = true }: IntentPathRouterProps) {
   return (
     <section className={className}>
       <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
@@ -51,20 +52,31 @@ export function IntentPathRouter({ pageSource, className = "" }: IntentPathRoute
             <div className="flex gap-3">
               <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-pine" aria-hidden="true" />
               <div>
-                <p className="text-sm font-semibold text-ink">Ready-to-compare signal</p>
+                <p className="text-sm font-semibold text-ink">
+                  {directProviderCta ? "Ready-to-compare signal" : "Education-first signal"}
+                </p>
                 <p className="mt-1 text-sm leading-6 text-muted">
-                  You know your pet type, age range, general breed context, budget comfort, and
-                  the policy features you want to verify directly.
+                  {directProviderCta
+                    ? "You know your pet type, age range, general breed context, quote settings, and the policy features you want to verify directly."
+                    : "Start with the checklist if you are still learning the policy terms, then continue to a provider route only when it fits."}
                 </p>
               </div>
             </div>
             <div className="mt-4">
-              <PrimaryOfferButton pageSource={pageSource} showDisclosure={false} />
+              {directProviderCta ? (
+                <PrimaryOfferButton pageSource={pageSource} showDisclosure={false} />
+              ) : (
+                <Button href="/find-my-path" variant="secondary">
+                  Find my path
+                </Button>
+              )}
             </div>
           </div>
-          <div className="mt-4">
-            <DisclosureBanner compact />
-          </div>
+          {directProviderCta ? (
+            <div className="mt-4">
+              <DisclosureBanner compact />
+            </div>
+          ) : null}
         </div>
 
         <div className="grid gap-3">

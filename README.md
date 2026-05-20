@@ -13,7 +13,7 @@ Facebook or Instagram ad traffic lands on `/pet-parent-protection`, `/dog-parent
 Preferred paid-traffic path:
 
 ```text
-Facebook ad -> /pet-parent-protection or /dog-parent-protection -> quiz or calculator -> current primary provider offer -> /go/odie
+Facebook ad -> /pet-parent-protection or /dog-parent-protection -> /find-my-path -> relevant education, quiz, calculator, or current live provider path -> /go/odie when it fits
 ```
 
 Main paths:
@@ -21,7 +21,7 @@ Main paths:
 - `/pet-parent-protection` for broad happy dog/cat/puppy/kitten Facebook creative
 - `/pet-insurance` for the primary general paid ad landing page
 - `/dog-parent-protection` for the dog-owner paid ad variant referenced in the launch checklist
-- `/emergency-vet-bills` for surprise-vet-bill creative
+- `/emergency-vet-bills` for organic or retargeting education after Meta compliance is stable
 - `/start-60-second-check` for creative focused on starting the 60-second check
 - `/dog-insurance`, `/cat-insurance`, `/puppy-insurance`, `/kitten-insurance`, `/vet-bill-help`
 - `/quiz`
@@ -98,11 +98,11 @@ Public analytics and engagement values are read in `data/siteConfig.ts`. Real Me
 
 ## Public Launch Milestone
 
-Use `/pet-parent-protection` for broad dog/cat Facebook traffic and `/dog-parent-protection` for dog-specific creative:
+Use `/pet-parent-protection` for broad dog/cat Facebook traffic and `/dog-parent-protection` for dog-specific creative. The paid landing pages route first to `/find-my-path` so Meta review sees an educational path selector rather than an insurance application or personal-data intake:
 
 ```text
-https://your-production-domain.com/pet-parent-protection?utm_source=facebook&utm_medium=paid_social&utm_campaign=pet_parent_test_1&utm_content=happy_pet_presell
-https://your-production-domain.com/dog-parent-protection?utm_source=instagram&utm_medium=paid_social&utm_campaign=dog_parent_test_1&utm_content=know_before_you_need_it
+https://your-production-domain.com/pet-parent-protection?utm_source=facebook&utm_medium=paid_social&utm_campaign=pet_parent_test_1&utm_content=education_options
+https://your-production-domain.com/dog-parent-protection?utm_source=instagram&utm_medium=paid_social&utm_campaign=dog_parent_test_1&utm_content=dog_education_options
 ```
 
 Run locally with `npm install` and `npm run dev`. Build and QA with `npm run lint` and `npm run build`.
@@ -136,21 +136,21 @@ https://your-production-domain.com/dog-parent-protection
 Example UTM URL:
 
 ```text
-https://your-production-domain.com/pet-parent-protection?utm_source=facebook&utm_medium=paid_social&utm_campaign=happy_pet_presell&utm_content=happy_dog_01
+https://your-production-domain.com/pet-parent-protection?utm_source=facebook&utm_medium=paid_social&utm_campaign=education_test_1&utm_content=pet_options_01
 ```
 
 Recommended creative-to-URL map:
 
-- "Before you need it" square creative: `/pet-parent-protection`
-- "A surprise vet bill..." wide creative: `/emergency-vet-bills`
-- "Start the 60-second pet insurance check" wide creative: `/start-60-second-check`
-- Dog-specific variants: `/dog-parent-protection`
+- Broad education creative: `/pet-parent-protection`
+- Dog-specific education creative: `/dog-parent-protection`
+- "Start the 60-second pet insurance check" creative: `/start-60-second-check`
+- Avoid using emergency, crisis, sick-pet, or pressure-heavy creative for the initial Meta review retry.
 
 Use matching `utm_content` values so performance can be read by creative:
 
 ```text
-utm_content=before_you_need_it_square
-utm_content=surprise_vet_bill_wide
+utm_content=pet_options_square
+utm_content=dog_options_wide
 utm_content=start_60_second_check_wide
 ```
 
@@ -181,7 +181,7 @@ Most paid social visitors should be assumed to arrive on mobile. The ad landing 
 Mobile QA priorities:
 
 - CTA is visible without hunting.
-- Sticky mobile CTA says `Start 60-sec check` on paid pages.
+- Sticky mobile CTA says `Find my path` on paid pages.
 - Pet image appears in the first scroll without pushing the CTA below the fold.
 - Quiz and calculator inputs use mobile-friendly text sizing to reduce iOS zoom.
 - Users can still reach the deeper desktop-style education sections by scrolling.
@@ -377,12 +377,38 @@ Never link directly to the public The Swiftest homepage or pet insurance page fr
 
 ## Meta/Instagram Compliance Notes
 
-- Insurance-related ads should be targeted to 18+.
+- Insurance-related ads must use the `Financial products and services` Special Ad Category in Meta Ads Manager when Meta classifies the ad this way.
+- Insurance-related ads should be targeted only to Accounts Center accounts age 18+.
 - Do not ask for personal financial information or insurance policy information in Meta ads or lead forms.
+- Do not use paid landing pages to directly request personally identifiable information, bank details, card details, routing numbers, Social Security numbers, or full insurance applications.
 - Do not imply the viewer has financial problems.
 - Do not imply their pet is currently sick.
 - Do not use fearmongering, graphic injury imagery, fake urgency, fake countdown timers, fake testimonials, fake reviews, or fake star ratings.
+- Do not claim discounted insurance, large savings, guaranteed approval, guaranteed coverage, or request any upfront fee on PawPeaceGuide.
 - Send traffic to the educational landing page first.
+
+## Meta Rejection Recovery: Financial Products And Services
+
+If Meta rejects PawPeaceGuide ads under `Discriminatory Practices` or `Financial products and services`, do not request review unchanged. Edit the campaign or ad set first:
+
+1. In Ads Manager, set Special Ad Category to `Financial products and services`.
+2. Confirm the audience is 18+.
+3. Use broad, non-sensitive targeting. Avoid age/gender narrowing beyond the required minimum, ZIP-level targeting, protected-class proxies, personal hardship targeting, and exclusion stacks.
+4. Send traffic to `https://pawpeaceguide.com/pet-parent-protection` with education-focused UTMs.
+5. Keep the ad copy educational: `Plain-English pet insurance guidance. Learn coverage features to compare before visiting a provider quote page.`
+6. Avoid copy that implies the viewer is in financial trouble, their pet is sick, or an urgent event is happening now.
+7. Confirm the landing page does not directly request PII or sensitive financial details.
+8. Confirm the ad and landing page do not claim discounted insurance, large savings, guaranteed approval, guaranteed coverage, or request any upfront fee.
+9. Keep affiliate and legal disclosures visible before partner clickout.
+10. Request review after these changes are saved.
+
+Current compliant retry URL:
+
+```text
+https://pawpeaceguide.com/pet-parent-protection?utm_source=facebook&utm_medium=paid_social&utm_campaign=education_test_1&utm_content=pet_options_01
+```
+
+Odie remains the live monetized route after the visitor self-selects a dog or cat insurance path. It remains reachable only through `/go/odie`, with affiliate disclosure before clickout.
 
 ## Pre-Ad Launch Checklist
 

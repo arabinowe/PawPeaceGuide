@@ -75,27 +75,27 @@ const steps: QuizStep[] = [
   },
   {
     key: "existingConditions",
-    question: "Any existing conditions?",
-    help: "Do not enter sensitive health details here. Provider rules control what counts as pre-existing.",
-    options: ["Yes", "No", "Not sure"]
+    question: "Do you want help understanding pre-existing condition rules?",
+    help: "Do not enter health details here. Provider policy wording controls how these rules work.",
+    options: ["I want to understand them", "Not a priority yet", "Not sure"]
   },
   {
     key: "budget",
-    question: "Monthly budget comfort",
-    help: "Think about premium comfort, not exact quote pricing.",
-    options: ["Low", "Medium", "High"]
+    question: "Which cost setting do you want to compare first?",
+    help: "This is educational only. PawPeaceGuide does not ask for income, bank, card, or payment details.",
+    options: ["Monthly premium", "Deductible", "Reimbursement and limits"]
   },
   {
     key: "emergencyFund",
-    question: "Emergency fund available for vet bills",
-    help: "This can influence deductible comfort and risk tolerance.",
-    options: ["Under $500", "$500-$1500", "$1500-$5000", "$5000+"]
+    question: "Which planning example would be most useful?",
+    help: "Use a general example, not personal financial details.",
+    options: ["Hypothetical vet bill math", "Premium vs deductible tradeoff", "Annual limit examples", "Not sure"]
   },
   {
     key: "riskTolerance",
-    question: "How much vet bill risk are you comfortable keeping?",
-    help: "There is no perfect answer. This helps frame features to compare.",
-    options: ["Low", "Medium", "High"]
+    question: "How detailed should your next step be?",
+    help: "This helps shape the education path without collecting sensitive information.",
+    options: ["Simple overview", "Balanced comparison", "Detailed checklist"]
   }
 ];
 
@@ -128,14 +128,14 @@ export function Quiz() {
   const shoppingProfile = useMemo(() => {
     const petLabel = answers.petType ? answers.petType.toLowerCase() : "pet";
     const budgetPhrase =
-      answers.budget === "Low"
-        ? "You may want to pay close attention to deductible and annual limit tradeoffs."
-        : answers.budget === "High"
-          ? "You may have more room to compare richer feature sets, but policy terms still matter."
-          : "You may be balancing monthly premium comfort with emergency bill protection.";
+      answers.budget === "Monthly premium"
+        ? "You may want to compare premium alongside deductible, reimbursement, and annual limit."
+        : answers.budget === "Deductible"
+          ? "You may want to focus on how deductible choices change quote-page math."
+          : "You may want to compare reimbursement rates and annual limits carefully.";
 
     const conditionPhrase =
-      answers.existingConditions === "Yes" || answers.existingConditions === "Not sure"
+      answers.existingConditions === "I want to understand them" || answers.existingConditions === "Not sure"
         ? "Ask providers how they define pre-existing conditions and whether medical records affect eligibility."
         : "Even without known conditions, waiting periods and exclusions are still important to review.";
 

@@ -12,9 +12,9 @@ const sharedFaq = [
       "No. Exact pricing, coverage, exclusions, waiting periods, and availability come from licensed providers and can vary by pet, state, age, breed, and policy terms."
   },
   {
-    question: "Should I compare before my pet is sick or injured?",
+    question: "When should I start learning about pet insurance?",
     answer:
-      "Many pet owners prefer to compare while their pet is healthy because pre-existing condition rules, waiting periods, and enrollment timing can matter."
+      "Many pet owners compare options while things are calm because pre-existing condition rules, waiting periods, and enrollment timing can matter."
   }
 ];
 
@@ -23,18 +23,18 @@ export const landingPages: LandingPageVariant[] = [
     slug: "pet-insurance",
     title: "Pet Insurance Guide | PawPeaceGuide",
     description:
-      "Know before you need it with plain-English pet insurance guidance for coverage features, costs, exclusions, and quote options.",
+      "Plain-English pet insurance guidance for coverage features, costs, exclusions, and quote options.",
     eyebrow: "Pet insurance education",
-    headline: "Know before you need it.",
+    headline: "Understand pet insurance options at your own pace.",
     subheadline:
-      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps pet owners understand coverage features, costs, exclusions, and quote options before choosing a fitting next step.",
-    primaryCta: "Start the 60-second pet insurance check",
+      "PawPeaceGuide helps pet owners understand coverage features, costs, exclusions, waiting periods, and quote options before visiting a third-party provider page.",
+    primaryCta: "Find my pet insurance path",
     secondaryCta: "Compare quote options",
     audienceNote:
       "Built for pet owners who want practical context before clicking into a licensed provider quote page.",
-    compareReasonTitle: "Why pet owners compare insurance before something goes wrong",
+    compareReasonTitle: "Why pet owners compare insurance while things are calm",
     compareReasons: [
-      "Unexpected care is easier to think through when you have already seen the main policy terms.",
+      "Pet insurance is easier to review when the main policy terms are familiar.",
       "Waiting periods and pre-existing condition rules can make timing important.",
       "Deductibles, reimbursement rates, annual limits, and exclusions can change the real out-of-pocket picture."
     ],
@@ -54,19 +54,19 @@ export const landingPages: LandingPageVariant[] = [
     slug: "pet-parent-protection",
     title: "Pet Parent Insurance Comparison Guide | PawPeaceGuide",
     description:
-      "A paid-social pre-sell page for dog and cat owners preparing to compare pet insurance quote options before visiting an approved provider.",
+      "A paid-social education page for dog and cat owners preparing to compare pet insurance quote options before visiting a third-party provider.",
     eyebrow: "Dog and cat owner guide",
-    headline: "Know before you need it.",
+    headline: "Understand pet insurance options at your own pace.",
     subheadline:
-      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps dog and cat owners understand coverage features, costs, exclusions, and quote-page details before choosing a fitting next step.",
-    primaryCta: "Start the 60-second pet insurance check",
+      "PawPeaceGuide helps dog and cat owners learn the features to compare, including deductibles, reimbursement rates, annual limits, waiting periods, exclusions, and provider quote-page details.",
+    primaryCta: "Find my pet insurance path",
     secondaryCta: "Compare quote options",
     audienceNote:
       "Built for broad Facebook traffic from happy dog, cat, puppy, and kitten creative.",
-    compareReasonTitle: "Why pet parents compare before something goes wrong",
+    compareReasonTitle: "Why pet parents compare options while things are calm",
     compareReasons: [
-      "Dogs and cats can face sudden accident, illness, diagnostic, medication, or surgery costs.",
-      "A comparison flow can help you review multiple quote options before checking one provider at a time.",
+      "Dogs and cats can have different accident, illness, diagnostic, medication, or surgery coverage considerations.",
+      "A comparison flow can help you review quote options without opening every provider page first.",
       "Breed, age, location, deductible, reimbursement rate, annual benefit, waiting periods, and exclusions can all change the tradeoff."
     ],
     helpWith: [
@@ -87,16 +87,16 @@ export const landingPages: LandingPageVariant[] = [
     description:
       "A mobile-first dog insurance education page for Instagram ad traffic and quote option comparison.",
     eyebrow: "Dog owner guide",
-    headline: "Know before you need it.",
+    headline: "Understand dog insurance options at your own pace.",
     subheadline:
-      "Pet insurance is easier to compare before there is a vet bill in front of you. PawPeaceGuide helps dog owners understand coverage features, costs, exclusions, and quote options before choosing a fitting next step.",
-    primaryCta: "Start the 60-second pet insurance check",
+      "PawPeaceGuide helps dog owners learn the features to compare, including deductibles, reimbursement rates, annual limits, waiting periods, exclusions, and provider quote-page details.",
+    primaryCta: "Find my dog insurance path",
     secondaryCta: "Compare quote options",
     audienceNote:
       "Built for dog owners coming from paid social who want plain-English guidance before visiting third-party quote pages.",
-    compareReasonTitle: "Why dog owners compare before something goes wrong",
+    compareReasonTitle: "Why dog owners compare options while things are calm",
     compareReasons: [
-      "Unexpected care is easier to think through when you have already seen the main policy terms.",
+      "Pet insurance is easier to review when the main policy terms are familiar.",
       "A comparison flow can help you review multiple quote options before checking one provider at a time.",
       "Deductibles, reimbursement rates, annual limits, waiting periods, and exclusions can change the real out-of-pocket picture."
     ],
@@ -120,7 +120,7 @@ export const landingPages: LandingPageVariant[] = [
     eyebrow: "60-second pet insurance check",
     headline: "Start the 60-second pet insurance check.",
     subheadline:
-      "Understand your options, compare with more confidence, and plan ahead before an unexpected vet bill is in front of you. PawPeaceGuide helps dog owners prepare for an approved third-party provider flow in plain English.",
+      "Understand your options and compare with more confidence. PawPeaceGuide helps dog owners prepare for a third-party provider flow in plain English.",
     primaryCta: "Start the 60-second pet insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:
@@ -155,7 +155,7 @@ export const landingPages: LandingPageVariant[] = [
     primaryCta: "Start the dog insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:
-      "Designed for dog owners weighing monthly premiums against possible emergency vet bills.",
+      "Designed for dog owners comparing monthly premiums, deductibles, reimbursement, limits, and policy language.",
     compareReasonTitle: "Why dog owners compare coverage features early",
     compareReasons: [
       "Dogs can face sudden accident, illness, diagnostic, or surgery costs.",
@@ -187,7 +187,7 @@ export const landingPages: LandingPageVariant[] = [
     secondaryCta: "Compare quote options",
     audienceNote:
       "Built for cat owners who want to understand the fine print at a comfortable pace.",
-    compareReasonTitle: "Why cat owners compare before the surprise bill",
+    compareReasonTitle: "Why cat owners compare while things are calm",
     compareReasons: [
       "Indoor cats and outdoor cats can have different risk patterns.",
       "Illness, diagnostics, dental issues, and medication costs can add up quickly.",
@@ -211,13 +211,13 @@ export const landingPages: LandingPageVariant[] = [
     description:
       "Understand puppy insurance quote options before comparing third-party provider pages.",
     eyebrow: "New puppy guide",
-    headline: "New puppy, new budget questions.",
+    headline: "New puppy, new coverage questions.",
     subheadline:
       "Compare what deductibles, reimbursement, wellness add-ons, and waiting periods can mean before choosing where to quote.",
     primaryCta: "Start the puppy insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:
-      "A quick guide for new puppy owners planning for accidents, illnesses, and early-life vet costs.",
+      "A quick guide for new puppy owners learning how accidents, illnesses, wellness add-ons, and early-life vet costs may be handled.",
     compareReasonTitle: "Why new puppy owners often compare early",
     compareReasons: [
       "Young pets may be easier to enroll before health history becomes complicated.",
@@ -242,13 +242,13 @@ export const landingPages: LandingPageVariant[] = [
     description:
       "A plain-English guide for kitten owners comparing quote options, deductibles, and coverage tradeoffs.",
     eyebrow: "New kitten guide",
-    headline: "Plan for kitten care before the urgent decision.",
+    headline: "Plan kitten coverage questions at a comfortable pace.",
     subheadline:
       "Learn the features to compare before you visit licensed third-party pet insurance quote pages.",
     primaryCta: "Start the kitten insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:
-      "A focused flow for new kitten owners thinking through emergency funds, wellness care, and illness coverage.",
+      "A focused flow for new kitten owners thinking through wellness care, accident coverage, illness coverage, and provider quote details.",
     compareReasonTitle: "Why kitten owners compare while things are calm",
     compareReasons: [
       "Early enrollment can reduce confusion around future health history.",
@@ -271,15 +271,15 @@ export const landingPages: LandingPageVariant[] = [
     slug: "emergency-vet-bills",
     title: "Emergency Vet Bill Planning | PawPeaceGuide",
     description:
-      "Understand pet insurance quote options, calculator tradeoffs, and emergency vet bill planning before pressure takes over.",
-    eyebrow: "Surprise vet bill planning",
-    headline: "A surprise vet bill is easier to face with options.",
+      "Understand pet insurance quote options, calculator tradeoffs, and emergency vet bill planning in plain English.",
+    eyebrow: "Vet cost planning",
+    headline: "Understand emergency vet cost planning options.",
     subheadline:
-      "Understand your options while you have room to think. PawPeaceGuide helps pet owners compare policy features, emergency-fund tradeoffs, and quote-page details in plain English.",
+      "Understand your options while you have room to think. PawPeaceGuide helps pet owners compare policy features, planning tradeoffs, and quote-page details in plain English.",
     primaryCta: "Start the 60-second check",
     secondaryCta: "Use the cost calculator",
     audienceNote:
-      "Built for Facebook creative about surprise vet bills, with calm education instead of fear-based urgency.",
+      "Built for calm education about pet insurance, planning resources, and provider quote-page details.",
     compareReasonTitle: "Why emergency planning matters",
     compareReasons: [
       "Emergency visits can include exam fees, diagnostics, treatment, and hospitalization.",
@@ -289,7 +289,7 @@ export const landingPages: LandingPageVariant[] = [
     helpWith: [
       "Eligible future accidents and illnesses after waiting periods",
       "A portion of covered costs after deductible and reimbursement rules",
-      "Reducing the size of some future out-of-pocket surprises"
+      "Reducing some future out-of-pocket costs when the policy terms apply"
     ],
     usuallyNotCovered: [
       "Bills from before coverage starts",
@@ -302,15 +302,15 @@ export const landingPages: LandingPageVariant[] = [
     slug: "vet-bill-help",
     title: "Vet Bill Help Planning | PawPeaceGuide",
     description:
-      "Learn how pet insurance quote options, savings, and emergency planning can fit together.",
+      "Learn how pet insurance quote options and emergency planning can fit together.",
     eyebrow: "Vet bill options guide",
-    headline: "Understand your vet bill options before pressure takes over.",
+    headline: "Understand vet bill planning options in plain English.",
     subheadline:
       "Use a plain-English guide, quick quiz, and cost calculator to prepare better questions before comparing third-party quote options.",
     primaryCta: "Start the 60-second check",
     secondaryCta: "Use the cost calculator",
     audienceNote:
-      "A practical guide for pet owners thinking through premiums, deductibles, reimbursement, and emergency savings.",
+      "A practical guide for pet owners thinking through premiums, deductibles, reimbursement, and planning resources.",
     compareReasonTitle: "Why planning helps",
     compareReasons: [
       "Pet insurance generally does not erase every cost or cover every situation.",
@@ -320,7 +320,7 @@ export const landingPages: LandingPageVariant[] = [
     helpWith: [
       "Eligible future accidents and illnesses",
       "Part of covered vet bills after deductible and reimbursement terms",
-      "Budget planning when paired with an emergency fund"
+      "Planning examples when paired with other household resources"
     ],
     usuallyNotCovered: [
       "Already-known health issues unless a provider states otherwise",

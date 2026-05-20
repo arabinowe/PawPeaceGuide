@@ -85,7 +85,7 @@ export function Calculator() {
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">Vet bill calculator</p>
             <h1 className="mt-3 text-4xl font-semibold text-ink">Estimate pet insurance cost tradeoffs</h1>
             <p className="mt-4 max-w-3xl text-lg leading-8 text-muted">
-              Use hypothetical numbers to see how premium, deductible, reimbursement rate, and coverage limits can change the out-of-pocket picture.
+              Use example numbers to see how premium, deductible, reimbursement rate, and coverage limits can change the out-of-pocket picture.
             </p>
             <div className="mt-6">
               <DisclosureBanner />
@@ -105,19 +105,19 @@ export function Calculator() {
         <form onSubmit={onSubmit} className="rounded-md border border-line bg-white p-5 shadow-tight">
           <div className="grid gap-4">
             <NumberField
-              label="Monthly premium estimate"
+              label="Example monthly premium"
               value={values.monthlyPremium}
               min={0}
               onChange={(value) => updateField("monthlyPremium", value)}
             />
             <NumberField
-              label="Annual deductible"
+              label="Example annual deductible"
               value={values.deductible}
               min={0}
               onChange={(value) => updateField("deductible", value)}
             />
             <NumberField
-              label="Reimbursement rate"
+              label="Example reimbursement rate"
               value={values.reimbursementRate}
               min={0}
               max={100}
@@ -125,13 +125,13 @@ export function Calculator() {
               onChange={(value) => updateField("reimbursementRate", value)}
             />
             <NumberField
-              label="Hypothetical vet bill amount"
+              label="Example vet bill amount"
               value={values.vetBill}
               min={0}
               onChange={(value) => updateField("vetBill", value)}
             />
             <NumberField
-              label="Optional annual coverage limit"
+              label="Example annual coverage limit"
               value={values.annualLimit}
               min={0}
               helper="Use 0 if you do not want to model a limit."
@@ -183,7 +183,7 @@ export function Calculator() {
             </div>
           ) : (
             <p className="mt-4 text-sm leading-6 text-muted">
-              Enter your assumptions and calculate to see a simplified educational estimate.
+              Enter example assumptions and calculate to see a simplified educational estimate.
             </p>
           )}
         </div>

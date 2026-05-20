@@ -33,8 +33,8 @@ const readyItems = [
   },
   {
     icon: WalletCards,
-    title: "Budget comfort",
-    body: "Know the monthly range, deductible comfort, reimbursement rate, and annual limit tradeoff you want to compare."
+    title: "Cost settings to compare",
+    body: "Review how premium, deductible, reimbursement rate, and annual limit can change the quote-page tradeoff."
   },
   {
     icon: ShieldQuestion,

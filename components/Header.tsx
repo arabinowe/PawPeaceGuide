@@ -32,7 +32,7 @@ export function Header() {
         </nav>
 
         <div className="hidden sm:block">
-          <Button href="/quiz" className="px-4 py-2" icon={false}>
+          <Button href="/find-my-path" className="px-4 py-2" icon={false}>
             Start check
           </Button>
         </div>

@@ -38,8 +38,8 @@ const readinessOptions: Array<{ label: string; value: ReadinessLevel }> = [
 
 export function FindMyPath() {
   const [petType, setPetType] = useState<PetType>("dog");
-  const [userIntent, setUserIntent] = useState<UserIntent>("ready to get a quote");
-  const [readinessLevel, setReadinessLevel] = useState<ReadinessLevel>("comparing soon");
+  const [userIntent, setUserIntent] = useState<UserIntent>("just researching");
+  const [readinessLevel, setReadinessLevel] = useState<ReadinessLevel>("just researching");
 
   const result = useMemo(
     () =>

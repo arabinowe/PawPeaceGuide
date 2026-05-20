@@ -34,7 +34,7 @@
 - Confirm happy dog, cat, puppy, and kitten images load without slowing or crowding the first CTA.
 - Confirm `/blog`, `/blog/pet-insurance-comparison-checklist`, `/ready-to-compare`, `/quiz`, `/calculator`, `/compare`, guide pages, and legal pages all include relevant happy pet imagery.
 - Confirm the primary CTA, disclosure, trust chips, and "what happens next" strip are visible in the first mobile scroll.
-- Confirm the sticky mobile CTA reads `Start 60-sec check` on paid pages.
+- Confirm the sticky mobile CTA reads `Find my path` on paid pages.
 - Confirm sticky mobile CTA works.
 - Complete the quiz on mobile.
 - Use the calculator on mobile.
@@ -56,16 +56,21 @@
 
 ## Ad Readiness QA
 
-- Use `/pet-parent-protection` for broad happy-pet creative and `/dog-parent-protection` for dog-specific creative.
-- Use `/emergency-vet-bills` for the surprise-vet-bill creative.
+- Use `/pet-parent-protection` for broad happy-pet education creative and `/dog-parent-protection` for dog-specific education creative.
+- Do not use emergency, crisis, sick-pet, or pressure-heavy creative for the initial Meta review retry.
 - Use `/start-60-second-check` for the 60-second-check creative.
 - Match ad images to the landing page path: dog to dog, cat to cat, puppy to puppy, kitten to kitten.
 - Use real, happy-looking pets in ordinary settings rather than fear-based or clinical imagery.
-- Target insurance-related ads to 18+.
+- Select the `Financial products and services` Special Ad Category in Meta Ads Manager for pet insurance ads.
+- Target insurance-related ads only to Accounts Center accounts age 18+.
+- Use broad, non-sensitive targeting. Avoid ZIP-level targeting, protected-class proxies, personal hardship targeting, and exclusion stacks.
+- Confirm the paid landing page does not directly request PII, bank details, card details, routing numbers, Social Security numbers, or full insurance applications.
 - Do not imply the viewer has financial problems.
 - Do not imply the viewer's pet is currently sick.
 - Do not use fake urgency, fake countdown timers, fake testimonials, fake reviews, or fake star ratings.
+- Do not claim discounted insurance, large savings, guaranteed approval, guaranteed coverage, or request any upfront fee on PawPeaceGuide.
 - Confirm affiliate terms allow Meta/Instagram paid social traffic before launching.
+- Request review only after the special ad category and 18+ audience are saved.
 
 ## Organic Funnel QA
 

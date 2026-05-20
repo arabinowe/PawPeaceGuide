@@ -157,10 +157,10 @@ export const lanePages: LanePageConfig[] = [
     title: "Emergency vet bill planning before decisions feel rushed",
     metaTitle: "Emergency Vet Bill Planning",
     metaDescription:
-      "A calm guide to emergency vet bill planning, insurance tradeoffs, emergency funds, and quote-readiness questions.",
+      "A calm guide to emergency vet bill planning, insurance tradeoffs, household resources, and quote-readiness questions.",
     eyebrow: "Emergency bill planning",
     intro:
-      "Emergency planning is calmer before the emergency. Use this lane to understand premium, deductible, reimbursement, annual limit, and emergency fund tradeoffs.",
+      "Emergency planning is calmer when you have time to learn. Use this lane to understand premium, deductible, reimbursement, annual limit, and household-resource tradeoffs.",
     petType: "unknown",
     userIntent: "emergency vet bill planning",
     readinessPrompt: "Useful for owners who want to reduce confusion before a bill requires a quick decision.",

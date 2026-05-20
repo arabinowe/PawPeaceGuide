@@ -21,7 +21,7 @@ export const metadata = createMetadata({
 });
 
 const intentSignals = [
-  "You are comparing before an unexpected bill is in front of you.",
+  "You are comparing while you have time to review the major terms.",
   "You know the pet type, age range, and general breed context.",
   "You want to compare deductible, reimbursement, annual limit, exclusions, and waiting periods.",
   "You understand PawPeaceGuide is education only and policy details must be reviewed directly."
