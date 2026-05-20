@@ -259,18 +259,6 @@ function sendGoogleFunnelEvent(eventName: FunnelEventName, payload: EventPayload
   }
 
   if (
-    eventName === siteConfig.eventNames.affiliateCtaClicked &&
-    isConfiguredPublicId(siteConfig.googleAdsId) &&
-    isConfiguredPublicId(siteConfig.googleAdsConversionLabel)
-  ) {
-    window.gtag("event", "conversion", {
-      send_to: `${siteConfig.googleAdsId}/${siteConfig.googleAdsConversionLabel}`,
-      event_category: "pawpeaceguide_funnel",
-      event_label: safePayload.providerSlug ?? "affiliate_clickout"
-    });
-  }
-
-  if (
     microConversion?.optimizationUse === "primary_proxy" &&
     isConfiguredPublicId(siteConfig.googleAdsId) &&
     isConfiguredPublicId(siteConfig.googleAdsMicroConversionLabel)
@@ -281,6 +269,52 @@ function sendGoogleFunnelEvent(eventName: FunnelEventName, payload: EventPayload
       event_label: microConversion.name
     });
   }
+}
+
+export function fireGoogleAdsClickoutConversion(payload: EventPayload = {}, onComplete?: () => void) {
+  if (
+    typeof window === "undefined" ||
+    typeof window.gtag !== "function" ||
+    !isConfiguredPublicId(siteConfig.googleAdsId) ||
+    !isConfiguredPublicId(siteConfig.googleAdsConversionLabel)
+  ) {
+    return false;
+  }
+
+  let completed = false;
+  const safePayload = sanitizePayload(payload);
+  const finish = () => {
+    if (completed) return;
+    completed = true;
+    onComplete?.();
+  };
+
+  window.gtag("event", "conversion", {
+    send_to: `${siteConfig.googleAdsId}/${siteConfig.googleAdsConversionLabel}`,
+    value: Number.isFinite(siteConfig.googleAdsClickoutConversionValue)
+      ? siteConfig.googleAdsClickoutConversionValue
+      : 1,
+    currency: "USD",
+    transaction_id: createId("clickout"),
+    event_category: "pawpeaceguide_partner_handoff",
+    event_label: safePayload.providerSlug ?? "partner_clickout",
+    provider_slug: safePayload.providerSlug,
+    provider_role: safePayload.providerRole,
+    page_source: safePayload.pageSource ?? "/go",
+    utm_campaign: safePayload.utm_campaign,
+    utm_content: safePayload.utm_content,
+    event_callback: finish,
+    event_timeout: 1200
+  });
+
+  return true;
+}
+
+export function isGoogleAdsClickoutConversionConfigured() {
+  return (
+    isConfiguredPublicId(siteConfig.googleAdsId) &&
+    isConfiguredPublicId(siteConfig.googleAdsConversionLabel)
+  );
 }
 
 function isConfiguredPublicId(value: string) {

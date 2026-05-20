@@ -20,7 +20,13 @@ const BLOCKED_KEYS = new Set([
   "reimbursementRate",
   "vetBill",
   "annualLimit",
-  "financialDetails"
+  "financialDetails",
+  "providerName",
+  "quoteName",
+  "quoteNotes",
+  "waitingPeriodNotes",
+  "preExistingNotes",
+  "claimPaymentNotes"
 ]);
 
 export async function POST(request: Request) {

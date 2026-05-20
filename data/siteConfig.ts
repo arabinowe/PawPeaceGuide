@@ -9,10 +9,15 @@ export const siteConfig = {
   googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || "TODO_GA_MEASUREMENT_ID",
   googleAdsId: process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "AW-18175565397",
   googleAdsConversionLabel:
-    process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL || "TODO_GOOGLE_ADS_CONVERSION_LABEL",
+    process.env.NEXT_PUBLIC_GOOGLE_ADS_CLICKOUT_CONVERSION_LABEL ||
+    process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL ||
+    "TODO_GOOGLE_ADS_CONVERSION_LABEL",
   googleAdsMicroConversionLabel:
     process.env.NEXT_PUBLIC_GOOGLE_ADS_MICRO_CONVERSION_LABEL ||
     "TODO_GOOGLE_ADS_MICRO_CONVERSION_LABEL",
+  googleAdsClickoutConversionValue: Number(
+    process.env.NEXT_PUBLIC_GOOGLE_ADS_CLICKOUT_CONVERSION_VALUE || "1"
+  ),
   googleAdSenseEnabled: process.env.NEXT_PUBLIC_ADSENSE_ENABLED !== "false",
   googleAdSenseClientId:
     process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-6197257851905887",

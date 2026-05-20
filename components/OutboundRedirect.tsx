@@ -3,7 +3,7 @@
 import { ExternalLink } from "lucide-react";
 import { useEffect } from "react";
 import { siteConfig } from "@/data/siteConfig";
-import { trackFunnelEvent } from "@/lib/tracking";
+import { fireGoogleAdsClickoutConversion, trackFunnelEvent } from "@/lib/tracking";
 
 type OutboundRedirectProps = {
   providerName: string;
@@ -38,9 +38,15 @@ export function OutboundRedirect({
     trackFunnelEvent(siteConfig.eventNames.affiliateCtaClicked, payload);
     trackFunnelEvent(siteConfig.eventNames.outboundRedirectStarted, payload);
 
-    const timeout = window.setTimeout(() => {
+    let didRedirect = false;
+    const redirect = () => {
+      if (didRedirect) return;
+      didRedirect = true;
       window.location.assign(destination);
-    }, 700);
+    };
+
+    const waitingForGoogleAds = fireGoogleAdsClickoutConversion(payload, redirect);
+    const timeout = window.setTimeout(redirect, waitingForGoogleAds ? 1400 : 700);
 
     return () => window.clearTimeout(timeout);
   }, [commissionType, destination, providerRole, providerSlug]);

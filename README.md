@@ -87,8 +87,10 @@ Copy `.env.example` to `.env.local` for local development:
 NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_META_PIXEL_ID=
 NEXT_PUBLIC_GA_ID=
-NEXT_PUBLIC_GOOGLE_ADS_ID=
+NEXT_PUBLIC_GOOGLE_ADS_ID=AW-18175565397
 NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL=
+NEXT_PUBLIC_GOOGLE_ADS_CLICKOUT_CONVERSION_LABEL=
+NEXT_PUBLIC_GOOGLE_ADS_CLICKOUT_CONVERSION_VALUE=1
 NEXT_PUBLIC_GOOGLE_ADS_MICRO_CONVERSION_LABEL=
 NEXT_PUBLIC_EXPERIMENT_ID=
 NEXT_PUBLIC_AWIN_PUBLISHER_TAG_ENABLED=true
@@ -116,7 +118,7 @@ CANONICAL_REDIRECT_HOSTS=pawpeaceguide.vercel.app,www.pawpeaceguide.com
 
 Do not commit real affiliate links, private API keys, partner tokens, or private tracking credentials.
 
-Public analytics and engagement values are read in `data/siteConfig.ts`. The Google tag loads only when `NEXT_PUBLIC_GA_ID` or `NEXT_PUBLIC_GOOGLE_ADS_ID` is configured. Google Ads conversion tracking fires on `affiliate_cta_clicked` when both `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL` are set. Optional Google Ads micro-conversion tracking fires for primary-proxy events when `NEXT_PUBLIC_GOOGLE_ADS_MICRO_CONVERSION_LABEL` is set. Meta Pixel remains a TODO integration and should only receive generic, privacy-reviewed events if added later.
+Public analytics and engagement values are read in `data/siteConfig.ts`. The Google tag loads only when `NEXT_PUBLIC_GA_ID` or `NEXT_PUBLIC_GOOGLE_ADS_ID` is configured. Google Ads clickout conversion tracking fires only from the actual `/go/[provider]` outbound handoff when `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CLICKOUT_CONVERSION_LABEL` are set. The older `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL` name is still accepted as a fallback. Treat this as a tracked partner clickout, not proof of an Odie purchase. Confirm actual affiliate leads or sales inside Awin/Odie reporting. Optional Google Ads micro-conversion tracking fires for primary-proxy events when `NEXT_PUBLIC_GOOGLE_ADS_MICRO_CONVERSION_LABEL` is set. Meta Pixel remains a TODO integration and should only receive generic, privacy-reviewed events if added later.
 
 The Awin Publisher MasterTag is enabled with `NEXT_PUBLIC_AWIN_PUBLISHER_ID=2902179` and loads `https://www.dwin2.com/pub.2902179.min.js` after hydration. Disable it with `NEXT_PUBLIC_AWIN_PUBLISHER_TAG_ENABLED=false` if Awin asks for a temporary removal during QA.
 
@@ -153,7 +155,7 @@ Test `/go/odie` after deployment. It should show the PawPeaceGuide leaving-site 
 
 Do not add direct public links to `https://theswiftest.com` anywhere in the app. All consumer paths to The Swiftest must go through `/go/the-swiftest`, which redirects only to the approved affiliate tracking URL. `npm run audit:outbound` checks this rule and CI runs the audit before build.
 
-Connect Google Analytics by setting `NEXT_PUBLIC_GA_ID`. Connect Google Ads conversion tracking by setting `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL`; the conversion fires when a visitor clicks an affiliate CTA such as `/go/odie`. Connect Meta Pixel only after a separate privacy and policy review. The app also captures privacy-safe engagement events through `/api/engagement`, stores the current browser session locally, and writes generic production events to Vercel Runtime Logs.
+Connect Google Analytics by setting `NEXT_PUBLIC_GA_ID`. Connect Google Ads conversion tracking by setting `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CLICKOUT_CONVERSION_LABEL`; the conversion fires when `/go/[provider]` starts the tracked outbound redirect to an affiliate partner such as Odie. This measures PawPeaceGuide partner handoff, not an affiliate purchase. Use Awin/Odie reporting to confirm downstream leads, sales, and commissionable policy purchases. Connect Meta Pixel only after a separate privacy and policy review. The app also captures privacy-safe engagement events through `/api/engagement`, stores the current browser session locally, and writes generic production events to Vercel Runtime Logs.
 
 ## Google Search Ads Setup
 
