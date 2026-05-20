@@ -3,7 +3,6 @@
 import { X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/Button";
-import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { getPrimaryProvider, isProviderAffiliateConfigured } from "@/data/providers";
 import { siteConfig } from "@/data/siteConfig";
 import { getPrimaryOfferHref } from "@/lib/affiliate";
@@ -140,9 +139,9 @@ export function EndOfPathQuoteNudge({
           {configured ? "Review Odie quote options" : "Compare quote options"}
         </Button>
       </div>
-      <div className="mt-3">
-        <DisclosureBanner compact />
-      </div>
+      <p className="mt-3 text-xs leading-5 text-muted">
+        Affiliate-supported partner route when active. Review policy terms directly with the provider.
+      </p>
     </aside>
   );
 }

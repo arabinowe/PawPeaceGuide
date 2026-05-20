@@ -10,7 +10,6 @@ import {
   WalletCards
 } from "lucide-react";
 import { Button } from "@/components/Button";
-import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
 import { getPrimaryProvider, isProviderAffiliateConfigured } from "@/data/providers";
 
@@ -97,9 +96,9 @@ export function QuoteReadinessChecklist({
                 Start the 60-second check
               </Button>
             </div>
-            <div className="mt-4">
-              <DisclosureBanner compact />
-            </div>
+            <p className="mt-3 text-xs leading-5 text-muted">
+              Affiliate-supported partner route when active. PawPeaceGuide is educational and does not sell or bind insurance.
+            </p>
           </div>
 
           <div className={compact ? "grid gap-3" : "grid gap-3 sm:grid-cols-2"}>

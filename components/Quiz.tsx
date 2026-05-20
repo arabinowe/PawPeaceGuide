@@ -295,11 +295,6 @@ export function Quiz() {
               Use the cost calculator
             </Button>
           </div>
-          {routingResult.disclosureNeeded ? (
-            <div className="mt-4">
-              <DisclosureBanner compact />
-            </div>
-          ) : null}
         </div>
 
         {showInsuranceHandoff ? (

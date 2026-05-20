@@ -2,7 +2,6 @@
 
 import { CheckCircle2, ClipboardCheck, ExternalLink, Info } from "lucide-react";
 import { useEffect } from "react";
-import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { UTMLink } from "@/components/UTMLink";
 import { isProviderAffiliateConfigured } from "@/data/providers";
 import { siteConfig } from "@/data/siteConfig";
@@ -196,14 +195,11 @@ export function ProviderCard({
         </UTMLink>
         <p className="mt-2 text-center text-xs text-muted">
           {affiliateConfigured
-            ? "You will leave PawPeaceGuide for a third-party provider site."
+            ? "Affiliate-supported third-party link. You will leave PawPeaceGuide and should review terms directly with the provider."
             : provider.role === "primary"
               ? "The approved partner link is not live yet. Use the quote-ready checklist to prepare before clickout is enabled."
               : "This backup partner link is not live yet. Review the comparison guide first."}
         </p>
-        <div className="mt-4">
-          <DisclosureBanner compact text={provider.disclosureText} />
-        </div>
       </div>
     </article>
   );

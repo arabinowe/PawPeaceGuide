@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { getPrimaryProvider, isProviderAffiliateConfigured } from "@/data/providers";
 import { siteConfig } from "@/data/siteConfig";
 import { getAffiliateRedirectHref } from "@/lib/affiliate";
@@ -22,7 +21,7 @@ export function PrimaryOfferButton({
   variant = "primary",
   className,
   showDevelopmentWarning = false,
-  showDisclosure = true
+  showDisclosure = false
 }: PrimaryOfferButtonProps) {
   const provider = getPrimaryProvider();
   const configured = isProviderAffiliateConfigured(provider);
@@ -63,9 +62,9 @@ export function PrimaryOfferButton({
         </p>
       ) : null}
       {showDisclosure ? (
-        <div className="mt-3">
-          <DisclosureBanner compact />
-        </div>
+        <p className="mt-2 text-xs leading-5 text-muted">
+          Affiliate-supported third-party link. PawPeaceGuide is not an insurer or broker; review terms directly with the provider.
+        </p>
       ) : null}
     </div>
   );

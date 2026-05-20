@@ -1,5 +1,4 @@
 import { Button } from "@/components/Button";
-import { DisclosureBanner } from "@/components/DisclosureBanner";
 
 type CTABlockProps = {
   eyebrow?: string;
@@ -20,7 +19,7 @@ export function CTABlock({
   primaryLabel,
   secondaryHref,
   secondaryLabel,
-  disclosure = true
+  disclosure = false
 }: CTABlockProps) {
   return (
     <section className="rounded-md border border-line bg-white p-5 shadow-tight md:p-7">
@@ -38,9 +37,9 @@ export function CTABlock({
         ) : null}
       </div>
       {disclosure ? (
-        <div className="mt-5">
-          <DisclosureBanner compact />
-        </div>
+        <p className="mt-4 text-xs leading-5 text-muted">
+          Affiliate-supported resource. PawPeaceGuide is educational and is not an insurer or broker.
+        </p>
       ) : null}
     </section>
   );

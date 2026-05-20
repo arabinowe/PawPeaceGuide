@@ -1,7 +1,6 @@
 "use client";
 
 import { ExternalLink, Leaf } from "lucide-react";
-import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { UTMLink } from "@/components/UTMLink";
 import { isProviderAffiliateConfigured } from "@/data/providers";
 import { getAffiliateRedirectHref } from "@/lib/affiliate";
@@ -49,9 +48,9 @@ export function PartnerOfferCard({ partner, pageSource }: { partner: PartnerOffe
           {configured ? <ExternalLink className="h-4 w-4" aria-hidden="true" /> : null}
         </UTMLink>
       </div>
-      <div className="mt-4">
-        <DisclosureBanner compact text={partner.disclosureText} />
-      </div>
+      <p className="mt-2 text-center text-xs leading-5 text-muted">
+        Affiliate-supported wellness link when active. Wellness products are not insurance or a substitute for veterinary care.
+      </p>
     </article>
   );
 }

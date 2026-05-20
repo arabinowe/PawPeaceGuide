@@ -1,6 +1,5 @@
 import { Calculator, ClipboardCheck, FileSearch, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/Button";
-import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
 
 type IntentPathRouterProps = {
@@ -71,12 +70,12 @@ export function IntentPathRouter({ pageSource, className = "", directProviderCta
                 </Button>
               )}
             </div>
+            {directProviderCta ? (
+              <p className="mt-3 text-xs leading-5 text-muted">
+                Affiliate-supported partner route when active. Review policy details directly before buying.
+              </p>
+            ) : null}
           </div>
-          {directProviderCta ? (
-            <div className="mt-4">
-              <DisclosureBanner compact />
-            </div>
-          ) : null}
         </div>
 
         <div className="grid gap-3">
