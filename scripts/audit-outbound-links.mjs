@@ -13,7 +13,8 @@ const blockedPatterns = [
 const allowedFiles = new Set([
   "data/providers.ts",
   "data/siteConfig.ts",
-  "lib/affiliate.ts"
+  "lib/affiliate.ts",
+  "lib/serverAffiliate.ts"
 ]);
 
 const violations = [];

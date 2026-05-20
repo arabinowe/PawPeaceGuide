@@ -593,6 +593,10 @@ export function isProviderAffiliateConfigured(provider: Provider | PartnerOffer)
 
   if (!value) return false;
 
+  if (value.startsWith("configured://")) {
+    return provider.isLive && provider.status === "live";
+  }
+
   const lowerValue = value.toLowerCase();
   if (
     lowerValue.includes("placeholder") ||

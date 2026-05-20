@@ -59,12 +59,8 @@ export const siteConfig = {
     outboundRedirectStarted: "outbound_redirect_started"
   } satisfies Record<string, FunnelEventName>,
   providerAffiliateUrls: {
-    theSwiftest:
-      process.env.NEXT_PUBLIC_SWIFTEST_AFFILIATE_URL || "PLACEHOLDER_SWIFTEST_AFFILIATE_URL",
-    odie:
-      process.env.NEXT_PUBLIC_PRIMARY_AFFILIATE_URL ||
-      process.env.NEXT_PUBLIC_ODIE_AFFILIATE_URL ||
-      "https://www.awin1.com/cread.php?awinmid=68990&awinaffid=2902179",
+    theSwiftest: "PLACEHOLDER_SWIFTEST_AFFILIATE_URL",
+    odie: "configured://odie",
     petted: "",
     petsBest: "",
     fetch: "",
@@ -73,9 +69,7 @@ export const siteConfig = {
     embrace: ""
   },
   supplementalAffiliateUrls: {
-    moodifypet:
-      process.env.NEXT_PUBLIC_MOODIFYPET_AFFILIATE_URL ||
-      "https://www.awin1.com/cread.php?awinmid=118489&awinaffid=2902179"
+    moodifypet: "configured://moodifypet"
   },
   providerTrackingSlugs: {
     theSwiftest: "the-swiftest",

@@ -4,8 +4,8 @@ import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { OutboundRedirect, UnconfiguredPartnerNotice } from "@/components/OutboundRedirect";
 import { PetImagePanel, petImages } from "@/components/PetImage";
 import { getProviderBySlug } from "@/data/providers";
-import { getProviderDestination } from "@/lib/affiliate";
 import { createMetadata } from "@/lib/seo";
+import { getProviderDestination } from "@/lib/serverAffiliate";
 
 type RedirectPageProps = {
   params: Promise<{ providerSlug: string }>;
