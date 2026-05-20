@@ -91,6 +91,30 @@ export const microConversionDefinitions: MicroConversionDefinition[] = [
     optimizationUse: "primary_proxy"
   },
   {
+    eventName: siteConfig.eventNames.quoteWorkspaceViewed,
+    name: "quote_workspace_viewed",
+    stage: "comparison_intent",
+    value: 16,
+    description: "Visitor opened the no-login quote comparison workspace.",
+    optimizationUse: "observe"
+  },
+  {
+    eventName: siteConfig.eventNames.quoteWorkspaceStarted,
+    name: "quote_workspace_started",
+    stage: "comparison_intent",
+    value: 18,
+    description: "Visitor started entering quote comparison assumptions locally.",
+    optimizationUse: "optimize_cautiously"
+  },
+  {
+    eventName: siteConfig.eventNames.quoteWorkspaceCompleted,
+    name: "quote_workspace_completed",
+    stage: "quote_intent",
+    value: 30,
+    description: "Visitor compared at least two quote cards locally.",
+    optimizationUse: "primary_proxy"
+  },
+  {
     eventName: siteConfig.eventNames.providerCardViewed,
     name: "provider_card_viewed",
     stage: "quote_intent",

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { guides } from "@/data/guides";
+import { getGuideCategorySlug, guideCategories, guides } from "@/data/guides";
 import { siteConfig } from "@/data/siteConfig";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/other-pet-insurance-options",
     "/quiz",
     "/calculator",
+    "/quote-workspace",
     "/compare",
     "/ready-to-compare",
     "/guides",
@@ -39,8 +40,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const guideRoutes = guides.map((guide) => `/guides/${guide.slug}`);
+  const categoryRoutes = guideCategories.map((category) => `/guides/category/${getGuideCategorySlug(category)}`);
 
-  return [...staticRoutes, ...guideRoutes].map((route) => ({
+  return [...staticRoutes, ...categoryRoutes, ...guideRoutes].map((route) => ({
     url: `${siteConfig.siteUrl}${route}`,
     lastModified:
       route.startsWith("/guides/")

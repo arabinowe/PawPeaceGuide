@@ -1,10 +1,13 @@
-import { guides } from "@/data/guides";
+import { getGuideCategorySlug, guideCategories, guides } from "@/data/guides";
 import { siteConfig } from "@/data/siteConfig";
 import { absoluteUrl } from "@/lib/seo";
 
 export function GET() {
   const guideLines = guides
     .map((guide) => `- ${guide.title}: ${absoluteUrl(`/guides/${guide.slug}`)} — ${guide.summary}`)
+    .join("\n");
+  const categoryLines = guideCategories
+    .map((category) => `- ${category}: ${absoluteUrl(`/guides/category/${getGuideCategorySlug(category)}`)}`)
     .join("\n");
 
   const body = `# PawPeaceGuide
@@ -20,6 +23,7 @@ Core public routes:
 - Glossary: ${absoluteUrl("/glossary")}
 - 60-second check: ${absoluteUrl("/quiz")}
 - Vet bill calculator: ${absoluteUrl("/calculator")}
+- Quote comparison workspace: ${absoluteUrl("/quote-workspace")}
 - Compare quote options: ${absoluteUrl("/compare")}
 - Find my path: ${absoluteUrl("/find-my-path")}
 - Dog insurance options: ${absoluteUrl("/dog-insurance-options")}
@@ -32,6 +36,9 @@ Core public routes:
 
 Published guides:
 ${guideLines}
+
+Guide topic hubs:
+${categoryLines}
 `;
 
   return new Response(body, {

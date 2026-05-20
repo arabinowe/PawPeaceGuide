@@ -156,7 +156,13 @@ export function sanitizePayload(payload: EventPayload): EventPayload {
     "reimbursementRate",
     "vetBill",
     "annualLimit",
-    "financialDetails"
+    "financialDetails",
+    "providerName",
+    "quoteName",
+    "quoteNotes",
+    "waitingPeriodNotes",
+    "preExistingNotes",
+    "claimPaymentNotes"
   ]);
 
   return Object.fromEntries(
@@ -383,6 +389,9 @@ function scoreForEvent(eventName: FunnelEventName) {
     calculator_completed: 7,
     compare_page_viewed: 5,
     ready_to_compare_viewed: 7,
+    quote_workspace_viewed: 5,
+    quote_workspace_started: 6,
+    quote_workspace_completed: 10,
     provider_card_viewed: 3,
     guide_page_viewed: 1,
     glossary_viewed: 1,

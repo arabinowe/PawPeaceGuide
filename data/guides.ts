@@ -2135,6 +2135,14 @@ export function getGuidesByCategory(category: GuideCategory) {
   return guides.filter((guide) => guide.category === category);
 }
 
+export function getGuideCategorySlug(category: GuideCategory) {
+  return category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+export function getGuideCategoryBySlug(slug: string) {
+  return guideCategories.find((category) => getGuideCategorySlug(category) === slug);
+}
+
 export function getRelatedGuides(guide: Guide) {
   return guide.relatedGuideSlugs
     .map((slug) => getGuide(slug))

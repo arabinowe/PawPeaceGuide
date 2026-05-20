@@ -16,8 +16,11 @@ export function GuideCtaButtons({ guideSlug }: { guideSlug: string }) {
   }
 
   return (
-    <div className="grid gap-3 sm:grid-cols-3">
-      <Button href="/compare" className="w-full" onClick={() => track("compare")}>
+    <div className="grid gap-3 sm:grid-cols-4">
+      <Button href="/quote-workspace" className="w-full" onClick={() => track("workspace")}>
+        Compare quotes side by side
+      </Button>
+      <Button href="/compare" variant="secondary" className="w-full" onClick={() => track("compare")}>
         Compare quote options
       </Button>
       <Button href="/quiz" variant="secondary" className="w-full" onClick={() => track("quiz")}>

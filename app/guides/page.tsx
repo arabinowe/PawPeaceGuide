@@ -1,10 +1,17 @@
 import { Fragment } from "react";
+import Link from "next/link";
 import { AdSenseUnit } from "@/components/AdSenseUnit";
 import { AdSenseSearchBox } from "@/components/AdSenseSearchBox";
 import { GuideCard } from "@/components/GuideCard";
 import { JsonLd } from "@/components/JsonLd";
 import { PetImagePanel, petImages } from "@/components/PetImage";
-import { getGuidesByCategory, guideCategories, guides, plannedGuideTopics } from "@/data/guides";
+import {
+  getGuideCategorySlug,
+  getGuidesByCategory,
+  guideCategories,
+  guides,
+  plannedGuideTopics
+} from "@/data/guides";
 import { siteConfig } from "@/data/siteConfig";
 import { absoluteUrl, createMetadata } from "@/lib/seo";
 
@@ -65,7 +72,9 @@ export default function GuidesIndexPage() {
               <div className="flex flex-col justify-between gap-3 border-b border-line pb-3 md:flex-row md:items-end">
                 <div>
                   <h2 id={`category-${category.replace(/\s+/g, "-").toLowerCase()}`} className="text-2xl font-semibold text-ink">
-                    {category}
+                    <Link href={`/guides/category/${getGuideCategorySlug(category)}`} className="transition hover:text-pine">
+                      {category}
+                    </Link>
                   </h2>
                   <p className="mt-2 text-sm leading-6 text-muted">
                     {categoryGuides.length > 0

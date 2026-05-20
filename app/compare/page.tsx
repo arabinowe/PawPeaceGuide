@@ -122,6 +122,9 @@ export default function ComparePage() {
                 policy documents. Treat those as starting points, then verify policy terms directly.
               </p>
               <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+                <Button href="/quote-workspace" variant="secondary">
+                  Open quote workspace
+                </Button>
                 <Button href="/quiz" variant="secondary">
                   Start the 60-second check
                 </Button>
@@ -129,6 +132,40 @@ export default function ComparePage() {
                   Use calculator
                 </Button>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 rounded-md border border-pine/20 bg-sky/35 p-5 shadow-tight md:p-7">
+          <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
+                Differentiator
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold text-ink">
+                Build your own quote comparison, not someone else&apos;s ranking.
+              </h2>
+              <p className="mt-3 text-base leading-7 text-muted">
+                PawPeaceGuide includes a no-login workspace where you can put provider quotes side
+                by side, flag missing policy terms, and keep the right questions open before
+                buying. It is educational, local to your browser, and designed to make the provider
+                clickout more informed.
+              </p>
+              <div className="mt-5">
+                <Button href="/quote-workspace">Open quote workspace</Button>
+              </div>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {[
+                ["No login", "Typed quote notes stay in the browser."],
+                ["Term gaps", "Waiting periods, exclusions, limits, and claim rules stay visible."],
+                ["Odie handoff", "Ready shoppers can continue through the tracked partner route."]
+              ].map(([title, body]) => (
+                <div key={title} className="rounded-md border border-white/80 bg-white p-4">
+                  <p className="text-sm font-semibold text-ink">{title}</p>
+                  <p className="mt-2 text-xs leading-5 text-muted">{body}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

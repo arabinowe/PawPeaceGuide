@@ -21,7 +21,7 @@ const sharedFaq = [
 export const landingPages: LandingPageVariant[] = [
   {
     slug: "pet-insurance",
-    title: "Pet Insurance Guide, Senior Planning, and Quote Options | PawPeaceGuide",
+    title: "Pet Insurance Guide, Senior Planning, and Quote Options",
     description:
       "Plain-English pet insurance guidance for senior pet planning, value-focused comparison, pre-existing condition rules, quote options, and provider handoff decisions.",
     eyebrow: "Pet insurance education",
@@ -52,7 +52,7 @@ export const landingPages: LandingPageVariant[] = [
   },
   {
     slug: "pet-parent-protection",
-    title: "Pet Parent Insurance Comparison Guide | PawPeaceGuide",
+    title: "Pet Parent Insurance Comparison Guide",
     description:
       "A paid-social education page for dog and cat owners preparing to compare pet insurance quote options before visiting a third-party provider.",
     eyebrow: "Dog and cat owner guide",
@@ -83,7 +83,7 @@ export const landingPages: LandingPageVariant[] = [
   },
   {
     slug: "dog-parent-protection",
-    title: "Dog Parent Protection Guide | PawPeaceGuide",
+    title: "Dog Parent Protection Guide",
     description:
       "A mobile-first dog insurance education page for Instagram ad traffic and quote option comparison.",
     eyebrow: "Dog owner guide",
@@ -114,7 +114,7 @@ export const landingPages: LandingPageVariant[] = [
   },
   {
     slug: "start-60-second-check",
-    title: "Start the 60-Second Pet Insurance Check | PawPeaceGuide",
+    title: "Start the 60-Second Pet Insurance Check",
     description:
       "A paid-social pre-sell page for dog owners ready to start PawPeaceGuide's 60-second pet insurance education check.",
     eyebrow: "60-second pet insurance check",
@@ -145,7 +145,7 @@ export const landingPages: LandingPageVariant[] = [
   },
   {
     slug: "dog-insurance",
-    title: "Dog Insurance Quote Options | PawPeaceGuide",
+    title: "Dog Insurance Quote Options",
     description:
       "Learn what dog owners may want to compare before visiting pet insurance provider quote pages.",
     eyebrow: "Dog owner guide",
@@ -176,7 +176,7 @@ export const landingPages: LandingPageVariant[] = [
   },
   {
     slug: "cat-insurance",
-    title: "Cat Insurance Quote Options | PawPeaceGuide",
+    title: "Cat Insurance Quote Options",
     description:
       "A calm guide to comparing cat insurance quote options, exclusions, deductibles, and reimbursement choices.",
     eyebrow: "Cat owner guide",
@@ -207,7 +207,7 @@ export const landingPages: LandingPageVariant[] = [
   },
   {
     slug: "puppy-insurance",
-    title: "Puppy Insurance Guide | PawPeaceGuide",
+    title: "Puppy Insurance Guide",
     description:
       "Understand puppy insurance quote options before comparing third-party provider pages.",
     eyebrow: "New puppy guide",
@@ -238,7 +238,7 @@ export const landingPages: LandingPageVariant[] = [
   },
   {
     slug: "kitten-insurance",
-    title: "Kitten Insurance Guide | PawPeaceGuide",
+    title: "Kitten Insurance Guide",
     description:
       "A plain-English guide for kitten owners comparing quote options, deductibles, and coverage tradeoffs.",
     eyebrow: "New kitten guide",
@@ -269,7 +269,7 @@ export const landingPages: LandingPageVariant[] = [
   },
   {
     slug: "emergency-vet-bills",
-    title: "Emergency Vet Bill Planning | PawPeaceGuide",
+    title: "Emergency Vet Bill Planning",
     description:
       "Understand pet insurance quote options, calculator tradeoffs, and emergency vet bill planning in plain English.",
     eyebrow: "Vet cost planning",
@@ -300,7 +300,7 @@ export const landingPages: LandingPageVariant[] = [
   },
   {
     slug: "vet-bill-help",
-    title: "Vet Bill Help Planning | PawPeaceGuide",
+    title: "Vet Bill Help Planning",
     description:
       "Learn how pet insurance quote options and emergency planning can fit together.",
     eyebrow: "Vet bill options guide",
