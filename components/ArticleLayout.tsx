@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AdSenseUnit } from "@/components/AdSenseUnit";
 import { CTABlock } from "@/components/CTABlock";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { GuideCtaButtons } from "@/components/GuideCtaButtons";
@@ -159,6 +160,13 @@ export function ArticleLayout({ guide }: { guide: Guide }) {
                   secondaryLabel="Use calculator"
                 />
               </div>
+            ) : null}
+            {index === 1 ? (
+              <AdSenseUnit
+                slot={siteConfig.googleAdSenseSlots.inArticle}
+                label="Advertisement"
+                className="bg-mist/40"
+              />
             ) : null}
           </section>
         ))}

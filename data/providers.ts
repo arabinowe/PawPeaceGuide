@@ -452,10 +452,78 @@ export const providers = ([
     ]
   },
   {
+    name: "Lemonade Pet Insurance",
+    slug: siteConfig.providerTrackingSlugs.lemonade,
+    role: "backup",
+    priority: 8,
+    isLive: false,
+    partnerType: "insurance",
+    status: "pending",
+    supportedPetTypes: ["dog", "cat"],
+    bestFitUseCases: [
+      "Dog and cat owners who want another direct-provider option after approval",
+      "Value-focused shoppers comparing premium against deductible, reimbursement, annual limit, and exclusions",
+      "Senior pet shoppers who need clear age, medical-record, and pre-existing condition questions"
+    ],
+    notBestFor: [
+      "Live clickout until affiliate approval and tracking are configured",
+      "Pet owners shopping for animals other than dogs or cats unless eligibility is verified directly",
+      "Shoppers expecting PawPeaceGuide to confirm pre-existing condition eligibility"
+    ],
+    differentiators: [
+      "Pending direct-provider lane for dog and cat shoppers",
+      "Useful future comparison point for digital-first quote shoppers after approved terms are verified",
+      "Good fit for education around value-focused comparison and policy transparency"
+    ],
+    verificationNeeded: [
+      "Approved affiliate URL, payout, cookie window, and qualifying action",
+      "Paid search rules, brand bidding restrictions, and landing-page requirements",
+      "Current dog and cat eligibility, state availability, and age rules",
+      "Waiting periods, exclusions, medical-record review, and pre-existing condition definitions"
+    ],
+    monetizationPriority: 66,
+    userValuePriority: 79,
+    routeWeight: 55,
+    affiliateUrl: siteConfig.providerAffiliateUrls.lemonade,
+    affiliateNetwork: "Unknown",
+    commissionType: "Unknown",
+    publicPayoutClaim: "Unknown. Verify approved payout and qualifying action after acceptance.",
+    estimatedPayout:
+      "Placeholder only. Add approved payout, cookie window, and qualifying action after affiliate acceptance.",
+    approvalStatus: "Pending approval",
+    bestForLabel: "Future dog and cat provider option",
+    shortDescription:
+      "Pending provider slot for dog and cat shoppers. Keep disabled until an approved Lemonade tracking URL and affiliate terms are confirmed.",
+    notes:
+      "Application pending. Treat Lemonade as a future direct-provider option and verify final terms, traffic rules, state availability, age rules, and required disclosures after approval.",
+    pros: [
+      "Potentially useful direct-provider option for dog and cat shoppers after approval",
+      "Can support value-focused comparison content once the approved affiliate terms are known",
+      "Gives PawPeaceGuide another recognizable provider lane without forcing routing before the link is live"
+    ],
+    cons: [
+      "Affiliate link is not configured yet",
+      "Payout, cookie window, and paid search permissions are unknown",
+      "Users must review pricing, coverage, exclusions, waiting periods, and eligibility directly with Lemonade"
+    ],
+    trafficRestrictionsNotes:
+      "Pending. Confirm paid social, retargeting, bridge page, creative, and disclosure rules after approval.",
+    paidSearchRestrictionsNotes:
+      "Pending. Confirm trademark, competitor terms, brand bidding, and display URL rules after approval.",
+    brandBiddingAllowed: "unknown",
+    ctaText: "Visit provider site",
+    disclosureText: siteConfig.affiliateDisclosure,
+    complianceNotes: [
+      "Do not route users to Lemonade until the approved affiliate URL is live.",
+      "Do not claim pre-existing conditions are covered; tell users to verify definitions, waiting periods, and exclusions directly.",
+      "Do not bid on Lemonade brand terms until affiliate paid-search terms explicitly allow it."
+    ]
+  },
+  {
     name: "Embrace",
     slug: siteConfig.providerTrackingSlugs.embrace,
     role: "backup",
-    priority: 8,
+    priority: 9,
     isLive: false,
     partnerType: "insurance",
     status: "pending",

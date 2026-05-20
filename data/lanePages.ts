@@ -127,18 +127,19 @@ export const lanePages: LanePageConfig[] = [
   },
   {
     slug: "senior-pet-insurance",
-    title: "Senior pet insurance planning without false promises",
+    title: "Senior pet insurance planning with clearer expectations",
     metaTitle: "Senior Pet Insurance Planning",
     metaDescription:
-      "A careful guide for senior dog and cat insurance planning, health history, age eligibility, and realistic coverage questions.",
+      "A careful guide for senior dog and cat insurance planning, health history, age eligibility, value-focused comparison, and pre-existing condition rules.",
     eyebrow: "Senior pet planning",
     intro:
-      "Senior pets deserve careful planning. The goal is to compare realistic future coverage, not assume existing symptoms or past diagnoses will be covered.",
+      "Senior pets deserve careful planning. The goal is to compare realistic future coverage, understand value beyond the monthly premium, and avoid assuming existing symptoms or past diagnoses will be covered.",
     petType: "senior pet",
     userIntent: "senior pet planning",
     readinessPrompt: "Useful for owners of older dogs or cats who want clear questions before quote review.",
     calmPoints: [
       "Past health history may affect future claim expectations.",
+      "Value can depend on deductible, reimbursement, annual limit, exclusions, and renewal rules together.",
       "Accident coverage may still be worth understanding even when some illness questions are complicated.",
       "Provider age limits and renewal rules should be verified directly."
     ],

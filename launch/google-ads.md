@@ -78,6 +78,11 @@ Start with exact and phrase match. Keep budgets small until clickout rate and co
 - Cat: `cat insurance`, `pet insurance for cats`, `cat health insurance`
 - Cost/research: `pet insurance cost`, `is pet insurance worth it`, `pet insurance deductible`
 - Puppy/kitten: `puppy insurance`, `kitten insurance`
+- Senior pet planning: `senior pet insurance`, `senior dog insurance`, `senior cat insurance`, `pet insurance for older dogs`, `pet insurance for older cats`
+- Transparency intent: `pet insurance pre-existing condition rules`, `pet insurance waiting periods`, `what does pet insurance not cover`, `pet insurance exclusions`
+- Value comparison: `affordable pet insurance options`, `pet insurance value`, `pet insurance deductible comparison`, `pet insurance reimbursement rates`
+
+Use `pre-existing condition rules`, `definitions`, or `waiting periods` in ad copy and landing pages. Avoid implying that pre-existing conditions are covered unless a provider's current policy terms explicitly support a specific exception.
 
 Suggested negatives:
 
@@ -90,6 +95,9 @@ Suggested negatives:
 - free
 - reddit
 - reviews, if the landing page is not review-oriented
+- guaranteed coverage
+- guaranteed approval
+- pre-existing condition coverage, if the ad copy would imply a promise the landing page cannot support
 
 ## Launch QA
 

@@ -17,6 +17,8 @@ const envAffiliateUrls: Record<string, string | undefined> = {
     process.env.NEXT_PUBLIC_PRIMARY_AFFILIATE_URL,
   [siteConfig.providerTrackingSlugs.theSwiftest]:
     process.env.SWIFTEST_AFFILIATE_URL || process.env.NEXT_PUBLIC_SWIFTEST_AFFILIATE_URL,
+  [siteConfig.providerTrackingSlugs.lemonade]:
+    process.env.LEMONADE_AFFILIATE_URL || process.env.NEXT_PUBLIC_LEMONADE_AFFILIATE_URL,
   [siteConfig.supplementalTrackingSlugs.moodifypet]:
     process.env.MOODIFYPET_AFFILIATE_URL || process.env.NEXT_PUBLIC_MOODIFYPET_AFFILIATE_URL
 };

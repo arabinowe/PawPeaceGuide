@@ -8,6 +8,7 @@ import {
   SearchCheck,
   ShieldCheck
 } from "lucide-react";
+import { AdSenseUnit } from "@/components/AdSenseUnit";
 import { Button } from "@/components/Button";
 import { DisclosureBanner } from "@/components/DisclosureBanner";
 import { EmailCaptureForm } from "@/components/EmailCaptureForm";
@@ -205,6 +206,12 @@ export default function PetInsuranceComparisonChecklistBlogPage() {
                 ))}
               </div>
             </section>
+
+            <AdSenseUnit
+              slot={siteConfig.googleAdSenseSlots.inArticle}
+              label="Advertisement"
+              className="bg-mist/40"
+            />
 
             <QuoteReadinessChecklist pageSource="/blog-comparison-checklist" />
 

@@ -38,6 +38,16 @@
 - Network note: FlexOffers or Unknown until confirmed.
 - Required before use: approved tracking URL, payout terms, qualifying action, paid social permission, and required disclosures.
 
+## Lemonade Pet Insurance
+
+- Status: Pending approval.
+- Role: Pending backup direct-provider option.
+- Slug: `lemonade-pet-insurance`.
+- Config field: `LEMONADE_AFFILIATE_URL` for the private server-side destination, plus `providerAffiliateUrls.lemonade = "configured://lemonade"` once approved.
+- Network note: Unknown until confirmed in the affiliate dashboard.
+- Required before use: approved tracking URL, payout terms, qualifying action, paid search permission, brand bidding rules, state availability notes, age eligibility notes, and required disclosures.
+- Content guardrail: use "pre-existing condition rules" or "definitions" language. Do not claim pre-existing conditions are covered unless verified directly from current provider terms.
+
 ## Link QA Steps
 
 1. Before the approved URL is added, visit `/compare` and confirm provider cards route users back into the quiz or guide instead of promising an outbound quote page.

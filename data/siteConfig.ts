@@ -10,6 +10,13 @@ export const siteConfig = {
   googleAdsId: process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "AW-18175565397",
   googleAdsConversionLabel:
     process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL || "TODO_GOOGLE_ADS_CONVERSION_LABEL",
+  googleAdSenseEnabled: process.env.NEXT_PUBLIC_ADSENSE_ENABLED !== "false",
+  googleAdSenseClientId:
+    process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-6197257851905887",
+  googleAdSenseSlots: {
+    inArticle: process.env.NEXT_PUBLIC_ADSENSE_SLOT_IN_ARTICLE || "",
+    secondary: process.env.NEXT_PUBLIC_ADSENSE_SLOT_SECONDARY || ""
+  },
   googleTagManagerId: "TODO_GTM_ID",
   emailCaptureProvider: "TODO_EMAIL_PROVIDER",
   appendUtmToAffiliateLinks: process.env.NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS !== "false",
@@ -66,7 +73,8 @@ export const siteConfig = {
     fetch: "",
     trupanion: "",
     aspcaPetHealth: "",
-    embrace: ""
+    embrace: "",
+    lemonade: ""
   },
   supplementalAffiliateUrls: {
     moodifypet: "configured://moodifypet"
@@ -79,7 +87,8 @@ export const siteConfig = {
     fetch: "fetch",
     trupanion: "trupanion",
     aspcaPetHealth: "aspca-pet-health-insurance",
-    embrace: "embrace"
+    embrace: "embrace",
+    lemonade: "lemonade-pet-insurance"
   },
   supplementalTrackingSlugs: {
     moodifypet: "moodifypet"
@@ -92,7 +101,8 @@ export const siteConfig = {
     fetch: "Unknown",
     trupanion: "Unknown",
     aspcaPetHealth: "Unknown",
-    embrace: "FlexOffers"
+    embrace: "FlexOffers",
+    lemonade: "Unknown"
   },
   providerCommissionType: {
     theSwiftest: "CPA / conversion",
@@ -102,7 +112,8 @@ export const siteConfig = {
     fetch: "Unknown",
     trupanion: "Unknown",
     aspcaPetHealth: "Unknown",
-    embrace: "qualified lead, verify after approval"
+    embrace: "qualified lead, verify after approval",
+    lemonade: "Unknown"
   }
 } as const;
 

@@ -21,13 +21,13 @@ const sharedFaq = [
 export const landingPages: LandingPageVariant[] = [
   {
     slug: "pet-insurance",
-    title: "Pet Insurance Guide and Quote Options | PawPeaceGuide",
+    title: "Pet Insurance Guide, Senior Planning, and Quote Options | PawPeaceGuide",
     description:
-      "Plain-English pet insurance guidance for coverage features, costs, exclusions, quote options, and provider handoff decisions.",
+      "Plain-English pet insurance guidance for senior pet planning, value-focused comparison, pre-existing condition rules, quote options, and provider handoff decisions.",
     eyebrow: "Pet insurance education",
     headline: "Pet insurance, explained before you compare.",
     subheadline:
-      "Learn how deductibles, reimbursement rates, annual limits, waiting periods, exclusions, and provider quote pages work. When you are ready, PawPeaceGuide can route you to the current live provider option through a disclosed affiliate path.",
+      "Learn how deductibles, reimbursement rates, annual limits, waiting periods, exclusions, senior-pet questions, and provider quote pages work. When you are ready, PawPeaceGuide can route you to the current live provider option through a disclosed affiliate path.",
     primaryCta: "Start the 60-second pet insurance check",
     secondaryCta: "Compare quote options",
     audienceNote:
@@ -35,7 +35,7 @@ export const landingPages: LandingPageVariant[] = [
     compareReasonTitle: "Why pet owners compare before choosing a provider path",
     compareReasons: [
       "Pet insurance is easier to review when the main policy terms are familiar before a quote page asks for details.",
-      "Waiting periods and pre-existing condition rules can affect timing, eligibility, and what questions to ask.",
+      "Waiting periods, age rules, medical-record review, and pre-existing condition definitions can affect timing, eligibility, and what questions to ask.",
       "Deductibles, reimbursement rates, annual limits, exclusions, and wellness add-ons can change the real tradeoff behind a monthly premium."
     ],
     helpWith: [

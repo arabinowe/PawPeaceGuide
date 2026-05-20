@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AdSenseUnit } from "@/components/AdSenseUnit";
 import { JsonLd } from "@/components/JsonLd";
 import { PageEventTracker } from "@/components/PageEventTracker";
 import { PetImagePanel, petImages } from "@/components/PetImage";
@@ -71,6 +72,12 @@ export default function GlossaryPage() {
             </section>
           ))}
         </div>
+
+        <AdSenseUnit
+          slot={siteConfig.googleAdSenseSlots.secondary}
+          label="Advertisement"
+          className="bg-mist/40"
+        />
 
         <div className="mt-10 rounded-md border border-line bg-mist p-5">
           <h2 className="text-2xl font-semibold text-ink">Next step</h2>

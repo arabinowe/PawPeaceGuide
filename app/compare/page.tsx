@@ -29,7 +29,7 @@ import { createMetadata } from "@/lib/seo";
 export const metadata = createMetadata({
   title: "Compare Pet Insurance Quote Options",
   description:
-    "Compare pet insurance quote options, provider features, deductibles, reimbursement rates, limits, exclusions, and waiting periods.",
+    "Compare pet insurance quote options, senior pet planning questions, value-focused provider features, deductibles, reimbursement rates, exclusions, and pre-existing condition rules.",
   path: "/compare"
 });
 
@@ -62,7 +62,7 @@ const comparisonFeatures = [
   {
     icon: ShieldQuestion,
     title: "Pre-existing conditions",
-    body: "Provider definitions vary. Ask how symptoms and medical records are reviewed before relying on coverage."
+    body: "Provider definitions vary. Ask how symptoms, diagnoses, medical records, curable-condition language, and waiting periods are reviewed before relying on coverage."
   },
   {
     icon: HeartHandshake,
@@ -149,6 +149,38 @@ export default function ComparePage() {
             title="Verify every detail"
             body={`${primaryProvider.name} controls its quote flow, eligibility, pricing, and policy terms. Review details directly before applying.`}
           />
+        </div>
+
+        <div className="mt-8 rounded-md border border-line bg-mist p-5 md:p-7">
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
+            Value and transparency
+          </p>
+          <h2 className="mt-3 text-3xl font-semibold text-ink">
+            A useful comparison answers more than the monthly cost question.
+          </h2>
+          <p className="mt-3 max-w-3xl text-base leading-7 text-muted">
+            Pet owners are increasingly comparing plans through a practical lens: senior-pet
+            eligibility, medical-record review, waiting periods, exclusions, annual limits, and
+            whether the deductible and reimbursement structure fit the household budget. That is
+            the context PawPeaceGuide gives before any provider clickout.
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <FeatureCard
+              icon={HeartHandshake}
+              title="Senior pet questions"
+              body="Ask about enrollment age, renewal rules, medical history, chronic conditions, and whether any age-specific limitations apply."
+            />
+            <FeatureCard
+              icon={BadgeDollarSign}
+              title="Value beyond price"
+              body="A cheaper monthly premium can still shift risk through deductible, reimbursement rate, annual limit, exclusions, or claim rules."
+            />
+            <FeatureCard
+              icon={ShieldQuestion}
+              title="Pre-existing condition rules"
+              body="Use provider pages to confirm definitions, medical-record review, waiting periods, and any exception language directly."
+            />
+          </div>
         </div>
 
         <IntentPathRouter pageSource="/compare-intent-router" className="mt-8" />

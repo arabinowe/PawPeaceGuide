@@ -6,6 +6,7 @@ import "@/app/globals.css";
 import { BehavioralNudge } from "@/components/BehavioralNudge";
 import { EngagementTracker } from "@/components/EngagementTracker";
 import { Footer } from "@/components/Footer";
+import { GoogleAdSense } from "@/components/GoogleAdSense";
 import { GoogleRouteTracker } from "@/components/GoogleRouteTracker";
 import { GoogleTag } from "@/components/GoogleTag";
 import { Header } from "@/components/Header";
@@ -53,6 +54,9 @@ export const metadata: Metadata = {
         type: "image/png"
       }
     ]
+  },
+  other: {
+    "google-adsense-account": siteConfig.googleAdSenseClientId
   }
 };
 
@@ -79,6 +83,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <GoogleAdSense />
+      </head>
       <body className="font-sans antialiased">
         <JsonLd data={[organizationSchema, websiteSchema]} />
         <EngagementTracker />

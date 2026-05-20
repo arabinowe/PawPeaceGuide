@@ -89,10 +89,15 @@ NEXT_PUBLIC_META_PIXEL_ID=
 NEXT_PUBLIC_GA_ID=
 NEXT_PUBLIC_GOOGLE_ADS_ID=
 NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL=
+NEXT_PUBLIC_ADSENSE_ENABLED=true
+NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-6197257851905887
+NEXT_PUBLIC_ADSENSE_SLOT_IN_ARTICLE=
+NEXT_PUBLIC_ADSENSE_SLOT_SECONDARY=
 NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true
 NEXT_PUBLIC_PRIMARY_AFFILIATE_URL=
 NEXT_PUBLIC_ODIE_AFFILIATE_URL=
 NEXT_PUBLIC_SWIFTEST_AFFILIATE_URL=
+NEXT_PUBLIC_LEMONADE_AFFILIATE_URL=
 NEXT_PUBLIC_ENGAGEMENT_TRACKING_ENABLED=true
 NEXT_PUBLIC_ENGAGEMENT_EVENT_ENDPOINT=/api/engagement
 NEXT_PUBLIC_ENGAGEMENT_SAMPLE_RATE=1
@@ -103,6 +108,10 @@ CANONICAL_REDIRECT_HOSTS=pawpeaceguide.vercel.app,www.pawpeaceguide.com
 Do not commit real affiliate links, private API keys, partner tokens, or private tracking credentials.
 
 Public analytics and engagement values are read in `data/siteConfig.ts`. The Google tag loads only when `NEXT_PUBLIC_GA_ID` or `NEXT_PUBLIC_GOOGLE_ADS_ID` is configured. Google Ads conversion tracking fires on `affiliate_cta_clicked` when both `NEXT_PUBLIC_GOOGLE_ADS_ID` and `NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL` are set. Meta Pixel remains a TODO integration and should only receive generic, privacy-reviewed events if added later.
+
+AdSense verification is configured with `NEXT_PUBLIC_ADSENSE_CLIENT_ID`. The global AdSense script and `google-adsense-account` meta tag load when `NEXT_PUBLIC_ADSENSE_ENABLED` is not `false`. The `ads.txt` route is available at `/ads.txt`. In-page ad units stay off until Google provides real slot IDs for `NEXT_PUBLIC_ADSENSE_SLOT_IN_ARTICLE` and `NEXT_PUBLIC_ADSENSE_SLOT_SECONDARY`.
+
+Keep display ads away from high-intent conversion steps unless revenue data proves they help. Recommended AdSense page exclusions: `/quiz`, `/calculator`, `/compare`, `/ready-to-compare`, `/go/*`, `/pet-parent-protection`, `/dog-parent-protection`, and `/pet-insurance`. Use manual slot IDs first on `/guides`, `/guides/[slug]`, `/glossary`, and the comparison-checklist blog so organic research traffic can monetize without interrupting the provider handoff.
 
 ## Public Launch Milestone
 
@@ -119,7 +128,7 @@ Deploy to Vercel by connecting the GitHub repo, using the default Next.js preset
 
 After `pawpeaceguide.com` is registered, assigned to the Vercel project, and resolving correctly, set `CANONICAL_HOST_REDIRECT_ENABLED=true` and keep `CANONICAL_REDIRECT_HOSTS=pawpeaceguide.vercel.app,www.pawpeaceguide.com`. That makes the Vercel app URL and `www` host redirect to the trusted apex domain without turning it on before DNS is ready.
 
-Odie is the current primary approved affiliate offer. Its Awin tracking URL is configured in `data/siteConfig.ts` so production can earn revenue immediately; you can override it with `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL` or `NEXT_PUBLIC_ODIE_AFFILIATE_URL`. Add The Swiftest affiliate link to `NEXT_PUBLIC_SWIFTEST_AFFILIATE_URL` after approval. Other backup affiliate links live in `data/siteConfig.ts` or can be edited directly in `data/providers.ts`. Affiliate tracking links are usually public click-tracking URLs, but do not commit private API keys, dashboard credentials, or partner tokens.
+Odie is the current primary approved affiliate offer. Its Awin tracking URL is configured server-side so production can earn revenue immediately; you can override it with `PRIMARY_AFFILIATE_URL`, `ODIE_AFFILIATE_URL`, `NEXT_PUBLIC_PRIMARY_AFFILIATE_URL`, or `NEXT_PUBLIC_ODIE_AFFILIATE_URL`. Add The Swiftest affiliate link to `SWIFTEST_AFFILIATE_URL` after approval and Lemonade's approved link to `LEMONADE_AFFILIATE_URL` after approval. Other backup affiliate links live in `data/siteConfig.ts` or can be edited directly in `data/providers.ts`. Affiliate tracking links are usually public click-tracking URLs, but do not commit private API keys, dashboard credentials, or partner tokens.
 
 Test `/go/odie` after deployment. It should show the PawPeaceGuide leaving-site page, then redirect through the Awin tracking URL and preserve UTMs when `NEXT_PUBLIC_APPEND_UTM_TO_AFFILIATE_LINKS=true`. Test `/go/the-swiftest` separately after approval; until then it should show: "This partner link has not been configured yet."
 
@@ -374,13 +383,15 @@ Pets Best is a backup/direct provider option and uses Impact Radius according to
 
 Actual approval, payout, traffic rules, cookie windows, qualifying events, and paid social permissions must be verified inside each affiliate dashboard before scaling ads. Paid traffic should not be scaled until the approved affiliate terms confirm Meta/Instagram traffic is allowed.
 
-When The Swiftest, Petted, Pets Best, Fetch, Trupanion, ASPCA Pet Health Insurance, or another partner approves PawPeaceGuide, add the tracking URL and decide whether its expected EPC justifies making it primary in `data/providers.ts`.
+When The Swiftest, Petted, Pets Best, Fetch, Trupanion, ASPCA Pet Health Insurance, Lemonade Pet Insurance, or another partner approves PawPeaceGuide, add the tracking URL and decide whether its expected EPC justifies changing priority in `data/providers.ts`.
 
 Current provider strategy:
 
 - Primary: Odie, `slug: "odie"`
 - Pending backup comparison offer: The Swiftest, `slug: "the-swiftest"`
-- Pending backup programs: Petted, Pets Best, Fetch, Trupanion, ASPCA Pet Health Insurance, Embrace
+- Pending backup programs: Petted, Pets Best, Fetch, Trupanion, ASPCA Pet Health Insurance, Lemonade Pet Insurance, Embrace
+
+Google Ads trend work should emphasize senior-pet planning, value-focused comparison, and policy transparency. Use phrases like `pre-existing condition rules`, `waiting periods`, `medical-record review`, and `what to verify before you buy`. Avoid implying pre-existing conditions are covered unless a provider's current policy terms and state availability explicitly support a specific exception.
 
 ## How to Add Approved Affiliate Links
 

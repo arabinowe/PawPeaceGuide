@@ -1,6 +1,8 @@
+import { AdSenseUnit } from "@/components/AdSenseUnit";
 import { GuideCard } from "@/components/GuideCard";
 import { PetImagePanel, petImages } from "@/components/PetImage";
 import { getGuidesByCategory, guideCategories, plannedGuideTopics } from "@/data/guides";
+import { siteConfig } from "@/data/siteConfig";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
@@ -25,7 +27,7 @@ export default function GuidesIndexPage() {
         <PetImagePanel image={petImages.calmTrust} label="Helpful dog and cat insurance guides" priority />
       </div>
       <div className="mt-10 space-y-10">
-        {guideCategories.map((category) => {
+        {guideCategories.map((category, index) => {
           const categoryGuides = getGuidesByCategory(category);
           const plannedTopics = plannedGuideTopics[category] || [];
 
@@ -61,6 +63,14 @@ export default function GuidesIndexPage() {
                     ))}
                   </ul>
                 </div>
+              ) : null}
+
+              {index === 1 ? (
+                <AdSenseUnit
+                  slot={siteConfig.googleAdSenseSlots.secondary}
+                  label="Advertisement"
+                  className="bg-mist/40"
+                />
               ) : null}
             </section>
           );

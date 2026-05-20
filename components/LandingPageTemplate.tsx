@@ -108,6 +108,27 @@ const providerPrepItems = [
   }
 ];
 
+const policyTransparencyItems = [
+  {
+    icon: HeartPulse,
+    title: "Senior pet planning",
+    body:
+      "Older dogs and cats may need a closer look at enrollment age, medical history, renewal rules, and how past symptoms are reviewed."
+  },
+  {
+    icon: WalletCards,
+    title: "Value-focused comparison",
+    body:
+      "A lower monthly premium is not the whole value story. Compare deductible, reimbursement rate, annual limit, exclusions, and waiting periods together."
+  },
+  {
+    icon: ShieldAlert,
+    title: "Pre-existing condition rules",
+    body:
+      "Do not assume coverage. Ask how symptoms, diagnoses, medical records, waiting periods, and curable-condition language are reviewed."
+  }
+];
+
 export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVariant; pagePath?: string }) {
   const primaryProvider = getPrimaryProvider();
   const routePath = pagePath ?? `/${page.slug}`;
@@ -266,8 +287,9 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-muted md:text-base md:leading-7">
                   Some visitors want a quick insurance check. Some want cost math. Some are ready
-                  to review Odie as the current live provider path. Choose the next step that
-                  matches your pace.
+                  to review Odie as the current live provider path. If you searched around senior
+                  pets, value, or pre-existing condition rules, start with the lane that matches
+                  your pace.
                 </p>
               </div>
               <div className="grid gap-3 md:grid-cols-2">
@@ -324,6 +346,42 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
                     </Button>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {isSearchLandingPage ? (
+        <section className="border-b border-line bg-mist">
+          <div className="mx-auto max-w-6xl px-5 py-10 md:py-12">
+            <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-clay">
+                  Policy transparency
+                </p>
+                <h2 className="mt-3 text-3xl font-semibold text-ink">
+                  The questions pet owners are bringing to search.
+                </h2>
+                <p className="mt-3 text-base leading-7 text-muted">
+                  Google shoppers are not just looking for a low monthly number. They are asking
+                  whether a plan makes sense for an older pet, what value means after the
+                  deductible, and how pre-existing condition rules are reviewed. PawPeaceGuide
+                  keeps those questions visible before any provider handoff.
+                </p>
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                  <Button href="/senior-pet-insurance" variant="secondary">
+                    Senior pet planning
+                  </Button>
+                  <Button href="/guides/pre-existing-conditions-pet-insurance" variant="secondary">
+                    Pre-existing rules
+                  </Button>
+                </div>
+              </div>
+              <div className="grid gap-4 md:grid-cols-3">
+                {policyTransparencyItems.map((item) => (
+                  <FeatureCard key={item.title} {...item} />
+                ))}
               </div>
             </div>
           </div>
