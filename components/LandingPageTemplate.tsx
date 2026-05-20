@@ -262,10 +262,9 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
                 Start by choosing what you want to understand.
               </h2>
               <p className="mt-3 text-sm leading-6 text-muted md:text-base md:leading-7">
-                PawPeaceGuide is not an insurance application and does not ask for bank details,
-                card details, Social Security numbers, or sensitive pet health records. The goal is
-                to help you learn the policy features to compare before visiting a third-party
-                provider page.
+                PawPeaceGuide is not an insurance application and does not collect full quote
+                applications or private intake details. The goal is to help you learn the policy
+                features to compare before visiting a third-party provider page.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -548,9 +547,8 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
               No application or sensitive intake on PawPeaceGuide.
             </h2>
             <p className="mt-3 text-base leading-7 text-muted">
-              This landing page does not ask for bank details, payment information, Social Security
-              numbers, full applications, or sensitive pet health records. Provider quote pages
-              control their own forms and policy terms.
+              This landing page does not collect full quote applications or private intake
+              details. Provider quote pages control their own forms and policy terms.
             </p>
           </section>
         ) : (

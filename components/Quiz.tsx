@@ -82,7 +82,7 @@ const steps: QuizStep[] = [
   {
     key: "budget",
     question: "Which cost setting do you want to compare first?",
-    help: "This is educational only. PawPeaceGuide does not ask for income, bank, card, or payment details.",
+    help: "This is educational only. PawPeaceGuide does not collect quote applications or private intake details.",
     options: ["Monthly premium", "Deductible", "Reimbursement and limits"]
   },
   {
@@ -94,7 +94,7 @@ const steps: QuizStep[] = [
   {
     key: "riskTolerance",
     question: "How detailed should your next step be?",
-    help: "This helps shape the education path without collecting sensitive information.",
+    help: "This helps shape the education path without collecting private intake details.",
     options: ["Simple overview", "Balanced comparison", "Detailed checklist"]
   }
 ];
