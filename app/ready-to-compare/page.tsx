@@ -86,10 +86,11 @@ export default function ReadyToComparePage() {
                 <div className="flex gap-3 rounded-md bg-mist p-4">
                   <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-pine" aria-hidden="true" />
                   <div>
-                    <p className="text-sm font-semibold text-ink">Still not an application</p>
+                    <p className="text-sm font-semibold text-ink">What happens after clickout</p>
                     <p className="mt-1 text-sm leading-6 text-muted">
-                      PawPeaceGuide does not collect sensitive pet health details, quote premiums,
-                      sell insurance, bind coverage, or recommend a policy.
+                      PawPeaceGuide shows a leaving-site page, records a generic partner handoff
+                      event, then sends ready dog and cat shoppers to the current live provider
+                      route. The provider controls its quote flow and terms.
                     </p>
                   </div>
                 </div>

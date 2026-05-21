@@ -20,6 +20,7 @@ import { InsuranceDecisionGuide } from "@/components/InsuranceDecisionGuide";
 import { IntentPathRouter } from "@/components/IntentPathRouter";
 import { MethodologyNote } from "@/components/MethodologyNote";
 import { PetImagePanel, petImages } from "@/components/PetImage";
+import { PrimaryOfferButton } from "@/components/PrimaryOfferButton";
 import { ProviderComparisonGrid } from "@/components/ProviderComparisonGrid";
 import { QuoteReadinessChecklist } from "@/components/QuoteReadinessChecklist";
 import { getConfiguredBackupProviders, getPrimaryProvider } from "@/data/providers";
@@ -115,13 +116,18 @@ export default function ComparePage() {
           <div className="grid gap-4">
             <PetImagePanel image={petImages.calmTrust} label="Dog and cat quote option prep" priority />
             <div className="rounded-md border border-line bg-white p-5 shadow-tight">
-              <p className="text-sm font-semibold text-ink">What to review before clicking out</p>
+              <p className="text-sm font-semibold text-ink">Ready for the current live quote path?</p>
               <p className="mt-2 text-sm leading-6 text-muted">
-                {primaryProvider.name} may show plan details such as cost assumptions,
-                deductible choices, reimbursement structure, annual benefit options, exclusions, and
-                policy documents. Treat those as starting points, then verify policy terms directly.
+                If you are shopping for a dog or cat and want one provider quote option now,
+                continue through PawPeaceGuide&apos;s tracked {primaryProvider.name} handoff. The
+                provider controls eligibility, pricing, policy terms, and any purchase flow.
               </p>
-              <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-4">
+                <PrimaryOfferButton pageSource="/compare-above-fold-live-provider" showDisclosure className="w-full sm:w-auto">
+                  Review {primaryProvider.name} quote options
+                </PrimaryOfferButton>
+              </div>
+              <div className="mt-4 flex flex-col gap-3 border-t border-line pt-4 sm:flex-row">
                 <Button href="/quote-workspace" variant="secondary">
                   Open quote workspace
                 </Button>

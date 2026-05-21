@@ -309,12 +309,22 @@ export function LandingPageTemplate({ page, pagePath }: { page: LandingPageVaria
                     </Button>
                   </div>
                 </div>
-                <div className="rounded-md border border-pine/20 bg-white p-4">
-                  <p className="text-sm font-semibold text-ink">I am ready to review quotes</p>
+                <div className="rounded-md border border-pine/30 bg-white p-4 shadow-tight">
+                  <p className="text-sm font-semibold text-ink">I am ready to review Odie</p>
                   <p className="mt-2 text-sm leading-6 text-muted">
-                    If you are planning for a dog or cat, continue through the tracked
-                    Odie partner route and verify terms directly.
+                    If you are planning for a dog or cat and want one live provider quote path now,
+                    continue through the tracked Odie route and verify terms directly.
                   </p>
+                  <ul className="mt-3 grid gap-2 text-xs leading-5 text-muted">
+                    <li className="flex gap-2">
+                      <ListChecks className="mt-0.5 h-4 w-4 shrink-0 text-pine" aria-hidden="true" />
+                      <span>Leaves PawPeaceGuide through the disclosed affiliate handoff.</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <ListChecks className="mt-0.5 h-4 w-4 shrink-0 text-pine" aria-hidden="true" />
+                      <span>Odie controls quote flow, eligibility, pricing, and policy terms.</span>
+                    </li>
+                  </ul>
                   <div className="mt-4">
                     <PrimaryOfferButton
                       pageSource={`${pageSourceBase}-google-search-fast-path`}
